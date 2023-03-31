@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->date('date_commande');
             $table->timestamps();
         });
     }
