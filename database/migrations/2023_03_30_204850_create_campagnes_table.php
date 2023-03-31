@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('date_fin_campagne');
             $table->date('date_debut_collecte');
             $table->date('date_fin_collecte');
-            $table->int('administrateur_id_creation')->foreignId('administrateur_id')->constrained('administrateurs');
-            $table->int('administrateur_id_modification')->foreignId('administrateur_id')->constrained('administrateurs');
+            $table->integer('administrateur_id_creation')->foreignId('administrateur_id')->constrained('administrateurs');
+            $table->integer('administrateur_id_modification')->foreignId('administrateur_id')->constrained('administrateurs');
             $table->timestamps();
         });
     }
