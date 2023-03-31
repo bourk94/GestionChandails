@@ -11,19 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('campagnes', function (Blueprint $table) {
             $table->id();
             $table->string('nom_campagne')->unique();
             $table->date('date_debut_campagne');
             $table->date('date_fin_campagne');
             $table->date('date_debut_collecte');
-            $table->date('date_fin_collecte');
-            $table->foreignId('administrateur_id_creation')->refrences('id')->on('administrateurs');
-            $table->foreignId('administrateur_id_modification')->refrences('id')->on('administrateurs');
+            $table->date('date_fin_collecte'); 
+            $table->unsignedBigInteger('administrateur_id_creation');
+            $table->unsignedBigInteger('administrateur_id_modification');
+            $table->foreign('administrateur_id_creation')->references('id')->on('administrateurs');
+            $table->foreign('administrateur_id_modification')->references('id')->on('administrateurs');
             $table->timestamps();
-        });
+        });   
     }
 
+    
     /**
      * Reverse the migrations.
      */
