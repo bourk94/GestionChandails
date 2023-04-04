@@ -129,6 +129,33 @@ ul.topnav li.right {
     height: 225px;
 }
 
+
+/**/
+
+/***************************************************************************/
+
+/* Page création campagne */
+
+.card__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #092D74;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
 /**/
 
 /***************************************************************************/
