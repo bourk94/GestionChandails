@@ -10,8 +10,29 @@
     display: inline-block;
     font-size: 16px;
 }
+/* Code pour le bouton :
+<a href="#" class="button">Voici un bouton</a> */
+
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+  }
 
 /**/
+
+/***************************************************************************/
 
 /* NavBar */
 
@@ -52,10 +73,7 @@ ul.topnav li.right {
     float: right;
 }
 
-@media screen and (max-width: 600px) {
-  ul.topnav li.right, 
-  ul.topnav li {float: none;}
-}
+
 
 /**/
 
@@ -65,6 +83,8 @@ ul.topnav li.right {
 
 .padding {
     padding: 0 16px;
+    padding-right: 255px;
+    padding-left: 255px;
 }
 
 .center {
@@ -82,12 +102,51 @@ ul.topnav li.right {
     background-color: #092D74;
     color: white;
     padding: 16px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 100%;
 }
 
-.padObjets
+.leftObjets {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.rightObjets {
+    float: right;
+    width: 75%;
+}
+
+.zoneImageVide
 {
-    padding-right: 16px;
-    padding-left: 16px;
+    background-color: white;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 180px;
+    height: 225px;
 }
 
 /**/
+
+/***************************************************************************/
+
+/* Media Queries */
+
+@media screen and (max-width: 1200px) {
+    .padding {
+      padding: 0 16px;
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+    .padding {
+      padding: 0 16px;
+    }
+  }
+
+  /**/
