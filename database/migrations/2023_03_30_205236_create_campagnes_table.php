@@ -9,6 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+     //On doit ajouter les champs de progression et statut 
+
+
     public function up(): void
     {
         Schema::enableForeignKeyConstraints();
@@ -21,6 +25,8 @@ return new class extends Migration
             $table->date('date_fin_collecte'); 
             $table->unsignedBigInteger('administrateur_id_creation');
             $table->unsignedBigInteger('administrateur_id_modification');
+            $table->string('progression');
+            $table->string('statut');
             $table->foreign('administrateur_id_creation')->references('id')->on('administrateurs');
             $table->foreign('administrateur_id_modification')->references('id')->on('administrateurs');
             $table->timestamps();

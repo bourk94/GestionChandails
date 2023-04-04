@@ -16,8 +16,9 @@ class CommandesTableSeeder extends Seeder
         DB::table('commandes')->insert(
             [
                 [
-                    'id_commande' => '',
-                    'date_commande' => ''
+                    'date_commande' => '2023-02-07',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ],
             ]);
     }

@@ -16,8 +16,16 @@ class CouleursTableSeeder extends Seeder
         DB::table('couleurs')->insert(
             [
                 [
-                    'nom_couleur' => '',
+                    'nom_couleur' => 'noir',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
                 ],
+
+                [
+                    'nom_couleur' => 'navy',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],                
             ]);
     }
 }

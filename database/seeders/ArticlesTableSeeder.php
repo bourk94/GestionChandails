@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use DB;
 
 class ArticlesTableSeeder extends Seeder
 {
@@ -15,11 +16,13 @@ class ArticlesTableSeeder extends Seeder
         DB::table('articles')->insert(
             [
                 [
-                    'id_article' => '',
-                    'nom' => '',
-                    'type' => '',
-                    'nom_couleur' => '',
-                    'id_taille' => ''
+                    'nom' => 't-shirt',
+                    'type' => 'vêtement',
+                    'nom_couleur' => 'noir',
+                    'couleur_id' => '1',
+                    'taille_id' => '1',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ],
             ]);
     }
