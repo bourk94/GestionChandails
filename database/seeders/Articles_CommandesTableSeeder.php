@@ -16,8 +16,8 @@ class Articles_CommandesTableSeeder extends Seeder
         DB::table('article_commande')->insert(
             [
                 [
-                    'id_commande' => '',
-                    'id_article' => ''
+                    'commande_id' => '',
+                    'article_id' => ''
                 ],
             ]);
     }

@@ -16,13 +16,14 @@ class ClientsTableSeeder extends Seeder
         DB::table('clients')->insert(
             [
                 [
-                    'id_client' => '',
-                    'nom' => '',
-                    'prenom' => '',
-                    'password' => '',
-                    'courriel' => '',
-                    'num_telephone' => '',
-                    'adresse' => ''
+                    'nom_client' => 'Blais Ouellette',
+                    'prenom_client' => 'Alexandre',
+                    'adresse_client' => '1 première rue',
+                    'password' => 'patate',
+                    'email' => 'alexandre@cegeptr.qc.ca',
+                    'telephone_client' => '111-111-1111',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
                 ],
             ]);
     }
