@@ -1,3 +1,18 @@
+/* Général */
+
+.button {
+    background-color: #EF3832;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/**/
+
 /* NavBar */
 
 body {
@@ -59,3 +74,20 @@ ul.topnav li.right {
 /**/
 
 /***************************************************************************/
+
+/* Objets */
+
+.bckgroundObjets
+{
+    background-color: #092D74;
+    color: white;
+    padding: 16px;
+}
+
+.padObjets
+{
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+/**/

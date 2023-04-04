@@ -13,10 +13,11 @@ class Articles_CommandesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('')->insert(
+        DB::table('article_commande')->insert(
             [
                 [
-
+                    'id_commande' => '',
+                    'id_article' => ''
                 ],
             ]);
     }
