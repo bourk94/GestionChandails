@@ -11,7 +11,6 @@ class AdministrateursTableSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-
     public function run(): void
     {
         DB::table('administrateurs')->insert(
@@ -22,7 +21,6 @@ class AdministrateursTableSeeder extends Seeder
                     'password' => '1234',
                     'courriel' => 'Fabrice@cepeptr.qc.ca',
                 ],
-
             ]);
     }
 }

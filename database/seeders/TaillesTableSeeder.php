@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use DB;
 
 class TaillesTableSeeder extends Seeder
 {
@@ -12,6 +13,13 @@ class TaillesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('tailles')->insert(
+            [
+                [
+                    'id_taille' => '',
+                    'grandeur' => '',
+                    'volume' => ''
+                ],
+            ]);
     }
 }

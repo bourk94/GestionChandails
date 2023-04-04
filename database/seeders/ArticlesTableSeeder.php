@@ -12,6 +12,15 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('articles')->insert(
+            [
+                [
+                    'id_article' => '',
+                    'nom' => '',
+                    'type' => '',
+                    'nom_couleur' => '',
+                    'id_taille' => ''
+                ],
+            ]);
     }
 }
