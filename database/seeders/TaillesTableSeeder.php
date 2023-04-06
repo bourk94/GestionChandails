@@ -16,11 +16,36 @@ class TaillesTableSeeder extends Seeder
         DB::table('tailles')->insert(
             [
                 [
-                    'grandeur' => 'medium',
+                    'grandeur' => 'small',
                     'volume' => 'Null',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
+                [
+                    'grandeur' => 'medium',
+                    'volume' => 'Null',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],      
+                [
+                    'grandeur' => 'large',
+                    'volume' => 'Null',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
+                [
+                    'grandeur' => 'x-large',
+                    'volume' => 'Null',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
+                [
+                    'grandeur' => 'xx-large',
+                    'volume' => 'Null',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
+
             ]);
     }
 }

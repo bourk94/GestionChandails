@@ -9,5 +9,5 @@ class Couleur extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom_couleur'];
+    protected $fillable = ['nom_couleur', 'code_couleur'];
 }
