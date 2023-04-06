@@ -16,8 +16,10 @@ class Clients_CommandesTableSeeder extends Seeder
         DB::table('client_commande')->insert(
             [
                 [
-                    'id_commande' => '',
-                    'id_client' => ''
+                    'commande_id' => '1',
+                    'client_id' => '1',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ],
             ]);
     }
