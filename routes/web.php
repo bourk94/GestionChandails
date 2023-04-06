@@ -23,6 +23,3 @@ Route::get('campagnes/create',
 
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
-
-
-//Route::get('/', [AccueilController::class, 'index']) -> name('accueil');
