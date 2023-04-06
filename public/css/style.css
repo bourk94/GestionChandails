@@ -82,11 +82,11 @@ ul.topnav li.right {
 /* Page d'accueil */
 
 .padding {
-    padding: 0 16px;
-    padding-right: 255px;
-    padding-left: 255px;
+    padding: 0 1rem;
+    padding-right: 16rem;
+    padding-left: 16rem;
 }
-
+ 
 .center {
     text-align: center;
 }
@@ -136,21 +136,49 @@ ul.topnav li.right {
 
 /* Page création campagne */
 
-.card__container {
+.flex__center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+}
+
+.card__container {
     background-color: #092D74;
     color: white;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: .75rem;
     margin-top: 2rem;
 }
 
+.card__padding {
+    padding: 0 1rem;
+    padding-right: 16rem;
+    padding-left: 16rem;
+}
 
+.btn {
+    border: none;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: .75rem;
+}
 
+.btn.bg__orange.color__white:hover {
+    background-color: #c71913;
+}
 
+.bg__orange {
+    background-color: #EF3832;
+}
+
+.color__white {
+    color: white;
+}
 
 
 
