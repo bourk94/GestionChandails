@@ -14,9 +14,8 @@ use App\Http\Controllers\CampagnesController;
 |
 */
 
-Route::get('/', function () {
-    return view('accueil');
-});
+Route::get('/', [AccueilController::class, 'index'])->name('accueil');
+
 
 Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');

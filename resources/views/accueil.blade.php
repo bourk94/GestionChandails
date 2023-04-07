@@ -16,7 +16,21 @@
             <h2>Chandail</h2>
         </div>
             <div class="rightObjets">
-                <label class="orange">
+                @if(count($couleurs))
+                    @foreach($couleurs as $couleur)
+                        <label class="{{$couleur->nom_couleur}}">
+                            <input type="radio" name="color" value="{{$couleur->nom_couleur}}">
+                            <div class="button"><span></span></div>
+                        </label>
+                    @endforeach
+                @endif
+                <script> 
+                var couleurs = document.createElement('style');
+                couleurs.innerHTML = `@foreach($couleurs as $couleur) .{{$couleur->nom_couleur}} .button span { background-color: {{$couleur->code_couleur}}; } @endforeach`;
+                document.head.appendChild(couleurs);
+                     </script>
+                     
+                {{-- <label class="orange">
                     <input type="radio" name="color" value="orange">
                     <div class="button"><span></span></div>
                 </label>
@@ -44,7 +58,7 @@
                 <label class="indigo">
                     <input type="radio" name="color" value="indigo">
                     <div class="button"><span></span></div>
-                </label>
+                </label> --}}
             </div>
             <div class="rightObjets">
                 <label class="small">
