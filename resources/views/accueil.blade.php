@@ -75,14 +75,14 @@
 
     <!-- ------------------------------------------------------------------ -->
 
-    <div class="bckgroundObjets">
+    <!-- <div class="bckgroundObjets">
         <div class="leftObjets">
             <div class="zoneImageVide"></div>
         </div>
         <div class="rightObjets">
             <h2>Chandail</h2>
         </div>
-        <!-- Section choix de couleurs -->
+
             <div class="rightObjets">
                 <label class="orange">
                     <input type="radio" name="couleurs" value="medium">
@@ -115,7 +115,7 @@
                 </label>
             </div>
             
-            <!-- Section choix de taille -->
+
             <div class="rightObjets">
                 <label class="small">
                     <input type="radio" name="size" value="small">
@@ -138,16 +138,9 @@
                 </label>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- ------------------------------------------------------------------ -->
-@if(count($articles))
-    @foreach($articles as $article)
-        <h1>{{$article->nom}}</h1>
-    @endforeach
-@else
-    <p>Aucun article</p>
-@endif
 
 </div>
     

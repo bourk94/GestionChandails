@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('accueil');
 });
 
-Route::get('/',
-[ArticlesController::class, 'index'])->name('articles.index')->middleware('auth');
+// Route::get('/',
+// [ArticlesController::class, 'index'])->name('articles.index')->middleware('auth');
 // Route::get('articles',
 // [ArticlesController::class, 'index'])->name('articles.index')->middleware('auth');
 
