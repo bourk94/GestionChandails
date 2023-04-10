@@ -205,81 +205,90 @@ ul.topnav li.right {
     }
   }
 
-  /**/
+/**/
 
 /***************************************************************************/
 
-  /* Radio Buttons Color Selector */
-  
-  input {
-    display: none;    
-  }
-  
-  .button {
-    display: inline-block;
-    position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .button span {
-    display: block;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    padding: 0;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 100%;
-    background: #eeeeee;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    transition: ease .3s;
-  }
-  
-  .button span:hover {
-    padding: 10px;
-  }
-  
-  .orange .button span {
-    background: #FF5722;
-  }
-  
-  .amber .button span {
-    background: #FFC107;
-  }
-  
-  .lime .button span {
-    background: #8BC34A;
-  }
-  
-  .teal .button span {
-    background: #009688;
-  }
-  
-  .blue .button span {
-    background: #2196F3;
-  }
-  
-  .indigo .button span {
-    background: #3F51B5;
-  }
-  
-  .layer {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: transparent;
-    /*transition: ease .3s;*/
-    z-index: -1;
-  }
+/* styles pour les boutons radio */
+input[type="radio"] {
+  display: none;
+}
 
-  /**/
+/* styles pour les options de couleur */
+label {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.button {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+}
+
+.button span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.orange .button span {
+  background-color: #FFA500;
+}
+
+.amber .button span {
+  background-color: #FFC107;
+}
+
+.lime .button span {
+  background-color: #CDDC39;
+}
+
+.teal .button span {
+  background-color: #009688;
+}
+
+.blue .button span {
+  background-color: #2196F3;
+}
+
+.indigo .button span {
+  background-color: #3F51B5;
+}
+
+input[type="radio"]:checked + .layer {
+  opacity: 1;
+}
+
+input[type="radio"]:checked + .button {
+  border-color: white;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/**/
