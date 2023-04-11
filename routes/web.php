@@ -26,3 +26,10 @@ Route::get('campagnes/create',
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
+
+Route::get('articles/create',
+[ArticlesController::class, 'create'])->name('articles.create');
+
+Route::post('articles',
+[ArticlesController::class, 'store'])->name('articles.store');
+
