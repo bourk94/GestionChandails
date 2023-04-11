@@ -15,14 +15,9 @@ use App\Http\Controllers\ArticlesController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('accueil');
-// });
-
 Route::get('/',
 [CampagnesController::class, 'index'])->name('accueil');
-// Route::get('articles',
-// [ArticlesController::class, 'index'])->name('articles.index')->middleware('auth');
+
 
 
 Route::get('campagnes/create',
