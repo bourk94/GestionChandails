@@ -12,11 +12,16 @@
                         <h2>Créer un article</h2>
                         <div>                            
                             <label for="imageArticle">image de l'article</label>
-                            <input type="text" name="imgArticle" id="imgArticle">
+                            <input type="file" class="form-control @error('name') is-invalid @enderror" class="form-control-file" id="imageArticle" name="imageArticle">
                         </div>
                         <div>
                             <label for="nomArticle">Nom de l'article</label>
                             <input type="text" name="nomArticle" id="nomArticle">
+
+                            @error('name')
+                                <span class="text-danger">{{ $messsages }}</span>
+                            @enderror
+
                         </div>
                         <div>
                             <label for="typeArticle">type de l'article</label> 
@@ -34,6 +39,14 @@
                                     <input type="checkbox" name="article3" id="article3">
                                     <label for="article3">Accessoire</label>
                                 </div>
+
+                                <!--UN TYPE DOIT ÊTRE SÉLECTIONNÉ-->
+                                <!--EST CE QUE C'EST GÉRÉ POUR CHAQUE INPUT OU UNE FOIS POUR LA SÉLECTION-->
+                                <!--
+                                     @error('name')
+                                        <span class="text-danger">{{ $messsages }}</span>
+                                    @enderror 
+                                -->
                         </div>
 
                         <!--EST CE QUE L'ON GÈRE LES COULEURS À PARTIR D'ICI ???-->
@@ -67,7 +80,12 @@
             <button class="btn bg__orange color__white" id="add-button" type="button">Ajouter un article</button>
         </div>
 
+        <!--SCRIPTS DE VALIDATION-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+        <script src="{{asset('js/jsvalidation.js')}}"></script>
+
+        {!! JsValidator::formRequest('App\Http\Requests\FilmRequest')!!}
 
 
 @endsection
