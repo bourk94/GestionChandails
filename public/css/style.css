@@ -142,7 +142,15 @@ ul.topnav li.right {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+}
+
+.flex__inline {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.margin__top {
+    margin-top: .5rem;
 }
 
 .card__container {
@@ -181,7 +189,13 @@ ul.topnav li.right {
     color: white;
 }
 
+.hover__orange:hover {
+    color: #EF3832;
+}
 
+.gap {
+    margin-top: .25rem;
+}
 
 
 
@@ -210,10 +224,6 @@ ul.topnav li.right {
 /***************************************************************************/
 
   /* Radio Buttons Color Selector */
-  
-  input {
-    display: none;    
-  }
   
   .button {
     display: inline-block;

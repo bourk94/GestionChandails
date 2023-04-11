@@ -40,7 +40,7 @@
         </template>     
     </form>
 
-        <div class="flex__center" id="btnAjouter">
+        <div class="flex__center margin__top" id="btnAjouter">
             <button class="btn bg__orange color__white" id="add-button" type="button">Ajouter un article</button>
         </div>
 
