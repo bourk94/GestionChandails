@@ -34,13 +34,13 @@ class CouleursTableSeeder extends Seeder
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_couleur' => 'Forest Green',
+                    'nom_couleur' => 'ForestGreen',
                     'code_couleur' => '#228B22',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_couleur' => 'Antique Sapphire',
+                    'nom_couleur' => 'AntiqueSapphire',
                     'code_couleur' => '#FAEBD7',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
@@ -52,31 +52,31 @@ class CouleursTableSeeder extends Seeder
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_couleur' => 'Military green',
+                    'nom_couleur' => 'MilitaryGreen',
                     'code_couleur' => '#BDB76B',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_couleur' => 'Dark Chocolate',
+                    'nom_couleur' => 'DarkChocolate',
                     'code_couleur' => '#D2691E',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ] ,
                 [
-                    'nom_couleur' => 'Dark Heather',
+                    'nom_couleur' => 'DarkHeather',
                     'code_couleur' => '#A9A9A9',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_couleur' => 'Antique Cherry Red',
+                    'nom_couleur' => 'AntiqueCherryRed',
                     'code_couleur' => '#CD5C5C',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ], 
                 [
-                    'nom_couleur' => 'Jade Dome',
+                    'nom_couleur' => 'JadeDome',
                     'code_couleur' => '#00FFFF',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')

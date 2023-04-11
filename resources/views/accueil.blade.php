@@ -2,146 +2,64 @@
 @section('contenu')
 
 <div class="padding">
+    <!-- Section informations de la campagne -->
     <h2 class="center">
-        Campagne d’hiver 2023 [en cours]
-        <br>
-        Intention d’achats disponible du X au X
+        Campagne
+        @foreach($campagnes as $campagne)
+            @if($campagne->statut == 'en cours')
+                {{$campagne->nom_campagne}}
+                [{{$campagne->statut}}]
+                <br>
+                {{$campagne->progression}} disponible
+                <br>
+                du {{$campagne->date_debut_campagne}} au {{$campagne->date_fin_campagne}}
+            @endif
+        @endforeach
     </h2>
 
-    <div class="bckgroundObjets">
-        <div class="leftObjets">
-            <div class="zoneImageVide"></div>
-        </div>
-        <div class="rightObjets">
-            <h2>Chandail</h2>
-        </div>
-        <!-- Section choix de couleurs -->
-            <div class="rightObjets">
-                <label class="orange">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
+    @if(count($articles))
+        @foreach($articles as $article)
+            <div class="bckgroundObjets">
+                <div class="leftObjets">
+                    <div class="zoneImageVide"></div>
+                </div>
+                <div class="rightObjets">
+                    <h2>{{$article->nom}}</h2>
+                </div>
 
-                <label class="amber">
-                    <input type="radio" name="couleurs" value="medium" checked>
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="lime">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="teal">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="blue">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="indigo">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
+                <!-- Section choix de couleurs -->
+                <div class="rightObjets">
+                    @if(count($couleurs))
+                        @foreach($couleurs as $couleur)
+                            <label class="{{$couleur->nom_couleur}}">
+                                <input type="radio" name="color" value="{{$couleur->nom_couleur}}">
+                                <div class="button"><span></span></div>
+                            </label>
+                        @endforeach
+                    @endif
+                    <script> 
+                        var couleurs = document.createElement('style');
+                        couleurs.innerHTML = `@foreach($couleurs as $couleur) .{{$couleur->nom_couleur}} .button span { background-color: {{$couleur->code_couleur}}; } @endforeach`;
+                        document.head.appendChild(couleurs);
+                    </script>
+                </div>
+                    
+                <!-- Section choix de taille -->
+                <div class="rightObjets">
+                    @if(count($tailles))
+                        @foreach($tailles as $taille)
+                            <label>
+                                <input type="radio" name="size" value="{{$taille->grandeur}}">
+                                <div class="button"><span>{{$taille->grandeur}}</span></div>
+                            </label>
+                        @endforeach
+                    @endif
+                </div>
             </div>
-            
-            <!-- Section choix de taille -->
-            <div class="rightObjets">
-                <label class="small">
-                    <input type="radio" name="size" value="small">
-                    <div class="button"><span>S</span></div>
-                </label>
-
-                <label class="medium">
-                    <input type="radio" name="size" value="medium" checked>
-                    <div class="button"><span>M</span></div>
-                </label>
-
-                <label class="large">
-                    <input type="radio" name="size" value="large">
-                    <div class="button"><span>L</span></div>
-                </label>
-
-                <label class="xlarge">
-                    <input type="radio" name="size" value="xlarge">
-                    <div class="button"><span>XL</span></div>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <!-- ------------------------------------------------------------------ -->
-
-    <!-- <div class="bckgroundObjets">
-        <div class="leftObjets">
-            <div class="zoneImageVide"></div>
-        </div>
-        <div class="rightObjets">
-            <h2>Chandail</h2>
-        </div>
-
-            <div class="rightObjets">
-                <label class="orange">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="amber">
-                    <input type="radio" name="couleurs" value="medium" checked>
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="lime">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="teal">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="blue">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-
-                <label class="indigo">
-                    <input type="radio" name="couleurs" value="medium">
-                    <div class="button"><span></span></div>
-                </label>
-            </div>
-            
-
-            <div class="rightObjets">
-                <label class="small">
-                    <input type="radio" name="size" value="small">
-                    <div class="button"><span>S</span></div>
-                </label>
-
-                <label class="medium">
-                    <input type="radio" name="size" value="medium" checked>
-                    <div class="button"><span>M</span></div>
-                </label>
-
-                <label class="large">
-                    <input type="radio" name="size" value="large">
-                    <div class="button"><span>L</span></div>
-                </label>
-
-                <label class="xlarge">
-                    <input type="radio" name="size" value="xlarge">
-                    <div class="button"><span>XL</span></div>
-                </label>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- ------------------------------------------------------------------ -->
-
+        @endforeach
+    @else
+        <p>Aucun article</p>
+    @endif
 </div>
     
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Couleur;
+use App\Models\Taille;
 
 class ArticlesController extends Controller
 {
@@ -12,10 +14,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        // $articles = Article::all();
-        // return view('articles.index', compact('articles'));
-        $articles = Article::all();
-        return view('accueil');
+        //
     }
 
     /**

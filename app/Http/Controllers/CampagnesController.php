@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Campagne;
+use App\Models\Article;
+use App\Models\Couleur;
+use App\Models\Taille;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
 use Illuminate\Support\Facades\File;
@@ -15,7 +18,11 @@ class CampagnesController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        $couleurs = Couleur::all();
+        $tailles = Taille::all();
+        $campagnes = Campagne::all();
+        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes'));
     }
 
     /**
