@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->string('image', 255);
             $table->string('nom');
-            $table->string('type');
-            $table->string('nom_couleur');
+            $table->string('type');            
             $table->foreignId('couleur_id')->constrained('couleurs');
             $table->foreignId('taille_id')->constrained('tailles');
             $table->timestamps();
