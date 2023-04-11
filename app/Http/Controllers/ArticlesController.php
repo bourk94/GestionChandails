@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
-use App\Models\Campagne;
 use App\Models\Article;
 use App\Models\Couleur;
 use App\Models\Taille;
-use Illuminate\Support\Facades\Log;
-use App\Http\Requests\CampagneRequest;
-use Illuminate\Support\Facades\File;
 
-class CampagnesController extends Controller
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
-        $campagnes = Campagne::all();
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes'));
+        //
     }
 
     /**
@@ -30,13 +23,13 @@ class CampagnesController extends Controller
      */
     public function create()
     {
-        return view('campagnes.createCampagne');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CampagneRequest $request)
+    public function store(ArticleRequest $request)
     {
         //
     }

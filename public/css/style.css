@@ -4,14 +4,17 @@
     background-color: #EF3832;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 10px;
+
 }
 /* Code pour le bouton :
-<a href="#" class="buttonSite">Voici un bouton</a> */
+  <a href="#" class="buttonSite">Voici un bouton</a>
+*/
 
 select {
     width: 100%;
@@ -28,6 +31,7 @@ input {
     box-sizing: border-box;
     border: 2px solid red;
     border-radius: 4px;
+    display: wrap;
 }
 
 /**/
@@ -121,13 +125,20 @@ ul.topnav li.right {
 
 .zoneImageVide
 {
-    background-color: white;
-    color: white;
-    border-radius: 10px;
-    display: inline-block;
-    width: 225px;
-    height: 225px;
-    padding: 0px;
+  background-color: white;
+  color: white;
+  border-radius: 10px;
+  display: inline-block;
+  width: 225px;
+  height: 225px;
+  padding: 0px;
+  align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
 }
 
 
@@ -219,7 +230,7 @@ ul.topnav li.right {
     }
   }
 
-  /**/
+/**/
 
 /***************************************************************************/
 
@@ -292,4 +303,81 @@ ul.topnav li.right {
     z-index: -1;
   }
 
-  /**/
+/* styles pour les options de couleur */
+label {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.button {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.100);
+  overflow: hidden;
+}
+
+.button span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.orange .button span {
+  background-color: #FFA500;
+}
+
+.amber .button span {
+  background-color: #FFC107;
+}
+
+.lime .button span {
+  background-color: ForestGreen;
+}
+
+.teal .button span {
+  background-color: #009688;
+}
+
+.blue .button span {
+  background-color: #2196F3;
+}
+
+.indigo .button span {
+  background-color: #3F51B5;
+}
+
+input[type="radio"]:checked + .layer {
+  opacity: 1;
+}
+
+input[type="radio"]:checked + .button {
+  border-color: white;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/**/

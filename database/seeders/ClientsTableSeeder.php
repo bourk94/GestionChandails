@@ -17,11 +17,9 @@ class ClientsTableSeeder extends Seeder
             [
                 [
                     'nom_client' => 'Blais Ouellette',
-                    'prenom_client' => 'Alexandre',
-                    'adresse_client' => '1 première rue',
+                    'prenom_client' => 'Alexandre',                    
                     'password' => 'patate',
-                    'email' => 'alexandre@cegeptr.qc.ca',
-                    'telephone_client' => '111-111-1111',
+                    'email' => 'alexandre@cegeptr.qc.ca',                    
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],

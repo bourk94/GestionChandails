@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\ArticlesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +16,8 @@ use App\Http\Controllers\ClientsController;
 |
 */
 
-Route::get('/', function () {
-    return view('accueil');
-});
+Route::get('/',
+[CampagnesController::class, 'index'])->name('accueil');
 
 Route::get('clients/login',
 [ClientsController::class, 'showLoginForm'])->name('clients.login')->middleware('guest');
@@ -55,3 +54,11 @@ Route::get('campagnes/create',
 
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
+
+
+Route::get('articles/create',
+[ArticlesController::class, 'create'])->name('articles.create');
+
+Route::post('articles',
+[ArticlesController::class, 'store'])->name('articles.store');
+
