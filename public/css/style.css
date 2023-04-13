@@ -134,8 +134,8 @@ ul.topnav li.right {
   color: white;
   border-radius: 10px;
   display: inline-block;
-  width: 225px;
-  height: 225px;
+  width: 15vmax;
+  height: 15vmax;
   padding: 0px;
   align-items: center;
 }
