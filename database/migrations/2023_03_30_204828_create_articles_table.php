@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('image', 255);
             $table->string('nom');
             $table->string('type');            
-            $table->foreignId('couleur_id')->constrained('couleurs');
-            $table->foreignId('taille_id')->constrained('tailles');
+            // $table->foreignId('couleur_id')->constrained('couleurs');
+            // $table->foreignId('taille_id')->constrained('tailles');
             $table->timestamps();
         });
     }
