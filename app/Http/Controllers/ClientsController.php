@@ -41,6 +41,7 @@ class clientsController extends Controller
     {
         try {    
             $client = new Client($request->all());
+            if ($client->password == $client->passwordConfirmation)
             $client->password = Hash::make($request->password);
             $client->save();
             return redirect()->route('clients.login')->with('success', 'client ajouté avec succès');
