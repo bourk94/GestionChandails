@@ -33,7 +33,7 @@
                     @if(count($couleurs))
                         @foreach($couleurs as $couleur)
                             <label class="{{$couleur->nom_couleur}}">
-                                <input type="radio" name="color" value="{{$couleur->nom_couleur}}">
+                                <input type="radio" name="color" value="{{$couleur->nom_couleur}}" class="radNone">
                                 <div class="button"><span></span></div>
                             </label>
                         @endforeach
@@ -50,7 +50,7 @@
                     @if(count($tailles))
                         @foreach($tailles as $taille)
                             <label>
-                                <input type="radio" name="size" value="{{$taille->grandeur}}">
+                                <input type="radio" name="size" value="{{$taille->grandeur}}" class="radNone">
                                 <div class="button"><span>{{$taille->grandeur}}</span></div>
                             </label>
                         @endforeach
