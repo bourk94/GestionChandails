@@ -146,11 +146,16 @@ class clientsController extends Controller
         return view ('clients.login');
     }
 
+
+
     public function login(Request $request) {
+        
+
         $reussi = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+
         if ($reussi) {
-            $films = Film::all();
-            return redirect()->route('films.index', compact('films'))->with('success', 'Connexion réussie');
+            $clients = Client::all();
+            return redirect()->route('accueil', compact('clients'))->with('success', 'Connexion réussie');
         } else {
             return redirect()->route('clients.login')->withErrors(['Email ou mot de passe incorrect']);
         }

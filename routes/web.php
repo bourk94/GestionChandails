@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\UsagersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,9 @@ Route::get('/',
 
 Route::get('clients/login',
 [ClientsController::class, 'showLoginForm'])->name('clients.login')->middleware('guest');
+
+// Route::post('login',
+// [UsagersController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('login',
 [ClientsController::class, 'login'])->name('login')->middleware('guest');

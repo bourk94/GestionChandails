@@ -16,6 +16,10 @@
   <li><a href="/campagnes/create">Créer campagne</a></li> {{-- Temporaire pour le moment --}}
   <li class="right"><a href="/clients/login">Connexion</a></li>
   <li class="right"><a href="#outils">Outils</a></li>
+  <form method="POST" action="{{ route('logout') }}" >
+      @csrf
+        <button type="submit" class="logout">Déconnecter</button>
+    </form>
 </ul>
 
     @yield('contenu')

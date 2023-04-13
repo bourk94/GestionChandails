@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use DB;
 
 class ClientsTableSeeder extends Seeder
@@ -18,8 +19,16 @@ class ClientsTableSeeder extends Seeder
                 [
                     'nom_client' => 'Blais Ouellette',
                     'prenom_client' => 'Alexandre',                    
-                    'password' => 'patate',
+                    'password' => Hash::make('patate'),
                     'email' => 'alexandre@cegeptr.qc.ca',                    
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
+                [
+                    'nom_client' => 'Client',
+                    'prenom_client' => 'Client',                    
+                    'password' => Hash::make('Client'),
+                    'email' => 'client@client.com',                    
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
