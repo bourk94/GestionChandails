@@ -26,9 +26,9 @@ class AdministrateurRequest extends FormRequest
             'prenom_administrateur' => 'required|min:2|max:50',
             'password' => 'required|min:8|max:50',
             'email' => 'required|email',
-
         ];
     }
+    
     public function messages()
     {
         return [
