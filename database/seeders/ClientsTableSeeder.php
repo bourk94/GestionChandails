@@ -32,6 +32,14 @@ class ClientsTableSeeder extends Seeder
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
+                [
+                    'nom_client' => 'Client',
+                    'prenom_client' => 'Client',                    
+                    'password' => Hash::make('Client'),
+                    'email' => 'alexandre.bourque.04@edu.cegeptr.qc.ca',                    
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
             ]);
     }
 }
