@@ -30,7 +30,9 @@ class CampagnesController extends Controller
      */
     public function create()
     {
-        return view('campagnes.createCampagne');
+        $articles = Article::all();
+       
+        return view('campagnes.createCampagne', compact('articles'));
     }
 
     /**
