@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SuperAdmin;
+use App\Models\Administrateur;
 use App\Models\Client;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
@@ -149,12 +151,14 @@ class clientsController extends Controller
 
 
     public function login(Request $request) {
-        
 
         $reussi = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         if ($reussi) {
             $clients = Client::all();
+            $admins = Administrateur::all();
+            $superAdmins = SuperAdmin::all();
+            
             return redirect()->route('accueil', compact('clients'))->with('success', 'Connexion réussie');
         } else {
             return redirect()->route('clients.login')->withErrors(['Email ou mot de passe incorrect']);
