@@ -38,26 +38,9 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'administrateurs',
+            'provider' => 'users',
         ],
     ],
-
-    // 'guards' => [
-    //     'admin' => [
-    //         'driver' => 'session',
-    //         'provider' => 'admins',
-    //     ],
-    
-    //     'user' => [
-    //         'driver' => 'session',
-    //         'provider' => 'users',
-    //     ],
-    
-    //     'customer' => [
-    //         'driver' => 'session',
-    //         'provider' => 'customers',
-    //     ],
-    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -77,19 +60,11 @@ return [
     */
 
     'providers' => [
-        'administrateurs' => [
+        'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Administrateur::class,
+            'model' => App\Models\Usager::class,
         ],
-
-        'clients' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Client::class,
-        ],
-        
     ],
-
-    
 
     /*
     |--------------------------------------------------------------------------

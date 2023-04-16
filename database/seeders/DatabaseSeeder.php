@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
                 CommandesTableSeeder::class,
                 Articles_CampagnesTableSeeder::class,
                 Articles_CommandesTableSeeder::class,
-                Clients_CommandesTableSeeder::class
+                Clients_CommandesTableSeeder::class,
+                UsagersTableSeeder::class
             ]);
     }
 }

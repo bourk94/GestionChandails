@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SuperAdmin;
 use App\Models\Administrateur;
 use App\Models\Client;
+use App\Models\Usager;
 
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\AdministrateurRequest;
@@ -162,12 +163,12 @@ class clientsController extends Controller
         
         if ($reussi) {
             
-            //$clients = Client::all();
-            $administrateurs = Administrateur::all();
+            $clients = Client::all();
+            // $administrateurs = Administrateur::all();
 
             log::debug ('Connexion réussie');
-            return redirect()->route('accueil', compact('administrateurs'))->with('success', 'Connexion réussie');
-            //return redirect()->route('accueil', compact('clients'))->with('success', 'Connexion réussie');
+            //return redirect()->route('accueil', compact('administrateurs'))->with('success', 'Connexion réussie');
+            return redirect()->route('accueil', compact('clients'))->with('success', 'Connexion réussie');
         } else {
             log::debug ('Email ou mot de passe incorrect');
             return redirect()->route('clients.login')->withErrors(['Email ou mot de passe incorrect']);
