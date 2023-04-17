@@ -10,6 +10,9 @@ use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
+
 class clientsController extends Controller
 {
     /**
@@ -156,11 +159,11 @@ class clientsController extends Controller
 
         if ($reussi) {
             $clients = Client::all();
-            $admins = Administrateur::all();
-            $superAdmins = SuperAdmin::all();
             
+            log::debug("Connexion réussie");
             return redirect()->route('accueil', compact('clients'))->with('success', 'Connexion réussie');
         } else {
+            log::debug("Email ou mot de passe incorrect");
             return redirect()->route('clients.login')->withErrors(['Email ou mot de passe incorrect']);
         }
     }
