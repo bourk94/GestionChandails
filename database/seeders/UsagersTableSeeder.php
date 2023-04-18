@@ -26,8 +26,8 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom_administrateur' => 'Admin',
-                    'prenom_administrateur' => 'Admin',
+                    'nom' => 'Admin',
+                    'prenom' => 'Admin',
                     'password' => Hash::make('Admin'),
                     'email' => 'admin@cegeptr.qc.ca',
                     'type' => 'admin',

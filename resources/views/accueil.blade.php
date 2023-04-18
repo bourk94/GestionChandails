@@ -65,21 +65,6 @@
         <p>Aucun article</p>
     @endif
 
-<!-- <div class="w3-row w3-border"> -->
-<div class="row">
-<div class="w3-twothird w3-container w3-red">
-  <h2>w3-twothird</h2>  
-  <p>The w3-twothird class uses 66% of the parent container.</p>
-  <p>On screens smaller than 601 pixels it resizes to full screen.</p>
-</div>
-
-<div class="w3-third w3-container">
-  <h2>w3-third</h2>
-  <p>The w3-twothird class uses 33% of parent container.</p>
-  <p>On screens smaller than 601 pixels it resizes to full screen.</p>
-</div>
-</div>
-
 </div>
     
 
