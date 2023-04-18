@@ -25,8 +25,8 @@ return new class extends Migration
             $table->date('date_fin_collecte'); 
             $table->unsignedBigInteger('administrateur_id_creation');
             $table->unsignedBigInteger('administrateur_id_modification');
-            $table->string('progression');
-            $table->string('statut');
+            $table->string('progression')->default('intention');
+            $table->string('statut')->default('en cours');
             $table->foreign('administrateur_id_creation')->references('id')->on('administrateurs');
             $table->foreign('administrateur_id_modification')->references('id')->on('administrateurs');
             $table->timestamps();

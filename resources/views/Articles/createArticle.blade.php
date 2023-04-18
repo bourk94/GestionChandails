@@ -20,7 +20,7 @@
                             <input type="text" name="nom" id="nom">
 
                             @error('nom')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messages }}</span>
                             @enderror
 
                         </div>
@@ -38,7 +38,7 @@
 
 
                             @error('type')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messages }}</span>
                             @enderror
 
                         </div>
