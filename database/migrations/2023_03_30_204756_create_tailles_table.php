@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('tailles', function (Blueprint $table) {
             $table->id();
-            $table->string('grandeur');
-            $table->string('volume');
+            $table->string('format');
             $table->timestamps();
         });
     }

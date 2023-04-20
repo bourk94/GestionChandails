@@ -6,15 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /** 
+     * 
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('article_campagne', function (Blueprint $table) {
+        Schema::create('usagers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained('articles');
-            $table->foreignId('campagne_id')->constrained('campagnes');
+            $table->string('nom');
+            $table->string('prenom');            
+            $table->string('password');
+            $table->string('email')->unique();
+            $table->string('type');
+            $table->rememberToken();            
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_campagne');
+        Schema::dropIfExists('usagers');
     }
 };

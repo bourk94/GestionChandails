@@ -9,5 +9,5 @@ class Taille extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['grandeur', 'volume'];
+    protected $fillable = ['grandeur'];
 }

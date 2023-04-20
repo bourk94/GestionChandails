@@ -50,8 +50,8 @@
                     @if(count($tailles))
                         @foreach($tailles as $taille)
                             <label>
-                                <input type="radio" name="size" value="{{$taille->grandeur}}" class="radNone">
-                                <div class="button"><span>{{$taille->grandeur}}</span></div>
+                                <input type="radio" name="size" value="{{$taille->format}}" class="radNone">
+                                <div class="button"><span>{{$taille->format}}</span></div>
                             </label>
                         @endforeach
                     @endif
