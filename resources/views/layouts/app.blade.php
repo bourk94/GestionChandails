@@ -74,9 +74,7 @@
     <!--  -->
     @if (Auth::user())
         <li class="right"><a href="#">
-            {{-- @if($usager->id == Auth::user()->id)
-                {{$usager->type}}
-            @endif --}}
+            {{ Session::get('user') }}
         </a></li>
     @endif
 
