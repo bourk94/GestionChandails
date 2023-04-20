@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commandes', function (Blueprint $table) {
-            $table->id();
-            $table->date('date_commande');
+        //
+
+        Schema::table('campagne_usager_modifier', function (Blueprint $table) {
             $table->foreignId('usager_id')->constrained('usagers');
-            $table->timestamps();
+            $table->foreignId('campagne_id')->constrained('campagnes');
+            $table->primary(['usager_id', 'campagne_id']);
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commandes');
+        Schema::dropIfExists('campagne_usager_modifier');
     }
 };

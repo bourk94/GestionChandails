@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            // $table->string('image', 255);
-            $table->string('nom');
-            $table->string('type');
-            $table->string('description');
+        Schema::table('article_campagne_commande', function (Blueprint $table) {
+            $table->foreignId('commande_id')->constrained('commandes');
+            $table->foreignId('article_campagne_id')->constrained('article_campagne');
+            $table->integer('quantite');
             $table->double('prix');
+            $table->primary(['commande_id', 'article_campagne_id']);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('article_campagne_commande');
     }
 };

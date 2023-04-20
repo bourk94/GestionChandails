@@ -13,9 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('article_campagne', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
             $table->foreignId('article_id')->constrained('articles');
             $table->foreignId('campagne_id')->constrained('campagnes');
+            $table->string('image');
+            $table->foreignId('taille_id')->constrained('tailles');
+            $table->foreignId('couleur_id')->constrained('couleurs');
+            $table->primary(['article_id', 'campagne_id']);
             $table->timestamps();
         });
     }

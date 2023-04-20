@@ -20,9 +20,9 @@ class Commande extends Model
         return $this->belongsToMany('App\Models\Article');
     }
 
-    //Jointure avec la table Client
-    public function clients()
+    //Jointure avec la table Usager
+    public function usagers()
     {
-        return $this->belongsToMany('App\Models\Client');
+        return $this->belongsToMany('App\Models\Usager');
     }
 }
