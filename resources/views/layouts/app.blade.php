@@ -12,17 +12,79 @@
 <body>
 
 <ul class="topnav">
-  <li><a class="active" href="/">Logo</a></li>
-  <li><a href="/campagnes/create">Créer campagne</a></li> {{-- Temporaire pour le moment --}}
-  <li class="right"><a href="/clients/login">Connexion</a></li>
-  <li class="right"><a href="#outils">Outils</a></li>
-  <form method="POST" action="{{ route('logout') }}" >
-      @csrf
-        <button type="submit" class="logout">Déconnecter</button>
-    </form>
+    <li><a class="active" href="/">Logo</a></li>
+
+    <!-- Dropdown pour l'administrateur -->
+    @auth
+        @if (Auth::user()->type == 'admin')
+
+            <!-- Dropdown pour gérer les campagnes -->
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Campagne</a>
+                <div class="dropdown-content">
+                    <a href="/campagnes/create">Créer</a>
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+                </div>
+            </li>
+
+            <!-- Dropdown pour gérer les articles -->
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Article</a>
+                <div class="dropdown-content">
+                    <a href="#">Créer</a>
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+                </div>
+            </li>
+        @endif
+    @endauth
+    <!--  -->
+
+    <!-- Dropdown pour le super administrateur -->
+    @auth
+        @if (Auth::user()->type == 'superadmin')
+
+            <!-- Dropdown pour gérer les utilisateurs -->
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Utilisateur</a>
+                <div class="dropdown-content">
+                    <a href="#">Créer</a>
+                    <a href="#">Modifier</a>
+                    <a href="#">Supprimer</a>
+                </div>
+            </li>
+        @endif
+    @endauth
+    <!--  -->
+
+    <!-- Boutons connexion et déconnexion -->
+    @if (!Auth::user())
+    <li class="right"><a href="/usagers/login">Connexion</a></li>
+    @endif
+
+    @if (Auth::user())
+    <li class="right">
+        <form method="POST" action="{{ route('logout') }}" >
+            @csrf
+            <button class="test" type="submit">Déconnecter</button>
+        </form>
+    </li>
+    @endif
+    <!--  -->
+    @if (Auth::user())
+        <li class="right"><a href="#">
+            {{-- @if($usager->id == Auth::user()->id)
+                {{$usager->type}}
+            @endif --}}
+        </a></li>
+    @endif
+
 </ul>
 
     @yield('contenu')
+
+    <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
 
 </body>
 </html>

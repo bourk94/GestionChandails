@@ -22,17 +22,16 @@ class TailleRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'grandeur'=>'required|min:2|max:7',
-                'volume'=> 'nullable|min:2|max:30',
+                'format'=>'required|min:2|max:7',
+
         ];
     }
     public function messages(){
         return [
-            'grandeur.required'=>'La grandeur est obligatoire',
-            'grandeur.min'=>'La grandeur doit faire au moins 2 caractères',
-            'grandeur.max'=>'La grandeur doit faire au plus 7 caractères',
-            'volume.min'=>'Le volume doit faire au moins 2 caractères',
-            'volume.max'=>'Le volume doit faire au plus 30 caractères',
+            'format.required'=>'La grandeur ou le format est obligatoire',
+            'format.min'=>'La grandeur ou le format doit faire au moins 2 caractères',
+            'format.max'=>'La grandeur ou le format doit faire au plus 7 caractères',
+
         ];
 
     }

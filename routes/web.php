@@ -1,5 +1,5 @@
 <?php
-use App\Models\Client;
+use App\Models\Usager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -8,9 +8,8 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
-use App\Http\Controllers\ClientsController;
-use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\UsagersController;
+use App\Http\Controllers\ArticlesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +24,7 @@ use App\Http\Controllers\UsagersController;
 
 
 Route::get('/forgot-password', function () {
-    return view('clients.forgot-password');
+    return view('usagers.forgot-password');
 })->middleware('guest')->name('password.request');
 
 Route::post('/forgot-password', function (Request $request) {
@@ -41,7 +40,7 @@ Route::post('/forgot-password', function (Request $request) {
 })->middleware('guest')->name('password.email');
 
 Route::get('/reset-password/{token}', function (string $token) {
-    return view('auth.reset-password', ['token' => $token]);
+    return view('usagers.reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
 Route::post('/reset-password', function (Request $request) {
@@ -53,7 +52,7 @@ Route::post('/reset-password', function (Request $request) {
  
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (User $user, string $password) {
+        function (Usager $user, string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
@@ -65,7 +64,7 @@ Route::post('/reset-password', function (Request $request) {
     );
  
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
+                ? redirect()->route('usagers.login')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
@@ -74,38 +73,38 @@ Route::post('/reset-password', function (Request $request) {
 Route::get('/',
 [CampagnesController::class, 'index'])->name('accueil');
 
-Route::get('clients/login',
-[ClientsController::class, 'showLoginForm'])->name('clients.login')->middleware('guest');
+Route::get('usagers/login',
+[UsagersController::class, 'showLoginForm'])->name('usagers.login')->middleware('guest');
 
 // Route::post('login',
 // [UsagersController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('login',
-[ClientsController::class, 'login'])->name('login')->middleware('guest');
+[UsagersController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('logout',
-[ClientsController::class, 'logout'])->name('logout')->middleware('auth');
+[UsagersController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::get('clients/register',
-[ClientsController::class, 'create'])->name('clients.create')->middleware('guest');
+Route::get('usagers/register',
+[UsagersController::class, 'create'])->name('usagers.create')->middleware('guest');
 
-Route::post('clients',
-[ClientsController::class, 'store'])->name('clients.store')->middleware('guest');
+Route::post('usagers',
+[UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
 
-Route::get('clients',
-[ClientsController::class, 'index'])->name('clients.index')->middleware('auth');
+Route::get('usagers',
+[UsagersController::class, 'index'])->name('usagers.index')->middleware('auth');
 
-Route::get('clients/{id}',
-[ClientsController::class, 'show'])->name('clients.show')->middleware('auth');
+Route::get('usagers/{id}',
+[UsagersController::class, 'show'])->name('usagers.show')->middleware('auth');
 
-Route::get('clients/{id}/edit',
-[ClientsController::class, 'edit'])->name('clients.edit')->middleware('auth');
+Route::get('usagers/{id}/edit',
+[UsagersController::class, 'edit'])->name('usagers.edit')->middleware('auth');
 
-Route::patch('clients/{id}',
-[ClientsController::class, 'update'])->name('clients.update')->middleware('auth');
+Route::patch('usagers/{id}',
+[UsagersController::class, 'update'])->name('usagers.update')->middleware('auth');
 
-Route::delete('clients/{id}/supprimer',
-[ClientsController::class, 'destroy'])->name('clients.destroy')->middleware('auth');
+Route::delete('usagers/{id}/supprimer',
+[UsagersController::class, 'destroy'])->name('usagers.destroy')->middleware('auth');
 
 Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
@@ -113,10 +112,23 @@ Route::get('campagnes/create',
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
+//Mettre les middleware ???
 
 Route::get('articles/create',
-[ArticlesController::class, 'create'])->name('articles.create');
+[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
 Route::post('articles',
-[ArticlesController::class, 'store'])->name('articles.store');
+[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
+
+Route::delete('/articles/{id}',
+[ArticlesController::class, 'destroy'])->name('articles.destroy'); //->middleware('auth');
+
+Route::get('/articles/{id}/modifier/',
+[ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
+
+Route::patch('/articles/{id}/modifier/',
+[ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
+
+
+
 

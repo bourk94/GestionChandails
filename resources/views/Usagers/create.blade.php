@@ -8,7 +8,7 @@
         <div class="card__container">
             <div class="flex__center">
                 <h1>Créer un compte</h1>
-                <form action="{{ route('clients.store') }}" method="POST">
+                <form action="{{ route('usagers.store') }}" method="POST">
                     @csrf
                     <div>
                         <label for="nom">Nom</label>
