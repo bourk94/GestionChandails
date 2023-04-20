@@ -20,7 +20,7 @@
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="flex__center">
-                                <a class="hover__orange color__white" href="{{ route('clients.create') }}">Créer un compte</a>
+                                <a class="hover__orange color__white" href="{{ route('usagers.create') }}">Créer un compte</a>
                                 </div>
                                 <div class="flex__center">
                                     <div class="flex__inline margin__top">

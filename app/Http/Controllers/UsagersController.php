@@ -84,7 +84,7 @@ class usagersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsagerResquest $request, $id)
+    public function update(UsagerRequest $request, $id)
     {
         try {
             $usager = usager::findOrFail($id);
