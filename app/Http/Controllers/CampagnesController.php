@@ -31,7 +31,7 @@ class CampagnesController extends Controller
     public function create()
     {
         $articles = Article::all();
-       
+
         return view('campagnes.createCampagne', compact('articles'));
     }
 

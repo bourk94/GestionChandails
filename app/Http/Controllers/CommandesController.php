@@ -27,7 +27,7 @@ class CommandesController extends Controller
         // return view('commandes.createCommande');
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      * 
      * @param  \Illuminate\Http\Request  $request
@@ -80,7 +80,7 @@ class CommandesController extends Controller
      */
     public function destroy(string $id)
     {
-        try{
+        try {
             $commande = Commande::find($id);
             $commande->delete();
             return redirect()->route('accueil')->with('message', "Suppression de la commande " . $commande->date_commande . " réussi!");
@@ -90,10 +90,9 @@ class CommandesController extends Controller
         }
 
         return redirect()->route('accueil');
-
     }
 
-       /**
+    /**
      * Store a newly created resource in storage.
      * 
      * @param  \Illuminate\Http\Request  $request

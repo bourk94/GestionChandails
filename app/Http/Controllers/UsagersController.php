@@ -41,14 +41,13 @@ class usagersController extends Controller
      */
     public function store(UsagerRequest $request)
     {
-        try {    
+        try {
             $usager = new Usager($request->all());
             if ($usager->password == $usager->passwordConfirmation)
-            $usager->password = Hash::make($request->password);
+                $usager->password = Hash::make($request->password);
             $usager->save();
             return redirect()->route('usagers.login')->with('success', 'usager ajouté avec succès');
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Log::error("Erreur lors de l'ajout d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de l\'ajout d\'un usager');
         }
@@ -90,23 +89,22 @@ class usagersController extends Controller
             $usager = usager::findOrFail($id);
             $oldPassword = $request->oldPassword;
             $newPassword = $request->password;
-            if(empty($newPassword) && $request->email == $usager->email) {
+            if (empty($newPassword) && $request->email == $usager->email) {
                 $usager->update($request->except('password', 'email'));
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
             }
-            if(empty($newPassword) && $request->email != $usager->email)
-            {
+            if (empty($newPassword) && $request->email != $usager->email) {
                 $usager->update($request->except('password'));
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
             }
-            if (($request->email == $usager->email) && Hash::check($oldPassword, $usager->password)){
+            if (($request->email == $usager->email) && Hash::check($oldPassword, $usager->password)) {
                 $usager->nom = $request->nom;
                 $usager->prenom = $request->prenom;
                 $usager->email = $request->email;
                 $usager->password = Hash::make($newPassword);
                 $usager->save();
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
-            }   
+            }
             if (Hash::check($oldPassword, $usager->password) && ($request->email != $usager->email)) {
                 $usager->nom = $request->nom;
                 $usager->prenom = $request->prenom;
@@ -114,12 +112,10 @@ class usagersController extends Controller
                 $usager->password = Hash::make($newPassword);
                 $usager->save();
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
-            }
-            else {
+            } else {
                 return redirect()->back()->withErrors(['Mot de passe incorrect']);
             }
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Log::error("Erreur lors de la modification d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de la modification d\'un usager');
         }
@@ -137,28 +133,29 @@ class usagersController extends Controller
             $usager = usager::findOrFail($id);
             $usager->delete();
             return redirect()->route('usagers.index')->with('success', 'usager supprimé avec succès');
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Log::error("Erreur lors de la suppression d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de la suppression d\'un usager');
         }
     }
 
-    public function showLoginForm() {
-        return view ('usagers.login');
+    public function showLoginForm()
+    {
+        return view('usagers.login');
     }
 
 
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
 
         $reussi = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         if ($reussi) {
-            
+
             $usagers = Usager::all();
 
-            log::debug ('Connexion réussie');
+            log::debug('Connexion réussie');
             return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
         } else {
             log::debug("Email ou mot de passe incorrect");
@@ -166,8 +163,9 @@ class usagersController extends Controller
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('usagers.login')->with('success', 'Déconnexion réussie');
-    }    
+    }
 }
