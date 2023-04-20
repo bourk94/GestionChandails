@@ -11,7 +11,6 @@ use App\Models\Usager;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 

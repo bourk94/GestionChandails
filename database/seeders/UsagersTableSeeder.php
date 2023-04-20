@@ -35,6 +35,7 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
                 [
+
                     'nom' => 'SuperAdmin',
                     'prenom' => 'SuperAdmin',
                     'password' => Hash::make('SuperAdmin'),
@@ -42,6 +43,15 @@ class UsagersTableSeeder extends Seeder
                     'type' => 'superadmin',
                     'created_at'=> date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
+                ],
+                [
+                    'nom_client' => 'Client',
+                    'prenom_client' => 'Client',                    
+                    'password' => Hash::make('Client'),
+                    'email' => 'alexandrebourque94@gmail.com',                    
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+
                 ],
             ]);
     }
