@@ -11,6 +11,9 @@ class ArticlesTableSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
+
+    //Les types à utiliser sont: chandail, kangourou et accessoire    
     public function run(): void
     {
         DB::table('articles')->insert(

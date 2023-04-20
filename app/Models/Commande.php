@@ -10,4 +10,19 @@ class Commande extends Model
     use HasFactory;
 
     protected $fillable = ['date_commande'];
+
+    
+    //Méthodes pour créer le lien de jointure
+
+    //Jointure avec la table Article
+    public function articles()
+    {
+        return $this->belongsToMany('App\Models\Article');
+    }
+
+    //Jointure avec la table Client
+    public function clients()
+    {
+        return $this->belongsToMany('App\Models\Client');
+    }
 }
