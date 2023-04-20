@@ -112,19 +112,14 @@ Route::get('campagnes/create',
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
-<<<<<<< Updated upstream
 //Mettre les middleware ???
 
-=======
-//Article
->>>>>>> Stashed changes
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
 Route::post('articles',
 [ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
 
-<<<<<<< Updated upstream
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->name('articles.destroy'); //->middleware('auth');
 
@@ -134,21 +129,6 @@ Route::get('/articles/{id}/modifier/',
 Route::patch('/articles/{id}/modifier/',
 [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
 
-=======
-Route::get('articles/{id}/edit',
-[ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
-
-Route::patch('articles/{id}',
-[ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
-
-//Couleur
-Route::get('couleurs/create',
-[CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
-
-Route::post('couleurs',
-[CouleursController::class, 'store'])->name('couleurs.store');  //->middleware('auth');
-
->>>>>>> Stashed changes
 
 
 
