@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
-class usagersController extends Controller
+class UsagersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class usagersController extends Controller
      */
     public function index()
     {
-        $usagers = usager::all();
+        $usagers = Usager::all();
         return view('usagers.index', compact('usagers'));
     }
 
@@ -87,7 +87,7 @@ class usagersController extends Controller
     public function update(UsagerRequest $request, $id)
     {
         try {
-            $usager = usager::findOrFail($id);
+            $usager = Usager::findOrFail($id);
             $oldPassword = $request->oldPassword;
             $newPassword = $request->password;
             if(empty($newPassword) && $request->email == $usager->email) {
@@ -134,7 +134,7 @@ class usagersController extends Controller
     public function destroy($id)
     {
         try {
-            $usager = usager::findOrFail($id);
+            $usager = Usager::findOrFail($id);
             $usager->delete();
             return redirect()->route('usagers.index')->with('success', 'usager supprimé avec succès');
         }
@@ -169,5 +169,6 @@ class usagersController extends Controller
     public function logout() {
         Auth::logout();
         return redirect()->route('usagers.login')->with('success', 'Déconnexion réussie');
-    }    
+    }
+    
 }
