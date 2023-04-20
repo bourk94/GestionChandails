@@ -1,5 +1,5 @@
 <?php
-use App\Models\Client;
+use App\Models\Usager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\UsagersController;
 use App\Http\Controllers\ArticlesController;
-use App\Http\Controllers\UsagersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +52,7 @@ Route::post('/reset-password', function (Request $request) {
  
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (Client $user, string $password) {
+        function (Usager $user, string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));

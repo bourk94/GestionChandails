@@ -60,7 +60,7 @@
 
     <!-- Boutons connexion et déconnexion -->
     @if (!Auth::user())
-    <li class="right"><a href="/clients/login">Connexion</a></li>
+    <li class="right"><a href="/usagers/login">Connexion</a></li>
     @endif
 
     @if (Auth::user())
