@@ -84,5 +84,7 @@
 
     @yield('contenu')
 
+    <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
+
 </body>
 </html>

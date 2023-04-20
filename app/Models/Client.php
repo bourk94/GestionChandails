@@ -44,6 +44,12 @@ class Client extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Jointure avec la table Commande
+    public function commandes()
+    {
+        return $this->belongsToMany('App\Models\Commande');
+    }
 }
 
 

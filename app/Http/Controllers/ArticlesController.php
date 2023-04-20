@@ -51,11 +51,11 @@ class ArticlesController extends Controller
             {
                 //If pour gérer le tri des images selon le type de l'article
 
-                if ($article->type == "chandail")
+                if ($article->type == "Chandail")
                 {
                     $request->image->move(public_path('img/chandails'), $nomFichierUnique);
                 }
-                else if ($article->type == "kangourou")
+                else if ($article->type == "Kangourou")
                 {
                     $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
                 }
@@ -97,24 +97,77 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        return view('articles.modifierArticle', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, $id)
     {
-        //
+        try
+        {
+            $article = Article::findOrFail($id);
+
+            //Les champs du update (image, nom, type)
+
+            $article->image = $request->image;
+            $article->nom = $request->nom;
+            $article->type = $request->type;
+
+            $article->save();
+            
+            return redirect()->route('accueil')->with('message', "Modification de " . $article->nom . " réussi!");
+        }
+        catch(\Throwable $e)
+        {
+            Log::debug($e);
+            return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
+        }
+
+        return redirect()->route('accueil');
+        
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        try
+        {
+            $article = Article::findOrFail($id);
+
+            //Gérer les liens avec les tables de jointures
+            $article->campagnes()->detach();
+            $article->commandes()->detach();
+
+            //Gérer le lien avec la table de jointure Caracteristique
+            //$article->caracteristiques()->detach();
+           
+            $article->delete();
+
+            //Retour à la page d'accueil suite à la suppression
+            return redirect()->route('accueil')->with('message', "Suppression de " . $article->nom . " réussi!");
+        }
+        catch(\Throwable $e)
+        {
+            Log::debug($e);
+
+            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);            
+        }
+
+        return redirect()->route('accueil');
     }
 }
