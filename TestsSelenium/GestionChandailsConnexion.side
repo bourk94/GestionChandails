@@ -2,94 +2,26 @@
   "id": "544fc504-719a-46d2-8065-6123109a8078",
   "version": "2.0",
   "name": "GestionChandails/Connexion",
-  "url": "http://127.0.0.1:8000/clients/login",
+  "url": "http://127.0.0.1:8000/usagers/login",
   "tests": [{
-    "id": "b7d17748-04cf-418f-a72d-d0444622c751",
-    "name": "1.1.1 Connexion Personnel Invalide",
+    "id": "5eb218a8-0cf0-44b0-8a76-f574d6b946a6",
+    "name": "1.1 email sans @ & mdp valide",
     "commands": [{
-      "id": "f4a16398-f233-49d0-855d-d67329b14999",
+      "id": "252b405c-4cc0-4638-80c6-03e0927f0dd2",
       "comment": "",
       "command": "open",
-      "target": "http://127.0.0.1:8000/clients/login",
+      "target": "http://127.0.0.1:8000/usagers/login",
       "targets": [],
       "value": ""
     }, {
-      "id": "44ee6c82-e1a3-43dc-bbe3-7329062d9a3a",
+      "id": "76ca7050-5441-4f4d-b302-afd09b3c3759",
       "comment": "",
-      "command": "click",
-      "target": "id=email",
-      "targets": [
-        ["id=email", "id"],
-        ["name=email", "name"],
-        ["css=#email", "css:finder"],
-        ["xpath=//input[@id='email']", "xpath:attributes"],
-        ["xpath=//div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "b45965cc-efc8-46bb-911a-b776d86c6f94",
-      "comment": "",
-      "command": "type",
-      "target": "id=email",
-      "targets": [
-        ["id=email", "id"],
-        ["name=email", "name"],
-        ["css=#email", "css:finder"],
-        ["xpath=//input[@id='email']", "xpath:attributes"],
-        ["xpath=//div/input", "xpath:position"]
-      ],
-      "value": "qweqweq"
-    }, {
-      "id": "ce032682-fb13-4027-89bc-48079a8ad95a",
-      "comment": "",
-      "command": "click",
-      "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=#password", "css:finder"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "62d84a7b-e9b7-49b0-891b-6b58d9785ebc",
-      "comment": "",
-      "command": "type",
-      "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=#password", "css:finder"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "eqweasdqwe"
-    }, {
-      "id": "39281227-9cfe-4b0c-972a-6a31ed8eceaa",
-      "comment": "",
-      "command": "click",
-      "target": "css=.btn:nth-child(1)",
-      "targets": [
-        ["css=.btn:nth-child(1)", "css:finder"],
-        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
-        ["xpath=//div/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }]
-  }, {
-    "id": "4a6b5f81-053c-43ac-9b60-15b96427ff81",
-    "name": "1.1.3 Connexion Personnel 2Valide",
-    "commands": [{
-      "id": "752c7add-2462-4f78-bf20-a64539427968",
-      "comment": "",
-      "command": "open",
-      "target": "http://127.0.0.1:8000/clients/login",
+      "command": "setWindowSize",
+      "target": "968x928",
       "targets": [],
       "value": ""
     }, {
-      "id": "3f46123a-7916-4d56-9ad1-7db31b570e13",
+      "id": "561a37ed-bdaf-4c72-80ad-78bff88b9005",
       "comment": "",
       "command": "click",
       "target": "id=email",
@@ -102,7 +34,7 @@
       ],
       "value": ""
     }, {
-      "id": "daa960a7-0d02-4ada-bcd0-9d240fd888d9",
+      "id": "28c5b54c-355d-4ec9-80db-0bcadaa3fb95",
       "comment": "",
       "command": "type",
       "target": "id=email",
@@ -113,22 +45,9 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div/input", "xpath:position"]
       ],
-      "value": "client@client.com"
+      "value": "Client.com"
     }, {
-      "id": "d339441e-a91a-4ea6-8b03-a275f545ae92",
-      "comment": "",
-      "command": "click",
-      "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=#password", "css:finder"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "7dd2cf73-d8dc-440d-b87a-6adbdce1a0c7",
+      "id": "f4bfe518-c937-48a2-a396-18c08361559a",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -141,30 +60,49 @@
       ],
       "value": "Client"
     }, {
-      "id": "40c27338-795d-4bdb-ac6b-933d658c4858",
+      "id": "d206faf7-6903-4721-9db3-bc8fc196e7e4",
       "comment": "",
       "command": "click",
-      "target": "css=.btn:nth-child(1)",
+      "target": "css=.flex__inline > .btn",
       "targets": [
-        ["css=.btn:nth-child(1)", "css:finder"],
-        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
-        ["xpath=//div/button", "xpath:position"],
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bc11561-493e-4603-bfda-85b032e030c5",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.test",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
     }]
   }, {
-    "id": "99a78512-d7db-4ffe-83c9-c6fdad0de940",
-    "name": "1.1.2 Connexion Personnel emailValide (1)",
+    "id": "b1c1fa97-09e2-4318-990f-cc72c5225443",
+    "name": "1.2 email & mdp invalide",
     "commands": [{
-      "id": "98c178aa-2326-4c34-8ab6-035652df0d3c",
+      "id": "0a00357f-d908-4c6f-a8e3-fed48bcb607e",
       "comment": "",
       "command": "open",
-      "target": "http://127.0.0.1:8000/clients/login",
+      "target": "http://127.0.0.1:8000/usagers/login",
       "targets": [],
       "value": ""
     }, {
-      "id": "a69a6379-9b57-4953-a920-aba3a67f9649",
+      "id": "3827732e-5e06-43cc-bff6-ff26ee94f29f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3089af1f-68a1-4e19-8f78-bab6f415769b",
       "comment": "",
       "command": "click",
       "target": "id=email",
@@ -177,7 +115,88 @@
       ],
       "value": ""
     }, {
-      "id": "d1245a79-e3f1-4df0-8945-997fb65127f1",
+      "id": "6be3819c-11be-4aec-8077-324dcbace640",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "invalide@mail.com"
+    }, {
+      "id": "8a40af0d-208b-4fcb-98a2-bc7b98faa2ee",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "invalide"
+    }, {
+      "id": "ed9cfd96-d6b0-4cbd-90cb-44ec3caa1b71",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex__inline > .btn",
+      "targets": [
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31ab8e4b-6f73-49dd-b809-0c3d4b314591",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.test",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "9db6744a-3b26-4bce-9c1d-df78555afa0c",
+    "name": "1.3 email valide & mdp invalide",
+    "commands": [{
+      "id": "78146017-12d7-407f-af95-757de114ea0b",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "095381e1-4344-4d01-8494-386be3bf650f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ba6d0f9c-e56f-4231-914a-82c50dc34f69",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "839b39e3-cfb3-4030-84cd-5be6c6e4bbdf",
       "comment": "",
       "command": "type",
       "target": "id=email",
@@ -190,7 +209,7 @@
       ],
       "value": "client@client.com"
     }, {
-      "id": "a05e5412-df9c-41b9-921e-91b26e9f7a62",
+      "id": "7ab27dbd-e81b-4e35-a5af-13f00d98747d",
       "comment": "",
       "command": "click",
       "target": "id=password",
@@ -203,7 +222,7 @@
       ],
       "value": ""
     }, {
-      "id": "59a1ea28-490c-4fb5-9dc0-1d397de1238d",
+      "id": "b31eed95-e2c8-4a48-bc16-45f81b03ca33",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -214,17 +233,354 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//div[2]/input", "xpath:position"]
       ],
-      "value": "eqweasdqwe"
+      "value": "invalide"
     }, {
-      "id": "3bdde15f-1a60-4da3-a1e7-5fd305f4329b",
+      "id": "998c7726-be8d-44e3-aca4-389ba76fae96",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "4bce0e0e-2e76-41ca-9924-d34c75b81962",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.test",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "95857769-4c5b-494d-8128-2f47ee895771",
+    "name": "1.4 Compte Client",
+    "commands": [{
+      "id": "e855a349-6d54-4132-869a-d4e70afb9c28",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9b81606-1d7d-4b25-b681-5fca62f95703",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "aea35524-24ee-4ef2-85b0-3ec8994bcb74",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "client@client.com"
+    }, {
+      "id": "f0a5e9a8-b086-4fc2-a68f-9284ed29d7cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Client"
+    }, {
+      "id": "e2ceb146-d171-4e73-ad45-52886b22f2ad",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "b8aadf00-4c2d-4e03-9993-06f0f9b78e8f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=client@client.com",
+      "targets": [
+        ["linkText=client@client.com", "linkText"],
+        ["css=.right > a", "css:finder"],
+        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1130a4a9-84be-46ae-980c-1915fb1e3017",
       "comment": "",
       "command": "click",
-      "target": "css=.btn:nth-child(1)",
+      "target": "css=.test",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "0d7bd57e-22c3-45d9-8c43-fcb9a3d46c89",
+    "name": "1.5 Compte Admin",
+    "commands": [{
+      "id": "cc3106fc-f370-4c80-a9e2-9055c07ff777",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "03495ad1-c2a1-4071-add1-89e33cacd884",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "603aeaed-7844-4c50-a37c-aef6d2c2bb85",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
       "targets": [
-        ["css=.btn:nth-child(1)", "css:finder"],
-        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
-        ["xpath=//div/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "admin@cegeptr.qc.ca"
+    }, {
+      "id": "f57637a3-82c4-450c-bedf-509871278f9a",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Admin"
+    }, {
+      "id": "f8feafa4-3954-49f8-a832-27bbcd8b55f4",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "e6aba4ce-6c43-4ceb-80d2-de7271fe3b6f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=admin@cegeptr.qc.ca",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb78b8e9-46b2-4831-a45f-255827975c87",
+      "comment": "",
+      "command": "click",
+      "target": "css=.test",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "362ba15f-b497-42ce-9b4e-4f8406575f8c",
+    "name": "1.5 Compte SuperAdmin",
+    "commands": [{
+      "id": "76303f28-85d2-4213-bd8d-dcb7951a4d6b",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7212ca03-a9a6-4c7b-9162-2df9e381b1b5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dc8403b8-5f7a-4fec-9768-04d4475b1f74",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "superadmin@superadmin.com"
+    }, {
+      "id": "076caf85-9487-4669-8335-7400cc0eb74d",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "SuperAdmin"
+    }, {
+      "id": "67d94486-8a5f-4a59-9ccf-2cc22bbc29d8",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "35fd581b-a8ad-492e-97bd-025c5fc38d83",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "linkText=superadmin@superadmin.com",
+      "targets": [
+        ["linkText=superadmin@superadmin.com", "linkText"],
+        ["css=.right > a", "css:finder"],
+        ["xpath=//a[contains(text(),'superadmin@superadmin.com')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '#')])[4]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'superadmin@superadmin.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa6e779e-00d9-4cb4-85ca-5915911df79a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.test",
+      "targets": [
+        ["css=.test", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "faa69310-0e28-4643-a5bf-8a310dc39a26",
+    "name": "3. Création de compte",
+    "commands": [{
+      "id": "a3ea4c58-44ad-4c73-a587-c02cedd65b34",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9404685-c532-46d5-b04f-39659924ae9c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7ddabf6d-d049-413f-b96d-f42a2029745c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Créer un compte",
+      "targets": [
+        ["linkText=Créer un compte", "linkText"],
+        ["css=.hover__orange", "css:finder"],
+        ["xpath=//a[contains(text(),'Créer un compte')]", "xpath:link"],
+        ["xpath=//a[@href='http://127.0.0.1:8000/usagers/register']", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Créer un compte')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bfb46a1e-4cf8-485c-af92-d0898d1998f3",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.flex__center:nth-child(1)",
+      "targets": [
+        ["css=.flex__center:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "9971ed3b-c8b4-4f89-9ac1-f190ea124777",
+    "name": "4. Bouton Mot de passe oublié",
+    "commands": [{
+      "id": "d72bbe37-00f2-42f3-ad6a-b22359471389",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e892c428-7589-49f9-9a2c-ed56bac9ef5a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00af333f-cc18-4266-9ee6-86e8f6775ba2",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > .btn",
+      "targets": [
+        ["css=a > .btn", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//a/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Mot de passe oublié')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "83dc2c04-a816-488c-8544-921cc5259bb0",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.flex__center:nth-child(1)",
+      "targets": [
+        ["css=.flex__center:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
       ],
       "value": ""
     }]
@@ -237,6 +593,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/clients/login"],
+  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/clients/login", "http://127.0.0.1:8000/usagers/login"],
   "plugins": []
 }
