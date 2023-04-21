@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Session;
 
 class UsagersController extends Controller
 {
@@ -157,6 +158,8 @@ class UsagersController extends Controller
         if ($reussi) {
             
             $usagers = Usager::all();
+
+            Session::put('user', $request->email);
 
             log::debug ('Connexion réussie');
             return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
