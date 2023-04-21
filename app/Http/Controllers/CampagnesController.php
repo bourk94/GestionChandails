@@ -22,6 +22,7 @@ class CampagnesController extends Controller
         $couleurs = Couleur::all();
         $tailles = Taille::all();
         $campagnes = Campagne::all();
+        
         return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes'));
     }
 

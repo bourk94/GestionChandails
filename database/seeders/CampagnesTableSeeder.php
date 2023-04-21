@@ -22,7 +22,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_debut_collecte' => '2023-02-15',
                     'date_fin_collecte' => '2023-02-28',
                     'administrateur_id_creation' => '2',
-                    'progression' => 'intention',
+                    'progression' => 'paiement',
                     //En cours ou terminée
                     'statut' => 'terminée',
                     'created_at' =>date('Y-m-d H:i:s'),
@@ -35,7 +35,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_debut_collecte' => '2023-06-15',
                     'date_fin_collecte' => '2023-06-28',
                     'administrateur_id_creation' => '2',
-                    'progression' => 'intention',
+                    'progression' => 'paiement',
                     //En cours ou terminée
                     'statut' => 'terminée',
                     'created_at' =>date('Y-m-d H:i:s'),
