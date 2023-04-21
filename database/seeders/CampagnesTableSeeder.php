@@ -21,9 +21,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_fin_campagne' => '2023-04-30',
                     'date_debut_collecte' => '2023-02-15',
                     'date_fin_collecte' => '2023-02-28',
-                    'administrateur_id_creation' => '1',
-                    //'administrateur_id_modification' => '1',
-                    //intention, paiement, collecte
+                    'administrateur_id_creation' => '2',
                     'progression' => 'intention',
                     //En cours ou terminée
                     'statut' => 'terminée',
@@ -36,9 +34,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_fin_campagne' => '2023-08-31',
                     'date_debut_collecte' => '2023-06-15',
                     'date_fin_collecte' => '2023-06-28',
-                    'administrateur_id_creation' => '1',
-                    //'administrateur_id_modification' => '1',
-                    //intention, paiement, collecte
+                    'administrateur_id_creation' => '2',
                     'progression' => 'intention',
                     //En cours ou terminée
                     'statut' => 'terminée',
@@ -51,9 +47,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_fin_campagne' => '2023-12-31',
                     'date_debut_collecte' => '2023-10-15',
                     'date_fin_collecte' => '2023-10-28',
-                    'administrateur_id_creation' => '1',
-                    //'administrateur_id_modification' => '1',
-                    //intention, paiement, collecte
+                    'administrateur_id_creation' => '2',
                     'progression' => 'intention',
                     //En cours ou terminée
                     'statut' => 'en cours',

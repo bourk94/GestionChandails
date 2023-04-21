@@ -4,26 +4,26 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use DB;
 
-class Articles_CampagnesTableSeeder extends Seeder
+class Articles_Campagnes_CommandesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('article_campagne')->insert(
+        DB::table('article_campagne_commande')->insert(
             [
                 [
-                    'campagne_id' => '1',
-                    'article_id' => '1',
-                    'image' => 'null',
-                    'couleur_id' => '1',
-                    'taille_id' => '1',
+                    'commande_id'=>'1',
+                    'article_campagne_id' => '1',
+                    'quantite' => '1',
+                    'montant_total' => '1',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
-            ]);
+            ]
+        )
+
     }
 }
