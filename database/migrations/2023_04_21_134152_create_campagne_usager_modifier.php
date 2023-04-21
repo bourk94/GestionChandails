@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-
-        Schema::table('campagne_usager_modifier', function (Blueprint $table) {
+        Schema::create('campagne_usager_modifier', function (Blueprint $table) {
+            //$table->id();
             $table->foreignId('usager_id')->constrained('usagers');
             $table->foreignId('campagne_id')->constrained('campagnes');
-            $table->primary(['usager_id', 'campagne_id']);
+            $table->primary(['usager_id', 'campagne_id'],'campagne_usager_modifier_id');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('campagne_usager_modifier');
+        Schema::dropIfExists('campagne_usager_modififier');
     }
 };
