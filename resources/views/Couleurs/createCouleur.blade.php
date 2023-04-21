@@ -61,23 +61,14 @@
                     <div>
                         <h2>Ajouter une taille</h2>                        
                         <div>
-                            <label for="nomCouleur">Nom de la couleur</label>
-                            <input type="text" name="nom_couleur" id="nom_couleur">
+                            <label for="formatTaille">Format</label>
+                            <input type="text" name="format" id="format">
 
-                            @error('nom_couleur')
+                            @error('format')
                                 <span class="text-danger">{{ $messages }}</span>
                             @enderror
 
-                        </div>
-                        <div>
-                            <label for="codeCouleur">Code de la couleur</label>
-                            <input type="text" name="code_couleur" id="code_couleur" placeholder="Ex: FFFFFF">            
-
-                            @error('code_couleur')
-                                <span class="text-danger">{{ $messages }}</span>
-                            @enderror
-
-                        </div>                        
+                        </div>                                               
                     </div>
                 </div>
             </div>
@@ -97,7 +88,7 @@
                 </template> -->
 
         <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter une couleur</button>
+            <button class="btn bg__orange color__white" type="submit">Ajouter une taille</button>
         </div>
 
     </form>

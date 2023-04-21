@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\UsagersController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\CouleursController;
+use App\Http\Controllers\TaillesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +115,6 @@ Route::get('campagnes/create',
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
-//Mettre les middleware ???
 
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
@@ -147,4 +149,22 @@ Route::post('couleurs',
 
 
 
+Route::post('couleurs',
+[CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
 
+Route::get('/couleurs/{id}/modifier/',
+[ArticlesController::class, 'edit'])->name('couleurs.edit'); //->middleware('auth');
+
+Route::patch('/couleurs/{id}/modifier/',
+[ArticlesController::class, 'update'])->name('couleurs.update'); //->middleware('auth');
+
+Route::delete('/couleurs/{id}',
+[ArticlesController::class, 'destroy'])->name('couleurs.destroy'); //->middleware('auth');
+
+//Route pour afficher la page createCouleur qui combine le formulaire d'ajout de couleur et celui d'ajout de taille
+
+Route::get('couleurs/create',
+[TaillesController::class, 'create'])->name('tailles.create'); //->middleware('auth');
+
+Route::post('tailles',
+[TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');

@@ -12,8 +12,12 @@ class Campagne extends Model
     protected $fillable = ['nom_campagne', 'date_debut_campagne', 'date_fin_campagne', 'date_debut_collecte', 'date_fin_collecte', 'progression', 'statut'];
 
     //Jointure avec la table Article
+    //Une campagne peut posséder un ou plusieurs articles, un article peut faire partie d'une ou plusieurs campagnes
     public function articles()
     {
-        return $this->belongsToMany('App\Models\Article');
+        return $this->hasMany('App\Models\Article');
     }
+
+    //Jointure avec la table Usager
+    //Une
 }
