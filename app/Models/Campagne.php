@@ -19,5 +19,22 @@ class Campagne extends Model
     }
 
     //Jointure avec la table Usager
-    //Une
+    //Un usager (Admin) peut créer une ou plusieurs campagnes, une campagne est créee par un seul usager (Admin)
+    public function usagers()
+    {
+        return $this->belongsTo('App\Models\Usager');
+    }
+
+    //Jointure avec la table Campagne_Modifier
+    //Un usager (Admin) peut modifier une ou plusieurs campagne(s), une campagne peut être modifier par un ou plusieurs usagers (Admin)
+    public function campagnes_modifier()
+    {
+        return $this->belongsToMany('App\Models\Usager');
+    }
+
+    //Jointure avec la table Article_Campagne
+    public function articles_campagnes()
+    {
+        return $this->belongsToMany('App\Models\Article');
+    }
 }

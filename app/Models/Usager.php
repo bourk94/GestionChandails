@@ -23,7 +23,7 @@ class Usager extends Authenticatable
         'password',
         'nom',
         'prenom',
-        'type'
+        'no_telephone'
     ];
 
     /**
@@ -61,8 +61,8 @@ class Usager extends Authenticatable
 
     //Jointure avec la table Campagne_Modifier
     //Un usager (Admin) peut modifier une ou plusieurs campagnes, une campagne peut être modifiée par un ou plusieurs usagers (Admin)
-    // public function campagnes_modifier()
-    // {
-    //     return $this->belongsToMany('App\Models\Campagne');
-    // }
+    public function campagnes_modifier()
+    {
+        return $this->belongsToMany('App\Models\Campagne');
+    }
 }

@@ -9,7 +9,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    //'couleur_id', 'taille_id'
     protected $fillable = ['image', 'nom', 'type'];
 
     //Méthodes pour créer le lien de jointure
