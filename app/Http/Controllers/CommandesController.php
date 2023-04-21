@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Commande;
 use Illuminate\Support\Facades\Log;
@@ -99,18 +99,20 @@ class CommandesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Revoir cette méthode la classe est le problème
-    public function storeArticleCampagneCommande(Request $request)
-    {
-        try {
-            $articlecampagnecommande = new ArticleCampagneCommande($request->all());
-            $articlecampagnecommande->save();
+    // public function storeArticleCampagneCommande(Request $request)
+    // {
+    //     try {
+    //         $article =  new Article($request->article_id);
+    //         $commande = new Commande($request->commande_id);
 
-            return redirect()->route('accueil')->with('message', "Ajout de l'article " . $articlecampagnecommande->nom . " réussi!");
-        } catch (\Throwable $e) {
-            Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
-        }
+    //         $commande->articles()->attach($article);
 
-        return redirect()->route('accueil');
-    }
+    //        // return redirect()->route('accueil')->with('message', "Ajout de l'article  réussi!");
+    //     } catch (\Throwable $e) {
+    //         Log::debug($e);
+    //         return redirect()->route('')->withErrors(['La liaison'.' n\'a pas fonctionné!']);
+    //     }
+
+    //     return redirect()->route('accueil');
+    // }
 }
