@@ -54,6 +54,33 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' =>date('Y-m-d H:i:s')
 
                 ],
+                [ // TEST D'AFFICHAGE DES ADMINISTRATEURS
+                    'nom' => 'Admin',
+                    'prenom' => 'Admin',
+                    'password' => Hash::make('Admin'),
+                    'email' => 'admin1@cegeptr.qc.ca',
+                    'type' => 'admin',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
+                [
+                    'nom' => 'Admin',
+                    'prenom' => 'Admin',
+                    'password' => Hash::make('Admin'),
+                    'email' => 'admin2@cegeptr.qc.ca',
+                    'type' => 'admin',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
+                [
+                    'nom' => 'Admin',
+                    'prenom' => 'Admin',
+                    'password' => Hash::make('Admin'),
+                    'email' => 'admin3@cegeptr.qc.ca',
+                    'type' => 'admin',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ], // TEST D'AFFICHAGE DES ADMINISTRATEURS
             ]);
     }
 }

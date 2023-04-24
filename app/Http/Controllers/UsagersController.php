@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Session;
 
 class UsagersController extends Controller
 {
@@ -136,7 +137,7 @@ class UsagersController extends Controller
         try {
             $usager = Usager::findOrFail($id);
             $usager->delete();
-            return redirect()->route('usagers.index')->with('success', 'usager supprimé avec succès');
+            return redirect()->route('accueil')->with('success', 'usager supprimé avec succès');
         }
         catch(\Throwable $e) {
             Log::error("Erreur lors de la suppression d'un usager: ", [$e]);
@@ -157,6 +158,8 @@ class UsagersController extends Controller
         if ($reussi) {
             
             $usagers = Usager::all();
+
+            Session::put('user', $request->email);
 
             log::debug ('Connexion réussie');
             return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');

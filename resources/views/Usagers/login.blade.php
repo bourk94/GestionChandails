@@ -25,7 +25,7 @@
                                 <div class="flex__center">
                                     <div class="flex__inline margin__top">
                                         <button class="btn bg__orange color__white" type="submit">Connexion</button>
-                                        <a href="/forgot-password"><button class="btn bg__orange color__white margin__top" type="button">Mot de passe oublié</button></a>
+                                        <a href="{{ route('password.request') }}"><button class="btn bg__orange color__white margin__top" type="button">Mot de passe oublié</button></a>
                                     </div>
                                 </div>
                         </form>

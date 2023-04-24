@@ -7,6 +7,7 @@ use App\Models\Campagne;
 use App\Models\Article;
 use App\Models\Couleur;
 use App\Models\Taille;
+use App\Models\Usager; //Je ne sais pas si c'est le bonne endroit
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
 use Illuminate\Support\Facades\File;
@@ -22,7 +23,10 @@ class CampagnesController extends Controller
         $couleurs = Couleur::all();
         $tailles = Taille::all();
         $campagnes = Campagne::all();
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes'));
+
+        $usagers = Usager::all(); //Je ne sais pas si c'est le bonne endroit
+
+        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes', 'usagers')); //Je ne sais pas si c'est le bonne endroit (usagers)
     }
 
     /**

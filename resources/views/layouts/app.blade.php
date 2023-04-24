@@ -12,7 +12,7 @@
 <body>
 
 <ul class="topnav">
-    <li><a class="active" href="/">Logo</a></li>
+    <li><a class="active" href="{{ route('accueil') }}">Logo</a></li>
 
     <!-- Dropdown pour l'administrateur -->
     @auth
@@ -22,7 +22,7 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Campagne</a>
                 <div class="dropdown-content">
-                    <a href="/campagnes/create">Créer</a>
+                    <a href="{{ route('campagnes.create') }}">Créer</a>
                     <a href="#">Modifier</a>
                     <a href="#">Supprimer</a>
                 </div>
@@ -60,7 +60,7 @@
 
     <!-- Boutons connexion et déconnexion -->
     @if (!Auth::user())
-    <li class="right"><a href="/usagers/login">Connexion</a></li>
+    <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
     @endif
 
     @if (Auth::user())
@@ -74,9 +74,7 @@
     <!--  -->
     @if (Auth::user())
         <li class="right"><a href="#">
-            {{-- @if($usager->id == Auth::user()->id)
-                {{$usager->type}}
-            @endif --}}
+            {{ Session::get('user') }}
         </a></li>
     @endif
 
@@ -85,6 +83,5 @@
     @yield('contenu')
 
     <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
-
 </body>
 </html>
