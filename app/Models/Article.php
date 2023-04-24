@@ -24,4 +24,14 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Models\Commande');
     }
+
+    public function couleurs()
+    {
+        return $this->hasMany('App\Models\Couleur');
+    }
+
+    public function tailles()
+    {
+        return $this->hasMany('App\Models\Taille');
+    }
 }

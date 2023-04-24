@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('article_campagne_commande', function (Blueprint $table) {
-            //$table->id();
+            $table->id();
             $table->foreignId('commande_id')->constrained('commandes');
             $table->foreignId('article_campagne_id')->constrained('article_campagne');
             $table->integer('quantite');
             $table->double('montant_total');
-            $table->primary(['commande_id', 'article_campagne_id'],'article_campagne_commande_id');
+            //$table->primary(['commande_id', 'article_campagne_id'],'article_campagne_commande_id');
             $table->timestamps();
         });
     }

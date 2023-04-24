@@ -10,4 +10,10 @@ class Taille extends Model
     use HasFactory;
 
     protected $fillable = ['format'];
+
+    public function articles()
+    {
+        return $this->belongsToMany('App\Models\Article');
+        
+    }
 }

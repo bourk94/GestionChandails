@@ -9,6 +9,7 @@ use App\Models\Couleur;
 use App\Models\Taille;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
+use App\Models\Commande;
 use Illuminate\Support\Facades\File;
 
 class CampagnesController extends Controller
@@ -22,8 +23,9 @@ class CampagnesController extends Controller
         $couleurs = Couleur::all();
         $tailles = Taille::all();
         $campagnes = Campagne::all();
+        $commandes = Commande::all();
         
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes'));
+        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes', 'commandes'));
     }
 
     /**

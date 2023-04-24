@@ -17,7 +17,7 @@ class Commande extends Model
     //Jointure avec la table Article
     public function articles()
     {
-        return $this->belongsToMany('App\Models\Article');
+        return $this->hasMany('App\Models\Article');
     }
 
     //Jointure avec la table Usager
