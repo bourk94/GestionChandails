@@ -43,11 +43,16 @@ class UsagersController extends Controller
     public function store(UsagerRequest $request)
     {
         try {    
-            $usager = new Usager($request->all());
-            if ($usager->password == $usager->passwordConfirmation)
+            $usager = new Usager();
+            $usager->nom = $request->nom;
+            $usager->prenom = $request->prenom;
+            $usager->email = $request->email;
+            if ($request->password == $request->passwordConfirmation)
             $usager->password = Hash::make($request->password);
+            log::debug($usager->password);
+            log::debug(Hash::make($request->password));
             $usager->save();
-            return redirect()->route('usagers.login')->with('success', 'usager ajouté avec succès');
+            return redirect()->route('usagers.login')->with('success', 'usager créé avec succès');
         }
         catch(\Throwable $e) {
             Log::error("Erreur lors de l'ajout d'un usager: ", [$e]);
