@@ -23,11 +23,14 @@
             <td>{{$usager->nom}}</td>
             <td>{{$usager->email}}</td>
             <td>
-                <form class="" method="POST" action="{{route('usagers.destroy', [$usager->id]) }}">
-                @csrf
-                    @method('DELETE')
-                    <button type="submit" class="buttonSite">Supprimer</button>
-                </form>
+                <div class="row">
+                    <a href="{{ route('usagers.edit', [$usager->id]) }}" class="buttonSite">Modifier</a>
+                    <form class="" method="POST" action="{{route('usagers.destroy', [$usager->id]) }}">
+                    @csrf
+                        @method('DELETE')
+                        <button type="submit" class="buttonSite">Supprimer</button>
+                    </form>
+                </div>
             </td>
             </tr>
         @endif
