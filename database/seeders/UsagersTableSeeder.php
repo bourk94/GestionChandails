@@ -48,7 +48,7 @@ class UsagersTableSeeder extends Seeder
                     'nom' => 'Client1',
                     'prenom' => 'Client1',                    
                     'password' => Hash::make('Client'),
-                    'email' => 'alexandrebourque94@gmail.com',
+                    'email' => 'testprojetfabrice.n4r1w@8shield.net',
                     'type' => 'client',                    
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
