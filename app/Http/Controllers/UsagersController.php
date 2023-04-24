@@ -137,7 +137,7 @@ class UsagersController extends Controller
         try {
             $usager = Usager::findOrFail($id);
             $usager->delete();
-            return redirect()->route('usagers.index')->with('success', 'usager supprimé avec succès');
+            return redirect()->route('accueil')->with('success', 'usager supprimé avec succès');
         }
         catch(\Throwable $e) {
             Log::error("Erreur lors de la suppression d'un usager: ", [$e]);

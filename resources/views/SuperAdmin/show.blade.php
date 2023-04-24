@@ -1,0 +1,45 @@
+@extends('layouts.app')
+@section('contenu')
+
+<div class="padding">
+
+<h2 class="center">Liste des administrateurs</h2>
+
+<div class="center">
+    <a href="#" class="buttonSite">Créer un administrateurs</a>
+</div>
+
+<table class="customers">
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Email</th>
+  </tr>
+  @if(count($usagers))
+    @foreach($usagers as $usager)
+        @if($usager->type == 'admin')
+            <tr>
+            <td>{{$usager->prenom}}</td>
+            <td>{{$usager->nom}}</td>
+            <td>{{$usager->email}}</td>
+            <td>
+                <form class="" method="POST" action="{{route('usagers.destroy', [$usager->id]) }}">
+                @csrf
+                    @method('DELETE')
+                    <button type="submit" class="buttonSite">Supprimer</button>
+                </form>
+            </td>
+            </tr>
+        @endif
+    @endforeach
+@else
+<!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+    <tr>
+        <td colspan="3">Aucun usager</td> 
+    </tr>
+<!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+@endif
+</table>
+</div>
+
+@endsection

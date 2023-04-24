@@ -10,7 +10,12 @@
     display: inline-block;
     font-size: 16px;
     border-radius: 10px;
+    margin: 10px;
+}
 
+.buttonSite:hover {
+    background-color: #a11510;
+    color: white;
 }
 /* Code pour le bouton :
   <a href="#" class="buttonSite">Voici un bouton</a>
@@ -142,7 +147,32 @@ li.dropdown {
 
 /**/
 
+/* Tableau  */
 
+.customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #092D74;
+  color: white;
+}
+
+/**/
 
 /**/
 
