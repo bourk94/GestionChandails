@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UsagerRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class UsagerRequest extends FormRequest
     {
         return [
                 'email'=>'required|email',
-                'password'=>'required|min:8|max:64',
+                'password'=> ['required','confirmed', Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
                 'nom'=>'required|min:2|max:20',
                 'prenom'=>'required|min:2|max:20',
 
@@ -39,13 +40,13 @@ class UsagerRequest extends FormRequest
             'password.required'=>'Le mot de passe est obligatoire',
             'password.min'=>'Le mot de passe doit faire au moins 8 caractères',
             'password.max'=>'Le mot de passe doit faire au plus 64 caractères',
+            'password.confirmed'=>'Les mots de passe ne correspondent pas',
             'nom.required'=>'Le nom est obligatoire',
             'nom.min'=>'Le nom doit faire au moins 2 caractères',
             'nom.max'=>'Le nom doit faire au plus 20 caractères',
             'prenom.required'=>'Le prénom est obligatoire',
             'prenom.min'=>'Le prénom doit faire au moins 2 caractères',
             'prenom.max'=>'Le prénom doit faire au plus 20 caractères',
-
         ];
 
     }

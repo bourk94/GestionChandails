@@ -12,5 +12,11 @@
     "Hello!" : "Bonjour!",
     "Regards" : "Cordialement",
     "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n" : "Si vous éprouvez des diffultées avec le bouton \":actionText\", copiez et collez l'URL ci-dessous\n",
-    "into your web browser:" : "dans votre navigateur internet:"
+    "into your web browser:" : "dans votre navigateur internet:",
+    "The :attribute field must contain at least one uppercase and one lowercase letter." : "Le champ mot de passe doit contenir au moins une lettre majuscule et une lettre minuscule.",
+    "The :attribute field must contain at least one letter." : "Le champ mot de passe doit contenir au moins une lettre.",
+    "The :attribute field must contain at least one number.": "Le champ mot de passe doit contenir au moins un chiffre.",
+    "The :attribute field must contain at least one symbol.": "Le champ mot de passe doit contenir au moins un symbole.",
+    "The :attribute field must contain at least :min characters.": "Le champ mot de passe doit contenir au moins :min caractères.",
+    "The given :attribute has appeared in a data leak. Please choose a different :attribute." : "Le mot de passe donné a été trouvé dans une fuite de données. Veuillez choisir un autre :attribute."
 }

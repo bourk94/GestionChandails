@@ -35,6 +35,43 @@ class UsagersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createAdmin()
+    {
+        return view('admin.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeAdmin(UsagerRequest $request)
+    {
+        try {    
+            $usager = new Usager();
+            $usager->nom = $request->nom;
+            $usager->prenom = $request->prenom;
+            $usager->email = $request->email;
+            $usager->type = "admin";
+            if ($request->password == $request->password_confirmation && $request->email )
+            $usager->password = Hash::make($request->password);
+            log::debug($usager->password);
+            log::debug(Hash::make($request->password));
+            $usager->save();
+            return redirect()->route('usagers.login')->with('success', 'usager créé avec succès');
+        }
+        catch(\Throwable $e) {
+            Log::error("Erreur lors de l'ajout d'un usager: ", [$e]);
+            return redirect()->back()->with('error', 'Erreur lors de l\'ajout d\'un usager');
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +84,7 @@ class UsagersController extends Controller
             $usager->nom = $request->nom;
             $usager->prenom = $request->prenom;
             $usager->email = $request->email;
-            if ($request->password == $request->passwordConfirmation)
+            if ($request->password == $request->password_confirmation)
             $usager->password = Hash::make($request->password);
             log::debug($usager->password);
             log::debug(Hash::make($request->password));

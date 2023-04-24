@@ -40,7 +40,7 @@
                     </div>
                     <div>
                         <label for="passwordConfirmation">Confirmer le mot de passe</label>
-                        <input class="@error('password') is-invalid @enderror" type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder="8 caractères minimum" required>
+                        <input class="@error('password') is-invalid @enderror" type="password" name="password_confirmation" id="password_confirmation" placeholder="8 caractères minimum" required>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

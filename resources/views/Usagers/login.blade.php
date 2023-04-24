@@ -3,7 +3,7 @@
 @section('title', 'Connexion')
 @section('contenu')
 
-    <section class="main-container">
+    <section class="main__container">
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
@@ -12,12 +12,12 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                                 <div>
-                                    <label for="email" class="form-label">Adresse courriel</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                                    <label for="email" >Adresse courriel</label>
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
                                 </div>
                                 <div>
-                                    <label for="password" class="form-label">Mot de passe</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" name="password" required>
                                 </div>
                                 <div class="flex__center">
                                 <a class="hover__orange color__white" href="{{ route('usagers.create') }}">Créer un compte</a>
