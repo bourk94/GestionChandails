@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Illuminate\Validation\Rules\Password as validation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\UsagersController;
@@ -47,9 +47,10 @@ Route::post('/reset-password', function (Request $request) {
     $request->validate([
         'token' => 'required',
         'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
+        'password' => ['required','confirmed', 'max:64', validation::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()]
     ]);
- 
+
+   
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (Usager $user, string $password) {
@@ -84,6 +85,12 @@ Route::post('login',
 
 Route::post('logout',
 [UsagersController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('admin/register',
+[UsagersController::class, 'createAdmin'])->name('admin.create')->middleware('auth');
+
+Route::post('admin',
+[UsagersController::class, 'storeAdmin'])->name('usagers.storeAdmin')->middleware('auth');
 
 Route::get('usagers/register',
 [UsagersController::class, 'create'])->name('usagers.create')->middleware('guest');

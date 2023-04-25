@@ -3,7 +3,7 @@
 @section('title', 'Connexion')
 @section('contenu')
 
-    <section class="main__container">
+    <section class="main-container">
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
