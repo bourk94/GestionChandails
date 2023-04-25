@@ -64,20 +64,18 @@
     @endif
 
     @if (Auth::user())
-    <li class="right">
-        <form method="POST" action="{{ route('logout') }}" >
+    <li class="dropdown right">
+        <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
+        <div class="dropdown-content">
+            <a href="{{ route('usagers.edit', [Auth::user()->id]) }}">Mon compte</a>
+            <form method="POST" action="{{ route('logout') }}" >
             @csrf
-            <button class="test" type="submit">Déconnecter</button>
+            <button type="submit">Déconnecter</button>
         </form>
+        </div>
     </li>
     @endif
     <!--  -->
-    @if (Auth::user())
-        <li class="right"><a href="#">
-            {{ Session::get('user') }}
-        </a></li>
-    @endif
-
 </ul>
 
     @yield('contenu')

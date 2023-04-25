@@ -63,7 +63,7 @@ class UsagersController extends Controller
      */
     public function show($id)
     {
-        return view('usagers.show', ['usager' => usager::findOrFail($id)]);
+        return view('usagers.show', ['usager' => Usager::findOrFail($id)]);
     }
 
     /**
@@ -74,8 +74,8 @@ class UsagersController extends Controller
      */
     public function edit($id)
     {
-        $usager = usager::findOrFail($id);
-        return view('usagers.edit', compact('usager'));
+        $usager = Usager::findOrFail($id);
+        return view('usagers.compte', compact('usager'));
     }
 
     /**
