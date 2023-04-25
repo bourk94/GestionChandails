@@ -9,7 +9,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'nom', 'type'];
+    protected $fillable = ['nom', 'type'];
 
     //Méthodes pour créer le lien de jointure
 
@@ -19,19 +19,10 @@ class Article extends Model
         return $this->belongsToMany('App\Models\Campagne');
     }
 
-    //Jointure avec la table Commande
-    public function commandes()
+    //Jointure avec la table Article_Campagne
+    public function articles_campagnes()
     {
-        return $this->belongsToMany('App\Models\Commande');
+        return $this->belongsToMany('App\Models\ArticleCampagne');
     }
-
-    public function couleurs()
-    {
-        return $this->hasMany('App\Models\Couleur');
-    }
-
-    public function tailles()
-    {
-        return $this->hasMany('App\Models\Taille');
-    }
+       
 }

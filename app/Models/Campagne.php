@@ -15,7 +15,7 @@ class Campagne extends Model
     //Une campagne peut posséder un ou plusieurs articles, un article peut faire partie d'une ou plusieurs campagnes
     public function articles()
     {
-        return $this->hasMany('App\Models\Article');
+        return $this->belongsToMany('App\Models\Article');
     }
 
     //Jointure avec la table Usager
@@ -33,8 +33,8 @@ class Campagne extends Model
     }
 
     //Jointure avec la table Article_Campagne
-    public function articles_campagnes()
-    {
-        return $this->belongsToMany('App\Models\Article');
-    }
+    // public function articles_campagnes()
+    // {
+    //     return $this->belongsToMany('App\Models\ArticleCampagne');
+    // }
 }

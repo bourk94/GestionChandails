@@ -84,9 +84,8 @@ class ArticlesController extends Controller
         try {
             $article = Article::findOrFail($id);
 
-            //Les champs du update (image, nom, type)
-
-            $article->image = $request->image;
+            //Les champs du update (nom, type, description, prix)
+            
             $article->nom = $request->nom;
             $article->type = $request->type;
             $article->description = $request->description;

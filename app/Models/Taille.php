@@ -11,9 +11,9 @@ class Taille extends Model
 
     protected $fillable = ['format'];
 
-    public function articles()
+    //Jointure avec la table Article_Campagne
+    public function articles_campagnes()
     {
-        return $this->belongsToMany('App\Models\Article');
-        
+        return $this->hasMany('App\Models\ArticleCampagne');
     }
 }
