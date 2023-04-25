@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
@@ -14,15 +15,18 @@ class Article extends Model
     //Méthodes pour créer le lien de jointure
 
     //Jointure avec la table Campagne
-    public function campagnes()
-    {
-        return $this->belongsToMany('App\Models\Campagne');
-    }
+    /**
+    *@return \Illuminate\Database\Eloquent\Relations\BelongsToMany 
+    */
+    // public function campagnes() : BelongsToMany
+    // {
+    //     return $this->belongsToMany('App\Models\Campagne');
+    // }
 
     //Jointure avec la table Article_Campagne
     public function articles_campagnes()
     {
-        return $this->belongsToMany('App\Models\ArticleCampagne');
+        return $this->belongsToMany('App\Models\Campagne', 'article_campagne', 'article_id', 'campagne_id');
     }
        
 }

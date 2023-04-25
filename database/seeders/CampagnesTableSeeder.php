@@ -25,9 +25,9 @@ class CampagnesTableSeeder extends Seeder
                     'progression' => 'paiement',
                     //En cours ou terminée
                     'statut' => 'terminée',
-                    'created_at' =>date('Y-m-d H:i:s'),
-                    'updated_at' =>date('Y-m-d H:i:s')
-                ],              
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
                 [
                     'nom_campagne' => 'printemps 2023',
                     'date_debut_campagne' => '2023-05-01',
@@ -38,9 +38,9 @@ class CampagnesTableSeeder extends Seeder
                     'progression' => 'paiement',
                     //En cours ou terminée
                     'statut' => 'terminée',
-                    'created_at' =>date('Y-m-d H:i:s'),
-                    'updated_at' =>date('Y-m-d H:i:s')
-                ],              
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
                 [
                     'nom_campagne' => 'été 2023',
                     'date_debut_campagne' => '2023-09-01',
@@ -51,9 +51,10 @@ class CampagnesTableSeeder extends Seeder
                     'progression' => 'intention',
                     //En cours ou terminée
                     'statut' => 'en cours',
-                    'created_at' =>date('Y-m-d H:i:s'),
-                    'updated_at' =>date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ],
-            ]);
+            ]
+        );
     }
 }

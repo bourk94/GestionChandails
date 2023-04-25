@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleCampagneCommande extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['commande_id', 'article_campagne_id'];
+
+   
+    
 }

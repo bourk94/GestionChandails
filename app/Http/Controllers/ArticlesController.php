@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleCampagneRequest;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\ArticleCampagne;
 use App\Models\Couleur;
 use App\Models\Taille;
 
@@ -42,7 +44,6 @@ class ArticlesController extends Controller
         try {
             $article = new Article($request->all());
             $article->save();
-
 
             return redirect()->route('accueil')->with('message', "Ajout de l'article " . $article->nom . " réussi!");
         } catch (\Throwable $e) {
@@ -85,7 +86,7 @@ class ArticlesController extends Controller
             $article = Article::findOrFail($id);
 
             //Les champs du update (nom, type, description, prix)
-            
+
             $article->nom = $request->nom;
             $article->type = $request->type;
             $article->description = $request->description;
@@ -140,11 +141,13 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Se passer l'id de l'article et de la campagne
-    public function storeArticleCampagne(Request $request, $id, $idCampagne)
+    public function storeArticleCampagne(ArticleCampagneRequest $request, $id, $idCampagne, $idcouleur, $idtaille)
     {
         try {
             $article = Article::findOrFail($id);
             $article->campagnes()->attach($idCampagne);
+            $article->couleurs()->attach($idcouleur);
+            $article->tailles()->attach($idtaille);
             $uploadedFile = $request->file('image');
 
             $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
@@ -165,7 +168,7 @@ class ArticlesController extends Controller
 
             $article->image = $nomFichierUnique;
 
-            $article->campagnes()->attach($request->campagne_id);
+            //$article->campagnes()->attach($request->campagne_id);
 
             return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $request->campagne_id . "  a réussi!");
         } catch (\Throwable $e) {

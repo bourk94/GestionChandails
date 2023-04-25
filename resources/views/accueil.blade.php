@@ -26,6 +26,21 @@
                                     <h2>{{ $article->nom }}</h2>
                                     <h2>{{$article->prix}}</h2>
                                     <h2>{{$article->description}}</h2>
+                                    {{-- Essai --}}
+                                    @foreach ($article->articles_campagnes as $article_campagne )
+                                        @if ($article_campagne->id_article == $article->id)
+                                            @foreach ($couleurs as $couleur)
+                                                @if ($couleur->id == $article_campagne->id_couleur)
+                                                    <label class="{{ $couleur->nom_couleur }}">
+                                                        <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
+                                                        <div class="button"><span></span></div>
+                                                    </label>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                    @endforeach
+                                    
                                     
 
 

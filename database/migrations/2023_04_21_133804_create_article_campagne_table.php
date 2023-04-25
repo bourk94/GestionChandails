@@ -19,7 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('couleur');
             $table->foreign('couleur')->references('id')->on('couleurs')->onDelete('cascade');
             $table->unsignedBigInteger('taille');
-            $table->foreign('taille')->references('id')->on('tailles')->onDelete('cascade');   
+            $table->foreign('taille')->references('id')->on('tailles')->onDelete('cascade');
+            $table->integer('quantite_max')->default(0); 
             //$table->primary(['article_id', 'campagne_id'],'id');
             $table->timestamps();
         });
