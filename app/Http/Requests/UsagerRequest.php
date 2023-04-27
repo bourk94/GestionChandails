@@ -25,7 +25,7 @@ class UsagerRequest extends FormRequest
     {
         return [
                 'email'=> 'required','email','unique:usagers,email,'. $this->id,
-                'password'=> [($this->id ? 'nullable' : 'required'),'confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
+                'password'=> [($this->id ? 'nullable' : 'required'), 'confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
                 'nom'=>'required|min:2|max:30',
                 'prenom'=>'required|min:2|max:30',
         ];      

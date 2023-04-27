@@ -139,18 +139,17 @@ class UsagersController extends Controller
     public function update(UsagerRequest $request)
     {
         try {
-            log::debug("salut les putes");
             $usager = Auth::user();
             $old_password = $request->old_password;
             $newPassword = $request->password;
             if(empty($newPassword) && $request->email == $usager->email) {
                 $usager->update($request->except('password', 'email'));
-                return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }
             if(empty($newPassword) && $request->email != $usager->email)
             {
                 $usager->update($request->except('password'));
-                return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }
             if (($request->email == $usager->email) && Hash::check($old_password, $usager->password)){
                 $usager->nom = $request->nom;
@@ -158,7 +157,7 @@ class UsagersController extends Controller
                 $usager->email = $request->email;
                 $usager->password = Hash::make($newPassword);
                 $usager->save();
-                return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }   
             if (Hash::check($old_password, $usager->password) && ($request->email != $usager->email)) {
                 $usager->nom = $request->nom;
@@ -166,7 +165,7 @@ class UsagersController extends Controller
                 $usager->email = $request->email;
                 $usager->password = Hash::make($newPassword);
                 $usager->save();
-                return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }
             else {
                 return redirect()->back()->withErrors(['Mot de passe incorrect']);

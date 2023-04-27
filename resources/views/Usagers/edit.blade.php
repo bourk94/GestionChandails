@@ -19,7 +19,7 @@
                     <h1>Modifier le mot de passe</h1>
                     <div>
                         <!-- Le formulaire ne fonctionne pas -->
-                        <form method="POST" action="{{ route('usagers.update') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('usagers.update') }}" {{-- enctype="multipart/form-data" --}}>
                             @csrf
                             @method('PATCH')
                                 <div>
@@ -44,26 +44,27 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label for="old_password" class="form-label">Ancien mot de passe :</label>
-                                    <input type="password" class="@error('password') is-invalid @enderror" id="old_password" name="old_password">
+                                    <label for="old_password" class="form-label">Mot de passe actuel :</label>
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="old_password" name="old_password" required>
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div>
                                     <label for="password" class="form-label">Nouveau mot de passe :</label>
-                                    <input type="password" class="@error('password') is-invalid @enderror" id="password" name="password">
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="password" name="password" required>
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div>
                                     <label for="password_confirmation" class="form-label">Confirmer le nouveau mot de passe :</label>
-                                    <input type="password" class="@error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required>
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="id" id="id" value="{{$usager->id}}">
                                 <div class="center">
                                     <button type="submit" class="buttonSite">Modifier le mot de passe</button>
                                 </div>

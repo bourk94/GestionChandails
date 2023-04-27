@@ -86,11 +86,12 @@ Route::post('admin',
 Route::get('admin/register',
 [UsagersController::class, 'createAdmin'])->name('admin.create')->middleware('auth');
 
-// Route::post('usagers',
-// [UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
+Route::post('usagers',
+[UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
 
 // Route::get('usagers',
 // [UsagersController::class, 'index'])->name('usagers.index')->middleware('auth');
+
 Route::get('usagers/login',
 [UsagersController::class, 'showLoginForm'])->name('usagers.login')->middleware('guest');
 
