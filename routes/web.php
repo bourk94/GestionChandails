@@ -104,7 +104,7 @@ Route::get('usagers',
 Route::get('usagers/{id}',
 [UsagersController::class, 'show'])->name('usagers.show')->middleware('auth');
 
-Route::get('usagers/{id}/edit',
+Route::post('usagers/{id}/edit',
 [UsagersController::class, 'edit'])->name('usagers.edit')->middleware('auth');
 
 Route::patch('usagers/{id}',

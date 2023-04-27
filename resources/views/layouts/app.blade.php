@@ -65,7 +65,10 @@
     <li class="dropdown right">
         <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
         <div class="dropdown-content">
-            <a href="{{ route('usagers.edit', [Auth::user()->id]) }}">Mon compte</a>
+            <form method="POST" action="{{ route('usagers.edit', [Auth::user()->id]) }}" >
+            @csrf
+            <button type="submit">Mon compte</button>
+        </form>
             <form method="POST" action="{{ route('logout') }}" >
             @csrf
             <button type="submit">Déconnecter</button>

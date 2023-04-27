@@ -19,18 +19,23 @@
                     <h1>Modifier le mot de passe</h1>
                     <div>
                         <!-- Le formulaire ne fonctionne pas -->
-                        <form method="POST" action="{{ route('usagers.update', ['id' => $usager->id]) }}">
+                        <form method="POST" action="{{ route('usagers.update', $usager->id) }}" enctype="multipart/form-data" >
                             @csrf
+                            @method('PATCH')
                                 <div>
-                                    <label for="newPassword" class="form-label">Nouveau mot de passe :</label>
-                                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                    <label for="old_password" class="form-label">Ancien mot de passe :</label>
+                                    <input type="password" class="form-control" id="old_password" name="old_password" required>
                                 </div>
                                 <div>
-                                    <label for="confirmationPassword" class="form-label">Confirmer le nouveau mot de passe :</label>
-                                    <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" required>
+                                    <label for="password" class="form-label">Nouveau mot de passe :</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div>
+                                    <label for="password_confirmation" class="form-label">Confirmer le nouveau mot de passe :</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                 </div>
                                 <div class="center">
-                                    <a type="submit" class="buttonSite">Modifier le mot de passe</a>
+                                    <button type="submit" class="buttonSite">Modifier le mot de passe</button>
                                 </div>
                         </form>
                         <!-- Le formulaire ne fonctionne pas -->

@@ -127,7 +127,17 @@ class UsagersController extends Controller
     public function edit($id)
     {
         $usager = Usager::findOrFail($id);
-        return view('usagers.compte', compact('usager'));
+        return view('usagers.edit', compact('usager')); 
+
+        // try {
+        //    $usager = Usager::findOrFail($id);
+        // return view('usagers.edit', compact('usager')); 
+        // }
+        // catch
+        // (\Throwable $e) {
+        //     Log::error("Erreur lors de l'édition d'un usager: ", [$e]);
+        //     return redirect()->back()->with('error', 'Erreur lors de l\'édition d\'un usager');
+        // }      
     }
 
     /**
@@ -141,7 +151,7 @@ class UsagersController extends Controller
     {
         try {
             $usager = Usager::findOrFail($id);
-            $oldPassword = $request->oldPassword;
+            $old_password = $request->old_password;
             $newPassword = $request->password;
             if(empty($newPassword) && $request->email == $usager->email) {
                 $usager->update($request->except('password', 'email'));
@@ -152,7 +162,7 @@ class UsagersController extends Controller
                 $usager->update($request->except('password'));
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
             }
-            if (($request->email == $usager->email) && Hash::check($oldPassword, $usager->password)){
+            if (($request->email == $usager->email) && Hash::check($old_password, $usager->password)){
                 $usager->nom = $request->nom;
                 $usager->prenom = $request->prenom;
                 $usager->email = $request->email;
@@ -160,7 +170,7 @@ class UsagersController extends Controller
                 $usager->save();
                 return redirect()->route('usagers.update', $usager->id)->with('success', 'usager modifié avec succès');
             }   
-            if (Hash::check($oldPassword, $usager->password) && ($request->email != $usager->email)) {
+            if (Hash::check($old_password, $usager->password) && ($request->email != $usager->email)) {
                 $usager->nom = $request->nom;
                 $usager->prenom = $request->prenom;
                 $usager->email = $request->email;
@@ -173,6 +183,7 @@ class UsagersController extends Controller
             }
         }
         catch(\Throwable $e) {
+            log::debug("Test");
             Log::error("Erreur lors de la modification d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de la modification d\'un usager');
         }
