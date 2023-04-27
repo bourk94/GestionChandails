@@ -16,8 +16,8 @@ class Article extends Model
 
     //Jointure avec la table Campagne
     /**
-    *@return \Illuminate\Database\Eloquent\Relations\BelongsToMany 
-    */
+     *@return \Illuminate\Database\Eloquent\Relations\BelongsToMany 
+     */
     // public function campagnes() : BelongsToMany
     // {
     //     return $this->belongsToMany('App\Models\Campagne');
@@ -28,5 +28,4 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Models\Campagne', 'article_campagne', 'article_id', 'campagne_id');
     }
-       
 }

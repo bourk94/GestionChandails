@@ -29,6 +29,4 @@ class ArticleCampagne extends Model
     {
         return $this->belongsToMany('App\Models\Commande');
     }
-
-    
 }

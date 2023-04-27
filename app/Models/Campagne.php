@@ -37,6 +37,4 @@ class Campagne extends Model
     {
         return $this->belongsToMany('App\Models\Article', 'article_campagne', 'campagne_id', 'article_id');
     }
-
-   
 }

@@ -33,7 +33,7 @@
                                 <option value="Kangourou">Kangourou</option>
 
                                 <option value="Accessoire">Accessoire</option>
-                                
+
                             </select>
 
 
@@ -45,10 +45,10 @@
 
                         <!--EST CE QUE L'ON GÈRE LES COULEURS À PARTIR D'ICI ???-->
                         <!--
-                                <div>
-                                    <label for="nomCouleur">Couleur</label>
-                                </div>
-                             -->
+                                    <div>
+                                        <label for="nomCouleur">Couleur</label>
+                                    </div>
+                                 -->
 
                     </div>
                 </div>
@@ -56,17 +56,17 @@
         </div>
 
         <!-- <template id="my-template">
-                    <div class="card__padding">
-                        <div class="card__container">
-                            <div class="flex__center">
-                                <div>
-                                    <label for="nomArticle">Nom de l'article</label>
-                                    <input name="nomArticle" type="text"/>
+                        <div class="card__padding">
+                            <div class="card__container">
+                                <div class="flex__center">
+                                    <div>
+                                        <label for="nomArticle">Nom de l'article</label>
+                                        <input name="nomArticle" type="text"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template> -->
+                    </template> -->
 
         <div class="flex__center margin__top">
             <button class="btn bg__orange color__white" type="submit">Ajouter un article</button>

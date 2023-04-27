@@ -46,7 +46,7 @@ class usagersController extends Controller
      */
     public function storeAdmin(AdminRequest $request)
     {
-        try {    
+        try {
             $usager = new Usager();
             $usager->nom = $request->nom;
             $usager->prenom = $request->prenom;
@@ -56,18 +56,17 @@ class usagersController extends Controller
             $usager->save();
 
             $request->validate(['email' => 'required|email']);
- 
+
             $status = Password::sendResetLink(
                 $request->only('email')
             );
-         
+
             $status === Password::RESET_LINK_SENT
-                        ? back()->with(['status' => __($status)])
-                        : back()->withErrors(['email' => __($status)]);
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
 
             return redirect()->route('usagers.login')->with('success', 'usager créé avec succès');
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Log::error("Erreur lors de l'ajout d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de l\'ajout d\'un usager');
         }
@@ -81,13 +80,13 @@ class usagersController extends Controller
      */
     public function store(UsagerRequest $request)
     {
-        try {    
+        try {
             $usager = new Usager();
             $usager->nom = $request->nom;
             $usager->prenom = $request->prenom;
             $usager->email = $request->email;
             if ($request->password == $request->password_confirmation)
-            $usager->password = Hash::make($request->password);
+                $usager->password = Hash::make($request->password);
             $usager->save();
             return redirect()->route('usagers.login')->with('success', 'usager ajouté avec succès');
         } catch (\Throwable $e) {

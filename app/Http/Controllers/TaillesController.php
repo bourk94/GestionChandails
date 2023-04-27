@@ -14,7 +14,7 @@ class TaillesController extends Controller
      */
     public function index()
     {
-        $tailles = Taille::all();                
+        $tailles = Taille::all();
 
         return view('tailles.index', compact('tailles'));
     }
@@ -35,16 +35,12 @@ class TaillesController extends Controller
      */
     public function store(TailleRequest $request)
     {
-        try
-        {
+        try {
             $taille = new Taille($request->all());
             $taille->save();
 
             return redirect()->route('accueil')->with('message', "Ajout de la taille " . $taille->format . " réussi!");
-
-        }
-        catch(\Throwable $e)
-        {
+        } catch (\Throwable $e) {
             Log::debug($e);
             return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
         }
@@ -79,20 +75,17 @@ class TaillesController extends Controller
      */
     public function update(TailleRequest $request, $id)
     {
-        try
-        {
+        try {
             $taille = Taille::findOrFail($id);
 
             //Le champs du update (format)
 
-            $taille->format = $request->format;                       
+            $taille->format = $request->format;
 
             $taille->save();
-            
+
             return redirect()->route('accueil')->with('message', "Modification de la taille " . $taille->format . " réussi!");
-        }
-        catch(\Throwable $e)
-        {
+        } catch (\Throwable $e) {
             Log::debug($e);
             return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
         }
@@ -108,22 +101,19 @@ class TaillesController extends Controller
      */
     public function destroy($id)
     {
-        try
-        {
+        try {
             $taille = Taille::findOrFail($id);
 
             //Gérer le lien avec la table de jointure (Article_Campagne)
             //$taille->article_campagnes()->detach();
 
-           
+
             $taille->delete();
-            
+
             return redirect()->route('accueil')->with('message', "Suppression de " . $couleur->nom_couleur . " réussi!");
-        }
-        catch(\Throwable $e)
-        {
+        } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);            
+            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
         }
 
         return redirect()->route('accueil');
