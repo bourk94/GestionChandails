@@ -28,7 +28,7 @@
                     <form class="" method="POST" action="{{route('usagers.destroy', [$usager->id]) }}">
                     @csrf
                         @method('DELETE')
-                        <button type="submit" class="buttonSite">Supprimer</button>
+                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer l\'administrateur {{$usager->prenom}} {{$usager->nom}} ?')" class="buttonSite">Supprimer</button>
                     </form>
                 </div>
             </td>
