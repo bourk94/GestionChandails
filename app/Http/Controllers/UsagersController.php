@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usager;
 use App\Http\Requests\UsagerRequest;
+use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Session;
 
 class usagersController extends Controller
 {
@@ -39,12 +44,50 @@ class usagersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function storeAdmin(AdminRequest $request)
+    {
+        try {    
+            $usager = new Usager();
+            $usager->nom = $request->nom;
+            $usager->prenom = $request->prenom;
+            $usager->email = $request->email;
+            $usager->password = Hash::make(str::random(16));
+            $usager->type = "admin";
+            $usager->save();
+
+            $request->validate(['email' => 'required|email']);
+ 
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
+         
+            $status === Password::RESET_LINK_SENT
+                        ? back()->with(['status' => __($status)])
+                        : back()->withErrors(['email' => __($status)]);
+
+            return redirect()->route('usagers.login')->with('success', 'usager créé avec succès');
+        }
+        catch(\Throwable $e) {
+            Log::error("Erreur lors de l'ajout d'un usager: ", [$e]);
+            return redirect()->back()->with('error', 'Erreur lors de l\'ajout d\'un usager');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(UsagerRequest $request)
     {
-        try {
-            $usager = new Usager($request->all());
-            if ($usager->password == $usager->passwordConfirmation)
-                $usager->password = Hash::make($request->password);
+        try {    
+            $usager = new Usager();
+            $usager->nom = $request->nom;
+            $usager->prenom = $request->prenom;
+            $usager->email = $request->email;
+            if ($request->password == $request->password_confirmation)
+            $usager->password = Hash::make($request->password);
             $usager->save();
             return redirect()->route('usagers.login')->with('success', 'usager ajouté avec succès');
         } catch (\Throwable $e) {
