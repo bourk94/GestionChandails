@@ -305,6 +305,9 @@ li.dropdown {
     margin-top: .25rem;
 }
 
+.text-danger {
+  color: #dc3545!important;
+}
 
 
 /**/

@@ -6,7 +6,7 @@
 <h2 class="center">Liste des administrateurs</h2>
 
 <div class="center">
-    <a href="#" class="buttonSite">Créer un administrateurs</a>
+    <a href="{{ route('admin.create') }}" class="buttonSite">Créer un administrateurs</a>
 </div>
 
 <table class="customers">
