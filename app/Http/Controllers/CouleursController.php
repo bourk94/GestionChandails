@@ -6,6 +6,9 @@ use App\Http\Requests\CouleurRequest;
 use Illuminate\Http\Request;
 use App\Models\Couleur;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\ErrorHandler\Debug;
+
+use function Psy\debug;
 
 class CouleursController extends Controller
 {

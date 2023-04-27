@@ -4,20 +4,20 @@
 @section('contenu')
 
 <!--Afficher la liste des couleurs disponible dans la table-->
-    {{-- @if (count($couleurs)) --}}
+    {{-- @if(Count($couleurs)>0)
     @foreach($couleurs as $couleur)
     <table>
         <tr>
             <!--Les headers de mes colonnes-->
-            <th>Nom de la couleur</th>
-            <th>Code de la couleur</th>
+            <th>{{$couleur->nom_couleur}}</th>
+            <th>{{$couleur->code_couleur}}</th>
         </tr>
         <tr>
             
         </tr>
     </table>
 @endforeach
-{{-- @else
+@else
 <p>Aucune couleur</p>
 @endif --}}
 

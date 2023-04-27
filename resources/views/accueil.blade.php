@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('contenu')
+
+
+
     <!-- <div class="row"> -->
     <div class="padding">
         <!-- Section informations de la campagne -->
@@ -39,7 +42,8 @@
 
                         <!-- affichage simple-->
                         <label class="{{ $article->nom_couleur }}">
-                            <input type="radio" name="color" value="{{ $article->nom_couleur }}" class="radNone">
+                            <input type="radio" name="{{ $article->nom }}color" value="{{ $article->nom_couleur }}"
+                                class="radNone">
                             <div class="button"><span></span></div>
                         </label>
 
@@ -67,7 +71,8 @@
                     <div class="rightObjets">
                         <!-- affichage simple-->
                         <label>
-                            <input type="radio" name="size" value="{{ $article->format }}" class="radNone">
+                            <input type="radio" name="{{ $article->nom }}size" value="{{ $article->format }}"
+                                class="radNone">
                             <div class="button"><span>{{ $article->format }}</span></div>
                         </label>
 
@@ -82,11 +87,18 @@
                         @endif --}}
                     </div>
                     <div>
-                        <!-- JavaScript pour compter le nombre d'article et vérifier si la quantité maximale est atteinte selon l'id de l'article -->
-                        
-                        <label>
-                            <input type="number" max="{{ $article->quantite }}" min="1" value="0">
-                        </label>
+
+
+
+                        {{-- non-fonctionnel <label>
+                            <button id="gestion{{ $article->nom }}addition">+</button>
+                            <span id="{{ $article->nom }}input">0</span>
+                            <button id="gestion{{ $article->nom }}soustraction">-</button>
+                        </label> --}}
+
+                        <!-- JavaScript  qui limite la quantité d'un article dans plusieurs inputs-->
+
+
                     </div>
                     <div class="rightObjets">
                         <a href="#" class="buttonSite">Ajouter au panier</a>
@@ -96,6 +108,35 @@
         @else
             <p>Aucun article</p>
         @endif
+        {{-- non fonctionnel
+            <script>
+            let inputkangourou = document.getElementById("kangourousinput");
+            let addition = document.getElementById("gestionkangourousaddition");
+            let soustraction = document.getElementById("gestionkangouroussoustraction");
+            let valeur = 0;
+            const max = {{ $article->quantite }};
+            const min = 0;
+
+            addition.addEventListener("click", function() {
+                if (valeur >= max) {
+                    valeur = max;
+                    
+                } else {
+                    valeur++;
+                    inputkangourou.textContent = valeur;
+                }
+            });
+
+            soustraction.addEventListener("click", function() {
+                if (valeur <= min) {
+                    valeur = 0; 
+                } else {
+                       valeur--;
+                    inputkangourou.textContent = valeur;
+                }
+
+            });
+        </script> --}}
 
 
 
