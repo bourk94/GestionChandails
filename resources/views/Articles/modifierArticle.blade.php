@@ -3,30 +3,27 @@
 @section('title', 'modification/suppression d''un article')
 @section('contenu')
 
-    <form id="my-form" method="PATCH" action="{{ route('articles.update'), [$article->id]) }}" enctype="multipart/form-data">
+    <form id="my-form" method="PATCH" action="{{ route('articles.update'), [$article->id]) }}">
         @csrf
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
                     <div>
-                        <h2>Modifier un article</h2>
-                        <div>
-                            <label for="imageArticle">Nouvelle image d'article</label>
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" class="form-control-file" id="image" name="image" value="{{ old('image', $article->image) }}">
-                        </div>
-
+                        <!--les champs que l'admin peut modifier-->
+                        <!--nom, type, description, prix-->
+                        <h2>Modifier un article</h2>                        
                         <div>
                             <label for="nomArticle">Nouveau nom d'article</label>
-                            <input type="text" name="nom" id="nom" value="{{ old('nom', $article->nom) }}">
+                            <input type="text" class="@error('description') is-invalid @enderror" name="nom" id="nom" value="{{ old('nom', $article->nom) }}">
 
                             @error('nom')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messsage }}</span>
                             @enderror
                         </div>
 
                         <div>
                             <label for="typeArticle">Nouveau type d'article</label>
-                            <select name="type" id="type">
+                            <select class="@error('description') is-invalid @enderror" name="type" id="type" value="{{ old('type', $article->type) }}">
 
                                 <option value="Chandail">Chandail</option>
 
@@ -38,17 +35,31 @@
 
 
                             @error('type')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messsage }}</span>
                             @enderror
 
                         </div>
 
-                        <!--EST CE QUE L'ON GÈRE LES COULEURS À PARTIR D'ICI ???-->
-                        <!--
-                            <div>
-                                <label for="nomCouleur">Couleur</label>
-                            </div>
-                         -->
+                        <div>
+                            <label for="descriptionArticle">Nouvelle description</label>
+                            <textarea class="@error('description') is-invalid @enderror" name="description" class="description" id="description" value="{{ old('description', $article->description) }}"></textarea>
+
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+
+                        <div>
+                            <label for="prixArticle">Nouveau prix</label>
+                            <input type="number" class="@error('prix') is-invalid @enderror" name="prix" id="prix" min="0" value="{{ old('prix', $article->prix)  }}">
+
+                            @error('prix')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+                        
 
                     </div>
                 </div>

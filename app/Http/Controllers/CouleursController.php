@@ -24,7 +24,9 @@ class CouleursController extends Controller
      */
     public function create()
     {
-        return view('couleurs.createCouleur');
+        $couleurs = Couleur::all();
+        
+        return view('couleurs.createCouleur', compact('couleurs'));
     }
 
     /**
@@ -34,8 +36,9 @@ class CouleursController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CouleurRequest $request)
-    {
-        try {
+    {        
+        try
+        {            
             $couleur = new Couleur($request->all());
             $couleur->save();
 

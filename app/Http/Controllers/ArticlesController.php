@@ -48,7 +48,7 @@ class ArticlesController extends Controller
             return redirect()->route('accueil')->with('message', "Ajout de l'article " . $article->nom . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('accueil')->with('message', ['L\'ajout n\'a pas fonctionné!']);
         }
 
 

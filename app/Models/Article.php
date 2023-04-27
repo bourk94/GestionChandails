@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'type'];
+    protected $fillable = ['nom', 'type', 'description', 'prix'];
 
     //Méthodes pour créer le lien de jointure
 

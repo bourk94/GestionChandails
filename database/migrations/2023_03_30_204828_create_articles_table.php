@@ -16,8 +16,8 @@ return new class extends Migration
             // $table->string('image', 255);
             $table->string('nom');
             $table->string('type');
-            $table->string('description');
-            $table->double('prix');
+            $table->string('description')->nullable();
+            $table->double('prix')->nullable();
             $table->timestamps();
         });
     }

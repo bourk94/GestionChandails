@@ -26,7 +26,7 @@ class ArticleRequest extends FormRequest
             'type' => 'required|min:2|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|min:2|max:50',
-            'prix' => 'nullable|double|min:2|max:50',
+            'prix' => 'nullable|numeric|min:2|max:50',
             
         ];
     }

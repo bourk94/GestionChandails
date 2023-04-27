@@ -12,19 +12,19 @@
                         <h2>Modifier une couleur</h2>
                         <div>
                             <label for="nomCouleur">Nouveau nom de couleur</label>
-                            <input type="text" class="form-control" id="nom_couleur" name="nom_couleur" value="{{ old('nom_couleur', $couleur->nom_couleur) }}">
+                            <input type="text" class="@error('nom_couleur') is-invalid @enderror" id="nom_couleur" name="nom_couleur" value="{{ old('nom_couleur', $couleur->nom_couleur) }}">
 
                             @error('nom_couleur')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messsage }}</span>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="nomArticle">Nouveau code de couleur</label>
-                            <input type="text" name="code_couleur" id="code_couleur" value="{{ old('code_couleur', $couleur->code_couleur) }}">
+                            <label for="nomArticle">Nouvelle couleur</label>
+                            <input type="color" class="@error('nom_couleur') is-invalid @enderror" name="code_couleur" id="code_couleur" value="{{ old('code_couleur', $couleur->code_couleur) }}">
 
                             @error('code_couleur')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messsage }}</span>
                             @enderror
                         </div>                        
                     </div>

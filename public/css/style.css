@@ -163,6 +163,36 @@ li.dropdown {
 /**/
 
 /***************************************************************************/
+/* Création d'article */
+
+#description
+{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+    display: wrap;
+}
+
+/***************************************************************************/
+
+/* Création d'une couleur */
+
+#code_couleur
+{
+    width: 100%;
+    height: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+    display: wrap;
+}
+
+/***************************************************************************/
 
 /* Objets */
 

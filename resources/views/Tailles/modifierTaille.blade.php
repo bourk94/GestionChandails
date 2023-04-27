@@ -12,10 +12,10 @@
                         <h2>Modifier une taille</h2>
                         <div>
                             <label for="formatTaille">Nouveau format</label>
-                            <input type="text" class="form-control" id="format" name="format" value="{{ old('format', $taille->format) }}">
+                            <input type="text" class="@error('code_couleur') is-invalid @enderror" id="format" name="format" value="{{ old('format', $taille->format) }}">
 
                             @error('format')
-                                <span class="text-danger">{{ $messsages }}</span>
+                                <span class="text-danger">{{ $messsage }}</span>
                             @enderror
                         </div>                        
                     </div>
