@@ -90,6 +90,7 @@ ul.topnav li button {
   font: 16px Arial;
   border: none;
   cursor: pointer;
+  width: 100%;
 }
 
 ul.topnav li button:hover:not(.active) {
@@ -112,6 +113,7 @@ li a, .dropbtn {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  /* margin-right: 10px; Il va falloir rajouter ça car sinon ça dépasse le fenêtre */
 }
 
 li a:hover, .dropdown:hover .dropbtn {
