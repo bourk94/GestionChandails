@@ -23,6 +23,14 @@ class Articles_Campagnes_CommandesTableSeeder extends Seeder
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
+                [
+                    'commande_id'=>'2',
+                    'article_campagne_id' => '2',
+                    'quantite' => '1',
+                    'montant_total' => '1',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
             ]
             );
 

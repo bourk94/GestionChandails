@@ -48,7 +48,7 @@ class CampagnesTableSeeder extends Seeder
                     'date_debut_collecte' => '2023-10-15',
                     'date_fin_collecte' => '2023-10-28',
                     'administrateur_id_creation' => '2',
-                    'progression' => 'intention',
+                    'progression' => "intention d'achat",
                     //En cours ou terminée
                     'statut' => 'en cours',
                     'created_at' => date('Y-m-d H:i:s'),

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('article_id')->constrained('articles');
             $table->foreignId('campagne_id')->constrained('campagnes');
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('null');
             $table->unsignedBigInteger('couleur');
             $table->foreign('couleur')->references('id')->on('couleurs')->onDelete('cascade');
             $table->unsignedBigInteger('taille');
             $table->foreign('taille')->references('id')->on('tailles')->onDelete('cascade');
-            $table->integer('quantite_max')->default(0); 
+            $table->integer('quantite_max')->default(5); 
             //$table->primary(['article_id', 'campagne_id'],'id');
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use App\Models\Taille;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
 use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class CampagnesController extends Controller
@@ -19,13 +20,40 @@ class CampagnesController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
         $campagnes = Campagne::all();
-        $commandes = Commande::all();
-        
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes', 'commandes'));
+        $articles = DB::table('articles')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->select(
+                'articles.nom',
+                'articles.type',
+                'articles.id',
+                'articles.description',
+                'articles.prix',
+                'article_campagne.image as image',
+                'article_campagne.quantite_max as quantite',
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.id as couleur_id',
+                'couleurs.code_couleur as code_couleur',
+                'tailles.format as format',
+                'tailles.id as taille_id'
+
+            )
+            ->get();
+
+        $couleurs = DB::table('couleurs')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->get();
+        $tailles = DB::table('tailles')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
+
+
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles'));
     }
 
     /**
