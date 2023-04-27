@@ -19,20 +19,50 @@
                     <h1>Modifier le mot de passe</h1>
                     <div>
                         <!-- Le formulaire ne fonctionne pas -->
-                        <form method="POST" action="{{ route('usagers.update', $usager->id) }}" enctype="multipart/form-data" >
+                        <form method="POST" action="{{ route('usagers.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                                 <div>
+                                    <label for="email" class="form-label">Adresse courriel :</label>
+                                    <input type="email" class="@error('email') is-invalid @enderror" id="email" name="email" value="{{ $usager->email }}" required>
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label for="nom" class="form-label">Nom :</label>
+                                    <input type="text" class="@error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ $usager->nom }}" required>
+                                    @error('nom')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label for="prenom" class="form-label">Prénom :</label>
+                                    <input type="text" class="@error('prenom') is-invalid @enderror" id="prenom" name="prenom" value="{{ $usager->prenom }}" required>
+                                    @error('prenom')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div>
                                     <label for="old_password" class="form-label">Ancien mot de passe :</label>
-                                    <input type="password" class="form-control" id="old_password" name="old_password" required>
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="old_password" name="old_password">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div>
                                     <label for="password" class="form-label">Nouveau mot de passe :</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="password" name="password">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div>
                                     <label for="password_confirmation" class="form-label">Confirmer le nouveau mot de passe :</label>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                    <input type="password" class="@error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="center">
                                     <button type="submit" class="buttonSite">Modifier le mot de passe</button>

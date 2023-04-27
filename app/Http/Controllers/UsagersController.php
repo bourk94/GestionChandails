@@ -121,23 +121,12 @@ class UsagersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $usager = Usager::findOrFail($id);
-        return view('usagers.edit', compact('usager')); 
-
-        // try {
-        //    $usager = Usager::findOrFail($id);
-        // return view('usagers.edit', compact('usager')); 
-        // }
-        // catch
-        // (\Throwable $e) {
-        //     Log::error("Erreur lors de l'édition d'un usager: ", [$e]);
-        //     return redirect()->back()->with('error', 'Erreur lors de l\'édition d\'un usager');
-        // }      
+        $usager = Auth::user();
+        return view ('usagers.edit', compact('usager'));
     }
 
     /**
@@ -147,10 +136,11 @@ class UsagersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsagerRequest $request, $id)
+    public function update(UsagerRequest $request)
     {
         try {
-            $usager = Usager::findOrFail($id);
+            log::debug("salut les putes");
+            $usager = Auth::user();
             $old_password = $request->old_password;
             $newPassword = $request->password;
             if(empty($newPassword) && $request->email == $usager->email) {
@@ -183,7 +173,6 @@ class UsagersController extends Controller
             }
         }
         catch(\Throwable $e) {
-            log::debug("Test");
             Log::error("Erreur lors de la modification d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de la modification d\'un usager');
         }
