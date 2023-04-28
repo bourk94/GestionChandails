@@ -47,7 +47,7 @@ Route::post('/reset-password', function (Request $request) {
     $request->validate([
         'token' => 'required',
         'email' => 'required|email',
-        'password' => ['required','confirmed', 'max:64', validation::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()]
+        'password' => ['required','confirmed', 'max:64', validation::min(8)->letters()->mixedCase()->numbers()->symbols()]
     ]);
 
    
@@ -74,67 +74,69 @@ Route::post('/reset-password', function (Request $request) {
 Route::get('/',
 [CampagnesController::class, 'index'])->name('accueil');
 
-Route::get('usagers/login',
-[UsagersController::class, 'showLoginForm'])->name('usagers.login')->middleware('guest');
-
-// Route::post('login',
-// [UsagersController::class, 'login'])->name('login')->middleware('guest');
-
 Route::post('login',
 [UsagersController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('logout',
 [UsagersController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::get('admin/register',
-[UsagersController::class, 'createAdmin'])->name('admin.create')->middleware('auth');
-
 Route::post('admin',
 [UsagersController::class, 'storeAdmin'])->name('usagers.storeAdmin')->middleware('auth');
 
-Route::get('usagers/register',
-[UsagersController::class, 'create'])->name('usagers.create')->middleware('guest');
+Route::get('admin/register',
+[UsagersController::class, 'createAdmin'])->name('admin.create')->middleware('auth');
+
+Route::patch('admin/update',
+[UsagersController::class, 'updateAdmin'])->name('admin.update')->middleware('auth');
 
 Route::post('usagers',
 [UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
 
-Route::get('usagers',
-[UsagersController::class, 'index'])->name('usagers.index')->middleware('auth');
+// Route::get('usagers',
+// [UsagersController::class, 'index'])->name('usagers.index')->middleware('auth');
 
-Route::get('usagers/{id}',
-[UsagersController::class, 'show'])->name('usagers.show')->middleware('auth');
+Route::get('usagers/login',
+[UsagersController::class, 'showLoginForm'])->name('usagers.login')->middleware('guest');
 
-Route::get('usagers/{id}/edit',
+Route::get('usagers/register',
+[UsagersController::class, 'create'])->name('usagers.create')->middleware('guest');
+
+Route::get('usagers/edit',
 [UsagersController::class, 'edit'])->name('usagers.edit')->middleware('auth');
 
-Route::patch('usagers/{id}',
+Route::patch('usagers/update',
 [UsagersController::class, 'update'])->name('usagers.update')->middleware('auth');
 
-Route::delete('usagers/{id}/supprimer',
-[UsagersController::class, 'destroy'])->name('usagers.destroy')->middleware('auth');
+// Route::get('usagers/{id}',
+// [UsagersController::class, 'show'])->name('usagers.show')->where('id', '[0-9]+')->middleware('auth');
 
-Route::get('campagnes/create',
-[CampagnesController::class, 'create'])->name('campagnes.create');
+// Route::post('usagers/{id}/edit',
+// [UsagersController::class, 'edit'])->name('usagers.edit')->where('id', '[0-9]+')->middleware('auth');
+
+Route::delete('usagers/{id}/supprimer',
+[UsagersController::class, 'destroy'])->name('usagers.destroy')->where('id', '[0-9]+')->middleware('auth');
 
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
+Route::get('campagnes/create',
+[CampagnesController::class, 'create'])->name('campagnes.create');
+
 //Mettre les middleware ???
+Route::post('articles',
+[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
 
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
-Route::post('articles',
-[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
-
 Route::delete('/articles/{id}',
-[ArticlesController::class, 'destroy'])->name('articles.destroy'); //->middleware('auth');
+[ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
 
 Route::get('/articles/{id}/modifier/',
-[ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
+[ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit'); //->middleware('auth');
 
 Route::patch('/articles/{id}/modifier/',
-[ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
+[ArticlesController::class, 'update'])->where('id', '[0-9]+')->name('articles.update'); //->middleware('auth');
 
 
 

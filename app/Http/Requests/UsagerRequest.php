@@ -24,8 +24,8 @@ class UsagerRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'email'=>'required|email|unique:usagers',
-                'password'=> ['required','confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()],
+                'email'=> 'required','email','unique:usagers,email,'. $this->id,
+                'password'=> [($this->id ? 'nullable' : 'required'), 'confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
                 'nom'=>'required|min:2|max:30',
                 'prenom'=>'required|min:2|max:30',
         ];      
