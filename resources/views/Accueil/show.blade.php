@@ -101,43 +101,90 @@
 
                         </div>
                         <div class="rightObjets">
-                            <a href="#" class="buttonSite">Ajouter au panier</a>
+                            @if (Auth::check())
+                                <a href="#" class="buttonSite">Ajouter au panier</a>
+                            @else
+                                <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
+                            @endif
+                            </div>
                         </div>
-                    </div>
                 @endif
             @endforeach
         @else
             <p>Aucun article</p>
         @endif
+     
+
+
+        <!-- Script qui fait apparaitre un modal -->
+        <div id="modalLogin" class="modal">
+            <section class="modal-content">
+                <div class=" card__padding">
+                    <div class="card__container">
+                        <div class="flex__center">
+                            <h1>Connexion</h1>
+                            <div>
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div>
+                                        <label for="email" class="form-label">Adresse courriel</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ old('email') }}" required>
+                                    </div>
+                                    <div>
+                                        <label for="password" class="form-label">Mot de passe</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                    <div class="flex__center">
+                                        <a class="hover__orange color__white" href="{{ route('usagers.create') }}">Créer un
+                                            compte</a>
+                                    </div>
+                                    <div class="flex__center">
+                                        <div class="flex__inline margin__top">
+                                            <button class="btn bg__orange color__white" type="submit">Connexion</button>
+                                            <a href="/forgot-password"><button
+                                                    class="btn bg__orange color__white margin__top" type="button">Mot de
+                                                    passe oublié</button></a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script>
+            //Mettre dans un .JS
+            var modalLogin = document.getElementById("modalLogin");
+            var btnModalLogin = document.getElementById("btnModalLogin");
+            var span = document.getElementsByClassName(" close")[0];
+            btnModalLogin.onclick = function() {
+                modalLogin.style.display = "block";
+            }
+            span.onclick = function() {
+                modalLogin.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modalLogin) {
+                    modalLogin.style.display = "none";
+                }
+            }
+        </script>
+
+
         {{-- non fonctionnel
             <script>
             let inputkangourou = document.getElementById("kangourousinput");
-            let addition = document.getElementById("gestionkangourousaddition");
-            let soustraction = document.getElementById("gestionkangouroussoustraction");
-            let valeur = 0;
-            const max = {{ $article->quantite }};
-            const min = 0;
 
-            addition.addEventListener("click", function() {
-                if (valeur >= max) {
-                    valeur = max;
-                    
-                } else {
-                    valeur++;
-                    inputkangourou.textContent = valeur;
-                }
-            });
 
-            soustraction.addEventListener("click", function() {
-                if (valeur <= min) {
-                    valeur = 0; 
-                } else {
-                       valeur--;
-                    inputkangourou.textContent = valeur;
-                }
-
-            });
-        </script> --}}
 
     </div>
+    <script>
+        var couleurs = document.createElement('style');
+        couleurs.innerHTML =
+            `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
+        document.head.appendChild(couleurs);
+    </script>
+    --}}
 @endsection
