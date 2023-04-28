@@ -19,7 +19,7 @@
                     <h1>Modifier le mot de passe</h1>
                     <div>
                         <!-- Le formulaire ne fonctionne pas -->
-                        <form method="POST" action="{{ route('usagers.update') }}" {{-- enctype="multipart/form-data" --}}>
+                        <form method="POST" action="{{ route('usagers.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                                 <div>
