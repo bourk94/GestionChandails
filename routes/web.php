@@ -86,6 +86,9 @@ Route::post('admin',
 Route::get('admin/register',
 [UsagersController::class, 'createAdmin'])->name('admin.create')->middleware('auth');
 
+Route::patch('admin/update',
+[UsagersController::class, 'updateAdmin'])->name('admin.update')->middleware('auth');
+
 Route::post('usagers',
 [UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
 

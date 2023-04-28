@@ -126,17 +126,68 @@ class UsagersController extends Controller
     public function edit()
     {
         $usager = Auth::user();
-        return view ('usagers.edit', compact('usager'));
+        if ($usager->type == "admin") {
+            return view ('admin.edit', compact('usager'));
+        }
+        else if ($usager->type == "client"){
+            return view ('usagers.edit', compact('usager'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UsagerRequest $request)
+    {
+        try {
+            $usager = Auth::user();
+            $old_password = $request->old_password;
+            $newPassword = $request->password;
+            if(empty($newPassword) && $request->email == $usager->email) {
+                $usager->update($request->except('password', 'email'));
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
+            }
+            if(empty($newPassword) && $request->email != $usager->email)
+            {
+                $usager->update($request->except('password'));
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
+            }
+            if (($request->email == $usager->email) && Hash::check($old_password, $usager->password)){
+                $usager->nom = $request->nom;
+                $usager->prenom = $request->prenom;
+                $usager->email = $request->email;
+                $usager->password = Hash::make($newPassword);
+                $usager->save();
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
+            }   
+            if (Hash::check($old_password, $usager->password) && ($request->email != $usager->email)) {
+                $usager->nom = $request->nom;
+                $usager->prenom = $request->prenom;
+                $usager->email = $request->email;
+                $usager->password = Hash::make($newPassword);
+                $usager->save();
+                return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
+            }
+            else {
+                return redirect()->back()->withErrors(['Mot de passe incorrect']);
+            }
+        }
+        catch(\Throwable $e) {
+            Log::error("Erreur lors de la modification d'un usager: ", [$e]);
+            return redirect()->back()->with('error', 'Erreur lors de la modification d\'un usager');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAdmin(AdminRequest $request)
     {
         try {
             $usager = Auth::user();

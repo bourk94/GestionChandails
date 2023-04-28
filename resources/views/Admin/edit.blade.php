@@ -2,7 +2,7 @@
 
 @section('title', 'Mon compte')
 @section('contenu')
-@if (Auth::user()->type == 'client')
+@if (Auth::user()->type == 'admin')
     <section class="main-container">
         <div class="card__padding">
             <div class="card__container">
@@ -13,7 +13,7 @@
                         <h3>{{ $usager->email }}</h3>
                     </div>
                     <div>
-                        <form method="POST" action="{{ route('usagers.update') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                                 <div>
@@ -63,6 +63,7 @@
                                     <button type="submit" class="buttonSite">Modifier</button>
                                 </div>
                         </form>
+                        <!-- Le formulaire ne fonctionne pas -->
                     </div>
                 </div>
             </div>
