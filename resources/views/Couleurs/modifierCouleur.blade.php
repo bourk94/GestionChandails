@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'modification/suppression d''une couleur')
+@section('title', "modification/suppression d''une couleur")
 @section('contenu')
 
-    <form id="my-form" method="PATCH" action="{{ route('couleurs.update'), [$couleur->id]) }}">
+    <form id="my-form" method="PATCH" action="{{ route('couleurs.update'), [$couleur->id] }}">
         @csrf
         <div class="card__padding">
             <div class="card__container">

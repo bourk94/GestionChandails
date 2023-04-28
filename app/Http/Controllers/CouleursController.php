@@ -56,10 +56,13 @@ class CouleursController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Couleur $couleur)
     {
-        //
+        return view('couleurs.show', ['couleur' => couleur::findOrFail($id)]);
     }
 
     /**
@@ -69,7 +72,7 @@ class CouleursController extends Controller
     {
         $couleur = Couleur::findOrFail($id);
 
-        return view('couleurs.modifierCouleur', compact('couleur'));
+        return view('couleurs.modifierCouleur', compact('id'));
     }
 
     /**

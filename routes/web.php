@@ -122,13 +122,12 @@ Route::get('campagnes/create',
 Route::post('campagnes',
 [CampagnesController::class, 'store'])->name('campagnes.store');
 
-
+//Article
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
 Route::post('articles',
 [ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
-
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->name('articles.destroy'); //->middleware('auth');
@@ -136,40 +135,41 @@ Route::delete('/articles/{id}',
 Route::get('/articles/{id}/modifier/',
 [ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
 
-Route::patch('/articles/{id}/modifier/',
-[ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
+// Route::patch('/articles/{id}',
+// [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
 
-
-Route::get('articles/{id}/edit',
-[ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
+// Route::get('articles/{id}/edit',
+// [ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
 
 Route::patch('articles/{id}',
 [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
 
 //Couleur
+Route::get('/couleurs',
+[CouleursController::class, 'index'])->name('couleurs');
+
 Route::get('couleurs/create',
 [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
 
 Route::post('couleurs',
 [CouleursController::class, 'store'])->name('couleurs.store');  //->middleware('auth');
 
+Route::get('couleurs/{id}',
+[CouleursController::class, 'show'])->name('couleurs.show'); //->middleware('auth');
 
+// Route::post('couleurs',
+// [CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
 
-
-Route::post('couleurs',
-[CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
+Route::patch('/couleurs/{id}',
+[CouleursController::class, 'update'])->name('couleurs.update'); //->middleware('auth');
 
 Route::get('/couleurs/{id}/modifier/',
-[ArticlesController::class, 'edit'])->name('couleurs.edit'); //->middleware('auth');
-
-Route::patch('/couleurs/{id}/modifier/',
-[ArticlesController::class, 'update'])->name('couleurs.update'); //->middleware('auth');
+[CouleursController::class, 'edit'])->name('couleurs.edit'); //->middleware('auth');
 
 Route::delete('/couleurs/{id}',
-[ArticlesController::class, 'destroy'])->name('couleurs.destroy'); //->middleware('auth');
+[CouleursController::class, 'destroy'])->name('couleurs.destroy'); //->middleware('auth');
 
 //Route pour afficher la page createCouleur qui combine le formulaire d'ajout de couleur et celui d'ajout de taille
-
 Route::get('couleurs/create',
 [TaillesController::class, 'create'])->name('tailles.create'); //->middleware('auth');
 
