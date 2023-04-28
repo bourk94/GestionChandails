@@ -22,14 +22,13 @@ class CampagnesController extends Controller
     {
         $campagnes = Campagne::all();
         $articles = DB::table('articles')
-            ->distinct()
             ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
             ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
             ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
             ->select(
                 'articles.nom',
                 'articles.type',
-                'articles.id',
+                'articles.id as article_id',
                 'articles.description',
                 'articles.prix',
                 'article_campagne.image as image',
@@ -47,12 +46,19 @@ class CampagnesController extends Controller
             ->distinct()
             ->join('article_campagne', 'article_campagne.couleur', '=', 'couleurs.id')
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->Select(
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.id as couleur_id',
+                'couleurs.code_couleur as code_couleur',
+                'articles.id as article_id',
+            )
             ->get();
         $tailles = DB::table('tailles')
             ->distinct()
             ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
             ->get();
         $articles_campagnes = DB::table('article_campagne')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
             ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
             ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
