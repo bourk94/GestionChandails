@@ -36,8 +36,8 @@
                         <a href="#">Supprimer</a>
                     </div>
                 </li>
-            @endif
-        @endauth
+            
+       
         <!--  -->
 
         <!-- Dropdown pour le super administrateur -->
@@ -80,9 +80,9 @@
 
     <!-- Boutons connexion et déconnexion -->
     @if (!Auth::user())
-    <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
-    </ul>
-
+        <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
+        </ul>
+    @endif
     @if (Session::has('message'))
         <div class="container alert alert-success text-center">
 
@@ -97,6 +97,7 @@
                 <p>{{ $error }}</p>
             @endforeach
         </div>
+        @endif
     @if (Auth::user())
     <li class="dropdown right">
         <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
