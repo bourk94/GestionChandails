@@ -42,7 +42,7 @@ class CampagnesController extends Controller
 
             )
             ->get();
-              
+
         $couleurs = DB::table('couleurs')
             ->distinct()
             ->join('article_campagne', 'article_campagne.couleur', '=', 'couleurs.id')
@@ -52,9 +52,14 @@ class CampagnesController extends Controller
             ->distinct()
             ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
             ->get();
+        $articles_campagnes = DB::table('article_campagne')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
 
 
-        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles'));
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'articles_campagnes'));
     }
 
     /**
