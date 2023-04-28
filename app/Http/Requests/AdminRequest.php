@@ -24,7 +24,7 @@ class AdminRequest extends FormRequest
     public function rules(): array
     {
         return [     
-            'email'=>'required|email|regex:/^((\.*[A-Za-z0-9])+)(@cegeptr\.qc\.ca)$/|unique:usagers,email,'. $this->id,
+            'email'=>'required|email|regex:/^((\.?[A-Za-z0-9])+)(@cegeptr\.qc\.ca)$/|unique:usagers,email,'. $this->id,
             'nom'=>'required|min:2|max:30',
             'prenom'=>'required|min:2|max:30',
             'password'=> [($this->id ? 'nullable' : 'prohibited'),'confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
