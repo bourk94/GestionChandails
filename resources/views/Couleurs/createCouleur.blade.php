@@ -3,48 +3,66 @@
 @section('title', 'Ajouter une couleur')
 @section('contenu')
 
+<!--Afficher la liste des couleurs disponible dans la table-->
+    {{-- @if(Count($couleurs)>0)
+    @foreach($couleurs as $couleur)
+    <table>
+        <tr>
+            <!--Les headers de mes colonnes-->
+            <th>{{$couleur->nom_couleur}}</th>
+            <th>{{$couleur->code_couleur}}</th>
+        </tr>
+        <tr>
+            
+        </tr>
+    </table>
+@endforeach
+@else
+<p>Aucune couleur</p>
+@endif --}}
+
     <form id="form_couleur" action="{{ route('couleurs.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
                     <div>
-                        <h2>Ajouter une couleur</h2>                        
+                        <h2>Ajouter une couleur</h2>
                         <div>
                             <label for="nomCouleur">Nom de la couleur</label>
-                            <input type="text" name="nom_couleur" id="nom_couleur">
+                            <input type="text" class="@error('nom_couleur') is-invalid @enderror" name="nom_couleur" id="nom_couleur">
 
                             @error('nom_couleur')
-                                <span class="text-danger">{{ $messages }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
 
                         </div>
                         <div>
-                            <label for="codeCouleur">Code de la couleur</label>
-                            <input type="text" name="code_couleur" id="code_couleur" placeholder="Ex: FFFFFF">            
+                            <label for="codeCouleur">Choisir une couleur</label>
+                            <input type="color" class="@error('code_couleur') is-invalid @enderror" name="code_couleur" id="code_couleur">            
 
                             @error('code_couleur')
-                                <span class="text-danger">{{ $messages }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
 
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- <template id="my-template">
-                    <div class="card__padding">
-                        <div class="card__container">
-                            <div class="flex__center">
-                                <div>
-                                    <label for="nomArticle">Nom de l'article</label>
-                                    <input name="nomArticle" type="text"/>
+                        <div class="card__padding">
+                            <div class="card__container">
+                                <div class="flex__center">
+                                    <div>
+                                        <label for="nomArticle">Nom de l'article</label>
+                                        <input name="nomArticle" type="text"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template> -->
+                    </template> -->
 
         <div class="flex__center margin__top">
             <button class="btn bg__orange color__white" type="submit">Ajouter une couleur</button>
@@ -52,52 +70,45 @@
 
     </form>
 
+    
+
     <!--Form pour l'ajout d'une taille-->
-    <form id="form_taille" action="{{ route('tailles.store') }}" method="POST" enctype="multipart/form-data">
+    <form id="form_taille" action="{{ route('tailles.store') }}" method="POST">
         @csrf
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
                     <div>
-                        <h2>Ajouter une taille</h2>                        
+                        <h2>Ajouter une taille</h2>
                         <div>
-                            <label for="nomCouleur">Nom de la couleur</label>
-                            <input type="text" name="nom_couleur" id="nom_couleur">
+                            <label for="formatTaille">Format</label>
+                            <input type="text" class="@error('format') is-invalid @enderror" name="format" id="format">
 
-                            @error('nom_couleur')
-                                <span class="text-danger">{{ $messages }}</span>
+                            @error('format')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
 
                         </div>
-                        <div>
-                            <label for="codeCouleur">Code de la couleur</label>
-                            <input type="text" name="code_couleur" id="code_couleur" placeholder="Ex: FFFFFF">            
-
-                            @error('code_couleur')
-                                <span class="text-danger">{{ $messages }}</span>
-                            @enderror
-
-                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- <template id="my-template">
-                    <div class="card__padding">
-                        <div class="card__container">
-                            <div class="flex__center">
-                                <div>
-                                    <label for="nomArticle">Nom de l'article</label>
-                                    <input name="nomArticle" type="text"/>
+                        <div class="card__padding">
+                            <div class="card__container">
+                                <div class="flex__center">
+                                    <div>
+                                        <label for="nomArticle">Nom de l'article</label>
+                                        <input name="nomArticle" type="text"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template> -->
+                    </template> -->
 
         <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter une couleur</button>
+            <button class="btn bg__orange color__white" type="submit">Ajouter une taille</button>
         </div>
 
     </form>

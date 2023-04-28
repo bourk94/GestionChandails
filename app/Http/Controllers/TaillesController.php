@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TailleRequest;
+use App\Models\Taille;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class TaillesController extends Controller
@@ -11,7 +14,9 @@ class TaillesController extends Controller
      */
     public function index()
     {
-        //
+        $tailles = Taille::all();
+
+        return view('tailles.index', compact('tailles'));
     }
 
     /**
@@ -19,15 +24,28 @@ class TaillesController extends Controller
      */
     public function create()
     {
-        //
+        return view('couleurs.createCouleur');
     }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TailleRequest $request)
     {
-        //
+        try {
+            $taille = new Taille($request->all());
+            $taille->save();
+
+            return redirect()->route('accueil')->with('message', "Ajout de la taille " . $taille->format . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+        }
+
+        return redirect()->route('accueil');
     }
 
     /**
@@ -41,24 +59,63 @@ class TaillesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $taille = Taille::findOrFail($id);
+
+        return view('tailles.modifierTaille', compact('taille'));
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(TailleRequest $request, $id)
     {
-        //
+        try {
+            $taille = Taille::findOrFail($id);
+
+            //Le champs du update (format)
+
+            $taille->format = $request->format;
+
+            $taille->save();
+
+            return redirect()->route('accueil')->with('message', "Modification de la taille " . $taille->format . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
+        }
+
+        return redirect()->route('accueil');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        try {
+            $taille = Taille::findOrFail($id);
+
+            //Gérer le lien avec la table de jointure (Article_Campagne)
+            //$taille->article_campagnes()->detach();
+
+
+            $taille->delete();
+
+            return redirect()->route('accueil')->with('message', "Suppression de " . $couleur->nom_couleur . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
+        }
+
+        return redirect()->route('accueil');
     }
 }

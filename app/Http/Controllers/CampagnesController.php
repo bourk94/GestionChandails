@@ -10,6 +10,8 @@ use App\Models\Taille;
 use App\Models\Usager; //Je ne sais pas si c'est le bonne endroit
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
+use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class CampagnesController extends Controller
@@ -19,14 +21,52 @@ class CampagnesController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
         $campagnes = Campagne::all();
+        $articles = DB::table('articles')
+            ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->select(
+                'articles.nom',
+                'articles.type',
+                'articles.id as article_id',
+                'articles.description',
+                'articles.prix',
+                'article_campagne.image as image',
+                'article_campagne.quantite_max as quantite',
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.id as couleur_id',
+                'couleurs.code_couleur as code_couleur',
+                'tailles.format as format',
+                'tailles.id as taille_id'
 
-        $usagers = Usager::all(); //Je ne sais pas si c'est le bonne endroit
+            )
+            ->get();
 
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes', 'usagers')); //Je ne sais pas si c'est le bonne endroit (usagers)
+        $couleurs = DB::table('couleurs')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->Select(
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.id as couleur_id',
+                'couleurs.code_couleur as code_couleur',
+                'articles.id as article_id',
+            )
+            ->get();
+        $tailles = DB::table('tailles')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
+        $articles_campagnes = DB::table('article_campagne')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
+
+
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'articles_campagnes'));
     }
 
     /**
@@ -35,7 +75,7 @@ class CampagnesController extends Controller
     public function create()
     {
         $articles = Article::all();
-       
+
         return view('campagnes.createCampagne', compact('articles'));
     }
 
@@ -78,4 +118,26 @@ class CampagnesController extends Controller
     {
         //
     }
+
+    // public function storeArticleCampagneCommande(Request $request)
+    // {
+    //     try {
+    //         $campagne = new Campagne($request->all());
+    //         $campagne->save();
+
+    //         $article = Article::find($request->article_id);
+    //         $article->campagnes()->attach($campagne->id);
+
+    //         $couleur = Couleur::find($request->couleur_id);
+    //         $couleur->campagnes()->attach($campagne->id);
+
+    //         $taille = Taille::find($request->taille_id);
+    //         $taille->campagnes()->attach($campagne->id);
+
+    //         return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
+    //     } catch (\Throwable $e) {
+    //         Log::debug($e);
+    //         return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+    //     }
+    // }
 }

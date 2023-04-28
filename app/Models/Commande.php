@@ -14,15 +14,15 @@ class Commande extends Model
     
     //Méthodes pour créer le lien de jointure
 
-    //Jointure avec la table Article
-    public function articles()
+    //Jointure avec la table ArticleCampagne
+    public function articles_campagnes()
     {
-        return $this->belongsToMany('App\Models\Article');
+        return $this->belongsToMany('App\Models\ArticleCampagne');
     }
 
-    //Jointure avec la table Client
-    public function clients()
+    //Jointure avec la table Usager
+    public function usagers()
     {
-        return $this->belongsToMany('App\Models\Client');
+        return $this->belongsToMany('App\Models\Usager');
     }
 }

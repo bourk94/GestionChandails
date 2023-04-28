@@ -19,21 +19,19 @@ class ArticlesTableSeeder extends Seeder
         DB::table('articles')->insert(
             [
                 [
-                    'image' => 'Exemple_Chandail_1.jpg',
                     'nom' => 't-shirt',
                     'type' => 'vêtement',
-                    // 'couleur_id' => '1',
-                    // 'taille_id' => '1',
+                    'description' => 't-shirt',
+                    'prix' => '20',
                     'created_at'=> date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
 
                 [
-                    'image'=> 'Exemple_Kangourou_1.jpg',
                     'nom' =>'kangourous',
                     'type' => 'vêtement',
-                    // 'couleur_id' => '1',
-                    // 'taille_id' => '1',
+                    'description' => 'kangourous',
+                    'prix' => '30',
                     'created_at'=> date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
