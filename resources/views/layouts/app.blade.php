@@ -40,6 +40,15 @@
                         <a href="#">Supprimer</a>
                     </div>
                 </li>
+
+                <!-- Dropdown pour gérer les couleurs -->
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Couleur</a>
+                    <div class="dropdown-content">
+                        <a href="{{ route('couleurs') }}">Gérer</a>
+                        <a href="{{ route('couleurs.create') }}">Ajouter</a>
+                    </div>
+                </li>
             @endif
         @endauth
         <!--  -->

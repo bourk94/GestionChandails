@@ -67,13 +67,4 @@
         </div>
     </form>
 
-
-    <!--SCRIPTS DE VALIDATION-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-    <script src="{{ asset('js/jsvalidation.js') }}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
-
-
 @endsection
