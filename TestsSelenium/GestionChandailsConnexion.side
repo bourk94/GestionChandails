@@ -83,6 +83,18 @@
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
+    }, {
+      "id": "9d481ecf-9ac0-4ef3-8765-786d65b968e2",
+      "comment": "Se déconnecter a la fin",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
+      "value": ""
     }]
   }, {
     "id": "b1c1fa97-09e2-4318-990f-cc72c5225443",
@@ -317,6 +329,18 @@
       ],
       "value": "${KEY_ENTER}"
     }, {
+      "id": "ad1cb587-4214-478b-93e1-3f49aa343358",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.flex__inline > .btn",
+      "targets": [
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
       "id": "b8aadf00-4c2d-4e03-9993-06f0f9b78e8f",
       "comment": "",
       "command": "assertElementPresent",
@@ -331,11 +355,30 @@
       ],
       "value": ""
     }, {
-      "id": "1130a4a9-84be-46ae-980c-1915fb1e3017",
+      "id": "756aec34-6e9c-4cb8-a6a6-58ac35b0bfc5",
       "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=client@client.com",
+      "targets": [
+        ["linkText=client@client.com", "linkText"],
+        ["css=.dropbtn", "css:finder"],
+        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'javascript:void(0)')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1130a4a9-84be-46ae-980c-1915fb1e3017",
+      "comment": "Se déconnecter a la fin",
       "command": "click",
-      "target": "css=.test",
-      "targets": [],
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+      ],
       "value": ""
     }]
   }, {
@@ -395,6 +438,18 @@
       ],
       "value": "${KEY_ENTER}"
     }, {
+      "id": "a0a81715-5fbb-41b6-b37e-33914ad56214",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.flex__inline > .btn",
+      "targets": [
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
       "id": "e6aba4ce-6c43-4ceb-80d2-de7271fe3b6f",
       "comment": "",
       "command": "assertElementPresent",
@@ -407,12 +462,26 @@
       ],
       "value": ""
     }, {
-      "id": "bb78b8e9-46b2-4831-a45f-255827975c87",
+      "id": "d03a2fb6-baa4-4c8c-841a-b46727f3a1da",
       "comment": "",
-      "command": "click",
-      "target": "css=.test",
+      "command": "mouseOver",
+      "target": "linkText=admin@cegeptr.qc.ca",
       "targets": [
-        ["css=.test", "css:finder"],
+        ["linkText=client@client.com", "linkText"],
+        ["css=.dropbtn", "css:finder"],
+        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'javascript:void(0)')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5a70157-cbcd-492e-9eca-a8c43b82e715",
+      "comment": "Se déconnecter a la fin",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
         ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
@@ -476,6 +545,18 @@
       ],
       "value": "${KEY_ENTER}"
     }, {
+      "id": "f9c85af6-3e68-4940-9aa0-47ad03871d7a",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.flex__inline > .btn",
+      "targets": [
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
       "id": "35fd581b-a8ad-492e-97bd-025c5fc38d83",
       "comment": "",
       "command": "assertElementPresent",
@@ -490,12 +571,26 @@
       ],
       "value": ""
     }, {
-      "id": "fa6e779e-00d9-4cb4-85ca-5915911df79a",
+      "id": "892104b0-477f-413d-b098-e4348f28eb32",
       "comment": "",
-      "command": "click",
-      "target": "css=.test",
+      "command": "mouseOver",
+      "target": "linkText=superadmin@superadmin.com",
       "targets": [
-        ["css=.test", "css:finder"],
+        ["linkText=superadmin@superadmin.com", "linkText"],
+        ["css=.right > .dropbtn", "css:finder"],
+        ["xpath=//a[contains(text(),'superadmin@superadmin.com')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, 'javascript:void(0)')])[2]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'superadmin@superadmin.com')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "524d47d7-458b-417b-9e6e-69784b3a7c90",
+      "comment": "Se déconnecter a la fin",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
         ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
@@ -504,7 +599,7 @@
     }]
   }, {
     "id": "faa69310-0e28-4643-a5bf-8a310dc39a26",
-    "name": "3. Création de compte",
+    "name": "3.1 Création de compte",
     "commands": [{
       "id": "a3ea4c58-44ad-4c73-a587-c02cedd65b34",
       "comment": "",
@@ -546,7 +641,7 @@
     }]
   }, {
     "id": "9971ed3b-c8b4-4f89-9ac1-f190ea124777",
-    "name": "4. Bouton Mot de passe oublié",
+    "name": "3.2 Bouton Mot de passe oublié",
     "commands": [{
       "id": "d72bbe37-00f2-42f3-ad6a-b22359471389",
       "comment": "",
@@ -575,6 +670,92 @@
       "value": ""
     }, {
       "id": "83dc2c04-a816-488c-8544-921cc5259bb0",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=.flex__center:nth-child(1)",
+      "targets": [
+        ["css=.flex__center:nth-child(1)", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "482f0c9b-f375-42c9-91eb-c53581db9f14",
+    "name": "3.4 Redirection Logo",
+    "commands": [{
+      "id": "86d770f5-e9fc-47b8-b943-f9ee9ce34d28",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8b6034f6-3be1-4af3-a4fc-a1b61e0f358c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7dd09540-64e6-43a1-931e-9cce1733db9f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logo",
+      "targets": [
+        ["linkText=Logo", "linkText"],
+        ["css=.active", "css:finder"],
+        ["xpath=//a[contains(text(),'Logo')]", "xpath:link"],
+        ["xpath=//a[@href='http://127.0.0.1:8000']", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4877291f-19d3-4c9e-840a-c9ed654ae69f",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.flex__inline > .btn",
+      "targets": [
+        ["css=.flex__inline > .btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c4153f40-c283-43a0-92b2-57d48e08d137",
+    "name": "3.3 Bouton Connexion",
+    "commands": [{
+      "id": "3aa4b1af-a90d-4bcf-a0d6-3bcb97902254",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/usagers/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0d8022b2-4fd7-4d31-a9a5-6f888a2e9253",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "968x928",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e0e4df0f-ba6a-4d01-8432-9c6a28bef0eb",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Connexion",
+      "targets": [
+        ["linkText=Connexion", "linkText"],
+        ["css=.right > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Connexion')]", "xpath:link"],
+        ["xpath=//a[@href='http://127.0.0.1:8000/usagers/login']", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "360dfd2f-2ba5-4e31-afd0-dd8da20fd2b0",
       "comment": "",
       "command": "assertElementPresent",
       "target": "css=.flex__center:nth-child(1)",
