@@ -127,9 +127,6 @@ Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
 //Mettre les middleware ???
-Route::post('articles',
-[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
-
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
@@ -156,25 +153,20 @@ Route::get('/couleurs',
 Route::get('couleurs/create',
 [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
 
-
 Route::get('couleurs/{id}',
 [CouleursController::class, 'show'])->name('couleurs.show'); //->middleware('auth');
 
-// Route::post('couleurs',
-// [CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
+Route::post('couleurs',
+[CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
 
-Route::patch('/couleurs/{id}',
-[CouleursController::class, 'update'])->name('couleurs.update'); //->middleware('auth');
+Route::post('tailles',
+[TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');
 
 Route::get('/couleurs/{id}/modifier/',
 [CouleursController::class, 'edit'])->name('couleurs.edit'); //->middleware('auth');
 
+Route::patch('/couleurs/{id}/modifier/',
+[CouleursController::class, 'update'])->name('couleurs.update'); //->middleware('auth');
+
 Route::delete('/couleurs/{id}',
 [CouleursController::class, 'destroy'])->name('couleurs.destroy'); //->middleware('auth');
-
-//Route pour afficher la page createCouleur qui combine le formulaire d'ajout de couleur et celui d'ajout de taille
-Route::get('couleurs/create',
-[TaillesController::class, 'create'])->name('tailles.create'); //->middleware('auth');
-
-Route::post('tailles',
-[TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');

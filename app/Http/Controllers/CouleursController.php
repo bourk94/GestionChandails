@@ -26,10 +26,8 @@ class CouleursController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $couleurs = Couleur::all();
-        
-        return view('couleurs.createCouleur', compact('couleurs'));
+    {        
+        return view('couleurs.createCouleur');
     }
 
     /**
@@ -67,12 +65,14 @@ class CouleursController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $couleur = Couleur::findOrFail($id);
 
-        return view('couleurs.modifierCouleur', compact('id'));
+        return view('couleurs.modifierCouleur', compact('couleur'));
     }
 
     /**
@@ -85,9 +85,7 @@ class CouleursController extends Controller
     public function update(CouleurRequest $request, $id)
     {
         try {
-            $couleur = Couleur::findOrFail($id);
-
-            //Les champs du update (nom_couleur, code_couleur)
+            $couleur = Couleur::findOrFail($id);           
 
             $couleur->nom_couleur = $request->nom_couleur;
             $couleur->code_couleur = $request->code_couleur;
