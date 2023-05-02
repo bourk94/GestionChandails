@@ -101,16 +101,15 @@ class TaillesController extends Controller
      */
     public function destroy($id)
     {
-        try {
+        try 
+        {
             $taille = Taille::findOrFail($id);
-
-            
-
-
             $taille->delete();
 
-            return redirect()->route('accueil')->with('message', "Suppression de " . $taille->format . " réussi!");
-        } catch (\Throwable $e) {
+            return redirect()->route('tailles.index')->with('message', "Suppression de " . $taille->format . " réussi!");
+
+        } catch (\Throwable $e)
+        {
             Log::debug($e);
             return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
         }
