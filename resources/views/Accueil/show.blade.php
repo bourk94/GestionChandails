@@ -69,7 +69,7 @@
                         @if (Auth::check())
                         <form action="{{ route('panier.store') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="article_id" value="{{ $article->article_id }}">
+                            {{-- <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                             <input type="hidden" name="nom" value="{{ $article->nom }}">
                             <input type="hidden" name="prix" value="{{ $article->prix }}">
                             <input type="hidden" name="quantite" value="{{ $article->quantite }}">
@@ -79,7 +79,7 @@
                             <input type="hidden" name="campagne_id" value="{{ $article->campagne_id }}">
                             <input type="hidden" name="usager_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="couleur" value="{{ $couleur->nom_couleur }}">
-                            <input type="hidden" name="taille" value="{{ $taille->format }}">
+                            <input type="hidden" name="taille" value="{{ $taille->format }}"> --}}
                             <button type="submit"  class="buttonSite">Ajouter au panier</button>
                         </form>
                         @else
