@@ -9,26 +9,30 @@
             <a href="{{ route('couleurs.create') }}" class="buttonSite">Ajouter une taille</a>
         </div>
 
-        <table class="tailles">
+        <table class="customers">
             <tr>
-                <th id="ColListeCouleur">Taille</th>                
+                <th id="ColListeCouleur">Taille</th>
+                <th></th>
+                <th></th>
             </tr>
             @if (count($tailles))
                 @foreach ($tailles as $taille)
-                    <td>{{ $taille->format }}</td>                  
-                    <td>
-                        <div class="row">
-                            <a href="{{ route('tailles.edit', [$taille->id]) }}" class="buttonSite">Modifier</a>
-                            <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')"
-                                    class="buttonSite">Supprimer
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                    <tr>
+                        <td>{{ $taille->format }}</td>                  
+                        <td>
+                            <div class="row">
+                                <a href="{{ route('tailles.edit', [$taille->id]) }}" class="buttonSite">Modifier</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
+                                    @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')" class="buttonSite">Supprimer </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             @else
