@@ -62,8 +62,8 @@
                             @endforeach
                         @endif
                     </div>
-                    <div>
-
+                    <div class="rightObjets">
+                        <livewire:counter />
                     </div>
                     <div class="rightObjets">
                         @if (Auth::check())

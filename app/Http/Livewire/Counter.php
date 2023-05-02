@@ -9,10 +9,10 @@ class Counter extends Component
     public $count = 0;
     public $max;
  
-    /* public function mount($max)
+    public function mount($maxValue)
     {
-        $this->max = $max;
-    } */
+        $this->max = (int)$maxValue;
+    }
 
     public function increment()
     {
