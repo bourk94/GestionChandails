@@ -12,7 +12,7 @@
                     @csrf
                     <div>
                         <label for="nom">Nom</label>
-                        <input class="@error('nom') is-invalid @enderror" type="text" name="nom" id="nom" value="{{ old('nom') }}" required>
+                        <input class="@error('nom') is-invalid @enderror" type="text" name="nom" id="nom" :value="old('nom')" required>
                         @error('nom')
                             <span class="text-danger">{{ $messages }}</span>
                         @enderror
