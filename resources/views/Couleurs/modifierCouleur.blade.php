@@ -3,8 +3,9 @@
 @section('title', "modification/suppression d''une couleur")
 @section('contenu')
 
-    <form id="my-form" method="POST" action="{{ route('couleurs.update'), [$couleur->id] }}">
+    <form method="POST" action="{{ route('couleurs.update', [$couleur->id]) }}">
         @csrf
+        @method('PATCH')
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
@@ -50,12 +51,7 @@
         </button>
 
 
-    <!--SCRIPTS DE VALIDATION-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <script src="{{ asset('js/jsvalidation.js') }}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
 
 
 @endsection
