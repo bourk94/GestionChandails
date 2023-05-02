@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr-ca">
-
+    @livewireStyles
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -114,6 +114,7 @@
         </div>
     @endif
     <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
+    @livewireScripts
 </body>
 
 </html>

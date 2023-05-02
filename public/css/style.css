@@ -1,4 +1,16 @@
 /* Général */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 .buttonSite {
     background-color: #EF3832;
@@ -382,6 +394,30 @@ li.dropdown {
 
 .text-danger {
   color: #dc3545!important;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter__btn {
+    font-size: 2rem!important;
+    border: none;
+    padding: .25rem .75rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: .75rem;
+    background-color: #EF3832;
+    color: white;
+    margin: .5rem;
+}
+.counter__hover:hover {
+    background-color: #c71913;
 }
 
 
