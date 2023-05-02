@@ -23,24 +23,15 @@ class CampagnesController extends Controller
     {
         $campagnes = Campagne::all();
         $articles = DB::table('articles')
-            ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
-            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
-            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
-            ->select(
-                'articles.nom',
-                'articles.type',
-                'articles.id as article_id',
-                'articles.description',
-                'articles.prix',
-                'article_campagne.image as image',
-                'article_campagne.quantite_max as quantite',
-                'couleurs.nom_couleur as nom_couleur',
-                'couleurs.id as couleur_id',
-                'couleurs.code_couleur as code_couleur',
-                'tailles.format as format',
-                'tailles.id as taille_id'
-
-            )
+        ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
+            ->select('articles.id as article_id', 
+            'articles.nom as nom',
+             'articles.description as description',
+              'articles.prix as prix',
+              'articles.type as type',
+             'article_campagne.image as image',
+             'article_campagne.quantite_max as quantite' )
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'articles.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image')
             ->get();
 
         $couleurs = DB::table('couleurs')
@@ -57,16 +48,17 @@ class CampagnesController extends Controller
         $tailles = DB::table('tailles')
             ->distinct()
             ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
-            ->get();
-        $articles_campagnes = DB::table('article_campagne')
-            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
-            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
-            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->Select(
+                'tailles.format as format',
+                'tailles.id as taille_id',
+                'articles.id as article_id',
+            )
             ->get();
+     
 
 
-        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'articles_campagnes'));
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles'));
     }
 
     /**

@@ -42,6 +42,15 @@ class Articles_CampagnesTableSeeder extends Seeder
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
+                [
+                    'campagne_id' => '3',
+                    'article_id' => '2',
+                    'couleur_id' => '3',
+                    'taille_id' => '4',
+                    'quantite_max' => '5',
+                    'created_at' =>date('Y-m-d H:i:s'),
+                    'updated_at' =>date('Y-m-d H:i:s')
+                ],
             ]);
     }
 }
