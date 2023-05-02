@@ -150,17 +150,22 @@ Route::get('/articles/{id}/modifier/',
 Route::get('/couleurs',
 [CouleursController::class, 'index'])->name('couleurs');
 
+//Taille
+Route::get('/tailles',
+[TaillesController::class, 'index'])->name('tailles');
+
 Route::get('couleurs/create',
 [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
-
-Route::get('couleurs/{id}',
-[CouleursController::class, 'show'])->name('couleurs.show'); //->middleware('auth');
 
 Route::post('couleurs',
 [CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
 
 Route::post('tailles',
 [TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');
+
+// ***pas utilisée***
+// Route::get('couleurs/{id}',
+// [CouleursController::class, 'show'])->name('couleurs.show'); //->middleware('auth');
 
 Route::get('/couleurs/{id}/modifier/',
 [CouleursController::class, 'edit'])->name('couleurs.edit'); //->middleware('auth');
@@ -170,3 +175,12 @@ Route::patch('/couleurs/{id}/modifier/',
 
 Route::delete('/couleurs/{id}',
 [CouleursController::class, 'destroy'])->name('couleurs.destroy'); //->middleware('auth');
+
+Route::get('/tailles/{id}/modifier/',
+[TaillesController::class, 'edit'])->name('tailles.edit'); //->middleware('auth');
+
+Route::patch('/tailles/{id}/modifier/',
+[TaillesController::class, 'update'])->name('tailles.update'); //->middleware('auth');
+
+Route::delete('/tailles/{id}',
+[TaillesController::class, 'destroy'])->name('tailles.destroy'); //->middleware('auth');
