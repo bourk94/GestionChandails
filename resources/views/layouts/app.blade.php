@@ -41,14 +41,16 @@
                     </div>
                 </li>
 
-                <!-- Dropdown pour gérer les couleurs -->
+                <!-- Dropdown pour gérer les couleurs et les tailles -->
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Couleur</a>
+                    <a href="javascript:void(0)" class="dropbtn">Couleur / Taille</a>
                     <div class="dropdown-content">
-                        <a href="{{ route('couleurs') }}">Gérer</a>
-                        <a href="{{ route('couleurs.create') }}">Ajouter</a>
+                        <a href="{{ route('couleurs') }}">Gérer couleurs</a>
+                        <a href="{{ route('tailles') }}">Gérer tailles</a>
+                        <a href="{{ route('couleurs.create') }}">Ajouter couleur / taille</a>
                     </div>
                 </li>
+                
             @endif
         @endauth
         <!--  -->
