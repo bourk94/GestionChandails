@@ -9,46 +9,30 @@
             <a href="{{ route('couleurs.create') }}" class="buttonSite">Ajouter une taille</a>
         </div>
 
-        <table class="couleurs">
+        <table class="customers">
             <tr>
-                <th id="ColListeCouleur">Nom de la couleur</th>
-                <th id="ColListeCouleur">Code de la couleur</th>
-                <th id="ColListeCouleur">Visualisation</th>
+                <th id="ColListeCouleur">Taille</th>
+                <th></th>
+                <th></th>
             </tr>
-            @if (count($couleurs))
-                @foreach ($couleurs as $couleur)
-                    <td>{{ $couleur->nom_couleur }}</td>
-                    <td>{{ $couleur->code_couleur }}</td>
-                    <td>
-                        <div class="rightObjets">
-
-                            <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
-                                <div class="button"><span></span></div>
-                            </label>
-
-
-                            <script>
-                                var couleurs = document.createElement('style');
-                                couleurs.innerHTML =
-                                    `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
-                                document.head.appendChild(couleurs);
-                            </script>
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="row">
-                            <a href="{{ route('couleurs.edit', [$couleur->id]) }}" class="buttonSite">Modifier</a>
-                            <form method="POST" action="{{ route('couleurs.destroy', [$couleur->id]) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')"
-                                    class="buttonSite">Supprimer</button>
-                            </form>
-                        </div>
-                    </td>
+            @if (count($tailles))
+                @foreach ($tailles as $taille)
+                    <tr>
+                        <td>{{ $taille->format }}</td>                  
+                        <td>
+                            <div class="row">
+                                <a href="{{ route('tailles.edit', [$taille->id]) }}" class="buttonSite">Modifier</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
+                                    @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')" class="buttonSite">Supprimer </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             @else
@@ -60,5 +44,12 @@
             @endif
         </table>
     </div>
+
+    <!--SCRIPTS DE VALIDATION-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="{{ asset('js/jsvalidation.js') }}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
 
 @endsection

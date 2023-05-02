@@ -3,8 +3,9 @@
 @section('title', "modification/suppression d''une taille")
 @section('contenu')
 
-    <form id="my-form" method="POST" action="{{ route('tailles.update'), [$taille->id] }}">
+    <form id="my-form" method="POST" action="{{ route('tailles.update', [$taille->id]) }}">
         @csrf
+        @method('PATCH')
         <div class="card__padding">
             <div class="card__container">
                 <div class="flex__center">
@@ -40,12 +41,12 @@
         </button>
 
 
-    <!--SCRIPTS DE VALIDATION-->
+     {{-- <!--SCRIPTS DE VALIDATION-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}  --}}
 
 
 @endsection
