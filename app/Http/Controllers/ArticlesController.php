@@ -12,6 +12,7 @@ use App\Models\Taille;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use DB;
 
 class ArticlesController extends Controller
 {
@@ -111,27 +112,34 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $article = Article::findOrFail($id);
+        $article = Article::findOrFail($id);
+        if ($article)
+        {
+            DB::transaction(function () use ($article)
+            {
 
-            //Gérer les liens avec les tables de jointures
-            $article->campagnes()->detach();
-            $article->commandes()->detach();
+                // Supprimer les entrées dans la table 'article_campagne_commande'
+                DB::table('article_campagne_commande')
+                    ->where('article_campagne_id', $article->id)
+                    ->delete();
 
-            //Gérer le lien avec la table de jointure Caracteristique
-            //$article->caracteristiques()->detach();
+                
+                
+                // Supprimer les entrées dans la table 'article_campagne'
+                DB::table('article_campagne')
+                    ->where('article_id', $article->id)
+                    ->delete();
 
-            $article->delete();
+                // Supprimer l'article
+                $article->delete();
+            });
 
-            //Retour à la page d'accueil suite à la suppression
-            return redirect()->route('accueil')->with('message', "Suppression de " . $article->nom . " réussi!");
-        } catch (\Throwable $e) {
-            Log::debug($e);
-
-            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
+            return redirect()->route('accueil')
+                ->with('success', 'Article supprimé avec succès.');
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('articles.index')
+            ->with('error', 'Article non trouvé.');
     }
 
     /**

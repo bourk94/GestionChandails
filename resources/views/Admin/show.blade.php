@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="rightObjets">
-                        <form method="POST" action="{{ route('articles.destroy', [$article->id]) }}">
+                        <form method="POST" action="{{ route('articles.destroy', [$article->article_id]) }}">
                             @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer l\'article {{ $article->nom }} ?')" class="buttonSite">Supprimer</button>
