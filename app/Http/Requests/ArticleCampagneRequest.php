@@ -27,7 +27,7 @@ class ArticleCampagneRequest extends FormRequest
             'image' => 'nullable|image',
             'couleur_id' => 'required|integer',
             'taille_id' => 'required|integer',
-            'prix' => 'nullable|numeric',
+            'prix' => 'nullable|numeric|min:2|max:50',
         ];
     }
 

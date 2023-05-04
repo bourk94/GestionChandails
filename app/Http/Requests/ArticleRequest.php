@@ -28,6 +28,7 @@ class ArticleRequest extends FormRequest
             'description' => 'nullable|min:2|max:50',
          
             
+            
         ];
     }
     public function messages(){

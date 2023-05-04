@@ -28,10 +28,23 @@ class ArticlesController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * Pour les articles 
      */
     public function create()
     {
         return view('articles.createArticle');
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     * 
+     * Pour les articles campagne
+     */
+    public function createArticleCampagne()
+    {
+        return view('articles.create');
     }
 
     /**
@@ -58,11 +71,27 @@ class ArticlesController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
         //
     }
+
+
+    /**
+     * Display the specified resource.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showArticleCampagne(Article $article)
+    {
+        return view('articles.show', compact('article'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.
