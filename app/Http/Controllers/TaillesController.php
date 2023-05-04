@@ -39,13 +39,13 @@ class TaillesController extends Controller
             $taille = new Taille($request->all());
             $taille->save();
 
-            return redirect()->route('accueil')->with('message', "Ajout de la taille " . $taille->format . " réussi!");
+            return redirect()->route('tailles')->with('message', "Ajout de la taille " . $taille->format . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('tailles')->withErrors(['L\'ajout n\'a pas fonctionné!']);
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('tailles');
     }
 
     /**
@@ -84,13 +84,13 @@ class TaillesController extends Controller
 
             $taille->save();
 
-            return redirect()->route('accueil')->with('message', "Modification de la taille " . $taille->format . " réussi!");
+            return redirect()->route('tailles')->with('message', "Modification de la taille " . $taille->format . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
+            return redirect()->route('tailles')->withErrors(['La modification n\'a pas fonctionnée']);
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('tailles');
     }
 
     /**
@@ -106,14 +106,14 @@ class TaillesController extends Controller
             $taille = Taille::findOrFail($id);
             $taille->delete();
 
-            return redirect()->route('tailles.index')->with('message', "Suppression de " . $taille->format . " réussi!");
+            return redirect()->route('tailles')->with('message', "Suppression de " . $taille->format . " réussi!");
 
         } catch (\Throwable $e)
         {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
+            return redirect()->route('tailles')->with('message', "La suppression n'a pas fonctionnée.  Il est impossible de supprimer une taille attachée à un article!");
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('tailles');
     }
 }
