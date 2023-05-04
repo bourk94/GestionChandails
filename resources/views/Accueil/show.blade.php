@@ -17,11 +17,12 @@
            
         </h2>
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
-        @if (count($articles))
+        @if (count($articles))   
             @foreach ($articles as $article)
+            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="bckgroundObjets ">
                     <div class="leftObjets">
-                       
                             @if ($article->image == 'null')
                                 <div class="zoneImageVide"></div>
                             @else
@@ -43,7 +44,7 @@
 
                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                             <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="couleur" value="{{ $couleur->nom_couleur }}" class="radNone">
+                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}" class="radNone">
                                 <div class="button"><span></span></div>
                             </label>
                         @endforeach
@@ -56,38 +57,29 @@
                         @if (count($tailles))
                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                 <label>
-                                    <input type="radio" name="taille" value="{{ $taille->taille_id }}" class="radNone">
+                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone">
                                     <div class="button"><span>{{ $taille->format }}</span></div>
                                 </label>
                             @endforeach
                         @endif
                     </div>
-                    <div>
-
+                    <div class="rightObjets">
+                        @livewire('counter', ['idarticle' => $article->article_id])
                     </div>
                     <div class="rightObjets">
                         @if (Auth::check())
-                        <form action="" method="POST">
-                            @csrf
-                            {{-- <input type="hidden" name="article_id" value="{{ $article->article_id }}">
-                            <input type="hidden" name="nom" value="{{ $article->nom }}">
-                            <input type="hidden" name="prix" value="{{ $article->prix }}">
-                            <input type="hidden" name="quantite" value="{{ $article->quantite }}">
-                            <input type="hidden" name="image" value="{{ $article->image }}">
-                            <input type="hidden" name="type" value="{{ $article->type }}">
-                            <input type="hidden" name="description" value="{{ $article->description }}">
-                            <input type="hidden" name="campagne_id" value="{{ $article->campagne_id }}">
-                            <input type="hidden" name="usager_id" value="{{ Auth::user()->id }}">
-                            <input type="hidden" name="couleur" value="{{ $couleur->nom_couleur }}">
-                            <input type="hidden" name="taille" value="{{ $taille->format }}"> --}}
-                            <button type="submit"  class="buttonSite">Ajouter au panier</button>
-                        </form>
+                        <button type="submit" class="buttonSite">Ajouter au panier</a>
                         @else
                             <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
                         @endif
                     </div>
                 </div>
-            @endforeach
+                <input type="hidden" name="id" value="{{ $article->article_id }}">
+                <input type="hidden" name="name" value="{{ $article->nom }}">
+                <input type="hidden" value="{{ $article->prix }}" name="price">
+                <input type="hidden" value="{{ $article->image }}"  name="image">
+            </form>    
+            @endforeach  
         @else
             <p>Aucun article</p>
         @endif
