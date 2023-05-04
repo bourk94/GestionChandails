@@ -14,6 +14,7 @@
     <th>Nom</th>
     <th>Prénom</th>
     <th>Email</th>
+    <th></th>
   </tr>
   @if(count($usagers))
     @foreach($usagers as $usager)

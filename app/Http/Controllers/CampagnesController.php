@@ -56,9 +56,9 @@ class CampagnesController extends Controller
             )
             ->get();
      
+        $usagers = Usager::all();
 
-
-        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles'));
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'usagers'));
     }
 
     /**
