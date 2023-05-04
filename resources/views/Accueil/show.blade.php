@@ -14,8 +14,7 @@
                     Est en : {{ $campagne->progression }}
                     <br>
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
-                @endif
-            @endforeach
+           
         </h2>
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))
@@ -36,6 +35,7 @@
                         <p>Description:{{ $article->description }}</p>
                         <p>Prix estimé:{{ $article->prix }} $</p>
                         <p>Nombre de {{ $article->nom }} que vous pouvez commander: {{ $article->quantite }}</p>
+                        <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                     </div>
 
                     <!-- Section choix de couleurs -->
@@ -43,7 +43,7 @@
 
                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                             <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
+                                <input type="radio" name="couleur" value="{{ $couleur->nom_couleur }}" class="radNone">
                                 <div class="button"><span></span></div>
                             </label>
                         @endforeach
@@ -56,7 +56,7 @@
                         @if (count($tailles))
                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                 <label>
-                                    <input type="radio" name="size" value="{{ $taille->format }}" class="radNone">
+                                    <input type="radio" name="taille" value="{{ $taille->taille_id }}" class="radNone">
                                     <div class="button"><span>{{ $taille->format }}</span></div>
                                 </label>
                             @endforeach
@@ -67,7 +67,7 @@
                     </div>
                     <div class="rightObjets">
                         @if (Auth::check())
-                        <form action="{{ route('panier.store') }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             {{-- <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                             <input type="hidden" name="nom" value="{{ $article->nom }}">
@@ -92,7 +92,8 @@
             <p>Aucun article</p>
         @endif
 
-
+        @endif
+        @endforeach
 
         <!-- Script qui fait apparaitre un modal -->
         <div id="modalLogin" class="modal">
