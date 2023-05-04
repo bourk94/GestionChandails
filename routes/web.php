@@ -102,8 +102,6 @@ Route::patch('admin/update',
 Route::post('usagers',
 [UsagersController::class, 'store'])->name('usagers.store')->middleware('guest');
 
-Route::post('usagers/panier', [\App\Http\Controllers\PanierController::class,'store'])->name('panier.store')->middleware('auth');
-
 // Route::get('usagers',
 // [UsagersController::class, 'index'])->name('usagers.index')->middleware('auth');
 
