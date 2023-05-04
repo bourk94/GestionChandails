@@ -9,7 +9,8 @@ use App\Models\Article;
 use App\Models\ArticleCampagne;
 use App\Models\Couleur;
 use App\Models\Taille;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
@@ -140,13 +141,15 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Se passer l'id de l'article et de la campagne
-    public function storeArticleCampagne(ArticleCampagneRequest $request, $id, $idCampagne, $idcouleur, $idtaille)
+    public function storeArticleCampagne(ArticleCampagneRequest $request)
     {
         try {
-            $article = Article::findOrFail($id);
-            $article->campagnes()->attach($idCampagne);
-            $article->couleurs()->attach($idcouleur);
-            $article->tailles()->attach($idtaille);
+            
+            $procedureCreateArticleCampagne = DB::insert('insert into article_campagne (article_id, campagne_id,couleur,taille,prix,created_at,updated_at) values (?, ?, ?, ?, ?, ?)',
+             [$request->article_id, $request->campagne_id, $request->couleur, $request->taille, $request->prix, now(), now()]);
+
+            $article = Article::findOrFail($request->article_id);
+
             $uploadedFile = $request->file('image');
 
             $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
@@ -177,6 +180,6 @@ class ArticlesController extends Controller
         }
 
         return redirect()->route('accueil');
-        $procedure = BD::select('call ajouterArticleCampagne(?,?)', array($request->article_id, $request->campagne_id));
+
     }
 }

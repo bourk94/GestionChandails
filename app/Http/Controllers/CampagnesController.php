@@ -27,11 +27,11 @@ class CampagnesController extends Controller
             ->select('articles.id as article_id', 
             'articles.nom as nom',
              'articles.description as description',
-              'articles.prix as prix',
+              'article_campagne.prix as prix',
               'articles.type as type',
              'article_campagne.image as image',
              'article_campagne.quantite_max as quantite' )
-            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'articles.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image')
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image')
             ->get();
 
         $couleurs = DB::table('couleurs')
@@ -56,9 +56,18 @@ class CampagnesController extends Controller
             )
             ->get();
      
+            $usagers = Usager::all();
+
+            $articles_campagnes = DB::table('article_campagne')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
 
 
-        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles'));
+
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles','usagers','articles_campagnes'));
     }
 
     /**
