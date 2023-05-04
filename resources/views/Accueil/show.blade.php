@@ -18,11 +18,12 @@
             @endforeach
         </h2>
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
-        @if (count($articles))
+        @if (count($articles))   
             @foreach ($articles as $article)
+            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="bckgroundObjets ">
                     <div class="leftObjets">
-                       
                             @if ($article->image == 'null')
                                 <div class="zoneImageVide"></div>
                             @else
@@ -43,7 +44,7 @@
 
                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                             <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
+                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}" class="radNone">
                                 <div class="button"><span></span></div>
                             </label>
                         @endforeach
@@ -56,24 +57,29 @@
                         @if (count($tailles))
                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                 <label>
-                                    <input type="radio" name="size" value="{{ $taille->format }}" class="radNone">
+                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone">
                                     <div class="button"><span>{{ $taille->format }}</span></div>
                                 </label>
                             @endforeach
                         @endif
                     </div>
                     <div class="rightObjets">
-                        <livewire:counter />
+                        @livewire('counter', ['idarticle' => $article->article_id])
                     </div>
                     <div class="rightObjets">
                         @if (Auth::check())
-                            <a href="#" class="buttonSite">Ajouter au panier</a>
+                        <button type="submit" class="buttonSite">Ajouter au panier</a>
                         @else
                             <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
                         @endif
                     </div>
                 </div>
-            @endforeach
+                <input type="hidden" name="id" value="{{ $article->article_id }}">
+                <input type="hidden" name="name" value="{{ $article->nom }}">
+                <input type="hidden" value="{{ $article->prix }}" name="price">
+                <input type="hidden" value="{{ $article->image }}"  name="image">
+            </form>    
+            @endforeach  
         @else
             <p>Aucun article</p>
         @endif
