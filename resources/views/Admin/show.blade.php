@@ -62,14 +62,6 @@
                     </div>
 
                     <div class="rightObjets">
-                        @if (Auth::check())
-                            <a href="#" class="buttonSite">Ajouter au panier</a>
-                        @else
-                            <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
-                        @endif
-                    </div>
-
-                    <div class="rightObjets">
                         <form method="POST" action="{{ route('articles.destroy', [$article->article_id]) }}">
                             @csrf
                                 @method('DELETE')
