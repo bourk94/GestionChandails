@@ -7,12 +7,14 @@ use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\ArticleCampagne;
+use App\Models\Campagne;
 use App\Models\Couleur;
 use App\Models\Taille;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\ErrorHandler\Debug;
 
 class ArticlesController extends Controller
 {
@@ -28,10 +30,10 @@ class ArticlesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
-     * Pour les articles 
+     *
+     * Pour les articles
      */
-    public function create()
+    public function createArticle()
     {
         return view('articles.createArticle');
     }
@@ -39,17 +41,21 @@ class ArticlesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * 
+     *
      * Pour les articles campagne
      */
-    public function createArticleCampagne()
+    public function create()
     {
-        return view('articles.create');
+        $articles = Article::all();
+        $couleurs = Couleur::all();
+        $tailles = Taille::all();
+        $campagnes = Campagne::all();
+        return view('articles.create', compact('articles', 'couleurs', 'tailles', 'campagnes'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -71,7 +77,7 @@ class ArticlesController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +89,7 @@ class ArticlesController extends Controller
 
     /**
      * Display the specified resource.
-     * 
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -105,7 +111,7 @@ class ArticlesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -134,7 +140,7 @@ class ArticlesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -165,43 +171,70 @@ class ArticlesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     //Se passer l'id de l'article et de la campagne
-    public function storeArticleCampagne(ArticleCampagneRequest $request)
+    public function storeArticleCampagne(Request $request)
     {
         try {
-            
-            $procedureCreateArticleCampagne = DB::insert('insert into article_campagne (article_id, campagne_id,couleur,taille,prix,created_at,updated_at) values (?, ?, ?, ?, ?, ?)',
-             [$request->article_id, $request->campagne_id, $request->couleur, $request->taille, $request->prix, now(), now()]);
+            $article = 0;
 
-            $article = Article::findOrFail($request->article_id);
+            if ($request->nom != null) {
+                $procedureCreateArticle = DB::select(
+                    "CALL createArticle(?,?,?)",
+                    [$request->nom, $request->type, $request->description,]
+                );
+                $article = DB::table('articles')->latest('id')->first();
 
-            $uploadedFile = $request->file('image');
-
-            $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
-
-            try {
-                //If pour gérer le tri des images selon le type de l'article
-
-                if ($article->type == "Chandail") {
-                    $request->image->move(public_path('img/chandails'), $nomFichierUnique);
-                } else if ($article->type == "Kangourou") {
-                    $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
-                } else {
-                    $request->image->move(public_path('img/autres'), $nomFichierUnique);
-                }
-            } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-                Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+                DB::prepareBindings($procedureCreateArticle);
             }
 
-            $article->image = $nomFichierUnique;
 
-            //$article->campagnes()->attach($request->campagne_id);
+            if ($article->id == null) {
+                $article = Article::findOrFail($request->article_id);
+                $procedureCreateArticleCampagne = DB::select(
+                    "CALL createArticleCampagne(?,?,?,?,?)",
+                    [$request->prix, $request->article_id, $request->campagne_id, $request->couleur_id, $request->taille_id]
+                );
+                DB::prepareBindings($procedureCreateArticleCampagne);
 
-            return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $request->campagne_id . "  a réussi!");
+            } else {
+
+                $article = DB::table('articles')->latest('id')->first();
+                $procedureCreateArticleCampagne = DB::select(
+                    "CALL createArticleCampagne(?,?,?,?,?)",
+                    [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]
+                );
+                DB::prepareBindings($procedureCreateArticleCampagne);
+            }
+            
+            $campagne = Campagne::findOrFail($request->campagne_id);
+            // Vérifier que l'image n'est pas nulle pour enregistrer l'image
+            // $uploadedFile = $request->file('image');
+
+            // $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+
+            // try {
+            //     //If pour gérer le tri des images selon le type de l'article
+
+            //     if ($article->type == "Chandail") {
+            //         $request->image->move(public_path('img/chandails'), $nomFichierUnique);
+            //     } else if ($article->type == "Kangourou") {
+            //         $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
+            //     } else {
+            //         $request->image->move(public_path('img/autres'), $nomFichierUnique);
+            //     }
+            // } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+            //     Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+            // }
+
+            // $article->image = $nomFichierUnique;
+
+            // //$article->campagnes()->attach($request->campagne_id);
+
+            return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
 
@@ -209,6 +242,5 @@ class ArticlesController extends Controller
         }
 
         return redirect()->route('accueil');
-
     }
 }

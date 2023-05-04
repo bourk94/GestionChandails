@@ -133,12 +133,14 @@ Route::post('campagnes',
 Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
+
+
 //Mettre les middleware ???
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
 Route::post('articles',
-[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
+[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne'); //->middleware('auth');
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
