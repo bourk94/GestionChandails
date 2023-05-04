@@ -14,12 +14,11 @@
                     Est en : {{ $campagne->progression }}
                     <br>
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
-                @endif
-            @endforeach
+
         </h2>
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))   
-            @foreach ($articles as $article)
+            @foreach ($articles->unique('article_id') as $article)
             <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="bckgroundObjets ">
@@ -44,7 +43,7 @@
 
                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                             <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}" class="radNone">
+                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}" class="radNone" >
                                 <div class="button"><span></span></div>
                             </label>
                         @endforeach
@@ -57,7 +56,7 @@
                         @if (count($tailles))
                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                 <label>
-                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone">
+                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone" required>
                                     <div class="button"><span>{{ $taille->format }}</span></div>
                                 </label>
                             @endforeach
@@ -74,17 +73,21 @@
                         @endif
                     </div>
                 </div>
-                <input type="hidden" name="id" value="{{ $article->article_id }}">
+                <input type="hidden" name="id" value="0">
+                <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                 <input type="hidden" name="name" value="{{ $article->nom }}">
                 <input type="hidden" value="{{ $article->prix }}" name="price">
                 <input type="hidden" value="{{ $article->image }}"  name="image">
+                <input type="hidden" name="campagne_id" value="{{ $campagne->id }}">
+           
             </form>    
             @endforeach  
         @else
             <p>Aucun article</p>
         @endif
 
-
+         @endif
+                @endforeach
 
         <!-- Script qui fait apparaitre un modal -->
         <div id="modalLogin" class="modal">

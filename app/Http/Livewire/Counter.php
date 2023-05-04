@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class Counter extends Component
 {
-    public $count = 0;
+    public $count;
     public $max;
  
     public function mount($idarticle)
     {
-        $this->max = DB::table('article_campagne')->where('article_id', $idarticle)->value('quantite_max');
-    }
+        $this->max = DB::table('article_campagne')->where('id', $idarticle)->value('quantite_max');
 
-    protected $rules = [
-        'count' => 'required', 'integer', 'min:0'
-    ];
+        if($this->count == null) {
+            $this->count = 0;
+        }
+
+        if($this->count > $this->max) {
+            $this->count = $this->max;
+        }     
+    }
 
     public function increment()
     {
