@@ -90,7 +90,6 @@ class ArticlesController extends Controller
             $article->nom = $request->nom;
             $article->type = $request->type;
             $article->description = $request->description;
-            $article->prix = $request->prix;
 
             $article->save();
 
@@ -178,5 +177,6 @@ class ArticlesController extends Controller
         }
 
         return redirect()->route('accueil');
+        $procedure = BD::select('call ajouterArticleCampagne(?,?)', array($request->article_id, $request->campagne_id));
     }
 }

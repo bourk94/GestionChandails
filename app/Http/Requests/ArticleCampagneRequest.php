@@ -27,6 +27,7 @@ class ArticleCampagneRequest extends FormRequest
             'image' => 'nullable|image',
             'couleur_id' => 'required|integer',
             'taille_id' => 'required|integer',
+            'prix' => 'nullable|numeric',
         ];
     }
 
@@ -45,6 +46,8 @@ class ArticleCampagneRequest extends FormRequest
             'couleur_id.integer' => 'Une couleur est requise',
             'taille_id.required' => 'Une taille est requise',
             'taille_id.integer' => 'Une taille est requise',
+            'prix.numeric' => 'Le prix doit être un nombre',
+            
         ];
     }
 }

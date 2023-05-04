@@ -10,7 +10,7 @@ class ArticleCampagne extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'couleur_id', 'taille_id', 'quantite'];
+    protected $fillable = ['image', 'couleur_id', 'taille_id', 'quantite','prix'];
 
     //Jointure avec la table Couleur
     public function couleurs()
