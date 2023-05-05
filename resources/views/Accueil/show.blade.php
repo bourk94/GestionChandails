@@ -17,18 +17,6 @@
                 @endif
             @endforeach
         </h2>
-
-        {{-- Zone de jeu --}}
-        <div class="w3-row-padding w3-grayscale">
-            <div class="w3-col l3 m6 w3-margin-bottom">
-              <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-              <h3>John Doe</h3>
-              <p class="w3-opacity">CEO & Founder</p>
-              <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-              <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-            </div>
-        </div>
-        {{-- Zone de jeu --}}
         
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))
