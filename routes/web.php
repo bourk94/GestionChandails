@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\UsagersController;
 use App\Http\Controllers\ArticlesController;
-use App\Http\Controllers\ArticlesCampagnesController;
 use App\Http\Controllers\CouleursController;
 use App\Http\Controllers\TaillesController;
 use App\Http\Controllers\CartController;
@@ -135,29 +134,28 @@ Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
 
+
 //Articles sans campagne
-Route::get('articles/create',
-[ArticlesController::class, 'create'])->name('articles.create')->middleware('auth');
+Route::get('articles/createArticle',
+[ArticlesController::class, 'createArticle'])->name('articles.createArticle')->middleware('auth');
 
 Route::post('articles', 
-[ArticlesController::class, 'storeArticle'])->name('articles.store')->middleware('auth');
+[ArticlesController::class, 'storeArticle'])->name('articles.storeArticle')->middleware('auth');
 
 
 //Mettre les middleware ???
-
 Route::get('articles/createArticleCampagne',
-[ArticlesCampagnesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
+[ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
 
-Route::post('articles',
-[ArticlesCampagnesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
+Route::post('articlescampagnes',
+[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
+
 
 Route::delete('/articles/{id}',
-[ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy')->middleware('auth');
+[ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
 
 Route::get('/articles/{id}/modifier/',
-[ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit')->middleware('auth');
-
-
+[ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit'); //->middleware('auth');
 
 // Route::patch('/articles/{id}',
 // [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
@@ -181,10 +179,10 @@ Route::get('/tailles',
 [TaillesController::class, 'index'])->name('tailles');
 
 Route::get('tailles/create',
-[CouleursController::class, 'create'])->name('tailles.create'); //->middleware('auth');
+[TaillesController::class, 'create'])->name('tailles.create')->middleware('auth');
 
 Route::post('tailles',
-[TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');
+[TaillesController::class, 'store'])->name('tailles.store')->middleware('auth');
 
 // ***pas utilisée***
 // Route::get('couleurs/{id}',

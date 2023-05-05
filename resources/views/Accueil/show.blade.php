@@ -84,6 +84,7 @@
         @else
             <p>Aucun article</p>
         @endif
+        
         @endif
         @endforeach
 

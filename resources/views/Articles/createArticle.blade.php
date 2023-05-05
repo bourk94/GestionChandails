@@ -3,7 +3,7 @@
 @section('title', 'Créer un article')
 @section('contenu')
 
-    <form id="my-form" action="{{route('articles.store')}}" method="POST">
+    <form id="my-form" action="{{ route('articles.storeArticle') }}" method="POST">
         @csrf
         <div class="card__padding">
             <div class="card__container">
@@ -64,7 +64,7 @@
 
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ArticleCampagneRequest') !!}
 
 
 @endsection

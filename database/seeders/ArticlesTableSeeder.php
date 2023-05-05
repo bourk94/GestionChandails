@@ -18,21 +18,21 @@ class ArticlesTableSeeder extends Seeder
     {
         DB::table('articles')->insert(
             [
-                // [
-                //     'nom' => 't-shirt',
-                //     'type' => 'vêtement',
-                //     'description' => 't-shirt',
-                //     'created_at'=> date('Y-m-d H:i:s'),
-                //     'updated_at' => date('Y-m-d H:i:s')
-                // ],
+                [
+                    'nom' => 't-shirt',
+                    'type' => 'vêtement',
+                    'description' => 't-shirt',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
 
-                // [
-                //     'nom' =>'kangourous',
-                //     'type' => 'vêtement',
-                //     'description' => 'kangourous',
-                //     'created_at'=> date('Y-m-d H:i:s'),
-                //     'updated_at' => date('Y-m-d H:i:s')
-                // ],
+                [
+                    'nom' =>'kangourous',
+                    'type' => 'vêtement',
+                    'description' => 'kangourous',
+                    'created_at'=> date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ],
 
 
             ]);

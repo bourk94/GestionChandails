@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr-ca">
-@livewireStyles
-
+ @livewireStyles
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,7 @@
     <!--MISE EN COMMENTAIRE POUR DEBUG-->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <title>@yield('title')</title>
-
+   
 </head>
 
 <body>
@@ -29,9 +28,9 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Campagne</a>
                     <div class="dropdown-content">
-
+                        
                         <a href="{{ route('campagnes.create') }}">Créer</a>
-                        <a href="{{ route('articles.createArticleCampagne') }}">Créer un article</a>
+                        <a href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
                         <a href="#">Modifier</a>
                         <a href="#">Supprimer</a>
                     </div>
@@ -41,7 +40,7 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Article</a>
                     <div class="dropdown-content">
-                        <a href="{{ route('articles.create') }}">Créer</a>
+                        <a href="{{route('articles.createArticle')}}">Créer</a>
                         <a href="#">Modifier</a>
                         <a href="#">Supprimer</a>
                     </div>
@@ -53,7 +52,8 @@
                     <div class="dropdown-content">
                         <a href="{{ route('couleurs') }}">Gérer couleurs</a>
                         <a href="{{ route('tailles') }}">Gérer tailles</a>
-                        <a href="{{ route('couleurs.create') }}">Ajouter couleur / taille</a>
+                        <a href="{{ route('couleurs.create') }}">Ajouter couleur</a>
+                        <a href="{{ route('tailles.create') }}">Ajouter taille</a>
                     </div>
                 </li>
             @endif
@@ -67,7 +67,7 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Utilisateur</a>
                     <div class="dropdown-content">
-                        <a href="{{ route('admin.create') }}">Créer</a>
+                        <a href="{{ route('admin.create')}}">Créer</a>
                         <a href="#">Modifier</a>
                         <a href="#">Supprimer</a>
                     </div>
