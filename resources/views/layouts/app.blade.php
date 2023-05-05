@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>@yield('title')</title>
@@ -64,9 +65,7 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Utilisateur</a>
                     <div class="dropdown-content">
-                        <a href="#">Créer</a>
-                        <a href="#">Modifier</a>
-                        <a href="#">Supprimer</a>
+                        <a href="{{ route('admin.create') }}">Créer</a>
                     </div>
                 </li>
             @endif
@@ -117,6 +116,7 @@
     @endif
     <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
     @livewireScripts
+
 </body>
 
 </html>

@@ -37,6 +37,9 @@
                 </form>
             </div>
         </div>
+        <div class="center">
+            <a href="{{ route('accueil') }}" class="buttonSite">Retour</a>
+        </div>
     </div>
 </section>
                 

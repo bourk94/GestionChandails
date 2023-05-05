@@ -51,6 +51,9 @@
                 </form>
             </div>
         </div>
+        <div class="center">
+            <a href="{{ route('usagers.login') }}" class="buttonSite">Retour</a>
+        </div>
     </div>
 </section>
 

@@ -3,36 +3,31 @@
 @section('title', 'Connexion')
 @section('contenu')
 
-    <section class="main-container">
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <h1>Connexion</h1>
-                    <div>
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                                <div>
-                                    <label for="email" >Adresse courriel</label>
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-                                </div>
-                                <div>
-                                    <label for="password">Mot de passe</label>
-                                    <input type="password" id="password" name="password" required>
-                                </div>
-                                <div class="flex__center">
-                                <a class="hover__orange color__white" href="{{ route('usagers.create') }}">Créer un compte</a>
-                                </div>
-                                <div class="flex__center">
-                                    <div class="flex__inline margin__top">
-                                        <button class="btn bg__orange color__white" type="submit">Connexion</button>
-                                        <a href="{{ route('password.request') }}"><button class="btn bg__orange color__white margin__top" type="button">Mot de passe oublié</button></a>
-                                    </div>
-                                </div>
-                        </form>
-                    </div>
-                </div>
+    <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+        <h1 class="center">Connexion</h1>
+        <form class="w3-container" method="POST" action="{{ route('login') }}">
+        @csrf
+
+            <div class="w3-section">
+                <label for="email">Adresse courriel :</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="email" id="email" name="email" value="{{ old('email') }}" required>
             </div>
-        </div>
-    </section>
+            <div class="w3-section">
+                <label for="password">Mot de passe</label>
+                <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="password" id="password" name="password" required>
+            </div>
+        
+            <div class="center">
+                <a href="{{ route('usagers.create') }}">Créer un compte</a>
+            </div>
+            <br>
+            <div>
+                <button type="submit" class="w3-button w3-block w3-black">Connexion</button>
+                <br>
+                <a href="{{ route('password.request') }}"><button class="w3-button w3-block w3-black" type="button">Mot de passe oublié</button></a>
+            </div>
+        </form>
+
+    </div>
 
 @endsection

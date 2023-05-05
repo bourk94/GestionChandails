@@ -17,6 +17,7 @@
                 @endif
             @endforeach
         </h2>
+        
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))
             @foreach ($articles as $article)
