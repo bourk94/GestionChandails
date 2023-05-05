@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampagnesController;
 use App\Http\Controllers\UsagersController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\ArticlesCampagnesController;
 use App\Http\Controllers\CouleursController;
 use App\Http\Controllers\TaillesController;
 use App\Http\Controllers\CartController;
@@ -135,25 +136,29 @@ Route::get('campagnes/create',
 
 
 
+//Articles sans campagne
+Route::get('articles/create',
+[ArticlesController::class, 'create'])->name('articles.create')->middleware('auth');
+
+Route::post('articles', 
+[ArticlesController::class, 'storeArticle'])->name('articles.store')->middleware('auth');
+
+
 //Mettre les middleware ???
+
 Route::get('articles/createArticleCampagne',
-[ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
+[ArticlesCampagnesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
 
 Route::post('articles',
-[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
-
-//Articles sans campagne
-Route::get('atricles/createArticle',
-[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
-
-Route::post('articles/createArticle',
-[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
+[ArticlesCampagnesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
 
 Route::delete('/articles/{id}',
-[ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
+[ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy')->middleware('auth');
 
 Route::get('/articles/{id}/modifier/',
-[ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit'); //->middleware('auth');
+[ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit')->middleware('auth');
+
+
 
 // Route::patch('/articles/{id}',
 // [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
@@ -166,8 +171,8 @@ Route::get('/articles/{id}/modifier/',
 Route::get('/couleurs',
 [CouleursController::class, 'index'])->name('couleurs');
 
-// Route::get('couleurs/create',
-// [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
+Route::get('couleurs/create',
+[CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
 
 Route::post('couleurs',
 [CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
