@@ -12,6 +12,7 @@ use App\Http\Controllers\UsagersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CouleursController;
 use App\Http\Controllers\TaillesController;
+use App\Http\Controllers\CartController;
 
 
 /*
@@ -72,6 +73,12 @@ Route::post('/reset-password', function (Request $request) {
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
+
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 
 Route::get('/',
