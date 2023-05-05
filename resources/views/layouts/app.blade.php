@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!--MISE EN COMMENTAIRE POUR DEBUG-->
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>@yield('title')</title>
    
 </head>

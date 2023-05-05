@@ -20,14 +20,20 @@
 
                         {{-- menu déroulant pour afficher les articles (template disponible dans la table Article) --}}
                         <div>
+
                             @if (count($articles))
+                                <div>
                                 <label for="listeArticle">Choisir un article</label>
                                 <select name="article_id" id="article_id">
                                     @foreach ($articles as $article)
                                         <option value="{{ $article->id }}">{{ $article->nom }}</option>
                                     @endforeach
+                                        <option value="autre">Créer un nouvel article</option>
                                 </select>
+                                </div>
+
                             @else
+
                                 <div>
                                     <label for="nomArticle">Nom de l'article</label>
                                     <input type="text" class="@error('nom') is-invalid @enderror" name="nom"
@@ -68,6 +74,8 @@
 
                         </div>
 
+                        @endif
+
                         {{-- champs entré manuellement par l'admin pour ajouter une image sur l'article campagne --}}
                         <div>
                             <label for="imageArticleCampagne">Image de l'article</label>
@@ -78,10 +86,6 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
-
-                        @endif
                         {{-- nouveau champs pour créer un article campagne --}}
                         <div>
                             <label for="prixArticle">Prix</label>

@@ -176,189 +176,62 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //Se passer l'id de l'article et de la campagne
+    private function getPublicPath($type)
+    {
+        switch ($type) {
+            case "Chandail":
+                return public_path('img/chandails');
+            case "Kangourou":
+                return public_path('img/kangourou');
+            default:
+                return public_path('img/autres');
+        }
+    }
+
     public function storeArticleCampagne(Request $request)
     {
         try {
-            $article = 0;
+            $article = null;
 
             if ($request->nom != null) {
-                $procedureCreateArticle = DB::select(
-                    "CALL createArticle(?,?,?)",
-                    [$request->nom, $request->type, $request->description,]
-                );
-                $article = DB::table('articles')->latest('id')->first();
-
+                $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
                 DB::prepareBindings($procedureCreateArticle);
-            }
-
-
-            if ($article->id == null) {
+                $article = Article::latest('id')->first();
+            } elseif ($request->article_id != null) {
                 $article = Article::findOrFail($request->article_id);
-                $procedureCreateArticleCampagne = DB::select(
-                    "CALL createArticleCampagne(?,?,?,?,?)",
-                    [$request->prix, $request->article_id, $request->campagne_id, $request->couleur_id, $request->taille_id]
-                );
-                DB::prepareBindings($procedureCreateArticleCampagne);
-            } else {
-
-                $article = DB::table('articles')->latest('id')->first();
-                $procedureCreateArticleCampagne = DB::select(
-                    "CALL createArticleCampagne(?,?,?,?,?)",
-                    [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]
-                );
-                DB::prepareBindings($procedureCreateArticleCampagne);
             }
 
-            $campagne = Campagne::findOrFail($request->campagne_id);
-            // Vérifier que l'image n'est pas nulle pour enregistrer l'image
-            if ($request->image != null) {
-                $uploadedFile = $request->file('image');
+            if ($article != null) {
+                $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
+                DB::prepareBindings($procedureCreateArticleCampagne);
 
-                $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+                $campagne = Campagne::findOrFail($request->campagne_id);
 
-                try {
-                    //If pour gérer le tri des images selon le type de l'article
+                // Vérifier que l'image n'est pas nulle pour enregistrer l'image
+                if ($request->hasFile('image')) {
+                    $uploadedFile = $request->file('image');
+                    $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+                    $path = $this->getPublicPath($article->type);
 
-                    if ($article->type == "Chandail") {
-                        $request->image->move(public_path('img/chandails'), $nomFichierUnique);
-                    } else if ($article->type == "Kangourou") {
-                        $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
-                    } else {
-                        $request->image->move(public_path('img/autres'), $nomFichierUnique);
+                    try {
+                        $uploadedFile->move($path, $nomFichierUnique);
+                    } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+                        Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+                        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
                     }
-                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-                    Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-                    return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+
+                    $article->image = $nomFichierUnique;
+                    $article->save();
                 }
 
-                $article->image = $nomFichierUnique;
+                return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
             }
-
-
-            return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
     }
 
-    // Code dry  par GTP
-    // public function storeArticleCampagne(Request $request)
-    // {
-    //     try {
-    //         $article = null;
 
-    //         if ($request->nom != null) {
-    //             $procedureCreateArticle = DB::select(
-    //                 "CALL createArticle(?,?,?)",
-    //                 [$request->nom, $request->type, $request->description,]
-    //             );
-    //             $article = DB::table('articles')->latest('id')->first();
-
-    //             DB::prepareBindings($procedureCreateArticle);
-    //         }
-
-    //         if (!$article) {
-    //             $article = Article::findOrFail($request->article_id);
-    //         }
-
-    //         $procedureCreateArticleCampagne = DB::select(
-    //             "CALL createArticleCampagne(?,?,?,?,?)",
-    //             [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]
-    //         );
-    //         DB::prepareBindings($procedureCreateArticleCampagne);
-
-    //         $campagne = Campagne::findOrFail($request->campagne_id);
-
-    //         if ($request->image != null) {
-    //             $uploadedFile = $request->file('image');
-
-    //             $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
-
-    //             $destinationPath = public_path('img/autres');
-    //             if ($article->type == "Chandail") {
-    //                 $destinationPath = public_path('img/chandails');
-    //             } else if ($article->type == "Kangourou") {
-    //                 $destinationPath = public_path('img/kangourou');
-    //             }
-
-    //             try {
-    //                 $request->image->move($destinationPath, $nomFichierUnique);
-    //             } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-    //                 Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-    //                 return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
-    //             }
-
-    //             $article->image = $nomFichierUnique;
-    //         }
-
-    //         $articleName = $article->nom ?? $article->name;
-
-    //         return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $articleName . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
-    //     } catch (\Throwable $e) {
-    //         Log::debug($e);
-
-    //         return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
-    //     }
-    // }
-    //Version 2
-    // public function storeArticleCampagne(Request $request)
-    // {
-    //     try {
-    //         $article = null;
-
-    //         if ($request->nom != null) {
-    //             $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
-    //             DB::prepareBindings($procedureCreateArticle);
-    //             $article = Article::latest('id')->first();
-    //         } elseif ($request->article_id != null) {
-    //             $article = Article::findOrFail($request->article_id);
-    //         }
-
-    //         if ($article != null) {
-    //             $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
-    //             DB::prepareBindings($procedureCreateArticleCampagne);
-
-    //             $campagne = Campagne::findOrFail($request->campagne_id);
-
-    //             // Vérifier que l'image n'est pas nulle pour enregistrer l'image
-    //             if ($request->hasFile('image')) {
-    //                 $uploadedFile = $request->file('image');
-    //                 $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
-    //                 $path = $this->getPublicPath($article->type);
-
-    //                 try {
-    //                     $uploadedFile->move($path, $nomFichierUnique);
-    //                 } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-    //                     Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-    //                     return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
-    //                 }
-
-    //                 $article->image = $nomFichierUnique;
-    //                 $article->save();
-    //             }
-
-    //             return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
-    //         }
-    //     } catch (\Throwable $e) {
-    //         Log::debug($e);
-    //     }
-
-    //     return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
-    // }
-
-    // private function getPublicPath($type)
-    // {
-    //     switch ($type) {
-    //         case "Chandail":
-    //             return public_path('img/chandails');
-    //         case "Kangourou":
-    //             return public_path('img/kangourou');
-    //         default:
-    //             return public_path('img/autres');
-    //     }
-    // }
 }
