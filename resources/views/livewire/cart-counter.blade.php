@@ -1,6 +1,3 @@
 <div>
-    <form method="POST" action="{{ route('cart.list') }}" >
-        @csrf
-        <button type="submit"><i class="fa fa-shopping-cart"></i> Panier ({{ $cart_count }})</button>
-    </form>
+        <a class="btn color__white hover__orange" href="{{ route('cart.list') }}"><i class="fa fa-shopping-cart"></i> Panier ({{ $cart_count }})</a>
 </div>
