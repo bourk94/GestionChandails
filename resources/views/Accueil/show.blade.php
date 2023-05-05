@@ -55,7 +55,7 @@
                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                 <label>
                                     <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone" required>
-                                    <div class="button"><span>{{ $taille->format }}</span></div>
+                                    <div class="button"><span class="prevent-select">{{ $taille->format }}</span></div>
                                 </label>
                             @endforeach
                         @endif
