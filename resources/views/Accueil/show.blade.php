@@ -73,7 +73,7 @@
                         @endif
                     </div>
                 </div>
-                <input type="hidden" name="id" value="1">
+                <input type="hidden" name="id" value="0">
                 <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                 <input type="hidden" name="name" value="{{ $article->nom }}">
                 <input type="hidden" value="{{ $article->prix }}" name="price">
