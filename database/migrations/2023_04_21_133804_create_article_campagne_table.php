@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('taille');
             $table->foreign('taille')->references('id')->on('tailles')->onDelete('cascade');
             $table->integer('quantite_max')->default(5); 
+            $table->double('prix')->nullable();
             //$table->primary(['article_id', 'campagne_id'],'id');
             $table->timestamps();
         });

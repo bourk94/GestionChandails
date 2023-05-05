@@ -3,8 +3,7 @@
 @section('title', 'Ajouter une couleur')
 @section('contenu')
 
-
-    <form id="form_couleur" action="{{ route('couleurs.store') }}" method="POST" enctype="multipart/form-data">
+    <form id="form_couleur" action="{{ route('couleurs.store') }}" method="POST">
         @csrf
         <div class="card__padding">
             <div class="card__container">
@@ -23,37 +22,10 @@
                         </div>
                         <div>
                             <label for="codeCouleur">Choisir une couleur</label>
-                            <input type="color" class="@error('code_couleur') is-invalid @enderror" name="code_couleur" id="code_couleur">
+                            <input type="color" class="@error('code_couleur') is-invalid @enderror" name="code_couleur"
+                                id="code_couleur">
 
                             @error('code_couleur')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                        </div>                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter une couleur</button>
-        </div>
-    </form>
-
-
-    <!--Form pour l'ajout d'une taille-->
-    <form id="form_taille" action="{{ route('tailles.store') }}" method="POST">
-        @csrf
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <div>
-                        <h2>Ajouter une taille</h2>
-                        <div>
-                            <label for="formatTaille">Format</label>
-                            <input type="text" class="@error('format') is-invalid @enderror" name="format"
-                                id="format">
-
-                            @error('format')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
 
@@ -63,8 +35,15 @@
             </div>
         </div>
         <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter une taille</button>
+            <button class="btn bg__orange color__white" type="submit">Ajouter une couleur</button>
         </div>
     </form>
+
+    <!--SCRIPTS DE VALIDATION-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script src="{{ asset('js/jsvalidation.js') }}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\CouleurRequest') !!}
 
 @endsection
