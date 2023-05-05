@@ -4,8 +4,8 @@
 <div class="padding">
 
     <h1 class="center">Liste des administrateurs</h1>
-    
-    <a class="a_decoration_none" href="{{ route('admin.create') }}"><button class="w3-button w3-block w3-hover-red btnColor" type="button">Créer un administrateurs</button></a>
+
+    <a class="a_decoration_none" href="{{ route('admin.create') }}"><button class="w3-button w3-block w3-hover-red btnColor" type="button">Créer un administrateur</button></a>
     <br>
 
     <div style="overflow-x: auto;">
