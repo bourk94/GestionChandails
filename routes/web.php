@@ -136,11 +136,18 @@ Route::get('campagnes/create',
 
 
 //Mettre les middleware ???
-Route::get('articles/create',
-[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
+Route::get('articles/createArticleCampagne',
+[ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
 
 Route::post('articles',
-[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne'); //->middleware('auth');
+[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
+
+//Articles sans campagne
+Route::get('atricles/createArticle',
+[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
+
+Route::post('articles/createArticle',
+[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');

@@ -76,8 +76,9 @@ class CampagnesController extends Controller
     public function create()
     {
         $articles = Article::all();
+        $campagnes = Campagne::all();
 
-        return view('campagnes.createCampagne', compact('articles'));
+        return view('campagnes.createCampagne', compact('articles', 'campagnes'));
     }
 
     /**

@@ -33,7 +33,7 @@ class ArticlesController extends Controller
      *
      * Pour les articles
      */
-    public function createArticle()
+    public function create()
     {
         return view('articles.createArticle');
     }
@@ -44,7 +44,7 @@ class ArticlesController extends Controller
      *
      * Pour les articles campagne
      */
-    public function create()
+    public function createArticleCampagne()
     {
         $articles = Article::all();
         $couleurs = Couleur::all();
@@ -199,7 +199,6 @@ class ArticlesController extends Controller
                     [$request->prix, $request->article_id, $request->campagne_id, $request->couleur_id, $request->taille_id]
                 );
                 DB::prepareBindings($procedureCreateArticleCampagne);
-
             } else {
 
                 $article = DB::table('articles')->latest('id')->first();
@@ -209,30 +208,32 @@ class ArticlesController extends Controller
                 );
                 DB::prepareBindings($procedureCreateArticleCampagne);
             }
-            
+
             $campagne = Campagne::findOrFail($request->campagne_id);
             // Vérifier que l'image n'est pas nulle pour enregistrer l'image
-            // $uploadedFile = $request->file('image');
+            if ($request->image != null) {
+                $uploadedFile = $request->file('image');
 
-            // $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+                $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
 
-            // try {
-            //     //If pour gérer le tri des images selon le type de l'article
+                try {
+                    //If pour gérer le tri des images selon le type de l'article
 
-            //     if ($article->type == "Chandail") {
-            //         $request->image->move(public_path('img/chandails'), $nomFichierUnique);
-            //     } else if ($article->type == "Kangourou") {
-            //         $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
-            //     } else {
-            //         $request->image->move(public_path('img/autres'), $nomFichierUnique);
-            //     }
-            // } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-            //     Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-            // }
+                    if ($article->type == "Chandail") {
+                        $request->image->move(public_path('img/chandails'), $nomFichierUnique);
+                    } else if ($article->type == "Kangourou") {
+                        $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
+                    } else {
+                        $request->image->move(public_path('img/autres'), $nomFichierUnique);
+                    }
+                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+                    Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+                    return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+                }
 
-            // $article->image = $nomFichierUnique;
+                $article->image = $nomFichierUnique;
+            }
 
-            // //$article->campagnes()->attach($request->campagne_id);
 
             return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
         } catch (\Throwable $e) {
@@ -243,4 +244,121 @@ class ArticlesController extends Controller
 
         return redirect()->route('accueil');
     }
+
+    // Code dry  par GTP
+    // public function storeArticleCampagne(Request $request)
+    // {
+    //     try {
+    //         $article = null;
+
+    //         if ($request->nom != null) {
+    //             $procedureCreateArticle = DB::select(
+    //                 "CALL createArticle(?,?,?)",
+    //                 [$request->nom, $request->type, $request->description,]
+    //             );
+    //             $article = DB::table('articles')->latest('id')->first();
+
+    //             DB::prepareBindings($procedureCreateArticle);
+    //         }
+
+    //         if (!$article) {
+    //             $article = Article::findOrFail($request->article_id);
+    //         }
+
+    //         $procedureCreateArticleCampagne = DB::select(
+    //             "CALL createArticleCampagne(?,?,?,?,?)",
+    //             [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]
+    //         );
+    //         DB::prepareBindings($procedureCreateArticleCampagne);
+
+    //         $campagne = Campagne::findOrFail($request->campagne_id);
+
+    //         if ($request->image != null) {
+    //             $uploadedFile = $request->file('image');
+
+    //             $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+
+    //             $destinationPath = public_path('img/autres');
+    //             if ($article->type == "Chandail") {
+    //                 $destinationPath = public_path('img/chandails');
+    //             } else if ($article->type == "Kangourou") {
+    //                 $destinationPath = public_path('img/kangourou');
+    //             }
+
+    //             try {
+    //                 $request->image->move($destinationPath, $nomFichierUnique);
+    //             } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+    //                 Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+    //                 return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+    //             }
+
+    //             $article->image = $nomFichierUnique;
+    //         }
+
+    //         $articleName = $article->nom ?? $article->name;
+
+    //         return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $articleName . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
+    //     } catch (\Throwable $e) {
+    //         Log::debug($e);
+
+    //         return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+    //     }
+    // }
+    //Version 2
+    // public function storeArticleCampagne(Request $request)
+    // {
+    //     try {
+    //         $article = null;
+
+    //         if ($request->nom != null) {
+    //             $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
+    //             DB::prepareBindings($procedureCreateArticle);
+    //             $article = Article::latest('id')->first();
+    //         } elseif ($request->article_id != null) {
+    //             $article = Article::findOrFail($request->article_id);
+    //         }
+
+    //         if ($article != null) {
+    //             $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
+    //             DB::prepareBindings($procedureCreateArticleCampagne);
+
+    //             $campagne = Campagne::findOrFail($request->campagne_id);
+
+    //             // Vérifier que l'image n'est pas nulle pour enregistrer l'image
+    //             if ($request->hasFile('image')) {
+    //                 $uploadedFile = $request->file('image');
+    //                 $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+    //                 $path = $this->getPublicPath($article->type);
+
+    //                 try {
+    //                     $uploadedFile->move($path, $nomFichierUnique);
+    //                 } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+    //                     Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+    //                     return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+    //                 }
+
+    //                 $article->image = $nomFichierUnique;
+    //                 $article->save();
+    //             }
+
+    //             return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
+    //         }
+    //     } catch (\Throwable $e) {
+    //         Log::debug($e);
+    //     }
+
+    //     return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+    // }
+
+    // private function getPublicPath($type)
+    // {
+    //     switch ($type) {
+    //         case "Chandail":
+    //             return public_path('img/chandails');
+    //         case "Kangourou":
+    //             return public_path('img/kangourou');
+    //         default:
+    //             return public_path('img/autres');
+    //     }
+    // }
 }

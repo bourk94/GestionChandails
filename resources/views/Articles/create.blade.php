@@ -27,46 +27,45 @@
                                         <option value="{{ $article->id }}">{{ $article->nom }}</option>
                                     @endforeach
                                 </select>
-                                @else
-                                    
+                            @else
+                                <div>
+                                    <label for="nomArticle">Nom de l'article</label>
+                                    <input type="text" class="@error('nom') is-invalid @enderror" name="nom"
+                                        id="nom">
 
-                                    <div>
-                                        <label for="nomArticle">Nom de l'article</label>
-                                        <input type="text" class="@error('nom') is-invalid @enderror" name="nom" id="nom">
-            
-                                        @error('nom')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-            
-                                    {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
-                                    <div>
-                                        <label for="typeArticle">Type de l'article</label>
-                                        <select class="@error('type') is-invalid @enderror" name="type" id="type">
-                                            
-                                            <option value="Chandail" >Chandail</option>
-            
-                                            <option value="Kangourou">Kangourou</option>
-            
-                                            <option value="Accessoire">Accessoire</option>
-            
-                                        </select>
-            
-                                        @error('type')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-            
-                                    {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
-                                    <div>
-                                        <label for="descriptionArticle">Description</label>
-                                        <textarea class="@error('description') is-invalid @enderror" name="description" class="description" id="description"></textarea>
-            
-                                        @error('description')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                            
+                                    @error('nom')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
+                                <div>
+                                    <label for="typeArticle">Type de l'article</label>
+                                    <select class="@error('type') is-invalid @enderror" name="type" id="type">
+
+                                        <option value="Chandail">Chandail</option>
+
+                                        <option value="Kangourou">Kangourou</option>
+
+                                        <option value="Accessoire">Accessoire</option>
+
+                                    </select>
+
+                                    @error('type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
+                                <div>
+                                    <label for="descriptionArticle">Description</label>
+                                    <textarea class="@error('description') is-invalid @enderror" name="description" class="description" id="description"></textarea>
+
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                         </div>
 
                         {{-- champs entré manuellement par l'admin pour ajouter une image sur l'article campagne --}}
@@ -81,7 +80,7 @@
                         </div>
 
                         {{-- champs qui sera entré automatiquement suite à la sélection dans le menu déroulant (lien avec un article) --}}
-                       
+
                         @endif
                         {{-- nouveau champs pour créer un article campagne --}}
                         <div>
@@ -100,7 +99,7 @@
                                 <label for="couleurArticle">Couleur</label>
                                 <select name="couleur_id" id="couleur">
                                     @foreach ($couleurs as $couleur)
-                                        <option value="{{ $couleur->id }}">{{ $couleur->nom_couleur}}</option>
+                                        <option value="{{ $couleur->id }}">{{ $couleur->nom_couleur }}</option>
                                     @endforeach
                                 </select>
                             @else

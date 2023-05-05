@@ -3,6 +3,7 @@
 @section('title', 'Créer une campagne')
 @section('contenu')
 
+@if(!count($campagnes->where('statut', 'en cours')) > 0)
     <form id="my-form" action="{{ route('campagnes.store') }}" method="POST">
         @csrf
         <div class="card__padding">
@@ -29,7 +30,7 @@
 
         <div>
 
-            <div class="card__padding">
+            {{-- <div class="card__padding">
                 <div class="card__container">
                     @if (count($articles) > 0)
                         <div class="flex__center">
@@ -49,7 +50,7 @@
                         article</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         </div>
 
 
@@ -57,6 +58,20 @@
             <button class="btn bg__orange color__white" id="add-article" type="submit">Créer la campagne</button>
         </div>
     </form>
+@else
+    <div class="card__padding">
+        <div class="card__container">
+            <div class="flex__center">
+                <div>
+                    <h2>Vous avez déjà une campagne en cours</h2>
+                    <a href="{{ route('accueil') }}" class="btn bg__orange color__white" id="add-article">Retourner à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+   
+
     {{-- à gérer plus tard
      
     <div id="div-cible"></div>
