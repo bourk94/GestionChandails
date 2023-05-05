@@ -134,7 +134,6 @@
     </div>
     @if (Auth::User())
     <script>
-        //Mettre dans un .JS
         var modalLogin = document.getElementById("modalLogin");     
         modalLogin.style.display = "block";
     </script>
