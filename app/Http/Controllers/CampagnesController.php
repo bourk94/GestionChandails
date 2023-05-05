@@ -32,7 +32,7 @@ class CampagnesController extends Controller
              'article_campagne.image as image',
              'article_campagne.quantite_max as quantite',
              'article_campagne.id as article_campagne_id')
-            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'articles.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
             ->get();
 
         $couleurs = DB::table('couleurs')

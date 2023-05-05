@@ -87,8 +87,6 @@
         @endif
         @endforeach
 
-         @endif
-                @endforeach
         
     <script>
         var couleurs = document.createElement('style');
