@@ -16,7 +16,6 @@
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
 
         </h2>
-        
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))   
             @foreach ($articles->unique('article_id') as $article)
@@ -27,17 +26,20 @@
                             @if ($article->image == 'null')
                                 <div class="zoneImageVide"></div>
                             @else
-                                <img src="{{ asset("img/$article->type/$article->image") }}" alt="Image de l'article">
+                                <img src="{{ asset("img/$article->type/$article->image") }}"
+                                    alt="Image de l'article">
                             @endif
+                      
+                    </div>
+                    <div class="rightObjets">
+                        <h2>{{ $article->nom }}</h2>
+                        <p>Description:{{ $article->description }}</p>
+                        <p>Prix estimé:{{ $article->prix }} $</p>
+                        <p>Nombre de {{ $article->nom }} que vous pouvez commander: {{ $article->quantite }}</p>
+                    </div>
 
-                        </div>
-                        <div class="rightObjets">
-                            <h2>{{ $article->nom }}</h2>
-                            <p>Description:{{ $article->description }}</p>
-                            <p>Prix estimé:{{ $article->prix }} $</p>
-                            <p>Nombre de {{ $article->nom }} que vous pouvez commander: {{ $article->quantite }}</p>
-                            <input type="hidden" name="article_id" value="{{ $article->article_id }}">
-                        </div>
+                    <!-- Section choix de couleurs -->
+                    <div class="rightObjets">
 
                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                             <label class="{{ $couleur->nom_couleur }}">
@@ -83,9 +85,6 @@
         @else
             <p>Aucun article</p>
         @endif
-        
-        @endif
-        @endforeach
 
          @endif
                 @endforeach

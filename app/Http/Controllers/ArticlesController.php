@@ -7,14 +7,11 @@ use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\ArticleCampagne;
-use App\Models\Campagne;
 use App\Models\Couleur;
 use App\Models\Taille;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
-use Symfony\Component\ErrorHandler\Debug;
 
 class ArticlesController extends Controller
 {
@@ -30,36 +27,19 @@ class ArticlesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * Pour les articles
      */
-    public function createArticle()
+    public function create()
     {
         return view('articles.createArticle');
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * Pour les articles campagne
-     */
-    public function createArticleCampagne()
-    {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
-        $campagnes = Campagne::all();
-        return view('Articles.createArticleCampagne', compact('articles', 'couleurs', 'tailles', 'campagnes'));
-    }
-
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeArticle(ArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
         try {
             $article = new Article($request->all());
@@ -77,27 +57,11 @@ class ArticlesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(string $id)
     {
         //
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showArticleCampagne(Article $article)
-    {
-        return view('articles.show', compact('article'));
-    }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -111,7 +75,7 @@ class ArticlesController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -126,6 +90,7 @@ class ArticlesController extends Controller
             $article->nom = $request->nom;
             $article->type = $request->type;
             $article->description = $request->description;
+            $article->prix = $request->prix;
 
             $article->save();
 
@@ -140,105 +105,78 @@ class ArticlesController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $article = Article::findOrFail($id);
-        if ($article)
-        {
-            DB::transaction(function () use ($article)
-            {
+        try {
+            $article = Article::findOrFail($id);
 
-                // Supprimer les entrées dans la table 'article_campagne_commande'
-                DB::table('article_campagne_commande')
-                    ->where('article_campagne_id', $article->id)
-                    ->delete();
+            //Gérer les liens avec les tables de jointures
+            $article->campagnes()->detach();
+            $article->commandes()->detach();
 
-                
-                
-                // Supprimer les entrées dans la table 'article_campagne'
-                DB::table('article_campagne')
-                    ->where('article_id', $article->id)
-                    ->delete();
+            //Gérer le lien avec la table de jointure Caracteristique
+            //$article->caracteristiques()->detach();
 
-                // Supprimer l'article
-                $article->delete();
-            });
+            $article->delete();
 
-            return redirect()->route('accueil')
-                ->with('success', 'Article supprimé avec succès.');
+            //Retour à la page d'accueil suite à la suppression
+            return redirect()->route('accueil')->with('message', "Suppression de " . $article->nom . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+
+            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
         }
 
-        return redirect()->route('articles.index')
-            ->with('error', 'Article non trouvé.');
+        return redirect()->route('accueil');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     //Se passer l'id de l'article et de la campagne
-    private function getPublicPath($type)
-    {
-        switch ($type) {
-            case "Chandail":
-                return public_path('img/chandails');
-            case "Kangourou":
-                return public_path('img/kangourou');
-            default:
-                return public_path('img/autres');
-        }
-    }
-
-    public function storeArticleCampagne(Request $request)
+    public function storeArticleCampagne(ArticleCampagneRequest $request, $id, $idCampagne, $idcouleur, $idtaille)
     {
         try {
-            $article = null;
+            $article = Article::findOrFail($id);
+            $article->campagnes()->attach($idCampagne);
+            $article->couleurs()->attach($idcouleur);
+            $article->tailles()->attach($idtaille);
+            $uploadedFile = $request->file('image');
 
-            if ($request->nom != null) {
-                $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
-                DB::prepareBindings($procedureCreateArticle);
-                $article = Article::latest('id')->first();
-            } elseif ($request->article_id != null) {
-                $article = Article::findOrFail($request->article_id);
-            }
+            $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
 
-            if ($article != null) {
-                $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
-                DB::prepareBindings($procedureCreateArticleCampagne);
+            try {
+                //If pour gérer le tri des images selon le type de l'article
 
-                $campagne = Campagne::findOrFail($request->campagne_id);
-
-                // Vérifier que l'image n'est pas nulle pour enregistrer l'image
-                if ($request->hasFile('image')) {
-                    $uploadedFile = $request->file('image');
-                    $nomFichierUnique = str_replace(' ', '_', $article->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
-                    $path = $this->getPublicPath($article->type);
-
-                    try {
-                        $uploadedFile->move($path, $nomFichierUnique);
-                    } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-                        Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-                        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
-                    }
-
-                    $article->image = $nomFichierUnique;
-                    $article->save();
+                if ($article->type == "Chandail") {
+                    $request->image->move(public_path('img/chandails'), $nomFichierUnique);
+                } else if ($article->type == "Kangourou") {
+                    $request->image->move(public_path('img/kangourou'), $nomFichierUnique);
+                } else {
+                    $request->image->move(public_path('img/autres'), $nomFichierUnique);
                 }
-
-                return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
+            } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+                Log::error("Erreur lors du téléversement du fichier. ", [$e]);
             }
+
+            $article->image = $nomFichierUnique;
+
+            //$article->campagnes()->attach($request->campagne_id);
+
+            return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $request->campagne_id . "  a réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
+
+            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
         }
 
-        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+        return redirect()->route('accueil');
     }
-
-
 }

@@ -133,23 +133,12 @@ Route::post('campagnes',
 Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
-
-
-//Articles sans campagne
-Route::get('articles/createArticle',
-[ArticlesController::class, 'createArticle'])->name('articles.createArticle')->middleware('auth');
-
-Route::post('articles', 
-[ArticlesController::class, 'storeArticle'])->name('articles.storeArticle')->middleware('auth');
-
-
 //Mettre les middleware ???
-Route::get('articles/createArticleCampagne',
-[ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
+Route::get('articles/create',
+[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
-Route::post('articlescampagnes',
-[ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
-
+Route::post('articles',
+[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
@@ -168,21 +157,18 @@ Route::get('/articles/{id}/modifier/',
 Route::get('/couleurs',
 [CouleursController::class, 'index'])->name('couleurs');
 
+//Taille
+Route::get('/tailles',
+[TaillesController::class, 'index'])->name('tailles');
+
 Route::get('couleurs/create',
 [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
 
 Route::post('couleurs',
 [CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
 
-//Taille
-Route::get('/tailles',
-[TaillesController::class, 'index'])->name('tailles');
-
-Route::get('tailles/create',
-[TaillesController::class, 'create'])->name('tailles.create')->middleware('auth');
-
 Route::post('tailles',
-[TaillesController::class, 'store'])->name('tailles.store')->middleware('auth');
+[TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');
 
 // ***pas utilisée***
 // Route::get('couleurs/{id}',

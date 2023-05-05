@@ -10,8 +10,7 @@ class ArticleCampagne extends Model
 {
     use HasFactory;
 
-    //Champs remplis manuellement par l'admin
-    protected $fillable = ['image', 'quantite', 'couleur_id', 'taille_id', 'prix'];
+    protected $fillable = ['image', 'couleur_id', 'taille_id', 'quantite'];
 
     //Jointure avec la table Couleur
     public function couleurs()

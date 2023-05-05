@@ -45,12 +45,10 @@
     <form method="POST" action="{{ route('couleurs.destroy', [$couleur->id]) }}">
         @csrf
         @method('DELETE')
-        <div class="center">
-            <button type="submit"
-                onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')"
-                class="buttonSite">Supprimer                
-            </button>
-        </div>
+        <button type="submit"
+            onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')"
+            class="buttonSite">Supprimer
+        </button>
 
         <!--SCRIPTS DE VALIDATION-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

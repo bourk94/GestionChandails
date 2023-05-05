@@ -15,5 +15,5 @@ class Couleur extends Model
     public function articles_campagnes()
     {
         return $this->hasMany('App\Models\ArticleCampagne');
-    }    
+    }
 }
