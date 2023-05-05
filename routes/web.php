@@ -135,7 +135,6 @@ Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
 
-
 //Articles sans campagne
 Route::get('articles/create',
 [ArticlesController::class, 'create'])->name('articles.create')->middleware('auth');
