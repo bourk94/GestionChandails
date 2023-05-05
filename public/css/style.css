@@ -11,8 +11,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.a_decoration_none {
+  text-decoration: none;
+}
 
-.buttonSite {
+/* .buttonSite {
     background-color: #EF3832;
     border: none;
     color: white;
@@ -26,6 +29,16 @@ input[type=number] {
 }
 
 .buttonSite:hover {
+    background-color: #a11510;
+    color: white;
+} */
+
+.btnColor {
+  background-color: #EF3832;
+  color: white;
+}
+
+.btnColor:hover {
     background-color: #a11510;
     color: white;
 }
