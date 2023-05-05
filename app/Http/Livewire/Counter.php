@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\ArticleCampagne;
 use Illuminate\Support\Facades\DB;
-use darryldecode\cart\Facades\CartFacade;
 
 class Counter extends Component
 {
