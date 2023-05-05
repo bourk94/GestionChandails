@@ -15,7 +15,6 @@ class CartController extends Controller
     {
         
         $cartItems = \Cart::getContent();
-        //dd($cartItems);
         return view('cart', compact('cartItems'));
     }
 
@@ -23,9 +22,8 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         
-        if (!empty($request->except('_token'))) {
+        if (!empty($request->except('_token')) && $request->quantity > 0) {
             $condition = ['couleur' => $request->couleur_id, 'taille'=> $request->taille_id, 'article_id'=> $request->article_id, 'campagne_id'=> $request->campagne_id];
-            //dd($condition);
             $article_campagne = DB::table('article_campagne')->where($condition)->value('id');
                 
         $article = Article::find($request->article_id);
@@ -49,11 +47,6 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-        if ($request->quantity == 0) {
-            \Cart::remove($request->id);
-            return redirect()->route('cart.list');
-        }
-        else {
             \Cart::update(
                 $request->id,
                 [
@@ -63,7 +56,7 @@ class CartController extends Controller
                     ],
                 ]
             );
-        }
+
         return redirect()->route('cart.list');
     }
 

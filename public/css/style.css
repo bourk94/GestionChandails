@@ -11,6 +11,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
 
 .buttonSite {
     background-color: #EF3832;
@@ -403,29 +408,61 @@ li.dropdown {
 }
 
 .counter__field {
-    width: 3rem;
+    width: 2rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: .9rem;
     margin: .5rem;
     border: 1px solid #ccc;
     border-radius: .25rem;
     padding: .25rem;
+    font-weight: bold;
 }
 
 .counter__btn {
-    font-size: 2rem!important;
+    font-size: 1.1rem;
     border: none;
-    padding: .25rem .75rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;
     border-radius: .75rem;
     background-color: #EF3832;
     color: white;
-    margin: .5rem;
+    margin: .1rem;
 }
+
+.counter__decrement {
+  padding: .1rem .74rem;
+}
+
+.counter__increment {
+  padding: .1rem .6rem;
+}
+
+
 .counter__hover:hover {
+    background-color: #c71913;
+}
+
+.cart__grid {
+    display: grid;
+    grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 3rem;; 
+    grid-gap: 1rem;
+}
+
+.cart__btn {
+    border: none;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: .9rem;
+    border-radius: .75rem;
+    background-color: #EF3832;
+    color: white;
+    margin: .1rem;
+}
+
+.cart__btn:hover {
     background-color: #c71913;
 }
 
