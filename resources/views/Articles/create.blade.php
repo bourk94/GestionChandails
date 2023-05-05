@@ -81,6 +81,7 @@
                             <label for="imageArticleCampagne">Image de l'article</label>
                             <input type="file" class="@error('image') is-invalid @enderror" name="image"
                                 id="image">
+                                
 
                             @error('image')
                                 <span class="text-danger">{{ $message }}</span>
@@ -91,7 +92,7 @@
                             <label for="prixArticle">Prix</label>
                             <input type="number" class="@error('prix') is-invalid @enderror" name="prix" id="prix"
                                 min="0">
-
+                                
                             @error('prix')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -129,7 +130,7 @@
                         <div>
                             <label for="qteArticle">Quantité disponible</label>
                             <input type="number" class="@error('quantite_max') is-invalid @enderror" name="quantite_max"
-                                id="quantite_max" min="0">
+                                id="quantite_max" min="0" placeholder="Valeur par défaut est 5">
 
                             @error('quantite_max')
                                 <span class="text-danger">{{ $message }}</span>
@@ -138,19 +139,19 @@
                     </div>
                 </div>
             </div>
+            <div class="flex__center margin__top">
+                <button class="btn bg__orange color__white" type="submit">Ajouter un article à la campagne</button>
+            </div>
         </div>
-        <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter un article à la campagne</button>
-        </div>
-    </form>
 
+    </form>
 
     <!--SCRIPTS DE VALIDATION-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-    {{-- {!! JsValidator::formRequest('App\Http\Requests\ArticleCampagneRequest') !!} --}}
+    {!! JsValidator::formRequest('App\Http\Requests\ArticleCampagneRequest') !!}
 
 
 @endsection

@@ -47,7 +47,7 @@
         ["xpath=//form[@id='my-form']/div/div/div/div/div/div[3]/input", "xpath:idRelative"],
         ["xpath=//div[3]/input", "xpath:position"]
       ],
-      "value": "4"
+      "value": "6"
     }, {
       "id": "fc78e700-0033-4382-9b98-cb7f5ce6b9d8",
       "comment": "",
@@ -132,6 +132,10 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "f1f39bb0-35c0-4a23-ab6b-dae92cde8b49",
+    "name": "Ajout d'article non fait",
+    "commands": []
   }],
   "suites": [{
     "id": "0508ee36-d367-4da4-bdbb-1bd164c73bd1",
