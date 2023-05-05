@@ -166,15 +166,18 @@ Route::get('/articles/{id}/modifier/',
 Route::get('/couleurs',
 [CouleursController::class, 'index'])->name('couleurs');
 
+// Route::get('couleurs/create',
+// [CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
+
+Route::post('couleurs',
+[CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
+
 //Taille
 Route::get('/tailles',
 [TaillesController::class, 'index'])->name('tailles');
 
-Route::get('couleurs/create',
-[CouleursController::class, 'create'])->name('couleurs.create'); //->middleware('auth');
-
-Route::post('couleurs',
-[CouleursController::class, 'store'])->name('couleurs.store'); //->middleware('auth');
+Route::get('tailles/create',
+[CouleursController::class, 'create'])->name('tailles.create'); //->middleware('auth');
 
 Route::post('tailles',
 [TaillesController::class, 'store'])->name('tailles.store'); //->middleware('auth');

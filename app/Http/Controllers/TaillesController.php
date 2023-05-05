@@ -24,7 +24,7 @@ class TaillesController extends Controller
      */
     public function create()
     {
-        return view('couleurs.createCouleur');
+        return view('tailles.create');
     }
 
     /**
