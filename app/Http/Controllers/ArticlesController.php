@@ -195,20 +195,12 @@ class ArticlesController extends Controller
         }
     }
 
-    public function storeArticleCampagne(Request $request)
+    public function storeArticleCampagne(ArticleCampagneRequest $request)
     {
         try {
-            $article = null;
-
-            if ($request->nom != null) {
-                $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
-                DB::prepareBindings($procedureCreateArticle);
-                $article = Article::latest('id')->first();
-            } elseif ($request->article_id != null) {
+            
                 $article = Article::findOrFail($request->article_id);
-            }
-
-            if ($article != null) {
+                
                 $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
                 DB::prepareBindings($procedureCreateArticleCampagne);
 
@@ -232,7 +224,7 @@ class ArticlesController extends Controller
                 }
 
                 return redirect()->route('accueil')->with('message', "La liaison entre l'article " . $article->nom . " à la campagne " . $campagne->nom_campagne . "  a réussi!");
-            }
+            
         } catch (\Throwable $e) {
             Log::debug($e);
         }

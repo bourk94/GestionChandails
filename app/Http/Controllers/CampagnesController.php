@@ -86,7 +86,20 @@ class CampagnesController extends Controller
      */
     public function store(CampagneRequest $request)
     {
-        //
+        try{
+            $campagne = new Campagne($request->all());
+            
+            $campagne->save();
+
+            return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+        }
+
+      
+
+
     }
 
     /**

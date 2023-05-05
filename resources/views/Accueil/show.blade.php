@@ -6,8 +6,8 @@
         <!-- Section informations de la campagne -->
         <h2 class="center">
             Campagne
-            @foreach ($campagnes as $campagne)
-                @if ($campagne->statut == 'en cours')
+            @if (count($campagnes->where('statut', 'like', 'en cours')) > 0)
+                @foreach ($campagnes->where('statut', 'like', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}
                     [{{ $campagne->statut }}]
                     <br>
@@ -16,7 +16,7 @@
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
 
         </h2>
-        
+
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))
             @foreach ($articles as $article)
@@ -85,10 +85,10 @@
         @else
             <p>Aucun article</p>
         @endif
-        
-        @endif
         @endforeach
-
+    @else
+        <p>Aucune campagne en cours</p>
+        @endif
         <!-- Script qui fait apparaitre un modal -->
         <div id="modalLogin" class="modal">
             <section class="modal-content">
