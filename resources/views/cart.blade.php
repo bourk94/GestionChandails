@@ -31,8 +31,10 @@
                                             <div>
                                                 <h3>Couleur</h3>
                                             </div>
-                                            <div class="cart__color" style="background-color: {{$item->attributes->code_couleur}}">&nbsp;</div>
-                                            <div>{{$item->attributes->couleur}}</div>
+                                            <div class="flex__center">
+                                                <div class="cart__color" style="background-color: {{$item->attributes->code_couleur}}">&nbsp;</div>
+                                                <div>{{$item->attributes->couleur}}</div>
+                                            </div>    
                                         </div>
                                         <div class="flex__center">
                                             <div>

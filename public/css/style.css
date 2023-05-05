@@ -447,6 +447,15 @@ li.dropdown {
     display: grid;
     grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 3rem;; 
     grid-gap: 1rem;
+    grid-template-rows: 11rem;
+}
+
+.cart__color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .75rem;
+    border: 1px solid #ccc;
+    margin: .5rem;
 }
 
 .cart__btn {
