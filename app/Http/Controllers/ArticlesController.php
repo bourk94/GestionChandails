@@ -35,7 +35,11 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.createArticle');
+        $articles = Article::all();
+        $couleurs = Couleur::all();
+        $tailles = Taille::all();
+        $campagnes = Campagne::all();
+        return view('articles.create', compact('articles', 'couleurs', 'tailles', 'campagnes'));
     }
 
 
@@ -44,14 +48,6 @@ class ArticlesController extends Controller
      *
      * Pour les articles campagne
      */
-    public function createArticleCampagne()
-    {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
-        $campagnes = Campagne::all();
-        return view('articles.create', compact('articles', 'couleurs', 'tailles', 'campagnes'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -193,14 +189,6 @@ class ArticlesController extends Controller
         try {
             $article = null;
 
-            if ($request->nom != null) {
-                $procedureCreateArticle = DB::select("CALL createArticle(?,?,?)", [$request->nom, $request->type, $request->description]);
-                DB::prepareBindings($procedureCreateArticle);
-                $article = Article::latest('id')->first();
-            } elseif ($request->article_id != null) {
-                $article = Article::findOrFail($request->article_id);
-            }
-
             if ($article != null) {
                 $procedureCreateArticleCampagne = DB::select("CALL createArticleCampagne(?,?,?,?,?)", [$request->prix, $article->id, $request->campagne_id, $request->couleur_id, $request->taille_id]);
                 DB::prepareBindings($procedureCreateArticleCampagne);
@@ -232,6 +220,4 @@ class ArticlesController extends Controller
 
         return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
     }
-
-
 }
