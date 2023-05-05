@@ -133,21 +133,34 @@ Route::post('campagnes',
 Route::get('campagnes/create',
 [CampagnesController::class, 'create'])->name('campagnes.create');
 
-//Articles sans campagne
-Route::get('articles/create',
-[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
 
-Route::post('articles/create',
-[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
+
+//Mettre les middleware ???
+Route::get('articles/createArticleCampagne',
+[ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
 
 Route::post('articles',
 [ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
+
+//Articles sans campagne
+Route::get('atricles/createArticle',
+[ArticlesController::class, 'create'])->name('articles.create'); //->middleware('auth');
+
+Route::post('articles/createArticle',
+[ArticlesController::class, 'store'])->name('articles.store'); //->middleware('auth');
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
 
 Route::get('/articles/{id}/modifier/',
 [ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit'); //->middleware('auth');
+
+// Route::patch('/articles/{id}',
+// [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
+
+// Route::get('articles/{id}/edit',
+// [ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
+
 
 //Couleur
 Route::get('/couleurs',
