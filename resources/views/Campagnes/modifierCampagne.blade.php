@@ -33,12 +33,23 @@
                                 <input type="date" name="date_fin_collecte" id="date_fin_collecte" value="{{ old('date_fin_collecte', $campagnes->where('statut', 'en cours')->first()->date_fin_collecte)}}">
                             </div>
                             <div>
-                                <label for="nom">Nouvelle progression de la campagne:</label>
-                                <input type="text" name="progression" id="progression" value="{{ old('progression', $campagnes->where('statut', 'en cours')->first()->progression)}}">
+                                <label for="progression">Progression actuelle : {{ old('progression', $campagnes->where('statut', 'en cours')->first()->progression)}}</label>
+                                <br>
+                                <label for="progression">Déterminez la progression de votre campagne :</label>
+                                <select name="progression" id="progression">
+                                    <option value="intention">intention</option>
+                                    <option value="paiement">paiement</option>
+                                    <option value="collecte">collecte</option>
+                                </select>
                             </div>
                             <div>
-                                <label for="nom">Nouveau statut de la campagne :</label>
-                                <input type="text" name="statut" id="statut" value="{{ old('statut', $campagnes->where('statut', 'en cours')->first()->statut)}}">
+                                <label for="statut">Statut de la campagne : {{ old('statut', $campagnes->where('statut', 'en cours')->first()->statut)}}</label>
+                                <br>
+                                <label for="statut">Déterminez le statut de votre campagne :</label>
+                                <select name="statut" id="statut">
+                                    <option value="en cours">En cours</option>
+                                    <option value="terminé">Terminé</option>
+                                </select>
                             </div>
                         </div>
                     </div>

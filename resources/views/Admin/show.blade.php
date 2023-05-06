@@ -2,11 +2,17 @@
 @section('contenu')
 
     <div class="padding center">
+
+        <br>
+
         @if (count($campagnes->where('statut', 'en cours')) > 0)
-        @foreach ($campagnes->where('statut', 'en cours') as $campagne)
-            <a href="{{route('campagnes.edit', $campagne->id)}}">Modifier</a>
-        @endforeach
-    @endif
+            @foreach ($campagnes->where('statut', 'en cours') as $campagne)
+                <a href="{{route('campagnes.edit', $campagne->id)}}" class="a_decoration_none">
+                    <button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier la campagne en cours</button>
+                </a>
+            @endforeach
+        @endif
+
         <h2 class="center">
             Campagne
             @if (count($campagnes->where('statut', 'en cours')) > 0)
@@ -18,43 +24,6 @@
                     Est en : {{ $campagne->progression }}
                     <br>
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
-
-                    <!-- Section qui permet de modifier l'état de campagne -->
-                    <form method="POST" action="{{-- route('campagnes.update', [$campagne->campagne_id]) --}}">
-                        @csrf
-                        @method('PATCH')
-                        <div class="flex__center">
-                            <div class="flex__inline">
-                                <label for="statut">Statut</label>
-                                <select name="statut" id="statut">
-                                    <option value="en cours">En cours</option>
-                                    <option value="terminé">Terminé</option>
-                                </select>
-                            </div>
-                            <div class="flex__inline">
-                                <button type="submit" class="buttonSite">Modifier</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Section qui permet de modifier la progression de la camapgne -->
-                    <form method="POST" action="{{-- route('campagnes.update', [$campagne->campagne_id]) --}}">
-                        @csrf
-                        @method('PATCH')
-                        <div class="flex__center">
-                            <div class="flex__inline">
-                                <label for="progression">Progression</label>
-                                <select name="progression" id="progression">
-                                    <option value="intention">intention</option>
-                                    <option value="paiement">paiement</option>
-                                    <option value="collecte">collecte</option>
-                                </select>
-                            </div>
-                            <div class="flex__inline">
-                                <button type="submit" class="buttonSite">Modifier</button>
-                            </div>
-                        </div>
-                    </form>
         </h2>
 
         <div class="w3-content w3-padding" style="max-width:1564px">
@@ -88,9 +57,9 @@
                                     @endforeach
                                 </div>
 
-                                <a href="#" class="a_decoration_none"><button
-                                        class="w3-button w3-block w3-hover-red btnColor"
-                                        type="button">Modifier</button></a>
+                                <a href="#" class="a_decoration_none">
+                                    <button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier</button>
+                                </a>
 
                                 <br>
 
