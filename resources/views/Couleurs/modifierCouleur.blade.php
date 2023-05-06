@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "modification/suppression d''une couleur")
+@section('title', "modification/suppression d'une couleur")
 @section('contenu')
 
 <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
@@ -53,7 +53,6 @@
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
         {!! JsValidator::formRequest('App\Http\Requests\CouleurRequest') !!}
-
 
 
     @endsection

@@ -70,7 +70,7 @@ class CampagnesController extends Controller
             ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
             ->get();
 
-
+                        
 
         return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'usagers', 'articles_campagnes'));
     }
@@ -113,24 +113,54 @@ class CampagnesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit(Campagne $campagnes)
     {
-        //
+        $campagnes = Campagne::all();
+        return view('campagnes.modifierCampagne', compact('campagnes'));
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     *  @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(CampagneRequest $request, $id)
     {
-        //
+        try {
+            $campagne = Campagne::findOrFail($id);           
+
+            $campagne->nom_campagne = $request->nom_campagne;
+            $campagne->date_debut_campagne = $request->date_debut_campagne;
+            $campagne->date_fin_campagne = $request->date_fin_campagne;
+            $campagne->date_debut_collecte = $request->date_debut_collecte;
+            $campagne->date_fin_collecte = $request->date_fin_collecte;
+            $campagne->progression = $request->progression;
+            $campagne->statut = $request->statut;
+
+            $campagne->save();
+
+            return redirect()->route('accueil')->with('message', "Modification de la campagne " . $campagne->nom . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->with('message', "La modification n'a pas fonctionnée");
+        }
+
+        return redirect()->route('accueil');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
     }
