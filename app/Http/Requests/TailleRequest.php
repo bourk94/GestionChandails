@@ -22,14 +22,14 @@ class TailleRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'format'=>'required|min:2|max:7',
+                'format'=>'required|min:1|max:7',
 
         ];
     }
     public function messages(){
         return [
             'format.required'=>'La grandeur ou le format est obligatoire',
-            'format.min'=>'La grandeur ou le format doit faire au moins 2 caractères',
+            'format.min'=>'La grandeur ou le format doit faire au moins 1 caractères',
             'format.max'=>'La grandeur ou le format doit faire au plus 7 caractères',
 
         ];

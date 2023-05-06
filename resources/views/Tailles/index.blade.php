@@ -5,44 +5,48 @@
 
         <h2 class="center">Liste des tailles</h2>
 
-        <div class="center">
-            <a href="{{ route('couleurs.create') }}" class="buttonSite">Ajouter une taille</a>
-        </div>
+        <a href="{{ route('tailles.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une taille</a>
 
-        <table class="customers">
-            <tr>
-                <th id="ColListeCouleur">Taille</th>
-                <th></th>
-                <th></th>
-            </tr>
-            @if (count($tailles))
-                @foreach ($tailles as $taille)
-                    <tr>
-                        <td>{{ $taille->format }}</td>                  
-                        <td>
-                            <div class="row">
-                                <a href="{{ route('tailles.edit', [$taille->id]) }}" class="buttonSite">Modifier</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
-                                    @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')" class="buttonSite">Supprimer </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            @else
-                <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+        <br>
+
+        <div style="overflow-x: auto;">
+            <table class="customers w3-border w3-bordered">
                 <tr>
-                    <td colspan="3">Aucune couleur</td>
+                    <th id="ColListeCouleur">Taille</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-                <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
-            @endif
-        </table>
+                @if (count($tailles))
+                    @foreach ($tailles as $taille)
+                        <tr>
+                            <td>{{ $taille->format }}</td>                  
+                            <td>
+                                <a class="a_decoration_none" href="{{ route('tailles.edit', [$taille->id]) }}">
+                                    <span>
+                                        <button class="w3-button w3-block" type="button"><strong>Modifier</strong></button>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="close">
+                                    <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
+                                        @csrf
+                                            @method('DELETE')
+                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')">&times;</button></span>
+                                    </form>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+                    <tr>
+                        <td colspan="3">Aucune couleur</td>
+                    </tr>
+                    <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+                @endif
+            </table>
+        </div>
     </div>
 
     <!--SCRIPTS DE VALIDATION-->

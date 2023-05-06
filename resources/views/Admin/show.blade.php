@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('contenu')
 
-    <div class="padding">
+    <div class="padding center">
 
         <h2 class="center">
             Campagne
