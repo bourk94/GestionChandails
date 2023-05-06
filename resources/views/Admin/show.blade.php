@@ -5,10 +5,10 @@
 
         <h2 class="center">
             Campagne
-            @if (count($campagnes->where('statut', 'en cours')) > 0))
-            
-            @foreach ($campagnes->where('statut', 'en cours') as $campagne)
-                
+            @if (count($campagnes->where('statut', 'en cours')) > 0)
+                )
+
+                @foreach ($campagnes->where('statut', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}
                     [{{ $campagne->statut }}]
                     <br>
@@ -68,7 +68,8 @@
                                 <div class="w3-row-padding">
                                     @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                                         <label class="{{ $couleur->nom_couleur }}">
-                                            <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
+                                            <input type="radio" name="color" value="{{ $couleur->nom_couleur }}"
+                                                class="radNone">
                                             <div class="button"><span></span></div>
                                         </label>
                                     @endforeach
@@ -76,20 +77,26 @@
                                 <div class="w3-row-padding">
                                     @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                         <label>
-                                            <input type="radio" name="size" value="{{ $taille->format }}" class="radNone">
-                                            <div class="button"><span class="w3-text-black">{{ $taille->format }}</span></div>
+                                            <input type="radio" name="size" value="{{ $taille->format }}"
+                                                class="radNone">
+                                            <div class="button"><span class="w3-text-black">{{ $taille->format }}</span>
+                                            </div>
                                         </label>
                                     @endforeach
                                 </div>
 
-                                <a href="#" class="a_decoration_none"><button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier</button></a>
+                                <a href="#" class="a_decoration_none"><button
+                                        class="w3-button w3-block w3-hover-red btnColor"
+                                        type="button">Modifier</button></a>
 
                                 <br>
 
                                 <form method="POST" action="{{ route('articles.destroy', [$article->article_id]) }}">
                                     @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer l\'article {{ $article->nom }} ?')" class="w3-button w3-block w3-black w3-hover-red">Supprimer</button>
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        onclick="return confirm('Êtes-vous certain de vouloir supprimer l\'article {{ $article->nom }} ?')"
+                                        class="w3-button w3-block w3-black w3-hover-red">Supprimer</button>
                                 </form>
                                 <br>
                             </div>
@@ -98,32 +105,20 @@
                 @else
                     <p>Aucun article</p>
                 @endif
+                @endforeach
+            @else
+                <p>Aucune campagne en cours</p>
+                @endif
+
             </div>
         </div>
     </div>
+
     <script>
-        //Mettre dans un .JS
-        var modalLogin = document.getElementById("modalLogin");
-        var btnModalLogin = document.getElementById("btnModalLogin");
-        var span = document.getElementsByClassName(" close")[0];
-        btnModalLogin.onclick = function() {
-            modalLogin.style.display = "block";
-        }
-        span.onclick = function() {
-            modalLogin.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modalLogin) {
-                modalLogin.style.display = "none";
-            }
-        }
+        var couleurs = document.createElement('style');
+        couleurs.innerHTML =
+            `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
+        document.head.appendChild(couleurs);
     </script>
 
-        <script>
-            var couleurs = document.createElement('style');
-            couleurs.innerHTML =
-                `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
-            document.head.appendChild(couleurs);
-        </script>
-   
 @endsection
