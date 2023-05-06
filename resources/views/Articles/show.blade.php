@@ -134,29 +134,6 @@
                 </div>
             </section>
         </div>
-        <script>
-            //Mettre dans un .JS
-            var modalLogin = document.getElementById("modalLogin");
-            var btnModalLogin = document.getElementById("btnModalLogin");
-            var span = document.getElementsByClassName(" close")[0];
-            btnModalLogin.onclick = function() {
-                modalLogin.style.display = "block";
-            }
-            span.onclick = function() {
-                modalLogin.style.display = "none";
-            }
-            window.onclick = function(event) {
-                if (event.target == modalLogin) {
-                    modalLogin.style.display = "none";
-                }
-            }
-        </script>
-
-
-
-
-
-
 
         <script>
             var couleurs = document.createElement('style');

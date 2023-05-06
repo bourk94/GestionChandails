@@ -28,7 +28,6 @@
                                         @foreach ($articles as $article)
                                             <option value="{{ $article->id }}">{{ $article->nom }}</option>
                                         @endforeach
-                                        <option value="autre">Créer un nouvel article</option>
                                     </select>
                                 </div>
                                 {{-- champs entré manuellement par l'admin pour ajouter une image sur l'article campagne --}}

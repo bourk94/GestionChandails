@@ -3,74 +3,97 @@
 @section('title', 'Créer une campagne')
 @section('contenu')
 
-@if(!count($campagnes->where('statut', 'en cours')) > 0)
-    <form id="my-form" action="{{ route('campagnes.store') }}" method="POST">
-        @csrf
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <div>
-                        <h2>Créer une campagne</h2>
+    @if (!count($campagnes->where('statut', 'en cours')) > 0)
+        <form id="my-form" action="{{ route('campagnes.store') }}" method="POST">
+            @csrf
+            <input type="number" name="administrateur_id_creation" id="administrateur_id_creation"
+                value="{{ Auth::user()->id }}" hidden>
+            <div class="card__padding">
+                <div class="card__container">
+                    <div class="flex__center">
                         <div>
-                            <label for="nom">Nom de la campagne</label>
-                            <input type="text" name="nom" id="nom">
-                        </div>
-                        <div>
-                            <label for="dateDebut">Date de début</label>
-                            <input type="date" name="dateDebut" id="dateDebut">
-                        </div>
-                        <div>
-                            <label for="dateFin">Date de fin</label>
-                            <input type="date" name="dateFin" id="dateFin">
+                            <h2>Créer une campagne</h2>
+                            <div>
+                                <label for="nom_campagne">Nom de la campagne</label>
+                                <input type="text" class="@error('nom_campagne') is-invalid @enderror"
+                                    name="nom_campagne" id="nom_campagne" value="{{ old('nom_campagne') }}">
+                                @error('nom_campagne')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="date_debut_campagne">Date de début</label>
+                                <input type="date" class="@error('date_debut_campagne') is-invalid @enderror"
+                                    value="{{ old('date_debut_campagne') }}" min="{{ date('Y-m-d') }}"
+                                    max="{{ date('Y-m-d', strtotime('+1 year')) }}" onkeydown="return false"
+                                    onfocus="this.blur( )"
+                                    class="@error('date_debut_campagne') is-invalid @enderror @error('dateFin') is-invalid @enderror"
+                                    name="date_debut_campagne" id="date_debut_campagne">
+                                @error('date_debut_campagne')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="date_fin_campagne">Date de fin</label>
+                                <input type="date" class="@error('date_fin_campagne') is-invalid @enderror"
+                                    value="{{ old('date_fin_campagne') }}" min="{{ date('Y-m-d', strtotime('+3 week')) }}"
+                                    max="{{ date('Y-m-d', strtotime('+1 year')) }}" onkeydown="return false"
+                                    onfocus="this.blur( )"
+                                    class="@error('date_fin_campagne') is-invalid @enderror @error('date_fin_campagne') is-invalid @enderror"
+                                    name="date_fin_campagne" id="date_fin_campagne">
+                                @error('date_fin_campagne')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="date_debut_collecte">Date de début de collecte</label>
+                                <input type="date" class="@error('date_debut_collecte') is-invalid @enderror"
+                                    value="{{ old('date_debut_collecte') }}"
+                                    min="{{ date('Y-m-d', strtotime('+6 week')) }}"
+                                    max="{{ date('Y-m-d', strtotime('+1 year')) }}" onkeydown="return false"
+                                    onfocus="this.blur( )"
+                                    class="@error('date_debut_collecte') is-invalid @enderror @error('date_debut_collecte') is-invalid @enderror"
+                                    name="date_debut_collecte" id="date_debut_collecte">
+                                @error('date_debut_collecte')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="date_fin_collecte">Date de fin de collecte</label>
+                                <input type="date" class="@error('date_fin_collecte') is-invalid @enderror"
+                                    value="{{ old('date_fin_collecte') }}" min="{{ date('Y-m-d', strtotime('+9 week')) }}"
+                                    max="{{ date('Y-m-d', strtotime('+1 year')) }}" onkeydown="return false"
+                                    onfocus="this.blur( )"
+                                    class="@error('date_fin_collecte') is-invalid @enderror @error('date_fin_collecte') is-invalid @enderror"
+                                    name="date_fin_collecte" id="date_fin_collecte">
+                                @error('date_fin_collecte')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div>
-
-            {{-- <div class="card__padding">
-                <div class="card__container">
-                    @if (count($articles) > 0)
-                        <div class="flex__center">
-                            <label for="articlesprefait">Articles préfait</label>
-                            <div>
-                                @foreach ($articles as $article)
-                                    <input type="checkbox" name="article" id="article" value="{{ $article->id }}">
-                                    <label for="article">{{ $article->nom }}</label>
-                                @endforeach
-                            </div>
-                        @else
-                            <p>Vous n'avez pas d'articles</p>
-                            <a href="{{ route('articles.create') }}"class="btn bg__orange color__white"
-                                id="add-article">Créer un article</a>
-                    @endif
-                    <a href="{{ route('articles.create') }}"class="btn bg__orange color__white" id="add-article">Créer un
-                        article</a>
-                </div>
+            <div class="flex__center margin__top" id="btnAjouter">
+                <button class="btn bg__orange color__white" id="add-article" type="submit">Créer la campagne</button>
             </div>
-        </div> --}}
-        </div>
-
-
-        <div class="flex__center margin__top" id="btnAjouter">
-            <button class="btn bg__orange color__white" id="add-article" type="submit">Créer la campagne</button>
-        </div>
-    </form>
-@else
-    <div class="card__padding">
-        <div class="card__container">
-            <div class="flex__center">
-                <div>
-                    <h2>Vous avez déjà une campagne en cours</h2>
-                    <a href="{{ route('accueil') }}" class="btn bg__orange color__white" id="add-article">Retourner à l'accueil</a>
+        </form>
+    @else
+        <div class="card__padding">
+            <div class="card__container">
+                <div class="flex__center">
+                    <div>
+                        <h2>Vous avez déjà une campagne en cours</h2>
+                        <a href="{{ route('accueil') }}" class="btn bg__orange color__white" id="add-article">Retourner à
+                            l'accueil</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
-   
+    @endif
+
 
     {{-- à gérer plus tard
      
