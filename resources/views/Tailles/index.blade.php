@@ -3,7 +3,7 @@
 
     <div class="padding">
 
-        <h2 class="center">Liste des tailles</h2>
+        <h1 class="center">Liste des tailles</h1>
 
         <a href="{{ route('tailles.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une taille</a>
 
