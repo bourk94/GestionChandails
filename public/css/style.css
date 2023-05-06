@@ -588,7 +588,7 @@ label {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.100);
+  border: 2px solid rgba(0, 0, 0, 0.100);
   overflow: hidden;
 }
 
@@ -614,7 +614,7 @@ input[type="radio"]:checked+.layer {
 }
 
 input[type="radio"]:checked+.button {
-  border-color: white;
+  border-color: black;
   transition: border-color 0.3s ease-in-out;
 }
 

@@ -7,7 +7,7 @@ use App\Models\Campagne;
 use App\Models\Article;
 use App\Models\Couleur;
 use App\Models\Taille;
-use App\Models\Usager; //Je ne sais pas si c'est le bonne endroit
+use App\Models\Usager;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
 use App\Models\Commande;
