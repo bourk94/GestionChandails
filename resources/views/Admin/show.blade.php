@@ -6,7 +6,6 @@
         <h2 class="center">
             Campagne
             @if (count($campagnes->where('statut', 'en cours')) > 0)
-                )
 
                 @foreach ($campagnes->where('statut', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}

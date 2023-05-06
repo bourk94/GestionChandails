@@ -117,10 +117,10 @@ class CampagnesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Campagne $campagnes)
     {
-        $campagne = Campagne::All();
-        return view('campagnes.modifierCampagne', compact('campagne'));
+        $campagnes = Campagne::all();
+        return view('campagnes.modifierCampagne', compact('campagnes'));
     }
 
     /**
@@ -135,7 +135,7 @@ class CampagnesController extends Controller
         try {
             $campagne = Campagne::findOrFail($id);           
 
-            $campagne->nom = $request->nom;
+            $campagne->nom_campagne = $request->nom_campagne;
             $campagne->date_debut_campagne = $request->date_debut_campagne;
             $campagne->date_fin_campagne = $request->date_fin_campagne;
             $campagne->date_debut_collecte = $request->date_debut_collecte;

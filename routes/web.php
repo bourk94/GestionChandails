@@ -136,6 +136,9 @@ Route::get('campagnes/create',
 Route::get('/campagnes/{id}/modifier/',
 [CampagnesController::class, 'edit'])->name('campagnes.edit'); //->middleware('auth');
 
+Route::patch('/campagnes/{id}/modifier/',
+[CampagnesController::class, 'update'])->name('campagnes.update'); //->middleware('auth');
+
 
 //Articles sans campagne
 Route::get('articles/createArticle',
