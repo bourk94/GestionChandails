@@ -23,16 +23,20 @@ class CampagnesController extends Controller
     {
         $campagnes = Campagne::all();
         $articles = DB::table('articles')
-        ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
-            ->select('articles.id as article_id', 
-            'articles.nom as nom',
-             'articles.description as description',
-              'article_campagne.prix as prix',
-              'articles.type as type',
-             'article_campagne.image as image',
-             'article_campagne.quantite_max as quantite',
-             'article_campagne.id as article_campagne_id')
-            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
+            ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->select(
+                'articles.id as article_id',
+                'articles.nom as nom',
+                'articles.description as description',
+                'article_campagne.prix as prix',
+                'articles.type as type',
+                'article_campagne.image as image',
+                'article_campagne.quantite_max as quantite',
+                'article_campagne.id as article_campagne_id'
+            )
+            ->where('campagnes.statut', '=', 'en cours')
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix', 'articles.type', 'article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
             ->get();
 
         $couleurs = DB::table('couleurs')
@@ -56,10 +60,10 @@ class CampagnesController extends Controller
                 'articles.id as article_id',
             )
             ->get();
-     
-            $usagers = Usager::all();
 
-            $articles_campagnes = DB::table('article_campagne')
+        $usagers = Usager::all();
+
+        $articles_campagnes = DB::table('article_campagne')
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
             ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
             ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
@@ -68,7 +72,7 @@ class CampagnesController extends Controller
 
 
 
-        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles','usagers','articles_campagnes'));
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'usagers', 'articles_campagnes'));
     }
 
     /**
@@ -87,9 +91,9 @@ class CampagnesController extends Controller
      */
     public function store(CampagneRequest $request)
     {
-        try{
+        try {
             $campagne = new Campagne($request->all());
-            
+
             $campagne->save();
 
             return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
@@ -97,10 +101,6 @@ class CampagnesController extends Controller
             Log::debug($e);
             return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
         }
-
-      
-
-
     }
 
     /**
