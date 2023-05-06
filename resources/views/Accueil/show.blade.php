@@ -6,80 +6,89 @@
         <!-- Section informations de la campagne -->
         <h2 class="center">
             Campagne
-            @foreach ($campagnes as $campagne)
-                @if ($campagne->statut == 'en cours')
+            @if (count($campagnes->where('statut', 'like', 'en cours')) > 0)
+                @foreach ($campagnes->where('statut', 'like', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}
                     [{{ $campagne->statut }}]
                     <br>
                     Est en : {{ $campagne->progression }}
                     <br>
                     du {{ $campagne->date_debut_campagne }} au {{ $campagne->date_fin_campagne }}
-                @endif
-            @endforeach
+
         </h2>
+
         <!-- Section qui affiche les articles disponibles dans la campagne avec les couleurs et les tailles -->
         @if (count($articles))
             @foreach ($articles as $article)
-                <div class="bckgroundObjets ">
-                    <div class="leftObjets">
-                       
+                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="bckgroundObjets ">
+                        <div class="leftObjets">
                             @if ($article->image == 'null')
                                 <div class="zoneImageVide"></div>
                             @else
-                                <img src="{{ asset("img/$article->type/$article->image") }}"
-                                    alt="Image de l'article">
+                                <img src="{{ asset("img/$article->type/$article->image") }}" alt="Image de l'article">
                             @endif
-                      
-                    </div>
-                    <div class="rightObjets">
-                        <h2>{{ $article->nom }}</h2>
-                        <p>Description:{{ $article->description }}</p>
-                        <p>Prix estimé:{{ $article->prix }} $</p>
-                        <p>Nombre de {{ $article->nom }} que vous pouvez commander: {{ $article->quantite }}</p>
-                    </div>
 
-                    <!-- Section choix de couleurs -->
-                    <div class="rightObjets">
+                        </div>
+                        <div class="rightObjets">
+                            <h2>{{ $article->nom }}</h2>
+                            <p>Description:{{ $article->description }}</p>
+                            <p>Prix estimé:{{ $article->prix }} $</p>
+                            <p>Nombre de {{ $article->nom }} que vous pouvez commander: {{ $article->quantite }}</p>
+                            <input type="hidden" name="article_id" value="{{ $article->article_id }}">
+                        </div>
 
-                        @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
-                            <label class="{{ $couleur->nom_couleur }}">
-                                <input type="radio" name="color" value="{{ $couleur->nom_couleur }}" class="radNone">
-                                <div class="button"><span></span></div>
-                            </label>
-                        @endforeach
+                        <!-- Section choix de couleurs -->
+                        <div class="rightObjets">
 
-                    </div>
-
-                    <!-- Section choix de taille -->
-                    <div class="rightObjets">
-                        <!-- Affichage multiple-->
-                        @if (count($tailles))
-                            @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
-                                <label>
-                                    <input type="radio" name="size" value="{{ $taille->format }}" class="radNone">
-                                    <div class="button"><span>{{ $taille->format }}</span></div>
+                            @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
+                                <label class="{{ $couleur->nom_couleur }}">
+                                    <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}"
+                                        class="radNone">
+                                    <div class="button"><span></span></div>
                                 </label>
                             @endforeach
-                        @endif
-                    </div>
-                    <div>
 
+                        </div>
+
+                        <!-- Section choix de taille -->
+                        <div class="rightObjets">
+                            <!-- Affichage multiple-->
+                            @if (count($tailles))
+                                @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
+                                    <label>
+                                        <input type="radio" name="taille_id" value="{{ $taille->taille_id }}"
+                                            class="radNone">
+                                        <div class="button"><span>{{ $taille->format }}</span></div>
+                                    </label>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="rightObjets">
+                            @livewire('counter', ['idarticle' => $article->article_id])
+                        </div>
+                        <div class="rightObjets">
+                            @if (Auth::check())
+                                <button type="submit" class="buttonSite">Ajouter au panier</a>
+                                @else
+                                    <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
+                            @endif
+                        </div>
                     </div>
-                    <div class="rightObjets">
-                        @if (Auth::check())
-                            <a href="#" class="buttonSite">Ajouter au panier</a>
-                        @else
-                            <button id="btnModalLogin" class="buttonSite">Ajouter au panier</a>
-                        @endif
-                    </div>
-                </div>
+                    <input type="hidden" name="id" value="{{ $article->article_id }}">
+                    <input type="hidden" name="name" value="{{ $article->nom }}">
+                    <input type="hidden" value="{{ $article->prix }}" name="price">
+                    <input type="hidden" value="{{ $article->image }}" name="image">
+                </form>
             @endforeach
         @else
             <p>Aucun article</p>
         @endif
-
-
-
+        @endforeach
+    @else
+        <p>Aucune campagne en cours</p>
+        @endif
         <!-- Script qui fait apparaitre un modal -->
         <div id="modalLogin" class="modal">
             <section class="modal-content">
@@ -141,12 +150,12 @@
 
 
 
-   
-    <script>
-        var couleurs = document.createElement('style');
-        couleurs.innerHTML =
-            `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
-        document.head.appendChild(couleurs);
-    </script>
-   
+
+        <script>
+            var couleurs = document.createElement('style');
+            couleurs.innerHTML =
+                `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
+            document.head.appendChild(couleurs);
+        </script>
+
     @endsection

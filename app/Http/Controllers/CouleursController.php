@@ -43,13 +43,13 @@ class CouleursController extends Controller
             $couleur = new Couleur($request->all());
             $couleur->save();
 
-            return redirect()->route('accueil')->with('message', "Ajout de la couleur " . $couleur->nom_couleur . " réussi!");
+            return redirect()->route('couleurs')->with('message', "Ajout de la couleur " . $couleur->nom_couleur . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('couleurs')->withErrors(['L\'ajout n\'a pas fonctionné!']);
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('couleurs');
     }
 
     /**
@@ -92,13 +92,13 @@ class CouleursController extends Controller
 
             $couleur->save();
 
-            return redirect()->route('accueil')->with('message', "Modification de la couleur " . $couleur->nom_couleur . " réussi!");
+            return redirect()->route('couleurs')->with('message', "Modification de la couleur " . $couleur->nom_couleur . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
+            return redirect()->route('couleurs')->withErrors(['La modification n\'a pas fonctionnée']);
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('couleurs');
     }
 
     /**
@@ -109,21 +109,24 @@ class CouleursController extends Controller
      */
     public function destroy($id)
     {
-        try {
+        try 
+        {
             $couleur = Couleur::findOrFail($id);
 
             //Gérer le lien avec la table de jointure (Article_Campagne)
-            //$couleur->article_campagnes()->detach();
+            //$couleur->articles_campagnes()->detach();
 
 
             $couleur->delete();
 
-            return redirect()->route('accueil')->with('message', "Suppression de " . $couleur->nom_couleur . " réussi!");
-        } catch (\Throwable $e) {
+            return redirect()->route('couleurs')->with('message', "Suppression de " . $couleur->nom_couleur . " réussi!");
+
+        } catch (\Throwable $e) 
+        {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La suppression n\'a pas fonctionnée']);
+            return redirect()->route('couleurs')->with('message', "La suppression n'a pas fonctionnée.  Il est impossible de supprimer une couleur attachée à un article!");
         }
 
-        return redirect()->route('accueil');
+        return redirect()->route('couleurs');
     }
 }

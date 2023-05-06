@@ -35,10 +35,13 @@
     <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
         @csrf
         @method('DELETE')
-        <button type="submit"
-            onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')"
-            class="buttonSite">Supprimer
-        </button>
+        <div class="center">
+            <button type="submit"
+                onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')"
+                class="buttonSite">Supprimer
+            </button>
+        </div>
+    
 
 
      {{-- <!--SCRIPTS DE VALIDATION-->
