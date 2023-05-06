@@ -2,7 +2,11 @@
 @section('contenu')
 
     <div class="padding center">
-
+        @if (count($campagnes->where('statut', 'en cours')) > 0)
+        @foreach ($campagnes->where('statut', 'en cours') as $campagne)
+            <a href="{{route('campagnes.edit', $campagne->id)}}">Modifier</a>
+        @endforeach
+    @endif
         <h2 class="center">
             Campagne
             @if (count($campagnes->where('statut', 'en cours')) > 0)

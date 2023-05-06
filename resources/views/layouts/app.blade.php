@@ -25,16 +25,8 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Campagne</a>
                     <div class="dropdown-content">
-                        
                         <a href="{{ route('campagnes.create')}}">Créer</a>
                         <a href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
-                        
-                        @if (count($campagnes->where('statut', 'en cours')) > 0)
-                            @foreach ($campagnes->where('statut', 'en cours') as $campagne)
-                                <a href="{{route('campagnes.edit', $campagne->id)}}">Modifier</a>
-                            @endforeach
-                        @endif
-
                     </div>
                 </li>
 

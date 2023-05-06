@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CouleurRequest;
 use Illuminate\Http\Request;
 use App\Models\Couleur;
+use App\Models\Campagne;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\ErrorHandler\Debug;
 
