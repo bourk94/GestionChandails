@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr-ca">
-    @livewireStyles
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <title>@yield('title')</title>
-   
+    <script src="https://kit.fontawesome.com/2cfafb1177.js" crossorigin="anonymous"></script>
+    @livewireStyles
 </head>
 
 <body>
@@ -76,21 +77,21 @@
 
         <!-- Boutons connexion et déconnexion -->
         @if (!Auth::user())
-            <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
+        <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
+            @livewire('cart-counter')
         @endif
 
         @if (Auth::user())
-            <li class="dropdown right">
-                <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
-                <div class="dropdown-content">
-                    <a href="{{ route('usagers.edit') }}">Mon compte</a>
-                    </form>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit">Déconnecter</button>
-                    </form>
-                </div>
-            </li>
+        <li class="dropdown right">
+            <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
+            <div class="dropdown-content">
+                <a href="{{ route('usagers.edit')}}">Mon compte</a>
+                <form method="POST" action="{{ route('logout') }}" >
+                    @csrf
+                    <button type="submit">Déconnecter</button>
+                </form>
+            </div>
+        </li>
         @endif
         <!--  -->
     </ul>

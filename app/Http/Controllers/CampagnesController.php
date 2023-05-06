@@ -7,7 +7,7 @@ use App\Models\Campagne;
 use App\Models\Article;
 use App\Models\Couleur;
 use App\Models\Taille;
-use App\Models\Usager; //Je ne sais pas si c'est le bonne endroit
+use App\Models\Usager;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
 use App\Models\Commande;
@@ -30,8 +30,9 @@ class CampagnesController extends Controller
               'article_campagne.prix as prix',
               'articles.type as type',
              'article_campagne.image as image',
-             'article_campagne.quantite_max as quantite' )
-            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image')
+             'article_campagne.quantite_max as quantite',
+             'article_campagne.id as article_campagne_id')
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix','articles.type','article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
             ->get();
 
         $couleurs = DB::table('couleurs')
