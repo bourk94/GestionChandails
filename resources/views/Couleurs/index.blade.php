@@ -3,50 +3,55 @@
 
     <div class="padding">
 
-        <h2 class="center">Liste des couleurs</h2>
+        <h1 class="center">Liste des couleurs</h1>
 
-        <div class="center">
-            <a href="{{ route('couleurs.create') }}" class="buttonSite">Ajouter une couleur</a>
-        </div>
 
-        <table class="customers">
-            <tr>
-                <th id="ColListeCouleur">Nom de la couleur</th>
-                <th id="ColListeCouleur">Code de la couleur</th>
-                <th id="ColListeCouleur">Visualisation</th>
-                <th></th>
-                <th></th>
-            </tr>
-            @if (count($couleurs))
-                @foreach ($couleurs as $couleur)
-                    <tr>
-                        <td>{{ $couleur->nom_couleur }}</td>
-                        <td>{{ $couleur->code_couleur }}</td>
-                        <td style = "background: {{ $couleur->code_couleur }}"></td>
-                        <td>
-                            <div class="row">
-                                <a href="{{ route('couleurs.edit', [$couleur->id]) }}" class="buttonSite">Modifier</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <form method="POST" action="{{ route('couleurs.destroy', [$couleur->id]) }}">
-                                    @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')" class="buttonSite">Supprimer</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            @else
-                <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+        <a href="{{ route('couleurs.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une couleur</a>
+
+        <br>
+        
+        <div style="overflow-x: auto;">
+            <table class="customers w3-border w3-bordered">
                 <tr>
-                    <td colspan="3">Aucune couleur</td>
+                    <th id="ColListeCouleur">Nom de la couleur</th>
+                    <th id="ColListeCouleur">Code de la couleur</th>
+                    <th id="ColListeCouleur">Visualisation</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-                <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
-            @endif
-        </table>
+                @if (count($couleurs))
+                    @foreach ($couleurs as $couleur)
+                        <tr>
+                            <td>{{ $couleur->nom_couleur }}</td>
+                            <td>{{ $couleur->code_couleur }}</td>
+                            <td style = "background: {{ $couleur->code_couleur }}"></td>
+                            <td>
+                                <a class="a_decoration_none" href="{{ route('couleurs.edit', [$couleur->id]) }}">
+                                    <span>
+                                        <button class="w3-button w3-block" type="button"><strong>Modifier</strong></button>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="close">
+                                    <form method="POST" action="{{ route('couleurs.destroy', [$couleur->id]) }}">
+                                        @csrf
+                                            @method('DELETE')
+                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')">&times;</button></span>
+                                    </form>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+                    <tr>
+                        <td colspan="3">Aucune couleur</td>
+                    </tr>
+                    <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
+                @endif
+            </table>
+        </div>
     </div>
 
     <!--SCRIPTS DE VALIDATION-->

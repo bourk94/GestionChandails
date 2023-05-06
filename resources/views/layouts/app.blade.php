@@ -15,9 +15,6 @@
 
 <body>
 
-
-
-
     <ul class="topnav">
         <li><a class="active" href="{{ route('accueil') }}">Logo</a></li>
 
