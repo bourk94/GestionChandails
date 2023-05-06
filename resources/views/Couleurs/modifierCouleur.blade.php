@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "modification/suppression d''une couleur")
+@section('title', "modification/suppression d'une couleur")
 @section('contenu')
 
     <form method="POST" action="{{ route('couleurs.update', [$couleur->id]) }}">
@@ -12,7 +12,7 @@
                     <div>
                         <h2>Modifier une couleur</h2>
                         <div>
-                            <label for="nomCouleur">Nouveau nom de couleur</label>
+                            <label for="nomCouleur">Nouveau nom de couleur :</label>
                             <input type="text" class="@error('nom_couleur') is-invalid @enderror" id="nom_couleur"
                                 name="nom_couleur" value="{{ old('nom_couleur', $couleur->nom_couleur) }}">
 
@@ -20,9 +20,8 @@
                                 <span class="text-danger">{{ $messsage }}</span>
                             @enderror
                         </div>
-
                         <div>
-                            <label for="nomArticle">Nouvelle couleur</label>
+                            <label for="nomArticle">Nouvelle couleur :</label>
                             <input type="color" class="@error('nom_couleur') is-invalid @enderror" name="code_couleur"
                                 id="code_couleur" value="{{ old('code_couleur', $couleur->code_couleur) }}">
 
@@ -48,9 +47,10 @@
         <div class="center">
             <button type="submit"
                 onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')"
-                class="buttonSite">Supprimer                
+                class="buttonSite">Supprimer
             </button>
         </div>
+    </form>
 
         <!--SCRIPTS DE VALIDATION-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -58,7 +58,6 @@
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
         {!! JsValidator::formRequest('App\Http\Requests\CouleurRequest') !!}
-
 
 
     @endsection

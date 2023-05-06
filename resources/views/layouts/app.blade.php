@@ -31,8 +31,7 @@
                         
                         <a href="{{ route('campagnes.create') }}">Créer</a>
                         <a href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
-                        <a href="#">Modifier</a>
-                        <a href="#">Supprimer</a>
+                        <a href="{{route('campagnes.edit', [$campagne->id])}}">Modifier</a>
                     </div>
                 </li>
 
