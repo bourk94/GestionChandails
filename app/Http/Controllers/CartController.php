@@ -21,11 +21,10 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        $condition = ['couleur' => $request->couleur_id, 'taille'=> $request->taille_id, 'article_id'=> $request->article_id, 'campagne_id'=> $request->campagne_id];
+        $article_campagne = DB::table('article_campagne')->where($condition)->value('id');
         
-        if (!empty($request->except('_token')) && $request->quantity > 0) {
-            $condition = ['couleur' => $request->couleur_id, 'taille'=> $request->taille_id, 'article_id'=> $request->article_id, 'campagne_id'=> $request->campagne_id];
-            $article_campagne = DB::table('article_campagne')->where($condition)->value('id');
-                
+        if (!empty($request->except('_token')) && $request->quantity > 0 && $article_campagne != null) {
         $article = Article::find($request->article_id);
         $couleur = Couleur::find($request->couleur_id);
         $taille = Taille::find($request->taille_id);
@@ -36,6 +35,9 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'attributes' => [
                 'image' => $article->image,
+                'id_article' => $request->article_id,
+                'id_couleur' => $request->couleur_id,
+                'id_taille' => $request->taille_id,
                 'code_couleur' => $couleur->code_couleur,
                 'couleur' => $couleur->nom_couleur,
                 'taille' => $taille->format

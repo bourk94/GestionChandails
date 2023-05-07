@@ -8,6 +8,7 @@ use App\Models\Commande;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Auth;
 
 
 class CommandesController extends Controller
@@ -59,33 +60,40 @@ class CommandesController extends Controller
     public function store(Request $request)
     {
         try {
+            $cartItems = \Cart::getContent();
+            DB::select('CALL createCommande(?)', [Auth::user()->id]);
+            $lastIdCommande = DB::table('commandes')->latest('id')->first();
+
+            //dd($cartItems);
+        foreach ($cartItems as $item) {
+
             $article_campagne = DB::table('article_campagne')
                 ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
-                ->where('article_id', $request->idArticleCampagne)
+                ->where('article_id', $item->attributes->id_article)
                 ->where('campagnes.statut', 'like', 'en cours')
-                ->where('couleur', $request->couleur)
-                ->where('taille', $request->taille)
-                ->get();
+                ->where('couleur', $item->attributes->id_couleur)
+                ->where('taille', $item->attributes->id_taille)->get();
 
             if (count($article_campagne) > 0) {
-
-                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?)', [
+                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?, ?, ?)', [
+                    $lastIdCommande->id,
                     $request->idUsager,
-                    $request->idArticleCampagne,
-                    $request->_quantite,
-
+                    $item->id,
+                    $item->quantity,
+                    $item->price * $item->quantity
                 ]);
 
                 DB::prepareBindings($procedureCreateCommandeArticle);
-                DB::commit();
-
-                \Cart::remove($request->idArticleCampagne);
-                return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
-            } else {
-                return redirect()->route('cart.list')->with('message', 'L\'article n\'est pas disponible dans la couleur ' . $request->couleur . ' et la taille ' . $request->taille . '.');
+                DB::commit();     
+                } 
+            else {
+                return redirect()->route('cart.list')->with('message', 'L\'article ' . $item->name . ' n\'est pas disponible dans la couleur ' . $item->attributes->couleur . ' et la taille ' . $item->attributes->taille . '.');
             }
+        }
+        \Cart::clear();
+        return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
         } catch (\Throwable $e) {
-
+            Log::debug($e);
             return redirect()->route('cart.list')->with('message', 'Une erreur est survenue lors de votre commande.');
         }
     }
