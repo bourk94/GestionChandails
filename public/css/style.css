@@ -184,6 +184,10 @@ body {
   padding-left: 16rem;
 }
 
+.margin {
+margin: 0.5rem;
+}
+
 .center {
   text-align: center;
 }
