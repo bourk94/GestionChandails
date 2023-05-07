@@ -52,7 +52,7 @@
                                         </div>
                                     </form>
                             </td>
-                            <td>{{ $item->price * $item->quan}} $</td>
+                            <td>{{ $item->price * $item->quantity}} $</td>
                             <td>
                                 <form action="{{ route('cart.remove') }}" method="POST">
                                 @csrf
