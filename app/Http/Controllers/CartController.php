@@ -71,4 +71,5 @@ class CartController extends Controller
         \Cart::clear();
         return redirect()->route('cart.list');
     }
+
 }

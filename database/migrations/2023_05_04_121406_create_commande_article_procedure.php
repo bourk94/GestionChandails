@@ -13,22 +13,21 @@ return new class extends Migration
     public function up(): void
     {
         $procedure = "DROP PROCEDURE IF EXISTS `createCommandeArticle`;
-        CREATE PROCEDURE createCommandeArticle(IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT, IN idCampagne INT)
-BEGIN
-    DECLARE idCommande INT;
-
-    CALL createCommande(idUsager);
-
-    SET idCommande = LAST_INSERT_ID();
-
-    IF (SELECT statut FROM campagnes WHERE id = idCampagne) = 'en cours' THEN
+        CREATE PROCEDURE createCommandeArticle(IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT)
+        BEGIN
+        DECLARE idCommande INT;
+        DECLARE idCampagne INT;
+    
+        CALL createCommande(idUsager);
+    
+        SET idCommande = LAST_INSERT_ID();
+    
+        SELECT id into idCampagne FROM campagnes WHERE statut = 'en cours';
         INSERT INTO article_campagne_commande (commande_id, article_campagne_id, quantite, created_at, updated_at)
         VALUES (idCommande, idArticleCampagne, _quantite, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-    ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La campagne est terminée';
-    END IF;
-
-END";
+    
+    
+    END;";
         DB::unprepared($procedure);
     }
 
