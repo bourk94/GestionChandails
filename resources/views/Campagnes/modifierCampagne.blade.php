@@ -37,17 +37,17 @@
                     <label for="progression">Progression actuelle : {{ old('progression', $campagnes->where('statut', 'en cours')->first()->progression)}}</label>
                     <br>
                     <label for="progression">Déterminez la progression de votre campagne :</label>
-                    <select name="progression" id="progression">
-                        <option value="intention">intention</option>
-                        <option value="paiement">paiement</option>
-                        <option value="collecte">collecte</option>
+                    <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="progression" id="progression">
+                        <option value="intention">Intention</option>
+                        <option value="paiement">Paiement</option>
+                        <option value="collecte">Collecte</option>
                     </select>
                 </div>
                 <div class="w3-section">
                     <label for="statut">Statut de la campagne : {{ old('statut', $campagnes->where('statut', 'en cours')->first()->statut)}}</label>
                     <br>
                     <label for="statut">Déterminez le statut de votre campagne :</label>
-                    <select name="statut" id="statut">
+                    <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="statut" id="statut">
                         <option value="en cours">En cours</option>
                         <option value="terminé">Terminé</option>
                     </select>
