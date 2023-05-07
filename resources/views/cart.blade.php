@@ -3,105 +3,78 @@
 @section('title', 'Panier')
 @section('contenu')
 
-    <div class="">
-        <h1 class="">Panier</h1>
-        @if ($cartItems->isNotEmpty())
-            @foreach ($cartItems as $item)
-                <div class="cart__grid">
-                    @if ($item->attributes->image == null)
-                        <div class="flex__center">
-                            <div class="zoneImageVide">.</div>
-                        </div>
-                    @else
-                        <div class="flex__center">
-                            <div>
-                                <h3>Image</h3>
-                            </div>
-                            <img src="{{ asset("img/$article->type/$article->image") }}" alt="{{ $item->name }}">
-                        </div>
-                    @endif
-                    <div class="flex__center">
-                        <div>
-                            <h3>Article</h3>
-                        </div>
-                        <h4>{{ $item->name }}</h4>
-                    </div>
-                    <div class="flex__center">
-                        <div>
-                            <h3>Couleur</h3>
-                        </div>
-                        <div class="flex__center">
-                            <div class="cart__color" style="background-color: {{ $item->attributes->code_couleur }}">&nbsp;
-                            </div>
-                            <div>{{ $item->attributes->couleur }}</div>
-                        </div>
-                    </div>
-                    <div class="flex__center">
-                        <div>
-                            <h3>Taille</h3>
-                        </div>
-                        <h4>{{ $item->attributes->taille }}</h4>
-                    </div>
-                    <div class="flex__center">
-                        <div class="cart__title">
-                            <h3>Quantité</h3>
-                        </div>
-                        <form action="{{ route('cart.update') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                            <div>
-                                @livewire('counter', ['idarticle' => $item->id, 'count' => $item->quantity])
-                            </div>
-                            <div class="flex__center">
-                                <button class="cart__btn">Modifier</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="flex__center">
-                        <div>
-                            <h3>Prix</h3>
-                        </div>
-                        <h4>{{ $item->quantity * $item->price }}$</h4>
-                    </div>
+    <div class="padding">
+        <h1 class="center">Panier</h1>
 
-                    <div class="flex__center">
-                        <form action="{{ route('cart.remove') }}" method="POST">
-                            @csrf
-                            <input type="hidden" value="{{ $item->id }}" name="id">
-                            <button class="cart__btn"><i class="fa-regular fa-trash-can"></i></button>
-                        </form>
-                    </div>
+        <br>
 
-
-                </div>
-                @if(Auth::user())
-                <div class="flex__center">
-                    <form action="{{ route('commandes.store') }}" method="POST">
-                        @csrf
-                        <input name="idUsager" type="hidden" value="{{ Auth::user()->id }}" />
-                        <input name="idArticleCampagne"  type="hidden" value="{{ $item->id }}" />
-                        <input name="_quantite"  type="hidden" value="{{ $item->quantity }}" />
-                        <input name="couleur" type="hidden" value="{{ $item->attributes->couleur }}" />
-                        <input name="taille" type="hidden" value="{{ $item->attributes->taille }}" />
-                        <button class="cart__btn">Confirmer</button>
-                    </form>
-                </div>
-                @endif
-            @endforeach
-
-            <div>
+        <div style="overflow-x: auto;">
+            <table class="customers w3-border w3-bordered">
+                <tr>
+                    <th></th> {{-- Zone pour l'image --}}
+                    <th>Article</th>
+                    <th>Couleur</th>
+                    <th>Taille</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+                @if ($cartItems->isNotEmpty())
+                    @foreach ($cartItems as $item)
+                        <tr>
+                            <td>
+                                {{-- @if ($item->attributes->image == null)
+                                    <div class="flex__center">
+                                        <div class="zoneImageVide">.</div>
+                                    </div>
+                                @else
+                                    <div class="flex__center">
+                                        <div>
+                                            <h3>Image</h3>
+                                        </div>
+                                        <img src="{{ asset("img/$article->type/$article->image") }}" alt="{{ $item->name }}">
+                                    </div> 
+                                @endif --}}
+                            </td>
+                            <td>{{ $item->name }}</td>
+                            <td>
+                                <div class="cart__color" style="background-color: {{ $item->attributes->code_couleur }}">&nbsp;</div>
+                                <div>{{ $item->attributes->couleur }}</div>
+                            </td>
+                            <td>{{ $item->attributes->taille }}</td>
+                            <td>
+                                <form action="{{ route('cart.update') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <div>
+                                        @livewire('counter', ['idarticle' => $item->id, 'count' => $item->quantity])
+                                    </div>
+                                    <div class="flex__center">
+                                        <button class="cart__btn">Modifier</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>{{ $item->price }} $</td>
+                            <td>
+                                <form action="{{ route('cart.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{ $item->id }}" name="id">
+                                    <button class="cart__btn"><i class="fa-regular fa-trash-can"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+            </table>
                 <h4>Total estimé: {{ Cart::getTotal() }}$</h4>
-            </div>
-
-            <div>
                 <form action="{{ route('cart.clear') }}" method="POST">
                     @csrf
                     <button class="cart__btn">Vider le panier</button>
                 </form>
-            </div>
-        @else
-            <p>Panier vide</p>
-        @endif
+                @else
+                    <h4>Panier vide</h4>
+                @endif
+                
+        </div>
     </div>
 
     <div id="modalLogin" class="modal">
