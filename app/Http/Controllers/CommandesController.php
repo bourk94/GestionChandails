@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CartController;
 
+
 class CommandesController extends Controller
 {
     /**
@@ -24,15 +25,17 @@ class CommandesController extends Controller
             ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
             ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
             ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
-            ->select('commandes.date_commande as date',
-             'articles.nom as nom_article',
-             'article_campagne_commande.quantite as quantite',
-             'article_campagne_commande.montant_total as montant',
-              'couleurs.nom_couleur as nom_couleur',
-              'couleurs.code_couleur as code_couleur',
-               'tailles.format as format', 
-               'usagers.id as usager_id',
-               'campagnes.nom_campagne as nom_campagne')
+            ->select(
+                'commandes.date_commande as date',
+                'articles.nom as nom_article',
+                'article_campagne_commande.quantite as quantite',
+                'article_campagne_commande.montant_total as montant',
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.code_couleur as code_couleur',
+                'tailles.format as format',
+                'usagers.id as usager_id',
+                'campagnes.nom_campagne as nom_campagne'
+            )
             ->get();
 
         return view('commandes.index', compact('commandes'));
@@ -56,19 +59,34 @@ class CommandesController extends Controller
     public function store(Request $request)
     {
         try {
-            $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?)', [
-                $request->idUsager,
-                $request->idArticleCampagne,
-                $request->_quantite,
-                
-            ]);
-            DB::prepareBindings($procedureCreateCommandeArticle);
-            DB::commit();
-            \Cart::remove($request->idArticleCampagne);
-            return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
+            $article_campagne = DB::table('article_campagne')
+                ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+                ->where('article_id', $request->idArticleCampagne)
+                ->where('campagnes.statut', 'like', 'en cours')
+                ->where('couleur', $request->couleur)
+                ->where('taille', $request->taille)
+                ->get();
+
+            if (count($article_campagne) > 0) {
+
+                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?)', [
+                    $request->idUsager,
+                    $request->idArticleCampagne,
+                    $request->_quantite,
+
+                ]);
+
+                DB::prepareBindings($procedureCreateCommandeArticle);
+                DB::commit();
+
+                \Cart::remove($request->idArticleCampagne);
+                return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
+            } else {
+                return redirect()->route('cart.list')->with('message', 'L\'article n\'est pas disponible dans la couleur ' . $request->couleur . ' et la taille ' . $request->taille . '.');
+            }
         } catch (\Throwable $e) {
-            
-            return redirect()->route('cart.list')->withErrors(['Une erreur est survenue lors de votre commande.']);
+
+            return redirect()->route('cart.list')->with('message', 'Une erreur est survenue lors de votre commande.');
         }
     }
 
