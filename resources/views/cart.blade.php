@@ -88,8 +88,6 @@
 
 {{-- ----------------------------MODAL---------------------------- --}}
 
-{{-- ZONE DE JEU --}}
-
 <div id="modalLogin" class="w3-modal">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
@@ -123,49 +121,6 @@
     </div>
   </div>
 
-{{-- FIN ZONE DE JEU --}}
-
-    <div id="modalLogin" class="modal">
-        <div class="modal-content">
-            <div>
-                <a href="{{ route('accueil') }}"><span class="close">&times;</span></a>
-            </div>
-            <div class=" card__padding">
-                <div class="card__container">
-                    <div class="flex__center">
-                        <h1>Connexion</h1>
-                        <div>
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <input type="hidden" name="modal" value="modal">
-                                <div>
-                                    <label for="email" class="form-label">Adresse courriel</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ old('email') }}" required>
-                                </div>
-                                <div>
-                                    <label for="password" class="form-label">Mot de passe</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                                <div class="flex__center">
-                                    <a class="hover__orange color__white" href="{{ route('usagers.create') }}">Créer un
-                                        compte</a>
-                                </div>
-                                <div class="flex__center">
-                                    <div class="flex__inline margin__top">
-                                        <button class="btn bg__orange color__white" type="submit">Connexion</button>
-                                        <a href="{{ route('password.request') }}"><button
-                                                class="btn bg__orange color__white margin__top" type="button">Mot de
-                                                passe oublié</button></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @if (!Auth::User())
         <script>
             var modalLogin = document.getElementById("modalLogin");
