@@ -8,6 +8,7 @@ use App\Models\Commande;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Auth;
 
 
 class CommandesController extends Controller
@@ -60,7 +61,7 @@ class CommandesController extends Controller
     {
         try {
             $cartItems = \Cart::getContent();
-            DB::select('CALL createCommande(?)', [$request->idUsager]);
+            DB::select('CALL createCommande(?)', [auth::user()->id]);
             $lastIdCommande = DB::table('commandes')->latest('id')->first();
         foreach ($cartItems as $item) {
 
