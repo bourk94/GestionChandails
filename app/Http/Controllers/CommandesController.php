@@ -22,7 +22,15 @@ class CommandesController extends Controller
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
             ->join('couleurs', 'article_campagne.couleur_id', '=', 'couleurs.id')
             ->join('tailles', 'article_campagne.taille_id', '=', 'tailles.id')
-            ->select('commandes.date_commande as date', 'articles.nom as nom_article','article_campagne_commande.quantite as quantite', 'couleurs.nom_couleur as nom_couleur','couleurs.code_couleur as code_couleur', 'tailles.format as format', 'usagers.id as usager_id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->select('commandes.date_commande as date',
+             'articles.nom as nom_article',
+             'article_campagne_commande.quantite as quantite',
+              'couleurs.nom_couleur as nom_couleur',
+              'couleurs.code_couleur as code_couleur',
+               'tailles.format as format', 
+               'usagers.id as usager_id',
+               'campagnes.nom_campagne as nom_campagne')
             ->get();
 
         return view('commandes.index', compact('commandes'));

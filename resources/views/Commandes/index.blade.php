@@ -9,6 +9,8 @@
         <div style="overflow-x: auto;">
             <table class="customers w3-border w3-bordered">
                 <tr>
+                    <th >Nom de la campagne</th>
+                    <th> Date de commande</th>
                     <th id="ColListeCouleur">Nom de l'article</th>
                     <th id="ColListeCouleur">Couleur</th>
                     <th></th>
@@ -16,9 +18,11 @@
                     
                     <th></th>
                 </tr>
-                @if (count($commandes))
-                    @foreach ($commandes as $commande)
+                @if (count($commandes->where('usager_id', Auth::user()->id)) > 0)
+                    @foreach ($commandes->where('usager_id', Auth::user()->id) as $commande)
                         <tr>
+                            <td>{{ $commande->nom_campagne }}</td>
+                            <td>{{ $commande->date }}</td>
                             <td>{{ $commande->nom_article }}</td>
                             <td>{{ $commande->nom_couleur }}</td>
                             <td style="background: {{ $commande->code_couleur }}"></td>
