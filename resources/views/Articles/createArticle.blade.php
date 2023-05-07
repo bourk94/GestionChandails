@@ -3,55 +3,51 @@
 @section('title', 'Créer un article')
 @section('contenu')
 
-    <form action="{{ route('articles.storeArticle') }}" method="POST">
-        @csrf
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <div>
-                        <!--les champs entrés manuellement par l'admin-->
-                        <!--nom, type, description-->
-                        <h2>Créer un article</h2>
-                        <div>
-                            <label for="nomArticle">Nom de l'article</label>
-                            <input type="text" class="@error('nom') is-invalid @enderror" name="nom" id="nom">
+<div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+        
+    <h1 class="center">Créer un article</h1>
 
-                            @error('nom')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="typeArticle">Type de l'article</label>
-                            <select class="@error('type') is-invalid @enderror" name="type" id="type">
+    <form class="w3-container" action="{{ route('articles.storeArticle') }}" method="POST">
+    @csrf
 
-                                <option value="Chandail">Chandail</option>
+        <div class="w3-section">
+            <label for="nomArticle">Nom de l'article :</label>
+            <input class="@error('nom') is-invalid @enderror w3-input w3-border w3-hover-border-black" type="text" name="nom" id="nom">
+            @error('nom')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
 
-                                <option value="Kangourou">Kangourou</option>
+            <label for="typeArticle">Type de l'article :</label>
+            <select class="@error('type') is-invalid @enderror w3-input w3-border w3-hover-border-black" name="type" id="type">
+                <option value="Chandail">Chandail</option>
+                <option value="Kangourou">Kangourou</option>
+                <option value="Accessoire">Accessoire</option>
+            </select>
+            @error('type')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
 
-                                <option value="Accessoire">Accessoire</option>
+            <br>
+            <br>
 
-                            </select>
-                            @error('type')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="descriptionArticle">Description</label>
-                            <textarea class="@error('description') is-invalid @enderror" name="description" class="description" id="description"></textarea>
-
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <label for="descriptionArticle">Description :</label>
+            <textarea class="@error('description') is-invalid @enderror w3-input w3-border w3-hover-border-black" name="description" class="description" id="description"></textarea>
+            @error('description')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
-        <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Ajouter un article</button>
-        </div>
+
+        <br>
+
+        <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Ajouter un article</button>
     </form>
 
+    <br>
+        
+    <div class="center">
+        <a href="{{ route('usagers.login') }}">Retour</a>
+    </div>
+</div>
 
     <!--SCRIPTS DE VALIDATION-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

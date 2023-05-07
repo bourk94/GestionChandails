@@ -81,16 +81,15 @@
             </div>
         </form>
     @else
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <div>
-                        <h2>Vous avez déjà une campagne en cours</h2>
-                        <a href="{{ route('accueil') }}" class="btn bg__orange color__white" id="add-article">Retourner à
-                            l'accueil</a>
-                    </div>
-                </div>
-            </div>
+        <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+                
+            <h1 class="center">Vous avez déjà une campagne en cours</h1>
+
+            <br>
+
+            <a href="{{ route('accueil') }}" class="a_decoration_none">
+                <button class="w3-button w3-block w3-hover-red btnColor" type="button">Retourner à l'accueil</button>
+            </a>
         </div>
     @endif
 

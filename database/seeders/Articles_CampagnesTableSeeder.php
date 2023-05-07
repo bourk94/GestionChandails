@@ -28,7 +28,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
-                    'couleur_id' => '2',
+                    'couleur' => '2',
                     'taille_id' => '2',
                     'quantite_max' => '5',
                     'prix' => '30',
@@ -38,7 +38,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
-                    'couleur_id' => '3',
+                    'couleur' => '3',
                     'taille_id' => '2',
                     'quantite_max' => '5',
                     'prix' => '30',
@@ -48,7 +48,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
-                    'couleur_id' => '3',
+                    'couleur' => '3',
                     'taille_id' => '4',
                     'quantite_max' => '5',
                     'prix' => '30',
