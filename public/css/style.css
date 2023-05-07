@@ -11,6 +11,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.livewire-cart-counter {
+  padding: 0;
+}
+
 .a_decoration_none {
   text-decoration: none;
 }
@@ -119,109 +123,20 @@ input {
 /***************************************************************************/
 
 /* NavBar */
+.navColor {
+  background-color: #092D74;
+  color: white;
+}
 
 body {
   font-family: "Source Sans Pro", "Arial", sans-serif;
   /*À voir si c'est vraiment joli*/
   margin: 0;
+  position: relative;
+  padding-top: 40px;
 }
 
-ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #092D74;
-}
-
-ul.topnav li {
-  float: left;
-}
-
-ul.topnav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-ul.topnav li a:hover:not(.active) {
-  background-color: #EF3832;
-}
-
-ul.topnav li button {
-  background-color: #092D74;
-  color: white;
-  text-align: center;
-  align-items: center;
-  border-radius: none;
-  padding: 14px 16px;
-  text-decoration: none;
-  font: 16px Arial;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-ul.topnav li button:hover:not(.active) {
-  background-color: #EF3832;
-}
-
-ul.topnav li a.active {
-  background-color: #092D74;
-  /*Faire en sorte qu'il n'y a pas de modification de couleurs lorsqu'on survol le logo*/
-}
-
-ul.topnav li.right {
-  float: right;
-}
-
-/* Dropdown */
-
-li a,
-.dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  /* margin-right: 10px; Il va falloir rajouter ça car sinon ça dépasse le fenêtre */
-}
-
-li a:hover,
-.dropdown:hover .dropbtn {
-  background-color: #EF3832;
-}
-
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #092D74;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+/* Modification de la navbar avec un template */
 
 /**/
 
