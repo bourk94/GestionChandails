@@ -13,14 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         $procedure = "DROP PROCEDURE IF EXISTS `createCommandeArticle`;
-        CREATE PROCEDURE createCommandeArticle(IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT)
+        CREATE PROCEDURE createCommandeArticle(IN idCommande INT, IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT)
         BEGIN
-        DECLARE idCommande INT;
         DECLARE idCampagne INT;
-    
-        CALL createCommande(idUsager);
-    
-        SET idCommande = LAST_INSERT_ID();
     
         SELECT id into idCampagne FROM campagnes WHERE statut = 'en cours';
         INSERT INTO article_campagne_commande (commande_id, article_campagne_id, quantite, created_at, updated_at)

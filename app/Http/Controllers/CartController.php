@@ -21,8 +21,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        
-        if (!empty($request->except('_token')) && $request->quantity > 0) {
+        if (!empty($request->except('_token')) && $request->quantity > 0 && $request->price >= 0 && $request->article_id != null && $request->couleur_id != null && $request->taille_id != null && $request->campagne_id != null) {
             $condition = ['couleur' => $request->couleur_id, 'taille'=> $request->taille_id, 'article_id'=> $request->article_id, 'campagne_id'=> $request->campagne_id];
             $article_campagne = DB::table('article_campagne')->where($condition)->value('id');
                 
@@ -36,6 +35,9 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'attributes' => [
                 'image' => $article->image,
+                'id_article' => $request->article_id,
+                'id_couleur' => $request->couleur_id,
+                'id_taille' => $request->taille_id,
                 'code_couleur' => $couleur->code_couleur,
                 'couleur' => $couleur->nom_couleur,
                 'taille' => $taille->format
