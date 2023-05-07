@@ -6,7 +6,6 @@
         <h2 class="center">
             Campagne
             @if (count($campagnes->where('statut', 'en cours')) > 0)
-
                 @foreach ($campagnes->where('statut', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}
                     [{{ $campagne->statut }}]
@@ -33,7 +32,8 @@
                                     <div class="w3-row-padding">
                                         @foreach ($couleurs->where('article_id', 'like', $article->article_id) as $couleur)
                                             <label class="{{ $couleur->nom_couleur }}">
-                                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}" class="radNone">
+                                                <input type="radio" name="couleur_id" value="{{ $couleur->couleur_id }}"
+                                                    class="radNone">
                                                 <div class="button"><span></span></div>
                                             </label>
                                         @endforeach
@@ -42,8 +42,11 @@
                                         @if (count($tailles))
                                             @foreach ($tailles->where('article_id', 'like', $article->article_id) as $taille)
                                                 <label>
-                                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}" class="radNone" required>
-                                                    <div class="button"><span class="prevent-select w3-text-black">{{ $taille->format }}</span></div>
+                                                    <input type="radio" name="taille_id" value="{{ $taille->taille_id }}"
+                                                        class="radNone" required>
+                                                    <div class="button"><span
+                                                            class="prevent-select w3-text-black">{{ $taille->format }}</span>
+                                                    </div>
                                                 </label>
                                             @endforeach
                                         @endif
@@ -54,11 +57,14 @@
                                     <br>
 
                                     <div>
-                                        @if (Auth::check())
+                                        @if ($campagne->progression == 'intention d\'achat')
                                             <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Ajouter au panier</a>
+                                        @elseif($campagne->progression == 'paiement' || 'collecte')
+                                            <button type="submit" disabled class="w3-button w3-block w3-hover-red btnColor">Ajout indisponible</a>
                                         @else
                                             <button id="btnModalLogin" class="w3-button w3-block w3-hover-red btnColor">Ajouter au panier</a>
                                         @endif
+
                                     </div>
                                     <br>
                                 </div>
@@ -77,7 +83,7 @@
                 @endforeach
             @else
                 <p>Aucune campagne en cours</p>
-            @endif
+                @endif
             </div>
         </div>
     </div>

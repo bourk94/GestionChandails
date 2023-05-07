@@ -38,7 +38,7 @@
                     <br>
                     <label for="progression">Déterminez la progression de votre campagne :</label>
                     <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="progression" id="progression">
-                        <option value="intention">Intention</option>
+                        <option value="intention d'achat">Intention d'achat</option>
                         <option value="paiement">Paiement</option>
                         <option value="collecte">Collecte</option>
                     </select>
