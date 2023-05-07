@@ -129,7 +129,7 @@ class UsagersController extends Controller
         if ($usager->type == "admin") {
             return view ('admin.edit', compact('usager'));
         }
-        else if ($usager->type == "client"){
+        else if ($usager->type == "client" || $usager->type == "superadmin"){
             return view ('usagers.edit', compact('usager'));
         }
     }

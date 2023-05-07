@@ -2,7 +2,7 @@
 
 @section('title', 'Mon compte')
 @section('contenu')
-@if (Auth::user()->type == 'client')
+@if (Auth::user()->type == 'client' || Auth::user()->type == 'superadmin')
     <section class="main-container">
         <div class="card__padding">
             <div class="card__container">
