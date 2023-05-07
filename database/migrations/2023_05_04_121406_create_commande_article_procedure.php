@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         $procedure = "DROP PROCEDURE IF EXISTS `createCommandeArticle`;
-        CREATE PROCEDURE createCommandeArticle(IN idCommande INT, IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT)
+        CREATE PROCEDURE createCommandeArticle(IN idCommande INT, IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT, IN _montantTotal DECIMAL(10,2))
         BEGIN
         DECLARE idCampagne INT;
     
         SELECT id into idCampagne FROM campagnes WHERE statut = 'en cours';
-        INSERT INTO article_campagne_commande (commande_id, article_campagne_id, quantite, created_at, updated_at)
-        VALUES (idCommande, idArticleCampagne, _quantite, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+        INSERT INTO article_campagne_commande (commande_id, article_campagne_id, quantite, montant_total,  created_at, updated_at)
+        VALUES (idCommande, idArticleCampagne, _quantite, _montantTotal, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     
     
     END;";

@@ -63,28 +63,31 @@ class CommandesController extends Controller
             $cartItems = \Cart::getContent();
             DB::select('CALL createCommande(?)', [Auth::user()->id]);
             $lastIdCommande = DB::table('commandes')->latest('id')->first();
+
+            //dd($cartItems);
         foreach ($cartItems as $item) {
 
             $article_campagne = DB::table('article_campagne')
                 ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
-                ->where('article_id', $item->id)
+                ->where('article_id', $item->attributes->id_article)
                 ->where('campagnes.statut', 'like', 'en cours')
                 ->where('couleur', $item->attributes->id_couleur)
                 ->where('taille', $item->attributes->id_taille)->get();
 
             if (count($article_campagne) > 0) {
-                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?, ?)', [
+                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?, ?, ?)', [
                     $lastIdCommande->id,
                     $request->idUsager,
                     $item->id,
                     $item->quantity,
+                    $item->price * $item->quantity
                 ]);
 
                 DB::prepareBindings($procedureCreateCommandeArticle);
                 DB::commit();     
                 } 
             else {
-                return redirect()->route('cart.list')->with('message', 'L\'article n\'est pas disponible dans la couleur ' . $request->couleur . ' et la taille ' . $request->taille . '.');
+                return redirect()->route('cart.list')->with('message', 'L\'article ' . $item->name . ' n\'est pas disponible dans la couleur ' . $item->attributes->couleur . ' et la taille ' . $item->attributes->taille . '.');
             }
         }
         \Cart::clear();

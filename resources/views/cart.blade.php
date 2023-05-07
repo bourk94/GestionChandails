@@ -49,8 +49,8 @@
                                     </div>
                                     <div class="flex__center">
                                         <button class="cart__btn">Modifier</button>
-                                        </div>
-                                    </form>
+                                    </div>
+                                </form>
                             </td>
                             <td>{{ $item->price * $item->quantity}} $</td>
                             <td>
@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    @if (!Auth::User())
+    @if (Auth::User())
         <script>
             var modalLogin = document.getElementById("modalLogin");
             modalLogin.style.display = "block";
