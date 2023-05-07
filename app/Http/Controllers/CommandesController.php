@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CommandesController extends Controller
@@ -14,9 +15,17 @@ class CommandesController extends Controller
      */
     public function index()
     {
-        // $commandes = Commande::all();
+        $commandes = DB::table('commandes')
+            ->join('usagers', 'commandes.usager_id', '=', 'usagers.id')
+            ->join('article_campagne_commande', 'commandes.id', '=', 'article_campagne_commande.commande_id')
+            ->join('article_campagne', 'article_campagne_commande.article_campagne_id', '=', 'article_campagne.id')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('couleurs', 'article_campagne.couleur_id', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille_id', '=', 'tailles.id')
+            ->select('commandes.date_commande as date', 'articles.nom as nom_article','article_campagne_commande.quantite as quantite', 'couleurs.nom_couleur as nom_couleur','couleurs.code_couleur as code_couleur', 'tailles.format as format', 'usagers.id as usager_id')
+            ->get();
 
-        // return view('commandes.index', compact('commandes'));
+        return view('commandes.index', compact('commandes'));
     }
 
     /**
@@ -36,19 +45,7 @@ class CommandesController extends Controller
 
     public function store(Request $request)
     {
-        try {
-
-
-            $commande = new Commande($request->all());
-            $commande->save();
-
-            //return redirect()->route('accueil')->with('message', "Ajout de la commande " . $commande->date_commande . " réussi!");
-        } catch (\Throwable $e) {
-            Log::debug($e);
-            //return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
-        }
-
-        return redirect()->route('accueil');
+        //
     }
 
     /**

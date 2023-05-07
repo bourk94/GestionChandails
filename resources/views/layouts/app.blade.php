@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr-ca">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +25,8 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Campagne</a>
                     <div class="dropdown-content">
-                        <a href="{{ route('campagnes.create')}}">Créer</a>
-                        <a href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
+                        <a href="{{ route('campagnes.create') }}">Créer</a>
+                        <a href="{{ route('articles.createArticleCampagne') }}">Créer un article</a>
                     </div>
                 </li>
 
@@ -34,7 +34,7 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Article</a>
                     <div class="dropdown-content">
-                        <a href="{{route('articles.createArticle')}}">Créer</a>
+                        <a href="{{ route('articles.createArticle') }}">Créer</a>
                         <a href="#">Modifier</a>
                         <a href="#">Supprimer</a>
                     </div>
@@ -50,7 +50,6 @@
                         <a href="{{ route('tailles.create') }}">Ajouter taille</a>
                     </div>
                 </li>
-                
             @endif
         @endauth
         <!--  -->
@@ -71,21 +70,23 @@
 
         <!-- Boutons connexion et déconnexion -->
         @if (!Auth::user())
-        <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
+            <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
             @livewire('cart-counter')
         @endif
 
         @if (Auth::user())
-        <li class="dropdown right">
-            <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
-            <div class="dropdown-content">
-                <a href="{{ route('usagers.edit')}}">Mon compte</a>
-                <form method="POST" action="{{ route('logout') }}" >
-                    @csrf
-                    <button type="submit">Déconnecter</button>
-                </form>
-            </div>
-        </li>
+            @livewire('cart-counter')
+            <li class="dropdown right">
+                <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('usagers.edit') }}">Mon compte</a>
+                    <a href="{{ route('commandes.index') }}">Mes commandes</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Déconnecter</button>
+                    </form>
+                </div>
+            </li>
         @endif
         <!--  -->
     </ul>

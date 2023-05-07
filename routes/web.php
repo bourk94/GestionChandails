@@ -13,7 +13,8 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CouleursController;
 use App\Http\Controllers\TaillesController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\CommandesController;
+use Darryldecode\Cart\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,8 @@ Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
-
+Route::post('commandes',
+ [CartController::class, 'store'])->name('cart.store')->middleware('auth');
 
 Route::get('/',
 [CampagnesController::class, 'index'])->name('accueil');
@@ -210,3 +212,5 @@ Route::patch('/tailles/{id}/modifier/',
 
 Route::delete('/tailles/{id}',
 [TaillesController::class, 'destroy'])->name('tailles.destroy'); //->middleware('auth');
+
+Route::get('/commandes', [CommandesController::class, 'index'])->name('commandes.index')->middleware('auth');
