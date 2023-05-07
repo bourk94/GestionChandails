@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    @if (Auth::User())
+    @if (!Auth::User())
         <script>
             var modalLogin = document.getElementById("modalLogin");
             modalLogin.style.display = "block";
