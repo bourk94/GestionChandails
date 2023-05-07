@@ -254,7 +254,6 @@ class UsagersController extends Controller
 
     public function login(Request $request)
     {
-
         $reussi = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         if ($reussi) {
@@ -264,7 +263,12 @@ class UsagersController extends Controller
             Session::put('user', $request->email);
 
             log::debug ('Connexion réussie');
-            return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
+            if ($request->has('modal')) {
+                return redirect()->route('cart.list', compact('usagers'))->with('success', 'Connexion réussie');
+            }
+            else {
+                return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
+            }
         } else {
             log::debug("Email ou mot de passe incorrect");
             return redirect()->route('usagers.login')->withErrors(['Email ou mot de passe incorrect']);

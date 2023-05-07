@@ -116,6 +116,7 @@
                         <div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
+                                <input type="hidden" name="modal" value="modal">
                                 <div>
                                     <label for="email" class="form-label">Adresse courriel</label>
                                     <input type="email" class="form-control" id="email" name="email"
