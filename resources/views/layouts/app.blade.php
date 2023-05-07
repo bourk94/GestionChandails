@@ -16,39 +16,55 @@
 
 <body>
 
-    <ul class="topnav">
-        <li><a class="active" href="{{ route('accueil') }}">Logo</a></li>
-
+    <div class="w3-top">
+        <div class="w3-bar navColor w3-card">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            
+            <a href="{{ route('accueil') }}" class="w3-bar-item w3-padding-large a_decoration_none">Logo</a>
         <!-- Dropdown pour l'administrateur -->
         @auth
             @if (Auth::user()->type == 'admin')
                 <!-- Dropdown pour gérer les campagnes -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Campagne</a>
-                    <div class="dropdown-content">
-                        <a href="{{ route('campagnes.create')}}">Créer</a>
-                        <a href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-padding-large w3-button w3-hover-red" title="More">Campagne <i class="fa fa-caret-down"></i></button>     
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('campagnes.create')}}">Créer</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
                     </div>
-                </li>
+                </div>
 
                 <!-- Dropdown pour gérer les articles -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Article</a>
-                    <div class="dropdown-content">
-                        <a href="{{route('articles.createArticle')}}">Créer</a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-padding-large w3-button w3-hover-red" title="More">Article <i class="fa fa-caret-down"></i></button>     
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Créer</a>
                     </div>
-                </li>
+                </div>
 
                 <!-- Dropdown pour gérer les couleurs et les tailles -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Couleur / Taille</a>
-                    <div class="dropdown-content">
-                        <a href="{{ route('couleurs') }}">Gérer couleurs</a>
-                        <a href="{{ route('tailles') }}">Gérer tailles</a>
-                        <a href="{{ route('couleurs.create') }}">Ajouter couleur</a>
-                        <a href="{{ route('tailles.create') }}">Ajouter taille</a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-padding-large w3-button w3-hover-red" title="More">Couleur / Taille <i class="fa fa-caret-down"></i></button>     
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer couleurs</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer tailles</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter couleur</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter taille</a>
                     </div>
-                </li>
+                </div>
+                <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+                    <p class="center w3-border w3-red">{{ Session::get('user') }}</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Mon compte</a>
+                    <p class="center w3-border w3-red">Campagne</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('campagnes.create')}}">Créer</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
+                    <p class="center w3-border w3-red">Article</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Créer</a>
+                    <p class="center w3-border w3-red">Couleur / Taille</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer couleurs</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer tailles</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter couleur</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter taille</a>
+                </div>
                 
             @endif
         @endauth
@@ -58,43 +74,56 @@
         @auth
             @if (Auth::user()->type == 'superadmin')
                 <!-- Dropdown pour gérer les utilisateurs -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Utilisateur</a>
-                    <div class="dropdown-content">
-                        <a href="{{ route('admin.create') }}">Créer</a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-padding-large w3-button w3-hover-red" title="Utilisateur">Utilisateur <i class="fa fa-caret-down"></i></button>     
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('admin.create') }}">Créer</a>
                     </div>
-                </li>
+                </div>
+                <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+                    <p class="center w3-border w3-red">{{ Session::get('user') }}</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Utilisateur</a>
+                    <p class="center w3-border w3-red">Campagne</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('admin.create') }}">Créer</a>
+                </div>
             @endif
         @endauth
         <!--  -->
 
         <!-- Boutons connexion et déconnexion -->
         @if (!Auth::user())
-        <li class="right"><a href="{{ route('usagers.login') }}">Connexion</a></li>
+            <a class="w3-bar-item w3-padding-large w3-hover-red w3-hide-small a_decoration_none w3-right" href="{{ route('usagers.login') }}">Connexion</a>
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" href="{{ route('usagers.login') }}"><i class="fa fa-sign-in"></i></a>
             @livewire('cart-counter')
         @endif
 
         @if (Auth::user())
-        <li class="dropdown right">
-            <a href="javascript:void(0)" class="dropbtn">{{ Session::get('user') }}</a>
-            <div class="dropdown-content">
-                <a href="{{ route('usagers.edit')}}">Mon compte</a>
-                <form method="POST" action="{{ route('logout') }}" >
-                    @csrf
-                    <button type="submit">Déconnecter</button>
-                </form>
+            <div class="w3-dropdown-hover w3-hide-small w3-right">
+                <button class="w3-padding-large w3-button w3-hover-red" title="Usager">{{ Session::get('user') }} <i class="fa fa-caret-down"></i></button>     
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Mon compte</a>
+                    <form method="POST" action="{{ route('logout') }}" >
+                        @csrf
+                        <button class="w3-bar-item w3-button w3-hover-red" type="submit">Déconnecter</button>
+                    </form>
+                </div>
             </div>
-        </li>
+            <form method="POST" action="{{ route('logout') }}" >
+                @csrf
+                <button class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" type="submit"><a><i class="fa fa-power-off"></i></a></button>
+            </form>
+            @if (Auth::user()->type == 'client')
+                @livewire('cart-counter')
+            @endif
         @endif
         <!--  -->
-    </ul>
+    </div>
+</div>
 
     <!--  -->
     @if (Session::has('message'))
         <div class="center">
-
             <h3>{{ Session::get('message') }}</h3>
-
         </div>
     @endif
 
@@ -112,6 +141,21 @@
 
     <!--IL MANQUE LE CODE POUR LES MESSAGES D'ERREURS-->
     @livewireScripts
+
+        <script>
+            function myFunction()
+            {
+                var x = document.getElementById("nav");
+                if (x.className.indexOf("w3-show") == -1)
+                {
+                    x.className += " w3-show";
+                }
+                else
+                {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+    </script>
 
 </body>
 
