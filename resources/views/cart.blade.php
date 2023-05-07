@@ -77,10 +77,11 @@
                 <div class="flex__center">
                     <form action="{{ route('commandes.store') }}" method="POST">
                         @csrf
-                        <input name="idUsager" value="{{ Auth::user()->id }}" />
-                        <input name="idArticleCampagne" value="{{ $item->id }}" />
-                        <input name="_quantite" value="{{ $item->quantity }}" />
-
+                        <input name="idUsager" type="hidden" value="{{ Auth::user()->id }}" />
+                        <input name="idArticleCampagne"  type="hidden" value="{{ $item->id }}" />
+                        <input name="_quantite"  type="hidden" value="{{ $item->quantity }}" />
+                        <input name="couleur" type="hidden" value="{{ $item->attributes->couleur }}" />
+                        <input name="taille" type="hidden" value="{{ $item->attributes->taille }}" />
                         <button class="cart__btn">Confirmer</button>
                     </form>
                 </div>
