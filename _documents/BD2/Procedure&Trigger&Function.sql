@@ -4,16 +4,18 @@
 
 /* Première lettre de nom et prenom en majuscule. */
 CREATE TRIGGER usagersCaps_before_insert
-BEFORE INSERT ON usagers
-FOR EACH ROW
+    BEFORE INSERT
+    ON usagers
+    FOR EACH ROW
 BEGIN
     SET NEW.nom = CONCAT(UCASE(LEFT(NEW.nom, 1)), SUBSTRING(NEW.nom, 2));
     SET NEW.prenom = CONCAT(UCASE(LEFT(NEW.prenom, 1)), SUBSTRING(NEW.prenom, 2));
 END;
 /* Première lettre de nom et prenom en majuscule après une modification */
 CREATE TRIGGER usagersCaps_before_update
-BEFORE UPDATE ON usagers
-FOR EACH ROW
+    BEFORE UPDATE
+    ON usagers
+    FOR EACH ROW
 BEGIN
     SET NEW.nom = CONCAT(UCASE(LEFT(NEW.nom, 1)), SUBSTRING(NEW.nom, 2));
     SET NEW.prenom = CONCAT(UCASE(LEFT(NEW.prenom, 1)), SUBSTRING(NEW.prenom, 2));
@@ -22,7 +24,8 @@ END;
 /* Triggers encrypt in argon */
 -- Déja fait en laravel directement.
 -- Vérifier la colonne password dans la table usagers.
-select password from usagers;
+select password
+from usagers;
 
 -- Procedure
 
@@ -46,11 +49,13 @@ CREATE PROCEDURE modifierUsager(
     IN nom VARCHAR(50),
     IN prenom VARCHAR(50),
     IN password VARCHAR(255),
-    IN email VARCHAR(50),
-)
+    IN email VARCHAR(50),)
 BEGIN
     UPDATE usagers
-    SET nom = nom, prenom = prenom, password = password, email = email
+    SET nom      = nom,
+        prenom   = prenom,
+        password = password,
+        email    = email
     WHERE id = id;
 END //
 
@@ -78,7 +83,7 @@ DELIMITER //
 CREATE PROCEDURE ajouterArticle(
     IN nom VARCHAR(50),
     IN type VARCHAR(50),
-    IN prix DECIMAL(10,2),
+    IN prix DECIMAL(10, 2),
     IN description varchar(255)
 )
 BEGIN
@@ -86,4 +91,61 @@ BEGIN
     VALUES (nom, type, prix, description);
 END //
 
---
+-- Création d'une procédure qui crée un article_campagne
+DELIMITER //
+CREATE PROCEDURE createArticleCampagne(
+    IN _prix DOUBLE,
+    IN idArticle INT,
+    IN idCampagne INT,
+    IN idCouleur INT,
+    IN idTaille INT
+)
+BEGIN
+
+    INSERT INTO article_campagne(article_id, campagne_id, couleur_id, taille_id, prix, created_at, updated_at)
+    VALUES (idArticle, idCampagne, idCouleur, idTaille, _prix, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+END//
+DELIMITER ;
+
+-- Création d'une procédure qui crée une commande
+DELIMITER //
+CREATE PROCEDURE `createCommande`(IN idUsager INT)
+BEGIN
+    INSERT INTO commandes (usager_id, date_commande, created_at, updated_at)
+    VALUES (idUsager, NOW(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+END//
+DELIMITER ;
+
+-- Création d'une procédure qui crée un article_campagne_commande
+DELIMITER //
+CREATE PROCEDURE createCommandeArticle(IN idCommande INT, IN idUsager INT, IN idArticleCampagne INT, IN _quantite INT,
+                                       IN _montantTotal DECIMAL(10, 2))
+BEGIN
+    DECLARE idCampagne INT;
+
+    SELECT id into idCampagne FROM campagnes WHERE statut = 'en cours';
+    INSERT INTO article_campagne_commande (commande_id, article_campagne_id, quantite, montant_total, created_at,
+                                           updated_at)
+    VALUES (idCommande, idArticleCampagne, _quantite, _montantTotal, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+END//
+DELIMITER ;
+
+-- Création d'une procédure qui retourne les infos d'une campagne selon son nom
+DELIMITER //
+CREATE PROCEDURE information_campagne(IN _nom_campagne VARCHAR(255))
+BEGIN
+    SELECT a.nom,
+           c.nom_couleur,
+           t.format,
+           COUNT(acc.article_id) as quantite
+    FROM article_campagne acc
+             INNER JOIN campagnes cam on acc.campagne_id = cam.id
+             INNER JOIN couleurs c on acc.couleur = c.id
+             INNER JOIN tailles t on acc.taille = t.id
+             INNER JOIN articles a on acc.article_id = a.id
+    WHERE nom_campagne = _nom_campagne
+    GROUP BY a.nom, c.nom_couleur, t.format;
+
+END//
+DELIMITER ;
