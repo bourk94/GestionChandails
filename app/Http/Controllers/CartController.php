@@ -35,6 +35,9 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'attributes' => [
                 'image' => $article->image,
+                'id_article' => $request->article_id,
+                'id_couleur' => $request->couleur_id,
+                'id_taille' => $request->taille_id,
                 'code_couleur' => $couleur->code_couleur,
                 'couleur' => $couleur->nom_couleur,
                 'taille' => $taille->format
