@@ -74,6 +74,7 @@
 
 
                 </div>
+                @if(Auth::user())
                 <div class="flex__center">
                     <form action="{{ route('commandes.store') }}" method="POST">
                         @csrf
@@ -85,6 +86,7 @@
                         <button class="cart__btn">Confirmer</button>
                     </form>
                 </div>
+                @endif
             @endforeach
 
             <div>
