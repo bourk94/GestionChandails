@@ -84,7 +84,6 @@
                 <div class="flex__center">
                     <form action="{{ route('commandes.store') }}" method="POST">
                         @csrf
-                        <input name="idUsager" type="hidden" value="{{ Auth::user()->id }}" />
                         <button class="cart__btn">Confirmer</button>
                     </form>
                 </div>
