@@ -16,7 +16,7 @@
                     <th></th>
                     <th id="ColListeCouleur">Quantitée</th>
                     
-                    <th></th>
+                    <th>Montant dû</th>
                 </tr>
                 @if (count($commandes->where('usager_id', Auth::user()->id)) > 0)
                     @foreach ($commandes->where('usager_id', Auth::user()->id) as $commande)
@@ -30,7 +30,7 @@
                                 {{ $commande->quantite }}
                             </td>
                             <td>
-
+                                {{$commande->montant}} $
                             </td>
                         </tr>
                     @endforeach

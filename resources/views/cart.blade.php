@@ -75,7 +75,7 @@
 
                 </div>
                 <div class="flex__center">
-                    <form action="{{ route('cart.store') }}" method="POST">
+                    <form action="{{ route('commandes.store') }}" method="POST">
                         @csrf
                         <input name="idUsager" value="{{ Auth::user()->id }}" />
                         <input name="idArticleCampagne" value="{{ $item->id }}" />

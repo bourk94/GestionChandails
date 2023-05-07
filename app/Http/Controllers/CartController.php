@@ -71,24 +71,5 @@ class CartController extends Controller
         \Cart::clear();
         return redirect()->route('cart.list');
     }
-    
-    public function store(Request $request)
-    {
-        try {
-            $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?)', [
-                $request->idUsager,
-                $request->idArticleCampagne,
-                $request->_quantite,
-                
-            ]);
-            DB::prepareBindings($procedureCreateCommandeArticle);
-            DB::commit();
-            \Cart::remove($request->idArticleCampagne);
-            return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
-        } catch (\Throwable $e) {
-            Log::debug($e);
-            return redirect()->route('cart.list')->withErrors(['Une erreur est survenue lors de votre commande.']);
-        }
-    }
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Commande;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\CartController;
 
 class CommandesController extends Controller
 {
@@ -20,12 +21,13 @@ class CommandesController extends Controller
             ->join('article_campagne_commande', 'commandes.id', '=', 'article_campagne_commande.commande_id')
             ->join('article_campagne', 'article_campagne_commande.article_campagne_id', '=', 'article_campagne.id')
             ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
-            ->join('couleurs', 'article_campagne.couleur_id', '=', 'couleurs.id')
-            ->join('tailles', 'article_campagne.taille_id', '=', 'tailles.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
             ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
             ->select('commandes.date_commande as date',
              'articles.nom as nom_article',
              'article_campagne_commande.quantite as quantite',
+             'article_campagne_commande.montant_total as montant',
               'couleurs.nom_couleur as nom_couleur',
               'couleurs.code_couleur as code_couleur',
                'tailles.format as format', 
@@ -53,7 +55,21 @@ class CommandesController extends Controller
 
     public function store(Request $request)
     {
-        //
+        try {
+            $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?)', [
+                $request->idUsager,
+                $request->idArticleCampagne,
+                $request->_quantite,
+                
+            ]);
+            DB::prepareBindings($procedureCreateCommandeArticle);
+            DB::commit();
+            \Cart::remove($request->idArticleCampagne);
+            return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
+        } catch (\Throwable $e) {
+            
+            return redirect()->route('cart.list')->withErrors(['Une erreur est survenue lors de votre commande.']);
+        }
     }
 
     /**
