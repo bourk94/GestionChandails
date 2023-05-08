@@ -15,6 +15,7 @@ use App\Http\Controllers\TaillesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommandesController;
 use Darryldecode\Cart\Cart;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,7 +175,7 @@ Route::patch('/articles/{id}/modifier',
 [ArticlesController::class, 'update'])->name('articles.update')->middleware('auth');
 
 // Route::get('articles/{id}/edit',
-// [ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');
+// [ArticlesController::class, 'edit'])->name('articles.edit')
 
 
 //Couleur
@@ -199,25 +200,25 @@ Route::post('tailles',
 
 // ***pas utilisée***
 // Route::get('couleurs/{id}',
-// [CouleursController::class, 'show'])->name('couleurs.show'); //->middleware('auth');
+// [CouleursController::class, 'show'])->name('couleurs.show')
 
 Route::get('/couleurs/{id}/modifier/',
-[CouleursController::class, 'edit'])->name('couleurs.edit')->middleware('auth');; //->middleware('auth');
+[CouleursController::class, 'edit'])->name('couleurs.edit')->middleware('auth');
 
 Route::patch('/couleurs/{id}/modifier/',
-[CouleursController::class, 'update'])->name('couleurs.update')->middleware('auth');; //->middleware('auth');
+[CouleursController::class, 'update'])->name('couleurs.update')->middleware('auth');
 
 Route::delete('/couleurs/{id}',
-[CouleursController::class, 'destroy'])->name('couleurs.destroy')->middleware('auth');; //->middleware('auth');
+[CouleursController::class, 'destroy'])->name('couleurs.destroy')->middleware('auth');
 
 Route::get('/tailles/{id}/modifier/',
-[TaillesController::class, 'edit'])->name('tailles.edit')->middleware('auth');; //->middleware('auth');
+[TaillesController::class, 'edit'])->name('tailles.edit')->middleware('auth');
 
 Route::patch('/tailles/{id}/modifier/',
-[TaillesController::class, 'update'])->name('tailles.update')->middleware('auth');; //->middleware('auth');
+[TaillesController::class, 'update'])->name('tailles.update')->middleware('auth');
 
 Route::delete('/tailles/{id}',
-[TaillesController::class, 'destroy'])->name('tailles.destroy')->middleware('auth');; //->middleware('auth');
+[TaillesController::class, 'destroy'])->name('tailles.destroy')->middleware('auth');
 
 Route::get('/commandes',
  [CommandesController::class, 'index'])->name('commandes.index')->middleware('auth');

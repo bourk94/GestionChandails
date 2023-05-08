@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('contenu')
-
+@if(Auth::user()->type == "admin")
     <div class="padding">
 
         <h1 class="center">Liste des couleurs</h1>
@@ -60,5 +60,7 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\CouleurRequest') !!}
-
+    @else
+    <script> window.location.href = "{{ url()->previous() }}"; </script>
+    @endif
 @endsection
