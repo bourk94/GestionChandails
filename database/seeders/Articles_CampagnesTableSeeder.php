@@ -18,6 +18,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '1',
+                    'image' => 'Chandail.jpg',
                     'couleur' => '1',
                     'taille' => '1',
                     'quantite_max' => '3',
@@ -28,6 +29,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
+                    'image' => 'Kangourou.jpg',
                     'couleur' => '2',
                     'taille' => '2',
                     'quantite_max' => '5',
@@ -38,6 +40,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
+                    'image' => 'Kangourou.jpg',
                     'couleur' => '3',
                     'taille' => '2',
                     'quantite_max' => '5',
@@ -48,6 +51,7 @@ class Articles_CampagnesTableSeeder extends Seeder
                 [
                     'campagne_id' => '3',
                     'article_id' => '2',
+                    'image' => 'Kangourou.jpg',
                     'couleur' => '3',
                     'taille' => '4',
                     'quantite_max' => '5',

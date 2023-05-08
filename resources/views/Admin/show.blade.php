@@ -7,8 +7,9 @@
 
         @if (count($campagnes->where('statut', 'en cours')) > 0)
             @foreach ($campagnes->where('statut', 'en cours') as $campagne)
-                <a href="{{route('campagnes.edit', $campagne->id)}}" class="a_decoration_none">
-                    <button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier la campagne en cours</button>
+                <a href="{{ route('campagnes.edit', $campagne->id) }}" class="a_decoration_none">
+                    <button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier la campagne en
+                        cours</button>
                 </a>
             @endforeach
         @endif
@@ -16,7 +17,6 @@
         <h2 class="center">
             Campagne
             @if (count($campagnes->where('statut', 'en cours')) > 0)
-
                 @foreach ($campagnes->where('statut', 'en cours') as $campagne)
                     {{ $campagne->nom_campagne }}
                     [{{ $campagne->statut }}]
@@ -33,7 +33,7 @@
                         <div class="w3-col l3 m6 w3-margin-bottom">
                             <div class="w3-panel w3-border w3-round-large">
                                 <br>
-                                <img src="/img/chandails/Exemple_Chandail_1.jpg" alt="John" style="width:100%">
+                                <img src= "{{ asset('/img/' . $article->type . '/' . $article->type . '.jpg') }}" alt="{{$article->type}}" style="width:100%"/>
                                 <h3>{{ $article->nom }}</h3>
                                 <p>Prix : {{ $article->prix }} $</p>
                                 <p>Description : {{ $article->description }}</p>
@@ -57,7 +57,7 @@
                                     @endforeach
                                 </div>
 
-                                <a href="#" class="a_decoration_none">
+                                <a href="{{ route('articles.editArticleCampagne', [$article->article_campagne_id]) }}" class="a_decoration_none">
                                     <button class="w3-button w3-block w3-hover-red btnColor" type="button">Modifier</button>
                                 </a>
 
