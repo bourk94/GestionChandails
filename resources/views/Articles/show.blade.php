@@ -1,36 +1,6 @@
 @extends('layouts.app')
 @section('contenu')
 
-
-    {{-- <h1>Zoom du film {{ $film->titre }}</h1>
-
-@if (isset($film))
-    <img src= "{{ asset('img/films/' . $film->image) }}" alt="image de film" class="img-fluid" height="1000" width="800"/>
-    <li>Titre: {{ $film->titre }}</li>
-    <li>Durée: {{ $film->duree }}</li>
-    <li>Genre: {{ $film->genre }}</li>
-    <li>Nom du réalisateur: {{ $film->nom_realisateur }}</li>
-    <li>Récolte au box office (million de dollars): {{ $film->recolte_boxOffice }}</li>
-@else
-    <p>le film n'existe pas!</p>
-@endif   
-
-    <!--MES BOUTONS POUR MODIFIER ET SUPPRIMER MES FILMS-->
-
-    <!--BOUTON POUR MODIFIER-->
-    <a href="{{ route('films.edit', [$film]) }}" class="btn btn-primary">Modifier le film</a>
-
-    <!--BOUTON POUR SUPPRIMER-->    
-    <!--FORMULAIRE POUR SUPPRIMER UN FILM-->
-    <form method="POST" action="{{ route('films.destroy', [$film->id]) }}">
-    @csrf
-    @method('DELETE')
-        <button type="submit" class="btn btn-danger">Supprimer</button>
-    </form>
-
-@endsection --}}
-
-
     <!-- <div class="row"> -->
     <div class="padding">
         <!-- Section informations sur un article de la campagne -->

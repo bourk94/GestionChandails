@@ -9,13 +9,12 @@
         <div style="overflow-x: auto;">
             <table class="customers w3-border w3-bordered">
                 <tr>
-                    <th >Nom de la campagne</th>
+                    <th>Nom de la campagne</th>
                     <th> Date de commande</th>
                     <th id="ColListeCouleur">Nom de l'article</th>
                     <th id="ColListeCouleur">Couleur</th>
                     <th></th>
                     <th id="ColListeCouleur">Quantitée</th>
-                    
                     <th>Montant dû</th>
                 </tr>
                 @if (count($commandes->where('usager_id', Auth::user()->id)) > 0)
@@ -26,12 +25,8 @@
                             <td>{{ $commande->nom_article }}</td>
                             <td>{{ $commande->nom_couleur }}</td>
                             <td style="background: {{ $commande->code_couleur }}"></td>
-                            <td>
-                                {{ $commande->quantite }}
-                            </td>
-                            <td>
-                                {{$commande->montant}} $
-                            </td>
+                            <td>{{ $commande->quantite }}</td>
+                            <td>{{ $commande->montant }} $</td>
                         </tr>
                     @endforeach
                 @else

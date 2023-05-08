@@ -45,10 +45,10 @@
                 <div class="w3-dropdown-hover w3-hide-small">
                     <button class="w3-padding-large w3-button w3-hover-red" title="More">Couleur / Taille <i class="fa fa-caret-down"></i></button>     
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer couleurs</a>
-                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer tailles</a>
-                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter couleur</a>
-                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter taille</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer les couleurs</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer les tailles</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter une couleur</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter une taille</a>
                     </div>
                 </div>
                 <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
@@ -60,10 +60,10 @@
                     <p class="center w3-border w3-red">Article</p>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Créer</a>
                     <p class="center w3-border w3-red">Couleur / Taille</p>
-                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer couleurs</a>
-                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer tailles</a>
-                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter couleur</a>
-                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter taille</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer les couleurs</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer les tailles</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs.create') }}">Ajouter une couleur</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles.create') }}">Ajouter une taille</a>
                 </div>
                 
             @endif

@@ -49,7 +49,7 @@
                     <label for="statut">Déterminez le statut de votre campagne :</label>
                     <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="statut" id="statut">
                         <option value="en cours">En cours</option>
-                        <option value="terminé">Terminé</option>
+                        <option value="terminée">Terminée</option>
                     </select>
                 </div>
         
