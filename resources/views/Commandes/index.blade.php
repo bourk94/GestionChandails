@@ -17,6 +17,7 @@
                     <th id="ColListeCouleur">Quantitée</th>
                     
                     <th>Montant dû</th>
+                    <th>État de la commande</th>
                 </tr>
                 @if (count($commandes->where('usager_id', Auth::user()->id)) > 0)
                     @foreach ($commandes->where('usager_id', Auth::user()->id) as $commande)
@@ -32,6 +33,7 @@
                             <td>
                                 {{$commande->montant}} $
                             </td>
+                            <td>{{ $commande->statut }}</td>
                         </tr>
                     @endforeach
                 @else
