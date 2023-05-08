@@ -141,7 +141,6 @@ Route::patch('/campagnes/{id}/modifier/',
 [CampagnesController::class, 'update'])->name('campagnes.update')->middleware('auth');
 
 
-//Articles sans campagne
 Route::get('/articles',
 [ArticlesController::class, 'index'])->name('articles')->middleware('auth');
 
@@ -152,7 +151,6 @@ Route::post('articles',
 [ArticlesController::class, 'storeArticle'])->name('articles.storeArticle')->middleware('auth');
 
 
-//Mettre les middleware ???
 Route::get('articles/createArticleCampagne',
 [ArticlesController::class, 'createArticleCampagne'])->name('articles.createArticleCampagne')->middleware('auth');
 
@@ -174,11 +172,6 @@ Route::get('/articles/{id}/modifier/',
 Route::patch('/articles/{id}/modifier',
 [ArticlesController::class, 'update'])->name('articles.update')->middleware('auth');
 
-// Route::get('articles/{id}/edit',
-// [ArticlesController::class, 'edit'])->name('articles.edit')
-
-
-//Couleur
 Route::get('/couleurs',
 [CouleursController::class, 'index'])->name('couleurs')->middleware('auth');;
 
@@ -188,7 +181,6 @@ Route::get('couleurs/create',
 Route::post('couleurs',
 [CouleursController::class, 'store'])->name('couleurs.store')->middleware('auth');
 
-//Taille
 Route::get('/tailles',
 [TaillesController::class, 'index'])->name('tailles')->middleware('auth');;
 
@@ -197,10 +189,6 @@ Route::get('tailles/create',
 
 Route::post('tailles',
 [TaillesController::class, 'store'])->name('tailles.store')->middleware('auth');
-
-// ***pas utilisée***
-// Route::get('couleurs/{id}',
-// [CouleursController::class, 'show'])->name('couleurs.show')
 
 Route::get('/couleurs/{id}/modifier/',
 [CouleursController::class, 'edit'])->name('couleurs.edit')->middleware('auth');
