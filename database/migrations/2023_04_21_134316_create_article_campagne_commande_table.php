@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('article_campagne_id')->constrained('article_campagne');
             $table->integer('quantite')->default(0);
             $table->double('montant_total')->default(0);
-            $table->string('statut')->default('non-payé');
+            $table->string('statut')->default('Non payé');
             //$table->primary(['commande_id', 'article_campagne_id'],'article_campagne_commande_id');
             $table->timestamps();
         });
