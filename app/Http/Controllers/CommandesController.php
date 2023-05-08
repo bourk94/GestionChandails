@@ -36,7 +36,7 @@ class CommandesController extends Controller
                 'tailles.format as format',
                 'usagers.id as usager_id',
                 'campagnes.nom_campagne as nom_campagne',
-                'commandes.statut as statut'
+                'article_campagne_commande.statut as statut'
             )
             ->get();
 
