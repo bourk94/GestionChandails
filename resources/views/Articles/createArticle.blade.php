@@ -19,9 +19,9 @@
 
             <label for="typeArticle">Type de l'article :</label>
             <select class="@error('type') is-invalid @enderror w3-input w3-border w3-hover-border-black" name="type" id="type">
-                <option value="Chandail">Chandail</option>
-                <option value="Kangourou">Kangourou</option>
-                <option value="Accessoire">Accessoire</option>
+                <option value="chandails">Chandail</option>
+                <option value="kangourou">Kangourou</option>
+                <option value="accessoire">Accessoire</option>
             </select>
             @error('type')
                 <span class="text-danger">{{ $message }}</span>

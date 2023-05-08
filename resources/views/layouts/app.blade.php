@@ -37,7 +37,8 @@
                 <div class="w3-dropdown-hover w3-hide-small">
                     <button class="w3-padding-large w3-button w3-hover-red" title="More">Article <i class="fa fa-caret-down"></i></button>     
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                        <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Créer</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles')}}">Gérer articles</a>
+                        <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Ajouter article</a>
                     </div>
                 </div>
 
@@ -101,6 +102,7 @@
             <div class="w3-dropdown-hover w3-hide-small w3-right">
                 <button class="w3-padding-large w3-button w3-hover-red" title="Usager">{{ Session::get('user') }} <i class="fa fa-caret-down"></i></button>     
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('commandes.index')}}">Mes commandes</a>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Mon compte</a>
                     <form method="POST" action="{{ route('logout') }}" >
                         @csrf

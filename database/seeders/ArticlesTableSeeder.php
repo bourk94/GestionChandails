@@ -20,7 +20,7 @@ class ArticlesTableSeeder extends Seeder
             [
                 [
                     'nom' => 't-shirt',
-                    'type' => 'vêtement',
+                    'type' => 'chandails',
                     'description' => 't-shirt',
                     'created_at'=> date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
@@ -28,7 +28,7 @@ class ArticlesTableSeeder extends Seeder
 
                 [
                     'nom' =>'kangourous',
-                    'type' => 'vêtement',
+                    'type' => 'kangourou',
                     'description' => 'kangourous',
                     'created_at'=> date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s')
