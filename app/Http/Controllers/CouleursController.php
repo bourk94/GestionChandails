@@ -47,7 +47,7 @@ class CouleursController extends Controller
             return redirect()->route('couleurs')->with('message', "Ajout de la couleur " . $couleur->nom_couleur . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('couleurs')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('couleurs')->with('message', 'L\'ajout n\'a pas fonctionné!');
         }
 
         return redirect()->route('couleurs');
@@ -96,7 +96,7 @@ class CouleursController extends Controller
             return redirect()->route('couleurs')->with('message', "Modification de la couleur " . $couleur->nom_couleur . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('couleurs')->withErrors(['La modification n\'a pas fonctionnée']);
+            return redirect()->route('couleurs')->with('message', 'La modification n\'a pas fonctionnée');
         }
 
         return redirect()->route('couleurs');

@@ -3,25 +3,29 @@
 
     <div class="padding">
 
-        <h1 class="center">Liste des tailles</h1>
+        <h1 class="center">Liste des articles</h1>
 
-        <a href="{{ route('tailles.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une taille</a>
+        <a href="{{ route('articles.createArticle') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter un article</a>
 
         <br>
 
         <div style="overflow-x: auto;">
             <table class="customers w3-border w3-bordered">
                 <tr>
-                    <th id="ColListeCouleur">Taille/Format</th>
+                    <th id="ColListeCouleur">nom</th>
+                    <th id="ColListeCouleur">type</th>
+                    <th id="ColListeCouleur">description</th>
                     <th></th>
                     <th></th>
                 </tr>
-                @if (count($tailles))
-                    @foreach ($tailles as $taille)
+                @if (count($articles))
+                    @foreach ($articles as $article)
                         <tr>
-                            <td>{{ $taille->format }}</td>                  
+                            <td>{{ $article->nom }}</td>    
+                            <td>{{ $article->type }}</td>
+                            <td>{{ $article->description }}</td>              
                             <td>
-                                <a class="a_decoration_none" href="{{ route('tailles.edit', [$taille->id]) }}">
+                                <a class="a_decoration_none" href="{{ route('articles.edit', [$article->id]) }}">
                                     <span>
                                         <button class="w3-button w3-block" type="button"><strong>Modifier</strong></button>
                                     </span>
@@ -29,10 +33,10 @@
                             </td>
                             <td>
                                 <a class="close">
-                                    <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
+                                    <form method="POST" action="{{ route('articles.destroy', [$article->id]) }}">
                                         @csrf
                                             @method('DELETE')
-                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')">&times;</button></span>
+                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer l''article{{ $article->nom }} ?')">&times;</button></span>
                                     </form>
                                 </a>
                             </td>
@@ -41,7 +45,7 @@
                 @else
                     <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
                     <tr>
-                        <td colspan="3">Il n'y a aucune taille</td>
+                        <td colspan="3">Il n'y a aucun article</td>
                     </tr>
                     <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
                 @endif
@@ -54,6 +58,6 @@
 
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
 
 @endsection

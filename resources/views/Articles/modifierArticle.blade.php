@@ -3,72 +3,74 @@
 @section('title', "modification/suppression d'un article")
 @section('contenu')
 
-    <form method="POST" action="{{ route('articles.update', [$article->id]) }}">
-        @csrf
-        @method('PATCH')
-        <div class="card__padding">
-            <div class="card__container">
-                <div class="flex__center">
-                    <div>
-                        <!--les champs que l'admin peut modifier-->
-                        <!--nom, type, description, prix-->
-                        <h2>Modifier un article</h2>
-                        <div>
-                            <label for="nomArticle">Nouveau nom d'article :</label>
-                            <input type="text" class="@error('description') is-invalid @enderror" name="nom"
-                                id="nom" value="{{ old('nom', $article->nom) }}">
+    <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
-                            @error('nom')
-                                <span class="text-danger">{{ $messsage }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="typeArticle">Nouveau type d'article :</label>
-                            <select class="@error('description') is-invalid @enderror" name="type" id="type"
-                                value="{{ old('type', $article->type) }}">
+        <h1 class="center">Modifier un article</h1>
 
-                                <option value="Chandail">Chandail</option>
+        <form class="w3-container" method="POST" action="{{ route('articles.update', [$article->id]) }}">
+            @csrf
+            @method('PATCH')
 
-                                <option value="Kangourou">Kangourou</option>
+            <div class="w3-section">
+                <label for="nomArticle">Nouveau nom d'article :</label>
+                <input type="text"
+                    class="@error('description') is-invalid @enderror w3-input w3-border w3-hover-border-black"
+                    style="width:100%;" name="nom" id="nom" value="{{ old('nom', $article->nom) }}">
 
-                                <option value="Accessoire">Accessoire</option>
-
-                            </select>
-                            @error('type')
-                                <span class="text-danger">{{ $messsage }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="descriptionArticle">Nouvelle description :</label>
-                            <textarea class="@error('description') is-invalid @enderror" name="description" class="description" id="description"
-                                value="{{ old('description', $article->description) }}"></textarea>
-
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
+                @error('nom')
+                    <span class="text-danger">{{ $messsage }}</span>
+                @enderror
             </div>
-        </div>
-        <div class="flex__center margin__top">
-            <button class="btn bg__orange color__white" type="submit">Modifier un article</button>
-        </div>
-    </form>
 
+            <div class="w3-section">
+                <label for="typeArticle">Nouveau type d'article :</label>
+                <select class="@error('description') is-invalid @enderror w3-input w3-border w3-hover-border-black"
+                    style="width:100%;" name="type" id="type" value="{{ old('type', $article->type) }}">
 
-    <!--Formulaire de suppression d'un article-->
+                    <option value="Chandail">Chandail</option>
 
-    <form method="POST" action="{{ route('articles.destroy', [$article->id]) }}">
-        @csrf
-        @method('DELETE')
-        <div class="center">
+                    <option value="Kangourou">Kangourou</option>
+
+                    <option value="Accessoire">Accessoire</option>
+
+                </select>
+                @error('type')
+                    <span class="text-danger">{{ $messsage }}</span>
+                @enderror
+            </div>
+
+            <div class="w3-section">
+                <label for="descriptionArticle">Nouvelle description :</label>
+                <textarea class="@error('description') is-invalid @enderror  w3-input w3-border w3-hover-border-black"
+                    style="width:100%;" name="description" class="description" id="description"
+                    value="{{ old('description', $article->description) }}"></textarea>
+
+                @error('description')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <br>
+
+            <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Modifier un article</button>
+        </form>
+
+        <br>
+
+        <form class="w3-container" method="POST" action="{{ route('articles.destroy', [$article->id]) }}">
+            @csrf
+            @method('DELETE')
             <button type="submit"
                 onclick="return confirm('Êtes-vous certain de vouloir supprimer l''article {{ $article->nom }} ?')"
-                class="buttonSite">Supprimer
-            </button>
+                class="w3-button w3-block w3-black w3-hover-red">Supprimer</button>
+        </form>
+
+        <br>
+
+        <div class="center">
+            <a href="{{ route('accueil') }}">Retour</a>
         </div>
-    </form>
+    </div>
 
 
     <!--SCRIPTS DE VALIDATION-->

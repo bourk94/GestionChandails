@@ -42,7 +42,7 @@ class TaillesController extends Controller
             return redirect()->route('tailles')->with('message', "Ajout de la taille " . $taille->format . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('tailles')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('tailles')->with('message', 'L\'ajout n\'a pas fonctionné!');
         }
 
         return redirect()->route('tailles');
@@ -87,7 +87,7 @@ class TaillesController extends Controller
             return redirect()->route('tailles')->with('message', "Modification de la taille " . $taille->format . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('tailles')->withErrors(['La modification n\'a pas fonctionnée']);
+            return redirect()->route('tailles')->with('message', 'La modification n\'a pas fonctionnée');
         }
 
         return redirect()->route('tailles');

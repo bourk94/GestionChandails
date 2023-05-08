@@ -141,6 +141,9 @@ Route::patch('/campagnes/{id}/modifier/',
 
 
 //Articles sans campagne
+Route::get('/articles',
+[ArticlesController::class, 'index'])->name('articles');
+
 Route::get('articles/createArticle',
 [ArticlesController::class, 'createArticle'])->name('articles.createArticle')->middleware('auth');
 
@@ -155,6 +158,11 @@ Route::get('articles/createArticleCampagne',
 Route::post('articlescampagnes',
 [ArticlesController::class, 'storeArticleCampagne'])->name('articles.storeArticleCampagne')->middleware('auth');
 
+Route::get('articlescampagnes/{id}/modifier/',
+[ArticlesController::class, 'editArticleCampagne'])->name('articles.editArticleCampagne'); //->middleware('auth');
+
+Route::patch('/articlescampagnes/{id}/modifier',
+[ArticlesController::class, 'updateArticleCampagne'])->name('articles.updateArticleCampagne'); //->middleware('auth');
 
 Route::delete('/articles/{id}',
 [ArticlesController::class, 'destroy'])->where('id', '[0-9]+')->name('articles.destroy'); //->middleware('auth');
@@ -162,8 +170,8 @@ Route::delete('/articles/{id}',
 Route::get('/articles/{id}/modifier/',
 [ArticlesController::class, 'edit'])->where('id', '[0-9]+')->name('articles.edit'); //->middleware('auth');
 
-// Route::patch('/articles/{id}',
-// [ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
+Route::patch('/articles/{id}/modifier',
+[ArticlesController::class, 'update'])->name('articles.update'); //->middleware('auth');
 
 // Route::get('articles/{id}/edit',
 // [ArticlesController::class, 'edit'])->name('articles.edit'); //->middleware('auth');

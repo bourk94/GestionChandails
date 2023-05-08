@@ -65,10 +65,9 @@ class ArticlesController extends Controller
             $article = new Article($request->all());
             $article->save();
 
-            return redirect()->route('accueil')->with('message', "Ajout de l'article " . $article->nom . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->with('message', ['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('accueil')->with('message', 'L\'ajout n\'a pas fonctionné!');
         }
 
 
@@ -95,18 +94,81 @@ class ArticlesController extends Controller
      */
     public function showArticleCampagne(Article $article)
     {
-        return view('articles.show', compact('article'));
+        // return view('articles.show', compact('article'));
     }
 
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * Pour les articles
      */
     public function edit($id)
     {
         $article = Article::findOrFail($id);
 
         return view('articles.modifierArticle', compact('article'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * 
+     * Pour les articles campagne
+     */
+    public function editArticleCampagne($id)
+    {
+        $articles_campagnes = DB::table('article_campagne')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->where('article_campagne.id', '=' , $id)
+            ->get();
+
+        $couleurs = Couleur::all();
+        $tailles = Taille::all();
+        $campagnes = Campagne::all();
+
+        log::debug($articles_campagnes);
+
+        return view('articles.modifierArticleCampagne', compact('articles_campagnes', 'couleurs', 'tailles', 'campagnes'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * Pour les articles campagne
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateArticleCampagne(ArticleCampagneRequest $request, $id)
+    {
+        try {
+            $articles = Article::all();
+            $couleurs = Couleur::all();
+            $tailles = Taille::all();
+            $campagnes = Campagne::all();
+
+            //Les champs du update (nom, type, description, prix, quantite_max)
+
+            $article->nom = $request->nom;
+            $article->type = $request->type;
+            $article->description = $request->description;
+            $article->quantite_max = $request->quantite_max;
+            $article->prix = $request->prix;
+
+            $article->save();
+
+            return redirect()->route('accueil')->with('message', "Modification de " . $article->nom . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->with('message', 'La modification n\'a pas fonctionnée');
+        }
+
+        return redirect()->route('accueil');
     }
 
     /**
@@ -121,7 +183,7 @@ class ArticlesController extends Controller
         try {
             $article = Article::findOrFail($id);
 
-            //Les champs du update (nom, type, description, prix)
+            //Les champs du update (nom, type, description)
 
             $article->nom = $request->nom;
             $article->type = $request->type;
@@ -132,7 +194,7 @@ class ArticlesController extends Controller
             return redirect()->route('accueil')->with('message', "Modification de " . $article->nom . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['La modification n\'a pas fonctionnée']);
+            return redirect()->route('accueil')->with('message', 'La modification n\'a pas fonctionnée');
         }
 
         return redirect()->route('accueil');
@@ -216,7 +278,7 @@ class ArticlesController extends Controller
                         $uploadedFile->move($path, $nomFichierUnique);
                     } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
                         Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-                        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+                        return redirect()->route('accueil')->with('message', 'L\'ajout n\'a pas fonctionné');
                     }
 
                     $article->image = $nomFichierUnique;
@@ -229,7 +291,7 @@ class ArticlesController extends Controller
             Log::debug($e);
         }
 
-        return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné']);
+        return redirect()->route('accueil')->with('message', 'L\'ajout n\'a pas fonctionné');
     }
 
 
