@@ -45,7 +45,7 @@
                 <div>
                     @if (count($couleurs))
                         <label for="couleurArticle">Couleur :</label>
-                        <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="couleur_id" id="couleur">
+                        <select class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="couleur_id" id="couleur_id">
                             @foreach ($couleurs as $couleur)
                                 <option value="{{ $couleur->id }}">{{ $couleur->nom_couleur }}</option>
                             @endforeach

@@ -22,7 +22,7 @@ return new class extends Migration
         )
         BEGIN
         
-            INSERT INTO article_campagne(article_id, campagne_id, couleur_id, taille_id, prix, created_at, updated_at)
+            INSERT INTO article_campagne(article_id, campagne_id, couleur, taille, prix, created_at, updated_at)
             VALUES (idArticle, idCampagne, idCouleur, idTaille,  _prix, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
         END";
         DB::unprepared($procedure);

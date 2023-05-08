@@ -35,7 +35,8 @@ class CommandesController extends Controller
                 'couleurs.code_couleur as code_couleur',
                 'tailles.format as format',
                 'usagers.id as usager_id',
-                'campagnes.nom_campagne as nom_campagne'
+                'campagnes.nom_campagne as nom_campagne',
+                'article_campagne_commande.statut as statut'
             )
             ->get();
 
