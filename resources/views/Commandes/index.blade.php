@@ -67,7 +67,8 @@
                             <td>{{ $commande->statut }}</td>
                             @if (Auth::user()->type == 'admin')
                                 <td>
-                                    <form action="{{ route('commandes.update', [$commande->commande_id]) }}" method="POST">
+                                    <form action="{{ route('commandes.update', [$commande->commande_id]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="commande_id" value="{{ $commande->commande_id }}">

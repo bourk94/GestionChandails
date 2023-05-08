@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('contenu')
+@if (Auth::user()->type == 'admin')
 
     <div class="padding">
 
@@ -59,5 +60,8 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
+@else
+<script> window.location.href = "{{ url()->previous() }}"; </script>
+@endif
 
 @endsection
