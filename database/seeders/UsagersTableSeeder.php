@@ -17,17 +17,17 @@ class UsagersTableSeeder extends Seeder
         DB::table('usagers')->insert(
             [
                 [
-                    'nom' => 'Client',
-                    'prenom' => 'Client',                    
+                    'nom' => 'Blais',
+                    'prenom' => 'Georges',                    
                     'password' => Hash::make('Client'),
-                    'email' => 'client@client.com',
+                    'email' => 'client@hotmail.com',
                     'type' => 'client',
                     'created_at' =>date('Y-m-d H:i:s'),
                     'updated_at' =>date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom' => 'Admin',
-                    'prenom' => 'Admin',
+                    'nom' => 'Dehoule',
+                    'prenom' => 'Fabrice',
                     'password' => Hash::make('Admin'),
                     'email' => 'admin@cegeptr.qc.ca',
                     'type' => 'admin',
@@ -45,8 +45,8 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom' => 'Client1',
-                    'prenom' => 'Client1',                    
+                    'nom' => 'Hamel',
+                    'prenom' => 'Roger',                    
                     'password' => Hash::make('Client'),
                     'email' => 'testprojetfabrice.n4r1w@8shield.net',
                     'type' => 'client',                    
