@@ -149,3 +149,13 @@ BEGIN
 
 END//
 DELIMITER ;
+
+-- Création d'une procédure qui modifie le statut d'un article_campagne_commande
+DELIMITER //
+  CREATE PROCEDURE updateStatutArticleCampagneCommande(IN idArticleCampagneCommande INT, IN statut VARCHAR(255))
+       BEGIN
+           UPDATE article_campagne_commande
+           SET statut = statut
+           WHERE id = idArticleCampagneCommande;
+       END//  
+DELIMITER ;
