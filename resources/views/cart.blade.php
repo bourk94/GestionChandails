@@ -97,7 +97,7 @@
 
       <form class="w3-container" method="POST" action="{{ route('login') }}">
         @csrf
-
+            <input type="hidden" name="modal" value="modal">
             <div class="w3-section">
                 <label for="email">Adresse courriel :</label>
                 <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="email" id="email" name="email" value="{{ old('email') }}" required>
