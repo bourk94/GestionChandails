@@ -3,6 +3,8 @@
 @section('title', 'Modifier un article de campagne')
 @section('contenu')
 
+
+
     @if (count($articles_campagnes))
         @foreach ($articles_campagnes as $article_campagne)
             <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
@@ -102,7 +104,6 @@
                     <a href="{{ route('accueil') }}">Retour</a>
                 </div>
             </div>
-
         @endforeach
     @endif
 

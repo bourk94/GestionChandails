@@ -1,11 +1,13 @@
 @extends('layouts.app')
 @section('contenu')
 
+
     <div class="padding">
 
         <h1 class="center">Liste des articles</h1>
 
-        <a href="{{ route('articles.createArticle') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter un article</a>
+        <a href="{{ route('articles.createArticle') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter un
+            article</a>
 
         <br>
 
@@ -21,9 +23,9 @@
                 @if (count($articles))
                     @foreach ($articles as $article)
                         <tr>
-                            <td>{{ $article->nom }}</td>    
+                            <td>{{ $article->nom }}</td>
                             <td>{{ $article->type }}</td>
-                            <td>{{ $article->description }}</td>              
+                            <td>{{ $article->description }}</td>
                             <td>
                                 <a class="a_decoration_none" href="{{ route('articles.edit', [$article->id]) }}">
                                     <span>
@@ -35,8 +37,9 @@
                                 <a class="close">
                                     <form method="POST" action="{{ route('articles.destroy', [$article->id]) }}">
                                         @csrf
-                                            @method('DELETE')
-                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer l''article{{ $article->nom }} ?')">&times;</button></span>
+                                        @method('DELETE')
+                                        <span><button class="w3-button w3-block" type="submit"
+                                                onclick="return confirm('Êtes-vous certain de vouloir supprimer l''article{{ $article->nom }} ?')">&times;</button></span>
                                     </form>
                                 </a>
                             </td>
@@ -59,5 +62,6 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
+
 
 @endsection

@@ -3,6 +3,8 @@
 @section('title', 'Créer un administrateur')
 @section('contenu')
 
+@if(Auth::user()->type == 'superadmin')
+
     <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
         <h1 class="center">Créer un administrateur</h1>
@@ -43,5 +45,10 @@
             <a href="{{ route('accueil') }}">Retour</a>
         </div>
     </div>
+@else
+    <div class="center">
+        <h2>Page indisponible</h2>
+    </div>
+@endif
 
 @endsection

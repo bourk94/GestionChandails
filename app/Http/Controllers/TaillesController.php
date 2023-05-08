@@ -6,6 +6,7 @@ use App\Http\Requests\TailleRequest;
 use App\Models\Taille;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Auth;
 
 class TaillesController extends Controller
 {
@@ -16,6 +17,11 @@ class TaillesController extends Controller
     {
         $tailles = Taille::all();
 
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('tailles.index', compact('tailles'));
     }
 
@@ -24,6 +30,11 @@ class TaillesController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('tailles.create');
     }
 
@@ -62,6 +73,11 @@ class TaillesController extends Controller
     public function edit($id)
     {
         $taille = Taille::findOrFail($id);
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
 
         return view('tailles.modifierTaille', compact('taille'));
     }

@@ -3,6 +3,7 @@
 @section('title', 'Créer un article')
 @section('contenu')
 
+
 <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
         
     <h1 class="center">Créer un article</h1>
@@ -17,6 +18,7 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
 
+            <br>
             <label for="typeArticle">Type de l'article :</label>
             <select class="@error('type') is-invalid @enderror w3-input w3-border w3-hover-border-black" name="type" id="type">
                 <option value="chandails">Chandail</option>

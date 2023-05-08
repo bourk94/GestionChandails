@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('contenu')
 
+@if(Auth::user()->type == 'admin')
+
     <div class="padding center">
 
         <br>
@@ -92,5 +94,11 @@
             `@foreach ($couleurs as $couleur) .{{ $couleur->nom_couleur }} .button span { background-color: {{ $couleur->code_couleur }}; } @endforeach`;
         document.head.appendChild(couleurs);
     </script>
+
+    @else
+        <div class="center">
+            <h2>Page indisponible</h2>
+        </div>
+    @endif
 
 @endsection

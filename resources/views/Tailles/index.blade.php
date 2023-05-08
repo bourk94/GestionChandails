@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('contenu')
 
+
+
     <div class="padding">
 
         <h1 class="center">Liste des tailles</h1>
@@ -19,7 +21,7 @@
                 @if (count($tailles))
                     @foreach ($tailles as $taille)
                         <tr>
-                            <td>{{ $taille->format }}</td>                  
+                            <td>{{ $taille->format }}</td>
                             <td>
                                 <a class="a_decoration_none" href="{{ route('tailles.edit', [$taille->id]) }}">
                                     <span>
@@ -31,8 +33,9 @@
                                 <a class="close">
                                     <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
                                         @csrf
-                                            @method('DELETE')
-                                            <span><button class="w3-button w3-block" type="submit" onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')">&times;</button></span>
+                                        @method('DELETE')
+                                        <span><button class="w3-button w3-block" type="submit"
+                                                onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')">&times;</button></span>
                                     </form>
                                 </a>
                             </td>
@@ -55,5 +58,6 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
+
 
 @endsection
