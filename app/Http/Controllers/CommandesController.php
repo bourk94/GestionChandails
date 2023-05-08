@@ -28,6 +28,7 @@ class CommandesController extends Controller
             ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
             ->select(
                 'commandes.date_commande as date',
+                'commandes.id as commande_id',
                 'articles.nom as nom_article',
                 'article_campagne_commande.quantite as quantite',
                 'article_campagne_commande.montant_total as montant',
@@ -36,7 +37,9 @@ class CommandesController extends Controller
                 'tailles.format as format',
                 'usagers.id as usager_id',
                 'campagnes.nom_campagne as nom_campagne',
-                'article_campagne_commande.statut as statut'
+                'article_campagne_commande.statut as statut',
+                'usagers.nom as usager_nom',
+                'usagers.prenom as usager_prenom',
             )
             ->get();
 
@@ -66,33 +69,32 @@ class CommandesController extends Controller
             $lastIdCommande = DB::table('commandes')->latest('id')->first();
 
             //dd($cartItems);
-        foreach ($cartItems as $item) {
+            foreach ($cartItems as $item) {
 
-            $article_campagne = DB::table('article_campagne')
-                ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
-                ->where('article_id', $item->attributes->id_article)
-                ->where('campagnes.statut', 'like', 'en cours')
-                ->where('couleur', $item->attributes->id_couleur)
-                ->where('taille', $item->attributes->id_taille)->get();
+                $article_campagne = DB::table('article_campagne')
+                    ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+                    ->where('article_id', $item->attributes->id_article)
+                    ->where('campagnes.statut', 'like', 'en cours')
+                    ->where('couleur', $item->attributes->id_couleur)
+                    ->where('taille', $item->attributes->id_taille)->get();
 
-            if (count($article_campagne) > 0) {
-                $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?, ?, ?)', [
-                    $lastIdCommande->id,
-                    $request->idUsager,
-                    $item->id,
-                    $item->quantity,
-                    $item->price * $item->quantity
-                ]);
+                if (count($article_campagne) > 0) {
+                    $procedureCreateCommandeArticle = DB::select('CALL createCommandeArticle (?, ?, ?, ?, ?)', [
+                        $lastIdCommande->id,
+                        $request->idUsager,
+                        $item->id,
+                        $item->quantity,
+                        $item->price * $item->quantity
+                    ]);
 
-                DB::prepareBindings($procedureCreateCommandeArticle);
-                DB::commit();     
-                } 
-            else {
-                return redirect()->route('cart.list')->with('message', 'L\'article ' . $item->name . ' n\'est pas disponible dans la couleur ' . $item->attributes->couleur . ' et la taille ' . $item->attributes->taille . '.');
+                    DB::prepareBindings($procedureCreateCommandeArticle);
+                    DB::commit();
+                } else {
+                    return redirect()->route('cart.list')->with('message', 'L\'article ' . $item->name . ' n\'est pas disponible dans la couleur ' . $item->attributes->couleur . ' et la taille ' . $item->attributes->taille . '.');
+                }
             }
-        }
-        \Cart::clear();
-        return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
+            \Cart::clear();
+            return redirect()->route('cart.list')->with('message', "Vous avez bien commandé l'article!");
         } catch (\Throwable $e) {
             Log::debug($e);
             return redirect()->route('cart.list')->with('message', 'Une erreur est survenue lors de votre commande.');
@@ -112,7 +114,7 @@ class CommandesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $article_campagne_commande = DB::table('article_campagne_commande')->where('commande_id', $id)->get();
     }
 
     /**
@@ -120,7 +122,22 @@ class CommandesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+
+            $article_campagne_commande = DB::table('article_campagne_commande')->where('commande_id', $request->commande_id)->get();
+
+            if (count($article_campagne_commande) == 0) {
+                return redirect()->route('commandes.index')->withErrors(['La modification n\'a pas fonctionné!']);
+            }
+
+            $procedure = DB::select('CALL updateStatutArticleCampagneCommande(?,?)', [$request->commande_id, $request->statut]);
+            DB::prepareBindings($procedure);
+            DB::commit();
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('commandes.index')->withErrors(['La modification n\'a pas fonctionné!']);
+        }
+        return redirect()->route('commandes.index')->with('message', "Modification de la commande " . $request->date_commande . " réussi!");
     }
 
     /**

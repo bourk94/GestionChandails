@@ -10,16 +10,18 @@
             <table class="customers w3-border w3-bordered">
                 <tr>
                     <th>Nom de la campagne</th>
-                    <th> Date de commande</th>
+                    @if (Auth::user()->type == 'admin')
+                        <th id="ColListeCouleur">Nom du client</th>
+                    @endif
+                    <th id="ColListeCouleur"> Date de commande</th>
                     <th id="ColListeCouleur">Nom de l'article</th>
                     <th id="ColListeCouleur">Couleur</th>
                     <th id="ColListeCouleur">Visualisation</th>
                     <th id="ColListeCouleur">Quantitée</th>
-
                     <th id="ColListeCouleur">Montant dû</th>
                     <th id="ColListeCouleur">État de la commande</th>
                     @if (Auth::user()->type == 'admin')
-                        <td id="ColListeCouleur"> Modifier le statut</td>
+                        <th id="ColListeCouleur"> Modifier le statut</th>
                     @endif
                 </tr>
                 @if (!Auth::user()->type == 'admin')
@@ -32,12 +34,8 @@
                                 <td>{{ $commande->nom_article }}</td>
                                 <td>{{ $commande->nom_couleur }}</td>
                                 <td style="background: {{ $commande->code_couleur }}"></td>
-                                <td>
-                                    {{ $commande->quantite }}
-                                </td>
-                                <td>
-                                    {{ $commande->montant }} $
-                                </td>
+                                <td>{{ $commande->quantite }}</td>
+                                <td>{{ $commande->montant }} $</td>
                                 <td>{{ $commande->statut }}</td>
 
                             </tr>
@@ -53,6 +51,9 @@
                     @foreach ($commandes as $commande)
                         <tr>
                             <td>{{ $commande->nom_campagne }}</td>
+                            @if (Auth::user()->type == 'admin')
+                                <td>{{ $commande->usager_nom }} {{ $commande->usager_prenom }}</td>
+                            @endif
                             <td>{{ $commande->date }}</td>
                             <td>{{ $commande->nom_article }}</td>
                             <td>{{ $commande->nom_couleur }}</td>
@@ -64,18 +65,22 @@
                                 {{ $commande->montant }} $
                             </td>
                             <td>{{ $commande->statut }}</td>
-                            <td>
-                                <form action="" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="idCommande" value="{{}}">
-                                    <select name="statut" id="statut" class="btn">
-                                        <option value="payé">Payé</option>
-                                        <option value="pas récolté">Pas récolté</option>
-                                        <option value="récolté">récolté</option>
-                                    </select>
-                                    <button type="submit" class="w3-button w3-block">Modifier</button>
-                                </form>
+                            @if (Auth::user()->type == 'admin')
+                                <td>
+                                    <form action="{{ route('commandes.update', [$commande->commande_id]) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="commande_id" value="{{ $commande->commande_id }}">
+                                        <select name="statut" id="statut" class="btn">
+                                            <option value="Non payé">Non payé</option>
+                                            <option value="Payé">Payé</option>
+                                            <option value="Ron ramassé">Non ramassé</option>
+                                            <option value="Ramassé">Ramassé</option>
+                                        </select>
+                                        <button type="submit" class="w3-button w3-block">Modifier</button>
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 @endif
