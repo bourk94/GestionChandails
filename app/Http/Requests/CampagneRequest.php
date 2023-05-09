@@ -26,9 +26,7 @@ class CampagneRequest extends FormRequest
             'date_debut_campagne' => 'required|date',
             'date_fin_campagne' => 'required|date',
             'date_debut_collecte' => 'required|date',
-            'date_fin_collecte' => 'required|date',   
-            'progression' => 'required',
-            'statut' => 'required'
+            'date_fin_collecte' => 'required|date',               
         ];
     }
     public function messages(){

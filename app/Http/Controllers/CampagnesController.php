@@ -84,10 +84,10 @@ class CampagnesController extends Controller
         $articles = Article::all();
         $campagnes = Campagne::all();
 
-        if (Auth::user()->type != 'admin') 
-        {            
-            return redirect()->back();
-        }
+        // if (Auth::user()->type != 'admin') 
+        // {            
+        //     return redirect()->back();
+        // }
 
         return view('campagnes.createCampagne', compact('articles', 'campagnes'));
     }
@@ -105,7 +105,7 @@ class CampagnesController extends Controller
             return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
         } catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
+            return redirect()->route('accueil')->with('message', 'L\'ajout n\'a pas fonctionné!');
         }
     }
 
