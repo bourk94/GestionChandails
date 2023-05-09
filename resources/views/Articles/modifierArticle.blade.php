@@ -80,8 +80,6 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\ArticleRequest') !!}
+    
 
-    @else
-    <script> window.location.href = "{{ url()->previous() }}"; </script>
-    @endif
 @endsection
