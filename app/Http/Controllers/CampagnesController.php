@@ -84,10 +84,10 @@ class CampagnesController extends Controller
         $articles = Article::all();
         $campagnes = Campagne::all();
 
-        // if (Auth::user()->type != 'admin') 
-        // {            
-        //     return redirect()->back();
-        // }
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
 
         return view('campagnes.createCampagne', compact('articles', 'campagnes'));
     }

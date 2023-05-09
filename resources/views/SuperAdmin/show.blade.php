@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('contenu')
+
     @if (Auth::user()->type == 'superadmin')
         <div class="padding">
 
@@ -50,8 +51,8 @@
             </div>
         </div>
     @else
-        <script>
-            window.location.href = "{{ url()->previous() }}";
-        </script>
+        <div class="center">
+            <h2>Page indisponible</h2>
+        </div>
     @endif
 @endsection

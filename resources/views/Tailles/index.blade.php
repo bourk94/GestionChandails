@@ -76,7 +76,7 @@
 
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
+        {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
 
 
 @endsection

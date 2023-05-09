@@ -2,6 +2,7 @@
 
 @section('title', 'Mon compte')
 @section('contenu')
+
     @if (Auth::user()->type == 'admin')
         <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
@@ -83,8 +84,9 @@
             </div>
         </div>
     @else
-        <script>
-            window.location.href = "{{ url()->previous() }}";
-        </script>
+        <div class="center">
+            <h2>Page indisponible</h2>
+        </div>
     @endif
+
 @endsection
