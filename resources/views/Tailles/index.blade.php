@@ -2,12 +2,12 @@
 @section('title', 'Tailles')
 @section('contenu')
 
-        <div class="padding">
-
-
-
     <div class="padding">
 
+
+
+        <div class="padding">
+            <br>
             <a href="{{ route('tailles.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une taille</a>
 
             <br>
@@ -79,4 +79,4 @@
         {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
 
 
-@endsection
+    @endsection
