@@ -20,7 +20,9 @@
         <div class="w3-bar navColor w3-card">
             <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
             
-            <a href="{{ route('accueil') }}" class="w3-bar-item w3-padding-large a_decoration_none">Logo</a>
+            <a href="{{ route('accueil') }}" class="w3-bar-item w3-padding-large a_decoration_none">
+                <img src="{{asset('img/logo/logoBlanc.png')}}" style="width: 24px;" alt="Logo">
+            </a>
         <!-- Dropdown pour l'administrateur -->
         @auth
             @if (Auth::user()->type == 'admin')
@@ -55,11 +57,13 @@
                 <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
                     <p class="center w3-border w3-red">{{ Session::get('user') }}</p>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Mon compte</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('commandes.index')}}">Mes commandes</a>
                     <p class="center w3-border w3-red">Campagne</p>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('campagnes.create')}}">Créer</a>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticleCampagne')}}">Créer un article</a>
                     <p class="center w3-border w3-red">Article</p>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Créer</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{route('articles.createArticle')}}">Ajouter article</a>
                     <p class="center w3-border w3-red">Couleur / Taille</p>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('couleurs') }}">Gérer couleurs</a>
                     <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('tailles') }}">Gérer tailles</a>
@@ -95,7 +99,12 @@
         @if (!Auth::user())
             <a class="w3-bar-item w3-padding-large w3-hover-red w3-hide-small a_decoration_none w3-right" href="{{ route('usagers.login') }}">Connexion</a>
             <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" href="{{ route('usagers.login') }}"><i class="fa fa-sign-in"></i></a>
-            @livewire('cart-counter')
+            <div class="w3-dropdown-hover w3-hide-small w3-right">
+                @livewire('cart-counter')
+            </div>
+            <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+                @livewire('cart-counter')
+            </div>
         @endif
 
         @if (Auth::user())
@@ -115,7 +124,15 @@
                 <button class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-hover-red w3-right" type="submit"><a><i class="fa fa-power-off"></i></a></button>
             </form>
             @if (Auth::user()->type == 'client')
-                @livewire('cart-counter')
+                <div class="w3-dropdown-hover w3-hide-small w3-right">
+                    @livewire('cart-counter')
+                </div>
+                <div id="nav" class="w3-bar-block w3-white w3-border w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+                    <p class="center w3-border w3-red">{{ Session::get('user') }}</p>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('usagers.edit')}}">Mon compte</a>
+                    <a class="w3-bar-item w3-button w3-hover-red" href="{{ route('commandes.index')}}">Mes commandes</a>
+                    @livewire('cart-counter')
+                </div>
             @endif
         @endif
         <!--  -->
