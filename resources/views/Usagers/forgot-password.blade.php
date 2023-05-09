@@ -7,7 +7,7 @@
         
     <h1 class="center">Mot de passe oublié</h1>
 
-    <form class="w3-container" method="POST" action="{{ route('login') }}">
+    <form class="w3-container" method="POST" action="{{ route('password.request') }}">
     @csrf
 
         <div class="w3-section">
