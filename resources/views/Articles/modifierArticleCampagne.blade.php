@@ -2,12 +2,6 @@
 
 @section('title', 'Modifier un article de campagne')
 @section('contenu')
-    @if (Auth::user()->type == 'admin')
-        @if (count($articles_campagnes))
-            @foreach ($articles_campagnes as $article_campagne)
-                <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
-
-
 
     @if (count($articles_campagnes))
         @foreach ($articles_campagnes as $article_campagne)
@@ -97,7 +91,7 @@
 
 
                         <br>
-                        <button type="submit" class="w3-button w3-block w3-hover-red btnColor">modifier un article de la
+                        <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Modifier un article de la
                             campagne</button>
                     </form>
 
@@ -114,10 +108,5 @@
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
         {!! JsValidator::formRequest('App\Http\Requests\ArticleCampagneRequest') !!}
-    @else
-        <script>
-            window.location.href = "{{ url()->previous() }}";
-        </script>
-    @endif
 
 @endsection
