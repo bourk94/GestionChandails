@@ -17,12 +17,6 @@
                     value="{{ Auth::user()->id }}" hidden>
 
                 <div class="w3-section">
-                    <label for="email">Adresse courriel :</label>
-                    <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="email"
-                        id="email" name="email" value="{{ old('email') }}" required>
-                </div>
-
-                <div class="w3-section">
                     <label for="nom_campagne">Nom de la campagne</label>
                     <input type="text"
                         class="@error('nom_campagne') is-invalid @enderror w3-input w3-border w3-hover-border-black"
