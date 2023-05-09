@@ -99,10 +99,10 @@
             </div>
         </div>
     @else
-        <div>
-            <h2>Il n'y a aucun article</h2>
-            <a href="{{ route('articles.createArticle') }}" class="btn bg__orange color__white">Créer un
-                article</a>
+    <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+
+        <h1 class="center">Créer un article de campagne</h1>
+            <a href="{{ route('articles.createArticle') }}" class="w3-button w3-block w3-hover-red btnColor">Créer un article</a>
         </div>
     @endif
 
