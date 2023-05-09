@@ -261,11 +261,11 @@ class ArticlesController extends Controller
             });
 
             return redirect()->route('accueil')
-                ->with('success', 'Article supprimé avec succès.');
+                ->with('message', 'Article supprimé avec succès.');
         }
 
         return redirect()->route('articles.index')
-            ->with('error', 'Article non trouvé.');
+            ->with('message', 'Article non trouvé.');
     }
 
     /**
