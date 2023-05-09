@@ -40,7 +40,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <span><button class="w3-button w3-block" type="submit"
-                                                onclick="return confirm('Êtes-vous certain de vouloir supprimer la couleur {{ $couleur->nom_couleur }} ?')">&times;</button></span>
+                                            onclick="return confirm('Êtes-vous certain de vouloir supprimer la {{ $couleur->nom_couleur }} ?')">&times;</button></span>
                                     </form>
                                 </a>
                             </td>
