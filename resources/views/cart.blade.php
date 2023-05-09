@@ -88,38 +88,42 @@
 
 {{-- ----------------------------MODAL---------------------------- --}}
 
-<div id="modalLogin" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+<div class="w3-container">
+    <div id="modalLogin" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
-      <div class="w3-center"><br>
-        <a href="{{ route('accueil') }}" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</a>
-      </div>
+            <div class="w3-center"><br>
+            <a href="{{ route('accueil') }}" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</a>
+            </div>
 
-      <form class="w3-container" method="POST" action="{{ route('login') }}">
-        @csrf
-            <input type="hidden" name="modal" value="modal">
-            <div class="w3-section">
-                <label for="email">Adresse courriel :</label>
-                <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="email" id="email" name="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="w3-section">
-                <label for="password">Mot de passe :</label>
-                <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="password" id="password" name="password" required>
-            </div>
-        
-            <div class="center">
-                <a href="{{ route('usagers.create') }}">Créer un compte</a>
-            </div>
-            <br>
-            <div>
-                <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Connexion</button>
+            <form class="w3-container" method="POST" action="{{ route('login') }}">
+            @csrf
+                <input type="hidden" name="modal" value="modal">
+                <div class="w3-section">
+                    <label for="email">Adresse courriel :</label>
+                    <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="email" id="email" name="email" value="{{ old('email') }}" required>
+                </div>
+                <div class="w3-section">
+                    <label for="password">Mot de passe :</label>
+                    <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="password" id="password" name="password" required>
+                </div>
+
+                <div class="center">
+                    <a href="{{ route('usagers.create') }}">Créer un compte</a>
+                </div>
+
                 <br>
-                <a class="a_decoration_none" href="{{ route('password.request') }}"><button class="w3-button w3-block w3-hover-red btnColor" type="button">Mot de passe oublié</button></a>
-            </div>
-        </form>
-        <br>
+
+                <div>
+                    <button type="submit" class="w3-button w3-block w3-hover-red btnColor">Connexion</button>
+                    <br>
+                    <a class="a_decoration_none" href="{{ route('password.request') }}"><button class="w3-button w3-block w3-hover-red btnColor" type="button">Mot de passe oublié</button></a>
+                </div>
+            </form>
+            <br>
+        </div>
     </div>
-  </div>
+</div>
 
     @if (!Auth::User())
         <script>
