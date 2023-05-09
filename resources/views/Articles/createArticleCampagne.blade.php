@@ -3,7 +3,6 @@
 @section('title', 'Créer un article de campagne')
 @section('contenu')
 
-
     @if (count($articles))
         <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
@@ -113,9 +112,5 @@
     <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\ArticleCampagneRequest') !!}
-
-    @else
-<script> window.location.href = "{{ url()->previous() }}"; </script>
-@endif
 
 @endsection

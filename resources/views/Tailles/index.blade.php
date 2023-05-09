@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Tailles')
 @section('contenu')
-    @if (Auth::user()->type == 'admin')
+
         <div class="padding">
 
 
