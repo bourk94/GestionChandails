@@ -75,7 +75,7 @@
                                         <select name="statut" id="statut" class="btn">
                                             <option value="Non payé">Non payé</option>
                                             <option value="Payé">Payé</option>
-                                            <option value="Ron ramassé">Non ramassé</option>
+                                            <option value="Non ramassé">Non ramassé</option>
                                             <option value="Ramassé">Ramassé</option>
                                         </select>
                                         <button type="submit" class="w3-button w3-block">Modifier</button>
