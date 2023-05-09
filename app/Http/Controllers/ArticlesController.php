@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\ErrorHandler\Debug;
+use Auth;
 
 class ArticlesController extends Controller
 {
@@ -24,6 +25,11 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::all();
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
 
         return view('articles.index', compact('articles'));
     }
@@ -35,6 +41,10 @@ class ArticlesController extends Controller
      */
     public function createArticle()
     {
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
         return view('articles.createArticle');
     }
 
@@ -50,6 +60,12 @@ class ArticlesController extends Controller
         $couleurs = Couleur::all();
         $tailles = Taille::all();
         $campagnes = Campagne::all();
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('Articles.createArticleCampagne', compact('articles', 'couleurs', 'tailles', 'campagnes'));
     }
 
@@ -107,6 +123,11 @@ class ArticlesController extends Controller
     {
         $article = Article::findOrFail($id);
 
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('articles.modifierArticle', compact('article'));
     }
 
@@ -129,7 +150,10 @@ class ArticlesController extends Controller
         $tailles = Taille::all();
         $campagnes = Campagne::all();
 
-        log::debug($articles_campagnes);
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
 
         return view('articles.modifierArticleCampagne', compact('articles_campagnes', 'couleurs', 'tailles', 'campagnes'));
     }
@@ -209,6 +233,12 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+        
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         if ($article)
         {
             DB::transaction(function () use ($article)

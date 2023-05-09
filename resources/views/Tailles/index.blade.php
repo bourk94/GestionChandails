@@ -4,7 +4,9 @@
     @if (Auth::user()->type == 'admin')
         <div class="padding">
 
-            <h1 class="center">Liste des tailles</h1>
+
+
+    <div class="padding">
 
             <a href="{{ route('tailles.create') }}" class="w3-button w3-block w3-hover-red btnColor">Ajouter une taille</a>
 
@@ -44,7 +46,24 @@
                     @else
                         <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
                         <tr>
-                            <td colspan="3">Il n'y a aucune taille</td>
+                            <td>{{ $taille->format }}</td>
+                            <td>
+                                <a class="a_decoration_none" href="{{ route('tailles.edit', [$taille->id]) }}">
+                                    <span>
+                                        <button class="w3-button w3-block" type="button"><strong>Modifier</strong></button>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="close">
+                                    <form method="POST" action="{{ route('tailles.destroy', [$taille->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <span><button class="w3-button w3-block" type="submit"
+                                                onclick="return confirm('Êtes-vous certain de vouloir supprimer la taille {{ $taille->format }} ?')">&times;</button></span>
+                                    </form>
+                                </a>
+                            </td>
                         </tr>
                         <!-- FAIRE EN SORTE DE FAIRE UN JOLI MESSAGE S'IL N'Y A RIEN ! -->
                     @endif
@@ -57,10 +76,7 @@
 
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 
-        {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
-    @else
-        <script>
-            window.location.href = "{{ url()->previous() }}";
-        </script>
-    @endif
+    {!! JsValidator::formRequest('App\Http\Requests\TailleRequest') !!}
+
+
 @endsection

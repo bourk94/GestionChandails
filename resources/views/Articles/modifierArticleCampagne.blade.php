@@ -7,7 +7,11 @@
             @foreach ($articles_campagnes as $article_campagne)
                 <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
-                    <h1 class="center">Modifier un article de campagne</h1>
+
+
+    @if (count($articles_campagnes))
+        @foreach ($articles_campagnes as $article_campagne)
+            <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
                     <form class="w3-container" id="my-form"
                         action="{{ route('articles.updateArticleCampagne', [$article_campagne->id]) }}" method="POST"
@@ -103,11 +107,9 @@
                         <a href="{{ route('accueil') }}">Retour</a>
                     </div>
                 </div>
-            @endforeach
-        @endif
-
-        <!--SCRIPTS DE VALIDATION-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+            </div>
+        @endforeach
+    @endif
 
         <script src="{{ asset('js/jsvalidation.js') }}"></script>
 

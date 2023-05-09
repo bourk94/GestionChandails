@@ -24,7 +24,7 @@
                             <div class="w3-col l3 m6 w3-margin-bottom margin">
                                 <div class="w3-panel w3-border w3-round-large">
                                     <br>
-                                    <img src="/img/chandails/Exemple_Chandail_1.jpg" alt="John" style="width:100%">
+                                    <img src= "{{ asset('/img/' . $article->type . '/' . $article->type . '.jpg') }}" alt="{{$article->type}}" style="width:100%"/>
                                     <h3>{{ $article->nom }}</h3>
                                     <p>Prix : {{ $article->prix }} $</p>
                                     <p>Commande maximale : {{ $article->quantite }}</p>

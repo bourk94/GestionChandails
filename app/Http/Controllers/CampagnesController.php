@@ -13,6 +13,7 @@ use App\Http\Requests\CampagneRequest;
 use App\Models\Commande;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 class CampagnesController extends Controller
 {
@@ -83,6 +84,11 @@ class CampagnesController extends Controller
         $articles = Article::all();
         $campagnes = Campagne::all();
 
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('campagnes.createCampagne', compact('articles', 'campagnes'));
     }
 
@@ -120,6 +126,12 @@ class CampagnesController extends Controller
     public function edit(Campagne $campagnes)
     {
         $campagnes = Campagne::all();
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('campagnes.modifierCampagne', compact('campagnes'));
     }
 
@@ -165,25 +177,5 @@ class CampagnesController extends Controller
         //
     }
 
-    // public function storeArticleCampagneCommande(Request $request)
-    // {
-    //     try {
-    //         $campagne = new Campagne($request->all());
-    //         $campagne->save();
-
-    //         $article = Article::find($request->article_id);
-    //         $article->campagnes()->attach($campagne->id);
-
-    //         $couleur = Couleur::find($request->couleur_id);
-    //         $couleur->campagnes()->attach($campagne->id);
-
-    //         $taille = Taille::find($request->taille_id);
-    //         $taille->campagnes()->attach($campagne->id);
-
-    //         return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
-    //     } catch (\Throwable $e) {
-    //         Log::debug($e);
-    //         return redirect()->route('accueil')->withErrors(['L\'ajout n\'a pas fonctionné!']);
-    //     }
-    // }
+    
 }

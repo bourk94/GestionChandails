@@ -2,7 +2,8 @@
 
 @section('title', "modification/suppression d'un article")
 @section('contenu')
-@if(Auth::user()->type == 'admin')
+
+
     <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
 
         <h1 class="center">Modifier un article</h1>

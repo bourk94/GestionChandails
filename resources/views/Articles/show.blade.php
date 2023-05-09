@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('contenu')
 
+
     <!-- <div class="row"> -->
     <div class="padding">
         <!-- Section informations sur un article de la campagne -->

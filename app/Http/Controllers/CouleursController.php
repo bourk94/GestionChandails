@@ -8,6 +8,7 @@ use App\Models\Couleur;
 use App\Models\Campagne;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\ErrorHandler\Debug;
+use Auth;
 
 use function Psy\debug;
 
@@ -20,6 +21,11 @@ class CouleursController extends Controller
     {
         $couleurs = Couleur::all();
 
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('couleurs.index', compact('couleurs'));
     }
 
@@ -28,6 +34,11 @@ class CouleursController extends Controller
      */
     public function create()
     {        
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
         return view('couleurs.createCouleur');
     }
 
@@ -72,6 +83,11 @@ class CouleursController extends Controller
     public function edit($id)
     {
         $couleur = Couleur::findOrFail($id);
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
 
         return view('couleurs.modifierCouleur', compact('couleur'));
     }
