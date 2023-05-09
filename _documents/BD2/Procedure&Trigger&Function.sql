@@ -138,7 +138,7 @@ BEGIN
     SELECT a.nom,
            c.nom_couleur,
            t.format,
-           COUNT(acc.article_id) as quantite
+           COUNT(acc.quantite) as quantite
     FROM article_campagne acc
              INNER JOIN campagnes cam on acc.campagne_id = cam.id
              INNER JOIN couleurs c on acc.couleur = c.id
