@@ -27,6 +27,8 @@ END;
 select password
 from usagers;
 
+
+
 -- Procedure
 
 /* Procedure pour ajouter un usager */
@@ -150,6 +152,19 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Function to connect with a usagers and return his type. the password is encrypted with argon
+DELIMITER //
+CREATE FUNCTION `connecterUsager`(IN _email VARCHAR(255), IN _password VARCHAR(255)) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE _type VARCHAR(1);
+    SELECT type INTO _type FROM usagers WHERE email = _email AND password = _password;
+    RETURN _type;
+END//
+
+-- function to
+
+
+
 -- Création d'une procédure qui modifie le statut d'un article_campagne_commande
 DELIMITER //
   CREATE PROCEDURE updateStatutArticleCampagneCommande(IN idArticleCampagneCommande INT, IN statut VARCHAR(255))
@@ -159,3 +174,12 @@ DELIMITER //
            WHERE id = idArticleCampagneCommande;
        END//  
 DELIMITER ;
+
+-- function pour se connecter en tant qu'usager et le type.
+DELIMITER //
+CREATE FUNCTION `connecterUsager`(IN _email VARCHAR(255), IN _password VARCHAR(255)) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE _type VARCHAR(1);
+    SELECT type INTO _type FROM usagers WHERE email = _email AND password = _password;
+    RETURN _type;
+END//
