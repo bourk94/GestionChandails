@@ -1,6 +1,30 @@
 /* Général */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-.buttonSite {
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.livewire-cart-counter {
+  padding: 0;
+}
+
+.a_decoration_none {
+  text-decoration: none;
+}
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+/* .buttonSite {
     background-color: #EF3832;
     border: none;
     color: white;
@@ -16,32 +40,82 @@
 .buttonSite:hover {
     background-color: #a11510;
     color: white;
+} */
+
+.btnColor {
+  background-color: #EF3832;
+  color: white;
+}
+
+.btnColor:hover {
+    background-color: #a11510;
+    color: white;
 }
 /* Code pour le bouton :
   <a href="#" class="buttonSite">Voici un bouton</a>
 */
 
 select {
-    width: 100%;
-    padding: 16px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
 }
 
 input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid red;
-    border-radius: 4px;
-    display: wrap;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+  display: wrap;
 }
 
-.radNone
-{
+.radNone {
   display: none;
+}
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /**/
@@ -49,103 +123,20 @@ input {
 /***************************************************************************/
 
 /* NavBar */
+.navColor {
+  background-color: #092D74;
+  color: white;
+}
 
 body {
-    font-family: "Source Sans Pro", "Arial", sans-serif; /*À voir si c'est vraiment joli*/
-    margin: 0;
-}
-
-ul.topnav {
-  list-style-type: none;
+  font-family: "Source Sans Pro", "Arial", sans-serif;
+  /*À voir si c'est vraiment joli*/
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #092D74;
+  position: relative;
+  padding-top: 40px;
 }
 
-ul.topnav li {
-    float: left;
-}
-
-ul.topnav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-ul.topnav li a:hover:not(.active) {
-  background-color: #EF3832;
-}
-
-ul.topnav li button {
-  background-color: #092D74;
-  color: white;
-  text-align: center;
-  align-items: center;
-  border-radius: none;
-  padding: 14px 16px;
-  text-decoration: none;
-  font: 16px Arial;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-ul.topnav li button:hover:not(.active) {
-  background-color: #EF3832;
-}
-
-ul.topnav li a.active {
-    background-color: #092D74; /*Faire en sorte qu'il n'y a pas de modification de couleurs lorsqu'on survol le logo*/
-} 
-
-ul.topnav li.right {
-    float: right;
-}
-
-/* Dropdown */
-
-li a, .dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  /* margin-right: 10px; Il va falloir rajouter ça car sinon ça dépasse le fenêtre */
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: #EF3832;
-}
-
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #092D74;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+/* Modification de la navbar avec un template */
 
 /**/
 
@@ -157,14 +148,19 @@ li.dropdown {
   width: 100%;
 }
 
-.customers td, #customers th {
+.customers td,
+#customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.customers tr:nth-child(even){background-color: #f2f2f2;}
+.customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-.customers tr:hover {background-color: #ddd;}
+.customers tr:hover {
+  background-color: #ddd;
+}
 
 .customers th {
   padding-top: 12px;
@@ -183,45 +179,87 @@ li.dropdown {
 /* Page d'accueil */
 
 .padding {
-    padding: 0 1rem;
-    padding-right: 16rem;
-    padding-left: 16rem;
+  padding: 0 1rem;
+  padding-right: 16rem;
+  padding-left: 16rem;
 }
- 
+
+.margin {
+margin: 0.5rem;
+}
+
+.pasPadding {
+  padding: 0;
+}
+
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 /**/
 
 /***************************************************************************/
+/* Création d'article */
+
+#description {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+  display: wrap;
+}
+
+/***************************************************************************/
+
+/* Création d'une couleur */
+
+#code_couleur {
+  width: 100%;
+  height: 60px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+  display: wrap;
+}
+
+/***************************************************************************/
+
+/* Affichage liste couleur */
+
+.ColListeCouleur {
+  margin-right: 60px;
+}
+
+/***************************************************************************/
 
 /* Objets */
 
-.bckgroundObjets
-{
-    background-color: #092D74;
-    color: white;
-    padding: 16px;
-    border-radius: 10px;
-    display: inline-block;
-    width: 100%;
-    
+.bckgroundObjets {
+  background-color: #092D74;
+  color: white;
+  padding: 16px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+
 }
 
 .leftObjets {
-    float: left;
-    text-align: center;
+  float: left;
+  text-align: center;
 }
 
 .rightObjets {
-    float: right;
-    width: 75%;
-    align-items: center;
+  float: right;
+  width: 75%;
+  align-items: center;
 }
 
-.zoneImageVide
-{
+.zoneImageVide {
   background-color: white;
   color: white;
   border-radius: 10px;
@@ -233,9 +271,9 @@ li.dropdown {
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 4px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
 
@@ -246,10 +284,10 @@ li.dropdown {
 /* Page création campagne */
 
 .flex__center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .flex__inline {
@@ -258,55 +296,130 @@ li.dropdown {
 }
 
 .margin__top {
-    margin-top: .5rem;
+  margin-top: .5rem;
 }
 
 .card__container {
-    background-color: #092D74;
-    color: white;
-    padding: 1rem;
-    border-radius: .75rem;
-    margin-top: 2rem;
+  background-color: #092D74;
+  color: white;
+  padding: 1rem;
+  border-radius: .75rem;
+  margin-top: 2rem;
 }
 
 .card__padding {
-    padding: 0 1rem;
-    padding-right: 16rem;
-    padding-left: 16rem;
+  padding: 0 1rem;
+  padding-right: 16rem;
+  padding-left: 16rem;
 }
 
 .btn {
-    border: none;
-    padding: 1rem 2rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    border-radius: .75rem;
+  border: none;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: .75rem;
 }
 
 .btn.bg__orange.color__white:hover {
-    background-color: #c71913;
+  background-color: #c71913;
 }
 
 .bg__orange {
-    background-color: #EF3832;
+  background-color: #EF3832;
 }
 
 .color__white {
-    color: white;
+  color: white;
 }
 
 .hover__orange:hover {
-    color: #EF3832;
+  color: #EF3832;
 }
 
 .gap {
-    margin-top: .25rem;
+  margin-top: .25rem;
 }
 
 .text-danger {
-  color: #dc3545!important;
+  color: #dc3545 !important;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter__field {
+    width: 2rem;
+    text-align: center;
+    font-size: .9rem;
+    margin: .5rem;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    padding: .25rem;
+    font-weight: bold;
+}
+
+.counter__btn {
+    font-size: 1.1rem;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: .75rem;
+    background-color: #EF3832;
+    color: white;
+    margin: .1rem;
+}
+
+.counter__decrement {
+  padding: .1rem .74rem;
+}
+
+.counter__increment {
+  padding: .1rem .6rem;
+}
+
+
+.counter__hover:hover {
+    background-color: #c71913;
+}
+
+.cart__grid {
+    display: grid;
+    grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 3rem;; 
+    grid-gap: 1rem;
+    grid-template-rows: 11rem;
+}
+
+.cart__color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .75rem;
+    border: 1px solid #ccc;
+    margin: .5rem;
+}
+
+.cart__btn {
+    border: none;
+    padding: .5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: .9rem;
+    border-radius: .75rem;
+    background-color: #EF3832;
+    color: white;
+    margin: .1rem;
+}
+
+.cart__btn:hover {
+    background-color: #c71913;
 }
 
 
@@ -317,35 +430,39 @@ li.dropdown {
 /* Media Queries */
 
 @media screen and (max-width: 1200px) {
-    .padding {
-      padding: 0 16px;
-    }
+  .padding {
+    padding: 0 16px;
   }
+}
 
 @media screen and (max-width: 600px) {
-    ul.topnav li.right, 
-    ul.topnav li {float: none;}
-    .padding {
-      padding: 0 16px;
-    }
+
+  ul.topnav li.right,
+  ul.topnav li {
+    float: none;
   }
+
+  .padding {
+    padding: 0 16px;
+  }
+}
 
 /**/
 
 /***************************************************************************/
 
 /* styles pour les options de couleur */
-  
-  .button {
-    display: inline-block;
-    position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  /* .button span {
+
+.button {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* .button span {
     display: block;
     position: absolute;
     width: 50px;
@@ -360,17 +477,17 @@ li.dropdown {
     border-radius: 100%;
     transition: ease .3s;
   } */
-  
-  .layer {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: transparent;
-    z-index: -1;
-  }
+
+.layer {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  z-index: -1;
+}
 
 /* styles pour les options de couleur */
 label {
@@ -394,7 +511,7 @@ label {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.100);
+  border: 2px solid rgba(0, 0, 0, 0.100);
   overflow: hidden;
 }
 
@@ -415,13 +532,27 @@ label {
   transition: background-color 0.3s ease-in-out;
 }
 
-input[type="radio"]:checked + .layer {
+input[type="radio"]:checked+.layer {
   opacity: 1;
 }
 
-input[type="radio"]:checked + .button {
+input[type="radio"]:checked+.button {
+  border-color: black;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/*CSS pour l'affichage des couleurs et des tailles dans le formulaire d'ajout d'un article campagne*/
+input[type="checkbox"]:checked+.layer {
+  opacity: 1;
+}
+
+input[type="checkbox"]:checked+.button {
   border-color: white;
   transition: border-color 0.3s ease-in-out;
 }
 
 /**/
+
+.modal__padding {
+  padding: 2rem;
+}

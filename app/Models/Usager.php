@@ -22,7 +22,7 @@ class Usager extends Authenticatable
         'password',
         'nom',
         'prenom',
-        'type'
+        'no_telephone'
     ];
 
     /**
@@ -45,8 +45,23 @@ class Usager extends Authenticatable
     ];
 
     //Jointure avec la table Commande
+    //Un usager (Client) peut faire plusieurs commande, une commande appartient à un seul usager (Client)
     public function commandes()
     {
-        return $this->belongsToMany('App\Models\Commande');
+        return $this->hasMany('App\Models\Commande');
+    }
+
+    //Jointure avec la table Campagne
+    //Un usager (Admin) peut créer une ou plusieurs campagne(s), une campagne est créée par un seul usager (Admin)
+    public function campagnes()
+    {
+        return $this->hasMany('App\Models\Campagne');
+    }
+
+    //Jointure avec la table Campagne_Modifier
+    //Un usager (Admin) peut modifier une ou plusieurs campagnes, une campagne peut être modifiée par un ou plusieurs usagers (Admin)
+    public function campagnes_modifier()
+    {
+        return $this->belongsToMany('App\Models\Campagne');
     }
 }

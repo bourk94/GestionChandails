@@ -26,8 +26,7 @@ class CampagneRequest extends FormRequest
             'date_debut_campagne' => 'required|date',
             'date_fin_campagne' => 'required|date',
             'date_debut_collecte' => 'required|date',
-            'date_fin_collecte' => 'required|date',   
-            
+            'date_fin_collecte' => 'required|date',               
         ];
     }
     public function messages(){
@@ -43,6 +42,8 @@ class CampagneRequest extends FormRequest
             'date_debut_collecte.date'=>'La date de début de la collecte doit être une date valide',
             'date_fin_collecte.required'=>'La date de fin de la collecte est obligatoire',
             'date_fin_collecte.date'=>'La date de fin de la collecte doit être une date valide',
+            'progression' =>'Le champs doit être absolument rempli',
+            'statut' =>'Le champs doit être absolument rempli'
         ];
 
     }

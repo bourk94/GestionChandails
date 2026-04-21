@@ -10,4 +10,10 @@ class Taille extends Model
     use HasFactory;
 
     protected $fillable = ['format'];
+
+    //Jointure avec la table Article_Campagne
+    public function articles_campagnes()
+    {
+        return $this->hasMany('App\Models\ArticleCampagne');
+    }
 }

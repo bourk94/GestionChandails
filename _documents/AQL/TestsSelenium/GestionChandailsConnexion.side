@@ -63,24 +63,12 @@
       "id": "d206faf7-6903-4721-9db3-bc8fc196e7e4",
       "comment": "",
       "command": "click",
-      "target": "css=.flex__inline > .btn",
+      "target": "css=div > .w3-block",
       "targets": [
-        ["css=.flex__inline > .btn", "css:finder"],
+        ["css=div > .w3-block", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
         ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "2bc11561-493e-4603-bfda-85b032e030c5",
-      "comment": "",
-      "command": "assertElementNotPresent",
-      "target": "css=.test",
-      "targets": [
-        ["css=.test", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
@@ -156,24 +144,12 @@
       "id": "ed9cfd96-d6b0-4cbd-90cb-44ec3caa1b71",
       "comment": "",
       "command": "click",
-      "target": "css=.flex__inline > .btn",
+      "target": "css=div > .w3-block",
       "targets": [
         ["css=.flex__inline > .btn", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
         ["xpath=//button", "xpath:position"],
         ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "31ab8e4b-6f73-49dd-b809-0c3d4b314591",
-      "comment": "",
-      "command": "assertElementNotPresent",
-      "target": "css=.test",
-      "targets": [
-        ["css=.test", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -344,39 +320,33 @@
       "id": "b8aadf00-4c2d-4e03-9993-06f0f9b78e8f",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "linkText=client@client.com",
+      "target": "css=.w3-dropdown-hover > .w3-padding-large",
       "targets": [
-        ["linkText=client@client.com", "linkText"],
-        ["css=.right > a", "css:finder"],
-        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
-        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
-        ["xpath=//li[3]/a", "xpath:position"],
-        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+        ["css=.w3-dropdown-hover > .w3-padding-large", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'client@client.com ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "756aec34-6e9c-4cb8-a6a6-58ac35b0bfc5",
       "comment": "",
       "command": "mouseOver",
-      "target": "linkText=client@client.com",
+      "target": "css=.w3-dropdown-hover > .w3-padding-large",
       "targets": [
-        ["linkText=client@client.com", "linkText"],
-        ["css=.dropbtn", "css:finder"],
-        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
-        ["xpath=//a[contains(@href, 'javascript:void(0)')]", "xpath:href"],
-        ["xpath=//li[2]/a", "xpath:position"],
-        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+        ["css=.w3-dropdown-hover > .w3-padding-large", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'client@client.com ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "1130a4a9-84be-46ae-980c-1915fb1e3017",
       "comment": "Se déconnecter a la fin",
       "command": "click",
-      "target": "css=button",
+      "target": "css=form:nth-child(3) > .w3-bar-item",
       "targets": [
-        ["css=button", "css:finder"],
+        ["css=form:nth-child(3) > .w3-bar-item", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
+        ["xpath=//form/button", "xpath:position"],
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
@@ -453,37 +423,33 @@
       "id": "e6aba4ce-6c43-4ceb-80d2-de7271fe3b6f",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "linkText=admin@cegeptr.qc.ca",
+      "target": "css=.w3-right > .w3-padding-large",
       "targets": [
-        ["css=.test", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
+        ["css=.w3-right > .w3-padding-large", "css:finder"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'admin@cegeptr.qc.ca ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "d03a2fb6-baa4-4c8c-841a-b46727f3a1da",
       "comment": "",
       "command": "mouseOver",
-      "target": "linkText=admin@cegeptr.qc.ca",
+      "target": "css=.w3-right > .w3-padding-large",
       "targets": [
-        ["linkText=client@client.com", "linkText"],
-        ["css=.dropbtn", "css:finder"],
-        ["xpath=//a[contains(text(),'client@client.com')]", "xpath:link"],
-        ["xpath=//a[contains(@href, 'javascript:void(0)')]", "xpath:href"],
-        ["xpath=//li[2]/a", "xpath:position"],
-        ["xpath=//a[contains(.,'client@client.com')]", "xpath:innerText"]
+        ["css=.w3-right > .w3-padding-large", "css:finder"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'admin@cegeptr.qc.ca ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "e5a70157-cbcd-492e-9eca-a8c43b82e715",
       "comment": "Se déconnecter a la fin",
       "command": "click",
-      "target": "css=button",
+      "target": "css=form:nth-child(3) > .w3-bar-item",
       "targets": [
-        ["css=button", "css:finder"],
+        ["css=form:nth-child(3) > .w3-bar-item", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
+        ["xpath=//form/button", "xpath:position"],
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
@@ -560,39 +526,33 @@
       "id": "35fd581b-a8ad-492e-97bd-025c5fc38d83",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "linkText=superadmin@superadmin.com",
+      "target": "css=.w3-right > .w3-padding-large",
       "targets": [
-        ["linkText=superadmin@superadmin.com", "linkText"],
-        ["css=.right > a", "css:finder"],
-        ["xpath=//a[contains(text(),'superadmin@superadmin.com')]", "xpath:link"],
-        ["xpath=(//a[contains(@href, '#')])[4]", "xpath:href"],
-        ["xpath=//li[4]/a", "xpath:position"],
-        ["xpath=//a[contains(.,'superadmin@superadmin.com')]", "xpath:innerText"]
+        ["css=.w3-right > .w3-padding-large", "css:finder"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'superadmin@superadmin.com ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "892104b0-477f-413d-b098-e4348f28eb32",
       "comment": "",
       "command": "mouseOver",
-      "target": "linkText=superadmin@superadmin.com",
+      "target": "css=.w3-right > .w3-padding-large",
       "targets": [
-        ["linkText=superadmin@superadmin.com", "linkText"],
-        ["css=.right > .dropbtn", "css:finder"],
-        ["xpath=//a[contains(text(),'superadmin@superadmin.com')]", "xpath:link"],
-        ["xpath=(//a[contains(@href, 'javascript:void(0)')])[2]", "xpath:href"],
-        ["xpath=//li[3]/a", "xpath:position"],
-        ["xpath=//a[contains(.,'superadmin@superadmin.com')]", "xpath:innerText"]
+        ["css=.w3-right > .w3-padding-large", "css:finder"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'superadmin@superadmin.com ')]", "xpath:innerText"]
       ],
       "value": ""
     }, {
       "id": "524d47d7-458b-417b-9e6e-69784b3a7c90",
       "comment": "Se déconnecter a la fin",
       "command": "click",
-      "target": "css=button",
+      "target": "css=form:nth-child(3) > .w3-bar-item",
       "targets": [
-        ["css=button", "css:finder"],
+        ["css=form:nth-child(3) > .w3-bar-item", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
+        ["xpath=//form/button", "xpath:position"],
         ["xpath=//button[contains(.,'Déconnecter')]", "xpath:innerText"]
       ],
       "value": ""
@@ -632,10 +592,11 @@
       "id": "bfb46a1e-4cf8-485c-af92-d0898d1998f3",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "css=.flex__center:nth-child(1)",
+      "target": "css=.center:nth-child(1)",
       "targets": [
-        ["css=.flex__center:nth-child(1)", "css:finder"],
-        ["xpath=//div/div/div", "xpath:position"]
+        ["css=.center:nth-child(1)", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Créer un compte')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -660,9 +621,9 @@
       "id": "00af333f-cc18-4266-9ee6-86e8f6775ba2",
       "comment": "",
       "command": "click",
-      "target": "css=a > .btn",
+      "target": "css=.a_decoration_none > .w3-button",
       "targets": [
-        ["css=a > .btn", "css:finder"],
+        ["css=.a_decoration_none > .w3-button", "css:finder"],
         ["xpath=//button[@type='button']", "xpath:attributes"],
         ["xpath=//a/button", "xpath:position"],
         ["xpath=//button[contains(.,'Mot de passe oublié')]", "xpath:innerText"]
@@ -672,10 +633,12 @@
       "id": "83dc2c04-a816-488c-8544-921cc5259bb0",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "css=.flex__center:nth-child(1)",
+      "target": "css=.w3-block",
       "targets": [
-        ["css=.flex__center:nth-child(1)", "css:finder"],
-        ["xpath=//div/div/div", "xpath:position"]
+        ["css=.w3-block", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Envoyer le lien de réinitialisation')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -700,26 +663,11 @@
       "id": "7dd09540-64e6-43a1-931e-9cce1733db9f",
       "comment": "",
       "command": "click",
-      "target": "linkText=Logo",
+      "target": "css=.w3-bar-item > img",
       "targets": [
-        ["linkText=Logo", "linkText"],
-        ["css=.active", "css:finder"],
-        ["xpath=//a[contains(text(),'Logo')]", "xpath:link"],
-        ["xpath=//a[@href='http://127.0.0.1:8000']", "xpath:href"],
-        ["xpath=//a", "xpath:position"],
-        ["xpath=//a[contains(.,'Logo')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "4877291f-19d3-4c9e-840a-c9ed654ae69f",
-      "comment": "",
-      "command": "assertElementNotPresent",
-      "target": "css=.flex__inline > .btn",
-      "targets": [
-        ["css=.flex__inline > .btn", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Connexion')]", "xpath:innerText"]
+        ["css=.w3-bar-item > img", "css:finder"],
+        ["xpath=//img[@alt='Logo']", "xpath:img"],
+        ["xpath=//a[2]/img", "xpath:position"]
       ],
       "value": ""
     }]
@@ -752,16 +700,6 @@
         ["xpath=//a[@href='http://127.0.0.1:8000/usagers/login']", "xpath:href"],
         ["xpath=//li[2]/a", "xpath:position"],
         ["xpath=//a[contains(.,'Connexion')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "360dfd2f-2ba5-4e31-afd0-dd8da20fd2b0",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=.flex__center:nth-child(1)",
-      "targets": [
-        ["css=.flex__center:nth-child(1)", "css:finder"],
-        ["xpath=//div/div/div", "xpath:position"]
       ],
       "value": ""
     }]

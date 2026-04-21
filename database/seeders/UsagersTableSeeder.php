@@ -17,8 +17,8 @@ class UsagersTableSeeder extends Seeder
         DB::table('usagers')->insert(
             [
                 [
-                    'nom' => 'Client',
-                    'prenom' => 'Client',                    
+                    'nom' => 'Hamel',
+                    'prenom' => 'Georges',                    
                     'password' => Hash::make('Client'),
                     'email' => 'client@client.com',
                     'type' => 'client',
@@ -45,8 +45,8 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom' => 'Client1',
-                    'prenom' => 'Client1',                    
+                    'nom' => 'Fortin',
+                    'prenom' => 'Catherine',                    
                     'password' => Hash::make('Client'),
                     'email' => 'testprojetfabrice.n4r1w@8shield.net',
                     'type' => 'client',                    
@@ -55,7 +55,7 @@ class UsagersTableSeeder extends Seeder
 
                 ],
                 [ // TEST D'AFFICHAGE DES ADMINISTRATEURS
-                    'nom' => 'Admin',
+                    'nom' => 'Brouillette',
                     'prenom' => 'Admin',
                     'password' => Hash::make('Admin'),
                     'email' => 'admin1@cegeptr.qc.ca',
@@ -64,7 +64,7 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom' => 'Admin',
+                    'nom' => 'Jacob',
                     'prenom' => 'Admin',
                     'password' => Hash::make('Admin'),
                     'email' => 'admin2@cegeptr.qc.ca',
@@ -73,7 +73,7 @@ class UsagersTableSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s')
                 ],
                 [
-                    'nom' => 'Admin',
+                    'nom' => 'Carle',
                     'prenom' => 'Admin',
                     'password' => Hash::make('Admin'),
                     'email' => 'admin3@cegeptr.qc.ca',

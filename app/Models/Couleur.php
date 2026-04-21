@@ -10,4 +10,10 @@ class Couleur extends Model
     use HasFactory;
 
     protected $fillable = ['nom_couleur', 'code_couleur'];
+
+    //Jointure avec la table Article_Campagne
+    public function articles_campagnes()
+    {
+        return $this->hasMany('App\Models\ArticleCampagne');
+    }    
 }

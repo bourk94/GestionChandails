@@ -129,7 +129,7 @@ class UsagersController extends Controller
         if ($usager->type == "admin") {
             return view ('admin.edit', compact('usager'));
         }
-        else if ($usager->type == "client"){
+        else if ($usager->type == "client" || $usager->type == "superadmin"){
             return view ('usagers.edit', compact('usager'));
         }
     }
@@ -146,12 +146,11 @@ class UsagersController extends Controller
             $usager = Auth::user();
             $old_password = $request->old_password;
             $newPassword = $request->password;
-            if(empty($newPassword) && $request->email == $usager->email) {
+            if (empty($newPassword) && $request->email == $usager->email) {
                 $usager->update($request->except('password', 'email'));
                 return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }
-            if(empty($newPassword) && $request->email != $usager->email)
-            {
+            if (empty($newPassword) && $request->email != $usager->email) {
                 $usager->update($request->except('password'));
                 return redirect()->route('usagers.edit')->with('success', 'usager modifié avec succès');
             }
@@ -174,8 +173,7 @@ class UsagersController extends Controller
             else {
                 return redirect()->back()->withErrors(['Mot de passe incorrect']);
             }
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Log::error("Erreur lors de la modification d'un usager: ", [$e]);
             return redirect()->back()->with('error', 'Erreur lors de la modification d\'un usager');
         }
@@ -247,31 +245,38 @@ class UsagersController extends Controller
         }
     }
 
-    public function showLoginForm() {
-        return view ('usagers.login');
+    public function showLoginForm()
+    {
+        return view('usagers.login');
     }
 
 
 
-    public function login(Request $request) {
-
+    public function login(Request $request)
+    {
         $reussi = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         if ($reussi) {
-            
+
             $usagers = Usager::all();
 
             Session::put('user', $request->email);
 
             log::debug ('Connexion réussie');
-            return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
+            if ($request->has('modal')) {
+                return redirect()->route('cart.list', compact('usagers'))->with('success', 'Connexion réussie');
+            }
+            else {
+                return redirect()->route('accueil', compact('usagers'))->with('success', 'Connexion réussie');
+            }
         } else {
             log::debug("Email ou mot de passe incorrect");
             return redirect()->route('usagers.login')->withErrors(['Email ou mot de passe incorrect']);
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('usagers.login')->with('success', 'Déconnexion réussie');
     }

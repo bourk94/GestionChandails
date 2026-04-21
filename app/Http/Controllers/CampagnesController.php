@@ -7,10 +7,13 @@ use App\Models\Campagne;
 use App\Models\Article;
 use App\Models\Couleur;
 use App\Models\Taille;
-use App\Models\Usager; //Je ne sais pas si c'est le bonne endroit
+use App\Models\Usager;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\CampagneRequest;
+use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 class CampagnesController extends Controller
 {
@@ -19,14 +22,58 @@ class CampagnesController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        $couleurs = Couleur::all();
-        $tailles = Taille::all();
         $campagnes = Campagne::all();
+        $articles = DB::table('articles')
+            ->join('article_campagne', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->select(
+                'articles.id as article_id',
+                'articles.nom as nom',
+                'articles.description as description',
+                'article_campagne.prix as prix',
+                'articles.type as type',
+                'article_campagne.image as image',
+                'article_campagne.quantite_max as quantite',
+                'article_campagne.id as article_campagne_id'
+            )
+            ->where('campagnes.statut', '=', 'en cours')
+            ->groupBy('articles.id', 'articles.nom', 'articles.description', 'article_campagne.prix', 'articles.type', 'article_campagne.quantite_max', 'article_campagne.image', 'article_campagne.id')
+            ->get();
 
-        $usagers = Usager::all(); //Je ne sais pas si c'est le bonne endroit
+        $couleurs = DB::table('couleurs')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->Select(
+                'couleurs.nom_couleur as nom_couleur',
+                'couleurs.id as couleur_id',
+                'couleurs.code_couleur as code_couleur',
+                'articles.id as article_id',
+            )
+            ->get();
+        $tailles = DB::table('tailles')
+            ->distinct()
+            ->join('article_campagne', 'article_campagne.taille', '=', 'tailles.id')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->Select(
+                'tailles.format as format',
+                'tailles.id as taille_id',
+                'articles.id as article_id',
+            )
+            ->get();
 
-        return view('accueil', compact('articles', 'couleurs', 'tailles', 'campagnes', 'usagers')); //Je ne sais pas si c'est le bonne endroit (usagers)
+        $usagers = Usager::all();
+
+        $articles_campagnes = DB::table('article_campagne')
+            ->join('articles', 'article_campagne.article_id', '=', 'articles.id')
+            ->join('campagnes', 'article_campagne.campagne_id', '=', 'campagnes.id')
+            ->join('couleurs', 'article_campagne.couleur', '=', 'couleurs.id')
+            ->join('tailles', 'article_campagne.taille', '=', 'tailles.id')
+            ->get();
+
+                        
+
+        return view('accueil', compact('campagnes', 'articles', 'couleurs', 'tailles', 'usagers', 'articles_campagnes'));
     }
 
     /**
@@ -35,8 +82,14 @@ class CampagnesController extends Controller
     public function create()
     {
         $articles = Article::all();
-       
-        return view('campagnes.createCampagne', compact('articles'));
+        $campagnes = Campagne::all();
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
+        return view('campagnes.createCampagne', compact('articles', 'campagnes'));
     }
 
     /**
@@ -44,7 +97,16 @@ class CampagnesController extends Controller
      */
     public function store(CampagneRequest $request)
     {
-        //
+        try {
+            $campagne = new Campagne($request->all());
+
+            $campagne->save();
+
+            return redirect()->route('accueil')->with('message', "Ajout de la campagne " . $campagne->date_debut . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->with('message', 'L\'ajout n\'a pas fonctionné!');
+        }
     }
 
     /**
@@ -57,25 +119,63 @@ class CampagnesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit(Campagne $campagnes)
     {
-        //
+        $campagnes = Campagne::all();
+
+        if (Auth::user()->type != 'admin') 
+        {            
+            return redirect()->back();
+        }
+
+        return view('campagnes.modifierCampagne', compact('campagnes'));
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     *  @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(CampagneRequest $request, $id)
     {
-        //
+        try {
+            $campagne = Campagne::findOrFail($id);           
+
+            $campagne->nom_campagne = $request->nom_campagne;
+            $campagne->date_debut_campagne = $request->date_debut_campagne;
+            $campagne->date_fin_campagne = $request->date_fin_campagne;
+            $campagne->date_debut_collecte = $request->date_debut_collecte;
+            $campagne->date_fin_collecte = $request->date_fin_collecte;
+            $campagne->progression = $request->progression;
+            $campagne->statut = $request->statut;
+
+            $campagne->save();
+
+            return redirect()->route('accueil')->with('message', "Modification de la campagne " . $campagne->nom . " réussi!");
+        } catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('accueil')->with('message', "La modification n'a pas fonctionnée");
+        }
+
+        return redirect()->route('accueil');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
     }
+
+    
 }

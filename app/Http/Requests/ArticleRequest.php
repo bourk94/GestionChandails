@@ -25,6 +25,9 @@ class ArticleRequest extends FormRequest
             'nom' => 'required|min:2|max:50',
             'type' => 'required|min:2|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'nullable|min:2|max:50',
+         
+            
             
         ];
     }
@@ -39,6 +42,9 @@ class ArticleRequest extends FormRequest
             'image.image'=>'Le fichier doit être une image',
             'image.mimes'=>'Le fichier doit être une image de type jpeg, png, jpg, gif ou svg',
             'image.max'=>'Le fichier doit être une image de taille maximale 2048',
+            'description.min'=>'La description de l\'article doit faire au moins 2 caractères',
+            'description.max'=>'La description de l\'article doit faire au plus 50 caractères',
+
         ];
 
     }

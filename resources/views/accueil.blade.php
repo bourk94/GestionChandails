@@ -14,11 +14,11 @@
         @include('SuperAdmin.show')
     @endif
 @endauth
-
+    
 @auth
     @if (Auth::user()->type == 'admin')
         @include('Admin.show')
     @endif
 @endauth
-
+           
 @endsection
