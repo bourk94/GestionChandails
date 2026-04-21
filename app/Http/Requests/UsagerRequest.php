@@ -23,8 +23,9 @@ class UsagerRequest extends FormRequest
      */
     public function rules(): array
     {
+       
         return [
-                'email'=> 'required','email:rfc,dns','unique:usagers,email,'. $this->id,
+                'email'=> 'required','email','unique:usagers,email,'. $this->id,
                 'password'=> [($this->id ? 'nullable' : 'required'), 'confirmed', 'max:64', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
                 'nom'=>'required|min:2|max:30',
                 'prenom'=>'required|min:2|max:30',
@@ -35,6 +36,8 @@ class UsagerRequest extends FormRequest
         return [
             'email.required'=>'L\'email est obligatoire',
             'email.email'=>'L\'email doit être valide',
+            'email.dns'=>'L\'email doit être valide',
+            'email.rfc'=>'L\'email doit être valide',
             'email.unique'=>'L\'email est déjà utilisé',
             'password.required'=>'Le mot de passe est obligatoire',
             'password.min'=>'Le mot de passe doit faire au moins 8 caractères',
